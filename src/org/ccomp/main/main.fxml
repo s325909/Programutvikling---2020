@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.main.MainController">
+    <children>
+        <ImageView fitHeight="500.0" fitWidth="500.0">
+            <image>
+                <Image url="@../../../resources/CCOMPS.png" />
+            </image>
+        </ImageView>
+        <Button layoutX="286.0" layoutY="350.0" mnemonicParsing="false" style="-fx-background-color: white;" text="KUNDE" textAlignment="JUSTIFY" textOverrun="CLIP">
+            <font>
+                <Font name="Segoe UI Semilight" size="24.0" />
+            </font>
+            <effect>
+                <DropShadow />
+            </effect>
+        </Button>
+        <Button layoutX="106.0" layoutY="350.0" mnemonicParsing="false" style="-fx-background-color: white;" text="ADMIN" textAlignment="JUSTIFY" textOverrun="CLIP">
+            <font>
+                <Font name="Segoe UI Semilight" size="24.0" />
+            </font>
+            <effect>
+                <DropShadow color="#b5a5a5" />
+            </effect>
+        </Button>
+    </children>
+</AnchorPane>

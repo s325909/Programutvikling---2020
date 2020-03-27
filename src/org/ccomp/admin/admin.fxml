@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.AdminController">
+    <children>
+        <TabPane layoutY="100.0" prefHeight="500.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="LEGG TIL/FJERN PRODUKTER">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TableView layoutY="-2.0" prefHeight="460.0" prefWidth="800.0">
+                                    <columns>
+                                        <TableColumn prefWidth="75.0" text="TYPE" />
+                                        <TableColumn prefWidth="75.0" text="C2" />
+                                        <TableColumn prefWidth="75.0" text="C3" />
+                                        <TableColumn prefWidth="75.0" text="C4" />
+                                        <TableColumn prefWidth="75.0" text="PRIS" />
+                                    </columns>
+                                    <effect>
+                                        <InnerShadow choke="0.8" color="#eaae3d" />
+                                    </effect>
+                                </TableView>
+                            </children></AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="SE PRODUKTER">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TableView layoutY="-2.0" prefHeight="460.0" prefWidth="800.0">
+                                    <columns>
+                                        <TableColumn prefWidth="75.0" text="TYPE" />
+                                        <TableColumn prefWidth="75.0" text="C2" />
+                                        <TableColumn prefWidth="75.0" text="C3" />
+                                        <TableColumn prefWidth="75.0" text="C4" />
+                                        <TableColumn prefWidth="75.0" text="PRIS" />
+                                    </columns>
+                                    <effect>
+                                        <InnerShadow choke="0.8" color="#eaae3d" />
+                                    </effect>
+                                </TableView>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="BESTILLINGER">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TableView layoutY="-2.0" prefHeight="460.0" prefWidth="800.0">
+                                    <columns>
+                                        <TableColumn prefWidth="75.0" text="TYPE" />
+                                        <TableColumn prefWidth="75.0" text="C2" />
+                                        <TableColumn prefWidth="75.0" text="C3" />
+                                        <TableColumn prefWidth="75.0" text="C4" />
+                                        <TableColumn prefWidth="75.0" text="PRIS" />
+                                    </columns>
+                                    <effect>
+                                        <InnerShadow choke="0.8" color="#eaae3d" />
+                                    </effect>
+                                </TableView>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+            <effect>
+                <InnerShadow choke="1.0" color="#41a2a667" />
+            </effect>
+        </TabPane>
+        <ImageView fitHeight="100.0" fitWidth="223.0" layoutX="289.0">
+            <image>
+                <Image url="@../../../resources/CCOMPW-small.png" />
+            </image>
+        </ImageView>
+    </children>
+</AnchorPane>

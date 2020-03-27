@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.user.UserController">
+    <children>
+        <ImageView fitHeight="235.0" fitWidth="500.0" layoutX="150.0" layoutY="14.0">
+            <image>
+                <Image url="@../../../resources/CCOMPW-small.png" />
+            </image>
+        </ImageView>
+        <ChoiceBox layoutX="56.0" layoutY="347.0" prefHeight="39.0" prefWidth="160.0">
+            <effect>
+                <DropShadow />
+            </effect>
+        </ChoiceBox>
+        <Text fill="#18a7d7" layoutX="56.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="VELG DIN BIL " wrappingWidth="217.890625">
+            <font>
+                <Font name="Segoe UI Semilight" size="36.0" />
+            </font>
+        </Text>
+        <Text fill="#18a7d7" layoutX="409.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="VELG KOMPONENT " wrappingWidth="320.890625">
+            <font>
+                <Font name="Segoe UI Semilight" size="36.0" />
+            </font>
+        </Text>
+        <CheckBox layoutX="595.0" layoutY="340.0" mnemonicParsing="false" text="Felg">
+            <font>
+                <Font name="Segoe UI Semilight" size="22.0" />
+            </font>
+        </CheckBox>
+        <CheckBox layoutX="409.0" layoutY="400.0" mnemonicParsing="false" text="Setetrekk">
+            <font>
+                <Font name="Segoe UI Semilight" size="22.0" />
+            </font>
+        </CheckBox>
+        <CheckBox layoutX="595.0" layoutY="400.0" mnemonicParsing="false" text="Ratt">
+            <font>
+                <Font name="Segoe UI Semilight" size="22.0" />
+            </font>
+        </CheckBox>
+        <CheckBox layoutX="409.0" layoutY="340.0" mnemonicParsing="false" text="Motor">
+            <font>
+                <Font name="Segoe UI Semilight" size="22.0" />
+            </font>
+        </CheckBox>
+        <CheckBox layoutX="409.0" layoutY="460.0" mnemonicParsing="false" text="Spoiler">
+            <font>
+                <Font name="Segoe UI Semilight" size="22.0" />
+            </font>
+        </CheckBox>
+        <Button layoutX="258.0" layoutY="546.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="303.0" text="SØK ETTER PRODUKT">
+            <graphic>
+                <ImageView fitHeight="28.0" fitWidth="30.0">
+                    <image>
+                        <Image url="@../../../resources/search-icon.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+    </children>
+</AnchorPane>
