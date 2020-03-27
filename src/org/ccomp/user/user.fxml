@@ -13,7 +13,7 @@
     <children>
         <ImageView fitHeight="235.0" fitWidth="500.0" layoutX="150.0" layoutY="14.0">
             <image>
-                <Image url="@../../../resources/CCOMPW-small.png" />
+                <Image url="@/resources/CCOMPW-small.png" />
             </image>
         </ImageView>
         <ChoiceBox layoutX="56.0" layoutY="347.0" prefHeight="39.0" prefWidth="160.0">
@@ -60,10 +60,11 @@
             <graphic>
                 <ImageView fitHeight="28.0" fitWidth="30.0">
                     <image>
-                        <Image url="@../../../resources/search-icon.png" />
+                        <Image url="@/resources/search-icon.png" />
                     </image>
                 </ImageView>
             </graphic>
         </Button>
+        <Button fx:id="backBtn" layoutX="30.0" layoutY="119.0" mnemonicParsing="false" onAction="#backToMain" text="Back to Main" />
     </children>
 </AnchorPane>
