@@ -21,6 +21,9 @@ public class UserController implements Initializable {
 
     }
 
+    /**
+     * Method that opens main.fxml when the Back Button is clicked
+     */
     @FXML
     public void backToMain() {
         try{

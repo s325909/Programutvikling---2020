@@ -21,7 +21,9 @@ public class MainController implements Initializable {
 
     }
 
-
+    /**
+     * Method that opens admin.fxml when the Admin Button is clicked
+     */
     @FXML
     public void openAdminPage() {
         try{
@@ -37,6 +39,9 @@ public class MainController implements Initializable {
         }
     }
 
+    /**
+     * Method that opens user.fxml when the User Button is clicked
+     */
     @FXML
     public void openUserPage() {
         try{
