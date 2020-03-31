@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="629.0" prefWidth="872.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.LeggeTilController">
+   <children>
+      <RadioButton fx:id="bensin" layoutX="201.0" layoutY="130.0" mnemonicParsing="false" text="Bensin">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="elBil" layoutX="377.0" layoutY="129.0" mnemonicParsing="false" text="Elbil">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="hybrid" layoutX="557.0" layoutY="129.0" mnemonicParsing="false" text="Hybrid">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </RadioButton>
+      <Label alignment="CENTER" contentDisplay="TOP" layoutX="336.0" layoutY="18.0" prefHeight="95.0" prefWidth="195.0" text="Velg biltype " textAlignment="RIGHT">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <RadioButton fx:id="motor" layoutX="205.0" layoutY="257.0" mnemonicParsing="false" text="Motor">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="seteTrekk" layoutX="381.0" layoutY="256.0" mnemonicParsing="false" text="Setetrekk">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="felg" layoutX="561.0" layoutY="256.0" mnemonicParsing="false" text="Felg">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </RadioButton>
+      <Label alignment="CENTER" contentDisplay="TOP" layoutX="315.0" layoutY="179.0" prefHeight="38.0" prefWidth="228.0" text="Velg komponent" textAlignment="RIGHT">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="29.0" layoutY="343.0" text="Navn:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="navn" layoutX="96.0" layoutY="344.0" />
+      <Label layoutX="305.0" layoutY="345.0" text="Hestekrefter">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="hestekrefter" layoutX="426.0" layoutY="345.0" />
+      <Label layoutX="619.0" layoutY="346.0" prefHeight="26.0" prefWidth="54.0" text="Pris">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="pris" layoutX="682.0" layoutY="343.0" />
+      <Button layoutX="383.0" layoutY="410.0" mnemonicParsing="false" text="Legg til " />
+      <TextArea layoutX="233.0" layoutY="442.0" prefHeight="145.0" prefWidth="347.0" />
+   </children>
+</AnchorPane>
