@@ -1,25 +1,17 @@
 package org.ccomp.admin;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import com.sun.tools.javac.comp.Todo;
-import com.sun.xml.internal.bind.v2.TODO;
+//import com.sun.tools.javac.comp.Todo;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-
-import javax.xml.soap.Text;
+import org.ccomp.model.Car;
+import org.ccomp.model.component.engine.ElectricMotor;
 
 public class LeggeTilController implements Initializable {
     @Override
@@ -65,11 +57,20 @@ public class LeggeTilController implements Initializable {
    @FXML
     void utText() {
 
+       ElectricMotor electricMotor = new ElectricMotor();
+       electricMotor.engineName(navn.getText());
+       electricMotor.enginePower(Integer.parseInt(hestekrefter.getText()));
+       electricMotor.enginePrice(Integer.parseInt(pris.getText()));
+
+
+       Car car = new Car(electricMotor);
+       car.builCarEngine();
+
        String radiotext= "";
        String bilTypetext = "";
-       String motorNavn = navn.getText();
-       String hesteKreftertxt = hestekrefter.getText();
-       String pristxt = pris.getText();
+       String motorNavn = electricMotor.getEngineName();//navn.getText();
+       String hesteKreftertxt = String.valueOf(electricMotor.getHorsePower());//hestekrefter.getText();
+       String pristxt = String.valueOf(electricMotor.getEnginePrice());//pris.getText();
 
 
   //   Bil bil1 = new Bil(bilTypetext,radiotext,navn.getText(),hestekrefter.getText(),pris.getText());
@@ -108,6 +109,8 @@ public class LeggeTilController implements Initializable {
            );
 
        }
+
+
        if (elBil.isSelected()) {
            bilTypetext = elBil.getText();
            Bil bil1 = new Bil(bilTypetext,radiotext,motorNavn,hesteKreftertxt,pristxt);
