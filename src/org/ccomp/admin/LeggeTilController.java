@@ -13,39 +13,32 @@ import javafx.scene.control.TextField;
 import org.ccomp.model.Car;
 import org.ccomp.model.component.engine.ElectricMotor;
 
+
 public class LeggeTilController implements Initializable {
+    String radiotext;
+    String bilTypetext;
+    String motorNavn;
+    String hesteKreftertxt;
+    String pristxt;
+
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
     }
 //bilType
     @FXML
-    RadioButton bensin;
-    @FXML
-    RadioButton elBil;
-    @FXML
-    RadioButton hybrid;
+    RadioButton bensin,elBil,hybrid;
 
     //komponent
-   @FXML
-   RadioButton motor;
-
-   @FXML
-    RadioButton seteTrekk;
-
-   @FXML
-    RadioButton felg;
+    @FXML
+    RadioButton motor,seteTrekk,felg;
 
    //Skrive inn
 
     @FXML
-    TextField navn;
-
-    @FXML
-    TextField hestekrefter;
-
-    @FXML
-    TextField pris;
+    TextField navn,hestekrefter,pris;
 
     @FXML
     TextArea skrivUt;
@@ -53,6 +46,8 @@ public class LeggeTilController implements Initializable {
     //leggtilKnapp
     @FXML
     Button printUt;
+
+
 
    @FXML
     void utText() {
@@ -71,42 +66,6 @@ public class LeggeTilController implements Initializable {
        String motorNavn = electricMotor.getEngineName();//navn.getText();
        String hesteKreftertxt = String.valueOf(electricMotor.getHorsePower());//hestekrefter.getText();
        String pristxt = String.valueOf(electricMotor.getEnginePrice());//pris.getText();
-
-
-  //   Bil bil1 = new Bil(bilTypetext,radiotext,navn.getText(),hestekrefter.getText(),pris.getText());
-       //When choosing buttons
-       // 1st CarType
-
-       //TODO for motor blir det navn, hestekrefter og pris. For setetrekk blir det valg av skinn/stoff, farge , pris og det samme for felge.
-       // Vil at de attrbuttene kommer kun når vi f.eks velger motor/setetrekk etc.
-
-       //TODO prøvd å forenkle den lange koden , men vet ikke helt hvordan jeg skal gjøre det
-
-     /*  if(bensin.isSelected() || elBil.isSelected() || hybrid.isSelected() && motor.isSelected() || seteTrekk.isSelected() || felg.isSelected()){
-
-           String bilTypetext = "";
-           bilTypetext = bensin.getText() ,elBil.getText(),hybrid.getText() ;
-           Bil bil1 = new Bil(bilTypetext,radiotext,motorNavn,hesteKreftertxt,pristxt);
-           skrivUt.setText("Bil: " + bil1.getBilType()+ "\n" +
-                   "Komponent: " + bil1.getKomponenter() + "\n" +
-                   "Navn :  " +  bil1.getNavn() + "\n" +
-                   "Hestekrefter :" + bil1.getHestekrefter() + "\n" +
-                   "Pris " + bil1.getPris()
-                   );
-
-
-       }*/
-
-
-       if (bensin.isSelected()){
-           bilTypetext = bensin.getText();
-           Bil bil1 = new Bil(bilTypetext,radiotext,motorNavn,hesteKreftertxt,pristxt);
-           skrivUt.setText("Bil: " + bil1.getBilType()+ "\n" +
-                   "Komponent: " + bil1.getKomponenter() + "\n" +
-                   "Navn :  " +  bil1.getNavn() + "\n" +
-                   "Hestekrefter :" + bil1.getHestekrefter() + "\n" +
-                   "Pris: " + bil1.getPris()
-           );
 
        }
 
@@ -189,8 +148,23 @@ public class LeggeTilController implements Initializable {
 
       //skrivUt.setText("Biltype:" + bil1.getBilType());
 
+
+
     }
 
+
+   /* public  void knappValg(RadioButton knapptype){
+        bilTypetext = knapptype.getText();
+        Bil bil1 = new Bil(bilTypetext,radiotext,motorNavn,hesteKreftertxt,pristxt);
+        skrivUt.setText("Bil: " + bil1.getBilType()+ "\n" +
+                "Komponent: " + bil1.getKomponenter() + "\n" +
+                "Navn :  " +  bil1.getNavn() + "\n" +
+                "Hestekrefter :" + bil1.getHestekrefter() + "\n" +
+                "Pris: " + bil1.getPris()
+        );
+
+    }
+*/
 
    /* //Kolonnene
     ArrayList<String> biltype = new ArrayList<String>();
