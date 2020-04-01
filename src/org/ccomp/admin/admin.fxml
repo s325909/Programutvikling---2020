@@ -1,35 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.AdminController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.AdminController">
     <children>
         <TabPane layoutY="100.0" prefHeight="500.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
-                <Tab text="LEGG TIL/FJERN PRODUKTER">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                            <children>
-                                <TableView layoutY="-2.0" prefHeight="460.0" prefWidth="800.0">
-                                    <columns>
-                                        <TableColumn prefWidth="75.0" text="TYPE" />
-                                        <TableColumn prefWidth="75.0" text="Motor" />
-                                        <TableColumn prefWidth="75.0" text="Felg" />
-                                        <TableColumn prefWidth="75.0" text="Ratt" />
-                                        <TableColumn prefWidth="75.0" text="PRIS" />
-                              <TableColumn prefWidth="75.0" />
-                                    </columns>
-                                    <effect>
-                                        <InnerShadow choke="0.8" color="#eaae3d" />
-                                    </effect>
-                                </TableView>
-                            </children></AnchorPane>
-                    </content>
-                </Tab>
                 <Tab text="SE PRODUKTER">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -72,7 +53,7 @@
                 </Tab>
             </tabs>
             <effect>
-                <InnerShadow choke="1.0" color="#41a2a667" />
+                <InnerShadow choke="1.0" color="#41a2a666" />
             </effect>
         </TabPane>
         <ImageView fitHeight="100.0" fitWidth="223.0" layoutX="289.0">
@@ -84,7 +65,7 @@
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font></Button>
-      <Button fx:id="leggTil" layoutX="111.0" layoutY="23.0" mnemonicParsing="false" onAction="#tilLeggeTil" prefHeight="40.0" prefWidth="67.0" text="Leggtil">
+      <Button fx:id="leggTil" layoutX="680.0" layoutY="15.0" mnemonicParsing="false" onAction="#tilLeggeTil" prefHeight="39.0" prefWidth="106.0" text="LEGG TIL">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
