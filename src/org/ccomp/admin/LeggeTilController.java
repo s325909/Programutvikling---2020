@@ -67,8 +67,6 @@ public class LeggeTilController implements Initializable {
        String hesteKreftertxt = String.valueOf(electricMotor.getHorsePower());//hestekrefter.getText();
        String pristxt = String.valueOf(electricMotor.getEnginePrice());//pris.getText();
 
-       }
-
 
        if (elBil.isSelected()) {
            bilTypetext = elBil.getText();
