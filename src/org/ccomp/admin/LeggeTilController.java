@@ -21,39 +21,32 @@ import javafx.stage.Stage;
 
 import javax.xml.soap.Text;
 
+
 public class LeggeTilController implements Initializable {
+    String radiotext;
+    String bilTypetext;
+    String motorNavn;
+    String hesteKreftertxt;
+    String pristxt;
+
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
     }
 //bilType
     @FXML
-    RadioButton bensin;
-    @FXML
-    RadioButton elBil;
-    @FXML
-    RadioButton hybrid;
+    RadioButton bensin,elBil,hybrid;
 
     //komponent
-   @FXML
-   RadioButton motor;
-
-   @FXML
-    RadioButton seteTrekk;
-
-   @FXML
-    RadioButton felg;
+    @FXML
+    RadioButton motor,seteTrekk,felg;
 
    //Skrive inn
 
     @FXML
-    TextField navn;
-
-    @FXML
-    TextField hestekrefter;
-
-    @FXML
-    TextField pris;
+    TextField navn,hestekrefter,pris;
 
     @FXML
     TextArea skrivUt;
@@ -62,14 +55,11 @@ public class LeggeTilController implements Initializable {
     @FXML
     Button printUt;
 
+
+
    @FXML
     void utText() {
 
-       String radiotext= "";
-       String bilTypetext = "";
-       String motorNavn = navn.getText();
-       String hesteKreftertxt = hestekrefter.getText();
-       String pristxt = pris.getText();
 
 
   //   Bil bil1 = new Bil(bilTypetext,radiotext,navn.getText(),hestekrefter.getText(),pris.getText());
@@ -97,17 +87,20 @@ public class LeggeTilController implements Initializable {
        }*/
 
 
-       if (bensin.isSelected()){
-           bilTypetext = bensin.getText();
-           Bil bil1 = new Bil(bilTypetext,radiotext,motorNavn,hesteKreftertxt,pristxt);
-           skrivUt.setText("Bil: " + bil1.getBilType()+ "\n" +
-                   "Komponent: " + bil1.getKomponenter() + "\n" +
-                   "Navn :  " +  bil1.getNavn() + "\n" +
-                   "Hestekrefter :" + bil1.getHestekrefter() + "\n" +
-                   "Pris: " + bil1.getPris()
-           );
+     /*if(bensin.isSelected() )
+      switch {
+          case bensin.isSelected(): knappValg(bensin);
+          break;
+         case elBil.isSelected(): knappValg(elBil);
+         break;
+         case hybrid.isSelected():knappValg(hybrid);
+         break;
+      }*/
 
-       }
+
+
+
+
        if (elBil.isSelected()) {
            bilTypetext = elBil.getText();
            Bil bil1 = new Bil(bilTypetext,radiotext,motorNavn,hesteKreftertxt,pristxt);
@@ -186,8 +179,23 @@ public class LeggeTilController implements Initializable {
 
       //skrivUt.setText("Biltype:" + bil1.getBilType());
 
+
+
     }
 
+
+   /* public  void knappValg(RadioButton knapptype){
+        bilTypetext = knapptype.getText();
+        Bil bil1 = new Bil(bilTypetext,radiotext,motorNavn,hesteKreftertxt,pristxt);
+        skrivUt.setText("Bil: " + bil1.getBilType()+ "\n" +
+                "Komponent: " + bil1.getKomponenter() + "\n" +
+                "Navn :  " +  bil1.getNavn() + "\n" +
+                "Hestekrefter :" + bil1.getHestekrefter() + "\n" +
+                "Pris: " + bil1.getPris()
+        );
+
+    }
+*/
 
    /* //Kolonnene
     ArrayList<String> biltype = new ArrayList<String>();
