@@ -4,6 +4,11 @@ public class WheelRim {
 
     private String material, color;
     private int price;
+    private int size;
+    private String winterSeason;
+    private String summerSeason;
+
+
 
     public WheelRim(String material, String color, int price) {
         this.material = material;
