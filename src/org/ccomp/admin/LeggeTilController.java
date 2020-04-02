@@ -57,7 +57,6 @@ public class LeggeTilController implements Initializable {
         electricMotor.enginePower(Integer.parseInt(hestekrefter.getText()));
         electricMotor.enginePrice(Integer.parseInt(pris.getText()));
 
-
         Car car = new Car(electricMotor);
         car.builCarEngine();
 

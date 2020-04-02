@@ -36,4 +36,16 @@ public class HybridEngine implements Engine {
                 + "\nhorsepower: " + horsePower
                 + "\nprice: " + enginePrice );
     }
+
+    public String getEngineName() {
+        return engineName;
+    }
+
+    public int getHorsePower() {
+        return horsePower;
+    }
+
+    public int getEnginePrice() {
+        return enginePrice;
+    }
 }

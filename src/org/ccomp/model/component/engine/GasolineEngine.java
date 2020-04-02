@@ -37,5 +37,15 @@ public class GasolineEngine implements Engine {
                 + "\nprice: " + enginePrice );
     }
 
+    public String getEngineName() {
+        return engineName;
+    }
 
+    public int getHorsePower() {
+        return horsePower;
+    }
+
+    public int getEnginePrice() {
+        return enginePrice;
+    }
 }
