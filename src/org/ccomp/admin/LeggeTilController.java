@@ -11,9 +11,15 @@ import org.ccomp.model.Car;
 import org.ccomp.model.component.engine.ElectricMotor;
 import org.ccomp.model.component.engine.Engine;
 import org.ccomp.model.component.engine.GasolineEngine;
+import org.ccomp.model.component.engine.HybridEngine;
 
 
 public class LeggeTilController implements Initializable {
+
+    private GasolineEngine gasolineEngine;
+    private ElectricMotor electricMotor;
+    private HybridEngine hybridEngine;
+
     String komponentType;
     String bilTypetext;
     String motorNavn;
@@ -54,13 +60,21 @@ public class LeggeTilController implements Initializable {
     @FXML
     void utText() {
 
+        /*
         ElectricMotor electricMotor = new ElectricMotor();
         electricMotor.engineName(navn.getText());
         electricMotor.enginePower(Integer.parseInt(hestekrefter.getText()));
         electricMotor.enginePrice(Integer.parseInt(pris.getText()));
 
-        Car car = new Car(electricMotor);
-        car.builCarEngine();
+         */
+
+
+        if (bensin.isSelected()) selectedEngine(gasolineEngine);
+        else if (elBil.isSelected()) selectedEngine(electricMotor);
+        else if (hybrid.isSelected()) selectedEngine(hybridEngine);
+
+       // Car car = new Car(electricMotor);
+       // car.builCarEngine();
 
         String komponentType = "";
         String bilTypetext = "";
@@ -85,18 +99,13 @@ public class LeggeTilController implements Initializable {
         // new electro motor , etc
     }
 
-   /* private void selectedEngine(Engine engine1 ){
+    private void selectedEngine(Engine engine ){
 
-        engine1.engineName(motorNavn);
-        engine1.enginePower(Integer.parseInt(hesteKreftertxt));
-        engine1.enginePrice(Integer.parseInt(pristxt));
+        engine.engineName(motorNavn);
+        engine.enginePower(Integer.parseInt(hesteKreftertxt));
+        engine.enginePrice(Integer.parseInt(pristxt));
 
-
-
-
-
-
-    }*/
+    }
 
     public void valgKnapp(){
         bensin.setUserData("Bensin");
