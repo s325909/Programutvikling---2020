@@ -1,8 +1,11 @@
 package org.ccomp.admin;
 
+import javafx.scene.control.ToggleGroup;
+
 public class Bil {
 
     //Biltype
+
     private String bilType;
     private String bensin;
     private String elBil;
@@ -22,7 +25,7 @@ public class Bil {
     private String hestekrefter;
     private String pris;
 
-    public Bil(String bilType, String komponenter, String navn, String hestekrefter, String pris){
+    public Bil( String bilType, String komponenter, String navn, String hestekrefter, String pris){
          this.bilType = bilType;
          this.komponenter = komponenter;
          this.navn = navn;
