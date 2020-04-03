@@ -9,6 +9,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import org.ccomp.model.Car;
 import org.ccomp.model.component.engine.ElectricMotor;
+import org.ccomp.model.component.engine.Engine;
+import org.ccomp.model.component.engine.GasolineEngine;
 
 
 public class LeggeTilController implements Initializable {
@@ -66,12 +68,35 @@ public class LeggeTilController implements Initializable {
         String hesteKreftertxt = String.valueOf(electricMotor.getHorsePower());//hestekrefter.getText();
         String pristxt = String.valueOf(electricMotor.getEnginePrice());//pris.getText();
 
-        if (carTypeGroup.getSelectedToggle().isSelected() && componentTypeGroup.getSelectedToggle().isSelected() ) {
+       if (carTypeGroup.getSelectedToggle().isSelected() && componentTypeGroup.getSelectedToggle().isSelected() ) {
             valgKnapp();
+
+
         }
 
 
+
+
+
+
+
+        //if elbil
+        //kaller selectedENgine
+        // new electro motor , etc
     }
+
+   /* private void selectedEngine(Engine engine1 ){
+
+        engine1.engineName(motorNavn);
+        engine1.enginePower(Integer.parseInt(hesteKreftertxt));
+        engine1.enginePrice(Integer.parseInt(pristxt));
+
+
+
+
+
+
+    }*/
 
     public void valgKnapp(){
         bensin.setUserData("Bensin");
