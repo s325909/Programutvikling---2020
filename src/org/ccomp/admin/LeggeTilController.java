@@ -8,6 +8,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import org.ccomp.model.Car;
+import org.ccomp.model.component.Seat;
+import org.ccomp.model.component.Spoiler;
+import org.ccomp.model.component.SteeringWheel;
 import org.ccomp.model.component.engine.ElectricMotor;
 import org.ccomp.model.component.engine.Engine;
 import org.ccomp.model.component.engine.GasolineEngine;
@@ -20,11 +23,13 @@ public class LeggeTilController implements Initializable {
     private ElectricMotor electricMotor;
     private HybridEngine hybridEngine;
 
-    String komponentType;
-    String bilTypetext;
-    String motorNavn;
-    String hesteKreftertxt;
-    String pristxt;
+    String componentType;
+    String carTypetext;
+    String namegivingEngine;
+    String horsePowertxt;
+    String pricetxt;
+    String seattxt;
+    String materolltxt;
 
 
     @Override
@@ -34,17 +39,17 @@ public class LeggeTilController implements Initializable {
 
     //bilType
     @FXML
-    RadioButton bensin, elBil, hybrid;
+    RadioButton gasoline, electric, hybrid;
 
 
     //komponent
     @FXML
-    RadioButton motor, seteTrekk, felg;
+    RadioButton engine, seat, spoiler;
 
     //Skrive inn
 
     @FXML
-    TextField navn, hestekrefter, pris;
+    TextField navn, horsepower, price;
 
     @FXML
     TextArea skrivUt;
@@ -69,29 +74,28 @@ public class LeggeTilController implements Initializable {
          */
 
 
-        if (bensin.isSelected()) selectedEngine(gasolineEngine);
-        else if (elBil.isSelected()) selectedEngine(electricMotor);
-        else if (hybrid.isSelected()) selectedEngine(hybridEngine);
 
        // Car car = new Car(electricMotor);
        // car.builCarEngine();
 
-        String komponentType = "";
+      /*  String komponentType = "";
         String bilTypetext = "";
-        String motorNavn = electricMotor.getEngineName();//navn.getText();
+        String engineName = electricMotor.getEngineName();//navn.getText();
         String hesteKreftertxt = String.valueOf(electricMotor.getHorsePower());//hestekrefter.getText();
-        String pristxt = String.valueOf(electricMotor.getEnginePrice());//pris.getText();
+        String pristxt = String.valueOf(electricMotor.getEnginePrice());//pris.getText();*/
 
-       if (carTypeGroup.getSelectedToggle().isSelected() && componentTypeGroup.getSelectedToggle().isSelected() ) {
-            valgKnapp();
-
-
-        }
+      /* if (carTypeGroup.getSelectedToggle().isSelected() && componentTypeGroup.getSelectedToggle().isSelected() ) {
+            selectedCarType();
 
 
+        }*/
 
 
 
+        selectedCarType();
+
+
+        //skrivUt.setText("Biltype:" + namegivingEngine + "\n");
 
 
         //if elbil
@@ -99,15 +103,90 @@ public class LeggeTilController implements Initializable {
         // new electro motor , etc
     }
 
-    private void selectedEngine(Engine engine ){
 
-        engine.engineName(motorNavn);
-        engine.enginePower(Integer.parseInt(hesteKreftertxt));
-        engine.enginePrice(Integer.parseInt(pristxt));
+
+    private  void selectedCarType(){
+        if (gasoline.isSelected()){
+            System.out.println("Bensin");
+            GasolineEngine gasolineEngine = new GasolineEngine();
+            selectedEngine(gasolineEngine);
+            gasolineEngine.printEngine();
+        }
+        else if (electric.isSelected()){
+            System.out.println("El");
+            ElectricMotor electricMotor = new ElectricMotor();
+            selectedEngine(electricMotor);
+            electricMotor.printEngine();
+
+        }
+
+        else if (hybrid.isSelected()){
+            System.out.println("hybrid");
+            HybridEngine hybridEngine = new HybridEngine();
+            selectedEngine(hybridEngine);
+            hybridEngine.printEngine();
+        }
+    }
+
+
+    /*private void selectedAthoerComp(){
+        if (seat.isSelected()){
+            Seat seat1 = new Seat();
+            selectedSeat(seat1);
+            System.out.println("ok");
+        }
+
+        if(spoiler.isSelected()){
+            Spoiler spoiler = new Spoiler();
+            selectedSpoiler(spoiler);
+
+        }*/
+
+
+        //TODO må bare forsette videre med flere komp
+
+    
+
+    /*private Seat selectedSeat(Seat seat){
+
+        seattxt= seatstuff.getText();
+        materolltxt = materiell.getText();
+        pricetxt = price.getText();
+        seat.getColor(seattxt);
+        seat.getMaterial(materolltxt);
+        seat.getPrice(pricetxt);
+        return seat;
+
+    }*/
+
+
+    /*private Spoiler selectedSpoiler(Spoiler spoiler){
+        return spoiler;
 
     }
 
-    public void valgKnapp(){
+    private SteeringWheel selectedSteerinWheel(SteeringWheel steeringWheel){
+        return steeringWheel;
+
+    }
+*/
+
+
+
+    private Engine selectedEngine(Engine engine ){
+
+        namegivingEngine = navn.getText();
+        horsePowertxt = String.valueOf(horsepower.getText());
+        pricetxt = price.getText();
+        engine.engineName(namegivingEngine);
+        engine.enginePower(Integer.parseInt(horsePowertxt));
+        engine.enginePrice(Integer.parseInt(pricetxt));
+        return engine;
+    }
+
+
+
+   /* public void valgKnapp(){
         bensin.setUserData("Bensin");
         elBil.setUserData("Elbil");
         hybrid.setUserData("Hybrid");
@@ -122,7 +201,7 @@ public class LeggeTilController implements Initializable {
                 "Navn :  " + bil1.getNavn()+ "\n" +
                 "Hestekrefter :" +  bil1.getHestekrefter() + "\n" +
                 "Pris: " + bil1.getPris()
-        );
+        );*/
 
     }
 
@@ -137,7 +216,7 @@ public class LeggeTilController implements Initializable {
         );
 
     }*/
-}
+
 
 
 
