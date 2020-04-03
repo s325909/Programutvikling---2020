@@ -47,8 +47,6 @@ public class LeggeTilController implements Initializable {
     @FXML
     Button printUt;
 
-
-
    @FXML
     void utText() {
 
@@ -56,7 +54,6 @@ public class LeggeTilController implements Initializable {
        electricMotor.engineName(navn.getText());
        electricMotor.enginePower(Integer.parseInt(hestekrefter.getText()));
        electricMotor.enginePrice(Integer.parseInt(pris.getText()));
-
 
        Car car = new Car(electricMotor);
        car.builCarEngine();
@@ -77,8 +74,6 @@ public class LeggeTilController implements Initializable {
                    "Hestekrefter :" + bil1.getHestekrefter() + "\n" +
                    "Pris: " + bil1.getPris()
            );
-
-
        }
 
        if(hybrid.isSelected()){
@@ -92,7 +87,6 @@ public class LeggeTilController implements Initializable {
            );
 
        }
-
 
        //motor
        if (motor.isSelected()){
@@ -128,28 +122,16 @@ public class LeggeTilController implements Initializable {
                    "Hestekrefter :" + bil1.getHestekrefter() + "\n" +
                    "Pris: " + bil1.getPris()
            );
-
        }
 
 
 
 
 
-
-
-       //  String bensinChoosen = bensin.getText();
-
-
-
-
+     // String bensinChoosen = bensin.getText();
      // Bil bil1 = new Bil(bensinChoosen,motor.getText(),navn.getText(),hestekrefter.getText(),pris.getText());
-
-      //skrivUt.setText("Biltype:" + bil1.getBilType());
-
-
-
+     // skrivUt.setText("Biltype:" + bil1.getBilType());
     }
-
 
    /* public  void knappValg(RadioButton knapptype){
         bilTypetext = knapptype.getText();
@@ -160,7 +142,6 @@ public class LeggeTilController implements Initializable {
                 "Hestekrefter :" + bil1.getHestekrefter() + "\n" +
                 "Pris: " + bil1.getPris()
         );
-
     }
 */
 
@@ -173,11 +154,6 @@ public class LeggeTilController implements Initializable {
     ArrayList<String> felg = new ArrayList<>();
     ArrayList<String> ratt = new ArrayList<>();
 */
-
-
-
-
-
 
 }
 
