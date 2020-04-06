@@ -1,5 +1,7 @@
 package org.ccomp.admin;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -15,6 +17,8 @@ import org.ccomp.model.component.engine.ElectricMotor;
 import org.ccomp.model.component.engine.Engine;
 import org.ccomp.model.component.engine.GasolineEngine;
 import org.ccomp.model.component.engine.HybridEngine;
+
+import javax.swing.*;
 
 
 public class LeggeTilController implements Initializable {
@@ -49,7 +53,9 @@ public class LeggeTilController implements Initializable {
     //Skrive inn
 
     @FXML
-    TextField navn, horsepower, price;
+    TextField navn, /*horsepower*/
+            variable, price;
+    //her må det komme inn en felles verdig for tekstfelt 2
 
     @FXML
     TextArea skrivUt;
@@ -59,7 +65,7 @@ public class LeggeTilController implements Initializable {
     Button printUt;
 
     @FXML
-    ToggleGroup carTypeGroup,componentTypeGroup;
+    ToggleGroup carTypeGroup, componentTypeGroup;
 
 
     @FXML
@@ -74,9 +80,8 @@ public class LeggeTilController implements Initializable {
          */
 
 
-
-       // Car car = new Car(electricMotor);
-       // car.builCarEngine();
+        // Car car = new Car(electricMotor);
+        // car.builCarEngine();
 
       /*  String komponentType = "";
         String bilTypetext = "";
@@ -91,7 +96,6 @@ public class LeggeTilController implements Initializable {
         }*/
 
 
-
         selectedCarType();
 
 
@@ -104,23 +108,20 @@ public class LeggeTilController implements Initializable {
     }
 
 
-
-    private  void selectedCarType(){
-        if (gasoline.isSelected()){
+    private void selectedCarType() {
+        if (gasoline.isSelected()) {
             System.out.println("Bensin");
             GasolineEngine gasolineEngine = new GasolineEngine();
             selectedEngine(gasolineEngine);
             gasolineEngine.printEngine();
-        }
-        else if (electric.isSelected()){
+
+        } else if (electric.isSelected()) {
             System.out.println("El");
             ElectricMotor electricMotor = new ElectricMotor();
             selectedEngine(electricMotor);
             electricMotor.printEngine();
 
-        }
-
-        else if (hybrid.isSelected()){
+        } else if (hybrid.isSelected()) {
             System.out.println("hybrid");
             HybridEngine hybridEngine = new HybridEngine();
             selectedEngine(hybridEngine);
@@ -143,7 +144,7 @@ public class LeggeTilController implements Initializable {
         }*/
 
 
-        //TODO må bare forsette videre med flere komp
+    //TODO må bare forsette videre med flere komp
 
     
 
@@ -170,20 +171,16 @@ public class LeggeTilController implements Initializable {
 
     }
 */
-
-
-
-    private Engine selectedEngine(Engine engine ){
+    private Engine selectedEngine(Engine engine) {
 
         namegivingEngine = navn.getText();
-        horsePowertxt = String.valueOf(horsepower.getText());
+        horsePowertxt = String.valueOf(variable.getText());
         pricetxt = price.getText();
         engine.engineName(namegivingEngine);
         engine.enginePower(Integer.parseInt(horsePowertxt));
         engine.enginePrice(Integer.parseInt(pricetxt));
         return engine;
     }
-
 
 
    /* public void valgKnapp(){
@@ -203,7 +200,9 @@ public class LeggeTilController implements Initializable {
                 "Pris: " + bil1.getPris()
         );*/
 
-    }
+
+
+
 
     /*public void knappValg(RadioButton knapptype) {
         bilTypetext = knapptype.getText();
@@ -218,6 +217,7 @@ public class LeggeTilController implements Initializable {
     }*/
 
 
+}
 
 
 

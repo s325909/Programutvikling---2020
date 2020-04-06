@@ -1,57 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.LeggeTilController">
+<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.LeggeTilController">
    <children>
-      <RadioButton fx:id="gasoline" layoutX="159.0" layoutY="109.0" mnemonicParsing="false" text="Bensin">
+      <RadioButton id="engine" fx:id="gasoline" layoutX="52.0" layoutY="251.0" mnemonicParsing="false" text="Bensin">
          <toggleGroup>
             <ToggleGroup fx:id="carTypeGroup" />
-         </toggleGroup></RadioButton>
-      <RadioButton fx:id="electric" layoutX="382.0" layoutY="109.0" mnemonicParsing="false" text="Elbil" toggleGroup="$carTypeGroup" />
-      <RadioButton fx:id="hybrid" layoutX="590.0" layoutY="109.0" mnemonicParsing="false" text="Hybrid" toggleGroup="$carTypeGroup" />
-      <Label alignment="CENTER" contentDisplay="TOP" layoutY="28.0" prefHeight="60.0" prefWidth="800.0" style="-fx-border-color: #41a2a6;" text="VELG BILTYPE" textAlignment="RIGHT">
+         </toggleGroup>
+         <font>
+            <Font name="Segoe UI Semilight" size="22.0" />
+         </font></RadioButton>
+      <RadioButton id="engine" fx:id="electric" layoutX="52.0" layoutY="300.0" mnemonicParsing="false" text="Elbil" toggleGroup="$carTypeGroup">
+         <font>
+            <Font name="Segoe UI Semilight" size="22.0" />
+         </font></RadioButton>
+      <RadioButton id="engine" fx:id="hybrid" layoutX="52.0" layoutY="351.0" mnemonicParsing="false" text="Hybrid" toggleGroup="$carTypeGroup">
+         <font>
+            <Font name="Segoe UI Semilight" size="22.0" />
+         </font></RadioButton>
+      <Label alignment="CENTER" contentDisplay="TOP" layoutX="52.0" layoutY="149.0" prefHeight="60.0" prefWidth="300.0" style="-fx-border-color: #41a2a6;" text="VELG BILTYPE" textAlignment="RIGHT">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
       </Label>
-      <RadioButton fx:id="engine" layoutX="160.0" layoutY="250.0" mnemonicParsing="false" text="Motor">
+      <RadioButton fx:id="engine" layoutX="446.0" layoutY="251.0" mnemonicParsing="false" text="Motor">
          <toggleGroup>
             <ToggleGroup fx:id="componentTypeGroup" />
-         </toggleGroup></RadioButton>
-      <RadioButton fx:id="seat" layoutX="380.0" layoutY="250.0" mnemonicParsing="false" text="Setetrekk" toggleGroup="$componentTypeGroup" />
-      <RadioButton fx:id="spoiler" layoutX="600.0" layoutY="250.0" mnemonicParsing="false" text="Felg" toggleGroup="$componentTypeGroup" />
-      <Label alignment="CENTER" contentDisplay="TOP" layoutY="162.0" prefHeight="60.0" prefWidth="800.0" style="-fx-border-color: #41a2a6;" text="VELG KOMPONENT" textAlignment="RIGHT">
+         </toggleGroup>
+         <font>
+            <Font name="Segoe UI Semilight" size="22.0" />
+         </font></RadioButton>
+      <RadioButton fx:id="seat" layoutX="446.0" layoutY="300.0" mnemonicParsing="false" text="Setetrekk" toggleGroup="$componentTypeGroup">
+         <font>
+            <Font name="Segoe UI Semilight" size="22.0" />
+         </font></RadioButton>
+      <RadioButton fx:id="spoiler" layoutX="446.0" layoutY="351.0" mnemonicParsing="false" text="Felg" toggleGroup="$componentTypeGroup">
+         <font>
+            <Font name="Segoe UI Semilight" size="22.0" />
+         </font></RadioButton>
+      <Label alignment="CENTER" contentDisplay="TOP" layoutX="441.0" layoutY="149.0" prefHeight="60.0" prefWidth="300.0" style="-fx-border-color: #41a2a6;" text="VELG KOMPONENT" textAlignment="RIGHT">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="347.0" prefHeight="28.0" prefWidth="62.0" text="Navn" />
-      <TextField fx:id="navn" layoutX="76.0" layoutY="341.0" prefHeight="39.0" prefWidth="190.0" />
-      <Label layoutX="311.0" layoutY="347.0" text="Hestekrefter">
-         <font>
-            <Font name="Segoe UI Semilight" size="18.0" />
-         </font>
-      </Label>
 
-      <TextField fx:id="horsepower" layoutX="418.0" layoutY="341.0" prefHeight="39.0" prefWidth="139.0" />
-      <Label layoutX="590.0" layoutY="347.0" prefHeight="26.0" prefWidth="54.0" text="Pris" />
-      <TextField fx:id="price" layoutX="629.0" layoutY="341.0" prefHeight="39.0" prefWidth="139.0" />
-
-      <TextField fx:id="hestekrefter" layoutX="418.0" layoutY="341.0" prefHeight="39.0" prefWidth="139.0" />
-      <Label layoutX="590.0" layoutY="347.0" prefHeight="26.0" prefWidth="54.0" text="Pris">
-         <font>
-            <Font name="Segoe UI Semilight" size="18.0" />
-         </font></Label>
-      <TextField fx:id="pris" layoutX="629.0" layoutY="341.0" prefHeight="39.0" prefWidth="139.0" />
-
-      <Button fx:id="printUt" layoutX="553.0" layoutY="537.0" mnemonicParsing="false" onAction="#utText" text="LEGG TIL">
+      <Button fx:id="printUt" layoutX="704.0" layoutY="435.0" mnemonicParsing="false" onAction="#utText" text="NESTE">
          <effect>
             <DropShadow color="#41a2a6" height="50.0" radius="24.5" width="50.0" />
          </effect></Button>
-      <TextArea fx:id="skrivUt" layoutX="274.0" layoutY="481.0" prefHeight="95.0" prefWidth="252.0" />
+      <ImageView fitHeight="120.0" fitWidth="260.0" layoutX="270.0">
+         <image>
+            <Image url="@../../../../../../../2.semester/Programutvikling-2020/CCOMPW-small.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

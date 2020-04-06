@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Endret GUI" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Endret GUI">
+      <change afterPath="$PROJECT_DIR$/src/org/ccomp/admin/compGUI/kEngine.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/org/ccomp/admin/compGUI/kSeat.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/org/ccomp/admin/compGUI/kSpoiler.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/org/ccomp/admin/compGUI/kSteeringwheel.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/org/ccomp/admin/compGUI/kWheelrim.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Programutvikling---2020/org/ccomp/admin/AdminController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Programutvikling---2020/org/ccomp/admin/AdminController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Programutvikling---2020/org/ccomp/admin/leggeTIl.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Programutvikling---2020/org/ccomp/admin/leggeTIl.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/ccomp/admin/LeggeTilController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/ccomp/admin/LeggeTilController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/ccomp/admin/leggeTIl.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/ccomp/admin/leggeTIl.fxml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,8 +80,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="FxmlFile" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -111,14 +122,15 @@
     <property name="recentsLimit" value="5" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Jasotharan\Documents\GitHub\Programutvikling---2020\src\resources" />
-      <recent name="C:\Users\Jasotharan\Documents\GitHub\Programutvikling---2020\src\ccomp\main" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Jasotharan\Documents\GitHub\Programutvikling---2020\src\resources" />
       <recent name="C:\Users\Jasotharan\Documents\GitHub\Programutvikling---2020\src\ccomp\resources" />
       <recent name="C:\Users\Jasotharan\Documents\GitHub\Programutvikling---2020\src" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\linda\OneDrive - OsloMet\2.året 2019-2020\1.semester\Algoritmer og datastrukturer\Programutvikling---2020\src\org\ccomp\admin\compGUI" />
+      <recent name="C:\Users\Jasotharan\Documents\GitHub\Programutvikling---2020\src\resources" />
+      <recent name="C:\Users\Jasotharan\Documents\GitHub\Programutvikling---2020\src\ccomp\main" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -259,7 +271,7 @@
       <workItem from="1585320865074" duration="4769000" />
       <workItem from="1585329720310" duration="1029000" />
       <workItem from="1585330876581" duration="3956000" />
-      <workItem from="1585766184294" duration="8767000" />
+      <workItem from="1585766184294" duration="21748000" />
     </task>
     <task id="LOCAL−00001" summary="Endret på admin og user">
       <created>1585336075198</created>
@@ -279,7 +291,13 @@
       <option name="presentableId" value="LOCAL−00003" />
       <updated>1585923645607</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL−00004" summary="Endret GUI">
+      <created>1585924059853</created>
+      <option name="number" value="LOCAL−00004" />
+      <option name="presentableId" value="LOCAL−00004" />
+      <updated>1585924059853</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
