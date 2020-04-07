@@ -47,7 +47,7 @@ public class AdminController implements Initializable {
     public void tilLeggeTil() {
         try {
             Stage stage = (Stage) leggTil.getScene().getWindow();
-            URL url = getClass().getResource("/org/ccomp/admin/addComponent.fxml");
+            URL url = getClass().getResource("/org/ccomp/admin/leggeTil.fxml");
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
             Scene scene = new Scene(root, 600, 500);

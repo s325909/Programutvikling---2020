@@ -1,16 +1,14 @@
 package org.ccomp.admin;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 //import com.sun.tools.javac.comp.Todo;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import org.ccomp.admin.compGUI.CompController;
 import org.ccomp.model.Car;
 import org.ccomp.model.component.Seat;
 import org.ccomp.model.component.Spoiler;
@@ -36,7 +34,6 @@ public class AddComponentController implements Initializable {
     String pricetxt;
     String seattxt;
     String materolltxt;
-    ArrayList<Engine> engineArrayList = new ArrayList<>();
 
 
     @Override
@@ -56,7 +53,7 @@ public class AddComponentController implements Initializable {
     //Skrive inn
 
     @FXML
-    TextField name, horsepower,price,printTxt;
+    TextField navn, /*horsepower*/variable, price;
     //her må det komme inn en felles verdig for tekstfelt 2
 
     @FXML
@@ -110,26 +107,12 @@ public class AddComponentController implements Initializable {
     }
 
 
-    @FXML
-    void txtUt() {
-
-        selectedCarType();
-
-
-    }
-
-
-
     private void selectedCarType() {
         if (gasoline.isSelected()) {
             System.out.println("Bensin");
             GasolineEngine gasolineEngine = new GasolineEngine();
             selectedEngine(gasolineEngine);
-            engineArrayList.add(gasolineEngine);
             gasolineEngine.printEngine();
-
-            printTxt.setText("Biltype: " + engineArrayList.toString());
-
 
         } else if (electric.isSelected()) {
             System.out.println("El");
@@ -189,16 +172,14 @@ public class AddComponentController implements Initializable {
 */
     private Engine selectedEngine(Engine engine) {
 
-        namegivingEngine = name.getText();
-        horsePowertxt = String.valueOf(horsepower.getText());
+        namegivingEngine = navn.getText();
+        horsePowertxt = String.valueOf(variable.getText());
         pricetxt = price.getText();
         engine.engineName(namegivingEngine);
         engine.enginePower(Integer.parseInt(horsePowertxt));
         engine.enginePrice(Integer.parseInt(pricetxt));
         return engine;
     }
-
-
 
 
    /* public void valgKnapp(){
