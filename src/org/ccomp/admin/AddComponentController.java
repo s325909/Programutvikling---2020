@@ -3,6 +3,8 @@ package org.ccomp.admin;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 //import com.sun.tools.javac.comp.Todo;
@@ -34,6 +36,8 @@ public class AddComponentController implements Initializable {
     String pricetxt;
     String seattxt;
     String materolltxt;
+    ArrayList<Engine> engineArrayList = new ArrayList<>();
+   // List<Engine> engineList = new ArrayList<>();
 
 
     @Override
@@ -107,23 +111,29 @@ public class AddComponentController implements Initializable {
     }
 
 
+
+
     private void selectedCarType() {
         if (gasoline.isSelected()) {
             System.out.println("Bensin");
             GasolineEngine gasolineEngine = new GasolineEngine();
             selectedEngine(gasolineEngine);
+            engineArrayList.add(gasolineEngine);
             gasolineEngine.printEngine();
+
 
         } else if (electric.isSelected()) {
             System.out.println("El");
             ElectricMotor electricMotor = new ElectricMotor();
             selectedEngine(electricMotor);
+            engineArrayList.add(electricMotor);
             electricMotor.printEngine();
 
         } else if (hybrid.isSelected()) {
             System.out.println("hybrid");
             HybridEngine hybridEngine = new HybridEngine();
             selectedEngine(hybridEngine);
+            engineArrayList.add(hybridEngine);
             hybridEngine.printEngine();
         }
     }
