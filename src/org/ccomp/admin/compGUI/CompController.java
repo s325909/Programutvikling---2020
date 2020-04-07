@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -19,13 +20,16 @@ public class CompController implements Initializable {
     @FXML
     Button next;
 
+    @FXML
+    RadioButton engine, seat, spoiler, steeringW, kWheelrim;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
     }
 
     @FXML
-    public void goNext() {
+    void goNext() {
         try {
             Stage stage = (Stage) next.getScene().getWindow();
 
@@ -72,7 +76,7 @@ public class CompController implements Initializable {
                 stage.setScene(scene);
                 stage.show();
             }
-            else //validation? Button ikke valgt???
+             //validation? Button ikke valgt???
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.AddComponentController">
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.compGUI.CompController">
    <children>
       <RadioButton fx:id="gasoline" layoutX="24.0" layoutY="260.0" mnemonicParsing="false" text="Bensin">
          <toggleGroup>
@@ -37,7 +31,7 @@
       </Label>
       <RadioButton fx:id="spoiler2" layoutX="328.0" layoutY="380.0" mnemonicParsing="false" text="Ratt" toggleGroup="$componentTypeGroup" />
       <RadioButton fx:id="spoiler3" layoutX="456.0" layoutY="320.0" mnemonicParsing="false" text="Spoiler" toggleGroup="$componentTypeGroup" />
-      <Button layoutX="507.0" layoutY="447.0" mnemonicParsing="false" text="NESTE" />
+      <Button fx:id="next" layoutX="507.0" layoutY="447.0" mnemonicParsing="false" onAction="#goNext" text="NESTE" />
       <ImageView fitHeight="94.0" fitWidth="200.0" layoutX="211.0" layoutY="14.0">
          <image>
             <Image url="@../../../resources/CCOMPW-small.png" />

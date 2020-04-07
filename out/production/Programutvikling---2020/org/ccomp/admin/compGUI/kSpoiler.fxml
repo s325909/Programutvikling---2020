@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.Sete">
+   <children>
+      <ImageView fitHeight="94.0" fitWidth="200.0" layoutX="200.0" layoutY="14.0">
+         <image>
+            <Image url="@../../../../../../../../2.semester/Programutvikling-2020/CCOMPW-small.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="158.0" layoutY="126.0" text="NAVN">
+         <font>
+            <Font name="Segoe UI Semilight" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="110.0" layoutY="227.0" text="MONTERINGSSIDE">
+         <font>
+            <Font name="Segoe UI Semilight" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="157.0" layoutY="176.0" text="FARGE">
+         <font>
+            <Font name="Segoe UI Semilight" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="165.0" layoutY="278.0" text="PRIS">
+         <font>
+            <Font name="Segoe UI Semilight" size="18.0" />
+         </font>
+      </Label>
+      <TextField layoutX="282.0" layoutY="120.0" />
+      <TextField layoutX="282.0" layoutY="170.0" />
+      <TextField layoutX="282.0" layoutY="221.0" />
+      <TextField layoutX="282.0" layoutY="272.0" />
+      <Button layoutX="493.0" layoutY="447.0" mnemonicParsing="false" text="LEGG TIL">
+         <font>
+            <Font name="Segoe UI Semilight" size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="14.0" layoutY="447.0" mnemonicParsing="false" text="TILBAKE">
+         <font>
+            <Font name="Segoe UI Semilight" size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="282.0" layoutY="320.0" mnemonicParsing="false" text="OK" />
+      <TextArea layoutX="188.0" layoutY="366.0" prefHeight="120.0" prefWidth="224.0" />
+   </children>
+</AnchorPane>
