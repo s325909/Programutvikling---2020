@@ -50,7 +50,7 @@
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
       </Button>
-      <TextArea layoutX="188.0" layoutY="366.0" prefHeight="120.0" prefWidth="224.0" />
+      <TextArea layoutX="170.0" layoutY="366.0" prefHeight="120.0" prefWidth="224.0" />
       <Button layoutX="282.0" layoutY="320.0" mnemonicParsing="false" text="OK" />
    </children>
 </AnchorPane>

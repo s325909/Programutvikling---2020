@@ -40,6 +40,6 @@
          </font>
       </Button>
       <TextArea layoutX="185.0" layoutY="366.0" prefHeight="120.0" prefWidth="224.0" />
-      <Button layoutX="272.0" layoutY="314.0" mnemonicParsing="false" text="OK" />
+      <Button layoutX="273.0" layoutY="314.0" mnemonicParsing="false" text="OK" />
    </children>
 </AnchorPane>
