@@ -59,5 +59,15 @@
             <Image url="@../../../../../../../2.semester/Programutvikling-2020/CCOMPW-small.png" />
          </image>
       </ImageView>
+      <RadioButton fx:id="spoiler1" layoutX="632.0" layoutY="300.0" mnemonicParsing="false" text="Spoiler" toggleGroup="$componentTypeGroup">
+         <font>
+            <Font name="Segoe UI Semilight" size="22.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="spoiler2" layoutX="632.0" layoutY="251.0" mnemonicParsing="false" text="Ratt" toggleGroup="$componentTypeGroup">
+         <font>
+            <Font name="Segoe UI Semilight" size="22.0" />
+         </font>
+      </RadioButton>
    </children>
 </AnchorPane>
