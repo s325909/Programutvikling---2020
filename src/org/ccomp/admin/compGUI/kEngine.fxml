@@ -8,8 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.Motor">
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.Motor">
    <children>
       <ImageView fitHeight="94.0" fitWidth="200.0" layoutX="200.0" layoutY="14.0">
          <image>
@@ -28,17 +27,19 @@
          </font>
       </Label>
       <TextField layoutX="272.0" layoutY="120.0" />
-      <Button layoutX="492.0" layoutY="346.0" mnemonicParsing="false" text="LEGG TIL">
+      <Button layoutX="493.0" layoutY="447.0" mnemonicParsing="false" text="LEGG TIL">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
       </Button>
       <TextField layoutX="272.0" layoutY="260.0" />
       <TextField layoutX="272.0" layoutY="190.0" />
-      <Button layoutX="14.0" layoutY="346.0" mnemonicParsing="false" text="TILBAKE">
+      <Button layoutX="14.0" layoutY="447.0" mnemonicParsing="false" text="TILBAKE">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
       </Button>
+      <TextArea layoutX="185.0" layoutY="366.0" prefHeight="120.0" prefWidth="224.0" />
+      <Button layoutX="272.0" layoutY="314.0" mnemonicParsing="false" text="OK" />
    </children>
 </AnchorPane>

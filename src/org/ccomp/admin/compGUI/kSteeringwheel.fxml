@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.Sete">
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.Sete">
    <children>
       <ImageView fitHeight="94.0" fitWidth="200.0" layoutX="200.0" layoutY="14.0">
          <image>
@@ -39,15 +39,17 @@
       <TextField layoutX="282.0" layoutY="170.0" />
       <TextField layoutX="282.0" layoutY="221.0" />
       <TextField layoutX="282.0" layoutY="272.0" />
-      <Button layoutX="493.0" layoutY="347.0" mnemonicParsing="false" text="LEGG TIL">
+      <Button layoutX="493.0" layoutY="447.0" mnemonicParsing="false" text="LEGG TIL">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
       </Button>
-      <Button layoutX="14.0" layoutY="347.0" mnemonicParsing="false" text="TILBAKE">
+      <Button layoutX="14.0" layoutY="447.0" mnemonicParsing="false" text="TILBAKE">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
       </Button>
+      <TextArea layoutX="188.0" layoutY="366.0" prefHeight="120.0" prefWidth="224.0" />
+      <Button layoutX="282.0" layoutY="318.0" mnemonicParsing="false" text="OK" />
    </children>
 </AnchorPane>
