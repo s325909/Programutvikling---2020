@@ -50,7 +50,7 @@ public class AdminController implements Initializable {
             URL url = getClass().getResource("/org/ccomp/admin/leggeTil.fxml");
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
-            Scene scene = new Scene(root, 800, 600);
+            Scene scene = new Scene(root, 600, 500);
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {

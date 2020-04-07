@@ -21,7 +21,7 @@ import org.ccomp.model.component.engine.HybridEngine;
 import javax.swing.*;
 
 
-public class LeggeTilController implements Initializable {
+public class AddComponentController implements Initializable {
 
     private GasolineEngine gasolineEngine;
     private ElectricMotor electricMotor;
@@ -53,8 +53,7 @@ public class LeggeTilController implements Initializable {
     //Skrive inn
 
     @FXML
-    TextField navn, /*horsepower*/
-            variable, price;
+    TextField navn, /*horsepower*/variable, price;
     //her må det komme inn en felles verdig for tekstfelt 2
 
     @FXML

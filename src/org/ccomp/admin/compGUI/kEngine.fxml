@@ -34,7 +34,7 @@
       </Button>
       <TextField layoutX="272.0" layoutY="260.0" />
       <TextField layoutX="272.0" layoutY="190.0" />
-      <Button layoutX="14.0" layoutY="447.0" mnemonicParsing="false" text="TILBAKE">
+      <Button fx:id="backBtn" layoutX="14.0" layoutY="447.0" mnemonicParsing="false" onAction="#backToAdd" text="TILBAKE">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
