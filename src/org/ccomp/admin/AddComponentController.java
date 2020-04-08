@@ -58,7 +58,7 @@ public class AddComponentController implements Initializable {
     @FXML
     public void backToAdmin() {
         try {
-            /*
+
             Stage stage = (Stage) backAdmin.getScene().getWindow();
             URL url = getClass().getResource("/org/ccomp/admin/admin.fxml");
             FXMLLoader loader = new FXMLLoader(url);
@@ -66,8 +66,8 @@ public class AddComponentController implements Initializable {
             Scene scene = new Scene(root, 800, 600);
             stage.setScene(scene);
             stage.show();
-            */
-            loadWindow(backAdmin, "/org/ccomp/admin/admin.fxml", "@../../../resources/style.ccs");
+
+           // loadWindow(backAdmin, "/org/ccomp/admin/admin.fxml", "@../../../resources/style.ccs");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -86,7 +86,7 @@ public class AddComponentController implements Initializable {
             URL url = getClass().getResource(resource);
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
-            Scene scene = new Scene(root, 800, 480);
+            Scene scene = new Scene(root, 600, 500);
 //            scene.getStylesheets().add(getClass().getResource(styleSheet).toExternalForm());
             stage.setScene(scene);
             stage.show();
@@ -94,7 +94,6 @@ public class AddComponentController implements Initializable {
             e.printStackTrace();
         }
     }
-
 }
 
 

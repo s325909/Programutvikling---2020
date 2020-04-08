@@ -47,7 +47,7 @@
       </Button>
       <TextArea layoutX="170.0" layoutY="366.0" prefHeight="120.0" prefWidth="224.0" />
       <Button layoutX="282.0" layoutY="320.0" mnemonicParsing="false" text="OK" />
-      <ImageView fitHeight="94.0" fitWidth="200.0" layoutX="207.0" layoutY="14.0">
+      <ImageView fitHeight="94.0" fitWidth="200.0" layoutX="200.0" layoutY="14.0">
          <image>
             <Image url="@../../../../resources/CCOMPW-small.png" />
          </image>
