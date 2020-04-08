@@ -1,10 +1,11 @@
 package org.ccomp.model.component;
 
-public class Spoiler {
+public class Spoiler extends CarComponent {
 
     private String type; //sport, normal, etc.
 
-    public Spoiler(String type) {
+    public Spoiler(String compName, double compPrice, int compQuantity, String type) {
+        super(compName, compPrice, compQuantity);
         this.type = type;
     }
 

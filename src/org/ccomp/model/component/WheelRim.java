@@ -1,6 +1,6 @@
 package org.ccomp.model.component;
 
-public class WheelRim {
+public class WheelRim extends CarComponent{
 
     private String material, color;
     private int price;
@@ -9,11 +9,10 @@ public class WheelRim {
     private String summerSeason;
 
 
-
-    public WheelRim(String material, String color, int price) {
+    public WheelRim(String compName, double compPrice, int compQuantity, String material, String color) {
+        super(compName, compPrice, compQuantity);
         this.material = material;
         this.color = color;
-        this.price = price;
     }
 
     public String getMaterial() {
@@ -32,9 +31,9 @@ public class WheelRim {
         this.color = color;
     }
 
-    public int getPrice() {
-        return price;
-    }
+   // public int getCompPrice() {
+    //    return price;
+  //  }
 
     public void setPrice(int price) {
         this.price = price;

@@ -1,9 +1,18 @@
 package org.ccomp.model.component.engine;
 
-public class ElectricMotor implements Engine {
+import org.ccomp.model.component.CarComponent;
+
+public class ElectricMotor extends CarComponent implements Engine {
 
     String engineName;
     int horsePower, enginePrice;
+
+    public ElectricMotor(String compName, double compPrice, int compQuantity, String engineName, int horsePower, int enginePrice) {
+        super(compName, compPrice, compQuantity);
+        this.engineName = engineName;
+        this.horsePower = horsePower;
+        this.enginePrice = enginePrice;
+    }
 
     @Override
     public boolean isCombustion() {
@@ -15,7 +24,7 @@ public class ElectricMotor implements Engine {
         return true;
     }
 
-    @Override
+   // @Override
     public void engineName(String name) {
         this.engineName = name;
     }
@@ -25,7 +34,7 @@ public class ElectricMotor implements Engine {
         this.horsePower = power;
     }
 
-    @Override
+   // @Override
     public void enginePrice(int price) {
         this.enginePrice = price;
     }

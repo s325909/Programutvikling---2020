@@ -1,14 +1,14 @@
 package org.ccomp.model.component;
 
-public class Seat {
+public class Seat extends CarComponent {
 
     private String material, color;
     private int price;
 
-    public Seat(String material, String color, int price) {
+    public Seat(String compName, double compPrice, int compQuantity, String material, String color) {
+        super(compName, compPrice, compQuantity);
         this.material = material;
         this.color = color;
-        this.price = price;
     }
 
     public String getMaterial() {
@@ -27,11 +27,28 @@ public class Seat {
         this.color = color;
     }
 
-    public int getPrice() {
+
+    @Override
+    public String toString() {
+        return "Seat{" +
+                "COMP NAME: " + getCompName() + '\'' +
+                "material='" + material + '\'' +
+                ", color='" + color + '\'' +
+                ", price=" + getCompPrice() +
+                ", quantity=" + getCompQuantity() + '\'' +
+                '}';
+    }
+
+
+
+    /*
+    public int getCompPrice() {
         return price;
     }
 
     public void setPrice(int price) {
         this.price = price;
     }
+
+     */
 }

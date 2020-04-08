@@ -6,9 +6,9 @@ public interface Engine {
 
     boolean isElectric();
 
-    void engineName(String name);
+  //  void engineName(String name);
 
     void enginePower(int power);
 
-    void enginePrice(int price);
+  //  void enginePrice(int price);
 }

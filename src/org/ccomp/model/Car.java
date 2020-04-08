@@ -7,7 +7,7 @@ import org.ccomp.model.component.engine.Engine;
 import org.ccomp.model.component.engine.GasolineEngine;
 import org.ccomp.model.component.engine.HybridEngine;
 
-public class        Car {
+public class Car {
 
     private Engine carEngine;
     private Spoiler spoiler;

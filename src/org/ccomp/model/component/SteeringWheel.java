@@ -1,10 +1,11 @@
 package org.ccomp.model.component;
 
-public class SteeringWheel {
+public class SteeringWheel extends CarComponent {
 
     private String type;
 
-    public SteeringWheel(String type) {
+    public SteeringWheel(String compName, double compPrice, int compQuantity, String type) {
+        super(compName, compPrice, compQuantity);
         this.type = type;
     }
 
