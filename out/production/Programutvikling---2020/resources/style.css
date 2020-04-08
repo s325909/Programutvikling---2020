@@ -1,0 +1,18 @@
+.button{
+    -fx-background-color: rgb(128,0,128);
+    -fx-text-fill: white;
+    -fx-font-size: 36;
+    -fx-pref-width: 360;
+    -fx-pref-height: 75;
+}
+
+.button:hover {
+    -fx-background-color: rgba(255,0,255,0.9);
+}
+
+.button:pressed {
+    -fx-background-color: rgba(255,0,255,0.6);
+    -fx-text-fill: black;
+}
+
+

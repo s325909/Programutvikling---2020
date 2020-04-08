@@ -29,63 +29,36 @@ public class AddComponentController implements Initializable {
 
     @FXML
     public void goNext() {
-        try {
-            Stage stage = (Stage) next.getScene().getWindow();
 
-            if (engine.isSelected()) {
-                URL url = getClass().getResource("/org/ccomp/admin/compGUI/kEngine.fxml");
-                FXMLLoader loader = new FXMLLoader(url);
-                Parent root = loader.load();
-                Scene scene = new Scene(root, 600, 500);
-                stage.setScene(scene);
-                stage.show();
-            }
-
-            else if (seat.isSelected()) {
-                URL url = getClass().getResource("/org/ccomp/admin/compGUI/kSeat.fxml");
-                FXMLLoader loader = new FXMLLoader(url);
-                Parent root = loader.load();
-                Scene scene = new Scene(root, 600, 500);
-                stage.setScene(scene);
-                stage.show();
-            }
-
-            else if (spoiler.isSelected()) {
-                URL url = getClass().getResource("/org/ccomp/admin/compGUI/kSpoiler.fxml");
-                FXMLLoader loader = new FXMLLoader(url);
-                Parent root = loader.load();
-                Scene scene = new Scene(root, 600, 500);
-                stage.setScene(scene);
-                stage.show();
-            }
-
-            else if (steeringwheel.isSelected()) {
-                URL url = getClass().getResource("/org/ccomp/admin/compGUI/kSteeringwheel.fxml");
-                FXMLLoader loader = new FXMLLoader(url);
-                Parent root = loader.load();
-                Scene scene = new Scene(root, 600, 500);
-                stage.setScene(scene);
-                stage.show();
-            }
-            else if (wheelrim.isSelected()) {
-                URL url = getClass().getResource("/org/ccomp/admin/compGUI/kWheelrim.fxml");
-                FXMLLoader loader = new FXMLLoader(url);
-                Parent root = loader.load();
-                Scene scene = new Scene(root, 600, 500);
-                stage.setScene(scene);
-                stage.show();
-            }
-            //else //validation? Button ikke valgt???{
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (engine.isSelected()) {
+            loadWindow(next, "/org/ccomp/admin/compGUI/kEngine.fxml", "@../../../resources/style.ccs");
         }
+
+        else if (seat.isSelected()) {
+            loadWindow(next, "/org/ccomp/admin/compGUI/kSeat.fxml", "@../../../resources/style.ccs");
+        }
+
+        else if (spoiler.isSelected()) {
+            loadWindow(next, "/org/ccomp/admin/compGUI/kSpoiler.fxml", "@../../../resources/style.ccs");
+        }
+
+        else if (steeringwheel.isSelected()) {
+            loadWindow(next, "/org/ccomp/admin/compGUI/kSteeringwheel.fxml", "@../../../resources/style.ccs");
+
+        }
+        else if (wheelrim.isSelected()) {
+            loadWindow(next, "/org/ccomp/admin/compGUI/kWheelRim.fxml", "@../../../resources/style.ccs");
+
+        }
+        //else //validation? Button ikke valgt???{
+
+
     }
 
     @FXML
     public void backToAdmin() {
         try {
+            /*
             Stage stage = (Stage) backAdmin.getScene().getWindow();
             URL url = getClass().getResource("/org/ccomp/admin/admin.fxml");
             FXMLLoader loader = new FXMLLoader(url);
@@ -93,10 +66,35 @@ public class AddComponentController implements Initializable {
             Scene scene = new Scene(root, 800, 600);
             stage.setScene(scene);
             stage.show();
+            */
+            loadWindow(backAdmin, "/org/ccomp/admin/admin.fxml", "@../../../resources/style.ccs");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    /***
+     * Method used to create and load a window used when changing between fxml scenes when a button i clicked
+     * @param button
+     * @param resource
+     * @param styleSheet
+     */
+    @FXML
+    private void loadWindow(Button button, String resource, String styleSheet){
+        try {
+            Stage stage = (Stage) button.getScene().getWindow();
+            URL url = getClass().getResource(resource);
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+            Scene scene = new Scene(root, 800, 480);
+//            scene.getStylesheets().add(getClass().getResource(styleSheet).toExternalForm());
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 }
 
 
