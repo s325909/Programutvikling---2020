@@ -65,7 +65,7 @@
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font></Button>
-      <Button fx:id="leggTil" layoutX="680.0" layoutY="15.0" mnemonicParsing="false" onAction="#tilLeggeTil" prefHeight="39.0" prefWidth="106.0" text="LEGG TIL">
+      <Button fx:id="addComp" layoutX="680.0" layoutY="15.0" mnemonicParsing="false" onAction="#toAddComponent" prefHeight="39.0" prefWidth="106.0" text="LEGG TIL">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>

@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
 <?import java.lang.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.AddComponentController">
    <children>
@@ -29,19 +24,23 @@
             <ToggleGroup fx:id="componentTypeGroup" />
          </toggleGroup></RadioButton>
       <RadioButton fx:id="seat" layoutX="459.0" layoutY="260.0" mnemonicParsing="false" text="Sete" toggleGroup="$componentTypeGroup" />
-      <RadioButton fx:id="spoiler" layoutX="327.0" layoutY="320.0" mnemonicParsing="false" text="Felg" toggleGroup="$componentTypeGroup" />
+      <RadioButton fx:id="wheelrim" layoutX="327.0" layoutY="320.0" mnemonicParsing="false" text="Felg" toggleGroup="$componentTypeGroup" />
       <Label alignment="CENTER" contentDisplay="TOP" layoutX="14.0" layoutY="173.0" prefHeight="60.0" prefWidth="260.0" style="-fx-border-color: #41a2a6;" text="VELG KOMPONENT" textAlignment="RIGHT">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
       </Label>
-      <RadioButton fx:id="spoiler2" layoutX="328.0" layoutY="380.0" mnemonicParsing="false" text="Ratt" toggleGroup="$componentTypeGroup" />
-      <RadioButton fx:id="spoiler3" layoutX="456.0" layoutY="320.0" mnemonicParsing="false" text="Spoiler" toggleGroup="$componentTypeGroup" />
-      <Button layoutX="507.0" layoutY="447.0" mnemonicParsing="false" text="NESTE" />
+      <RadioButton fx:id="steeringwheel" layoutX="328.0" layoutY="380.0" mnemonicParsing="false" text="Ratt" toggleGroup="$componentTypeGroup" />
+      <RadioButton fx:id="spoiler" layoutX="456.0" layoutY="320.0" mnemonicParsing="false" text="Spoiler" toggleGroup="$componentTypeGroup" />
+      <Button fx:id="next" layoutX="507.0" layoutY="447.0" mnemonicParsing="false" onAction="#goNext" text="NESTE" />
       <ImageView fitHeight="94.0" fitWidth="200.0" layoutX="211.0" layoutY="14.0">
          <image>
             <Image url="@../../../resources/CCOMPW-small.png" />
          </image>
       </ImageView>
+      <Button fx:id="backAdmin" layoutX="18.0" layoutY="447.0" mnemonicParsing="false" onAction="#backToAdmin" text="TILBAKE">
+         <font>
+            <Font name="Segoe UI Semilight" size="18.0" />
+         </font></Button>
    </children>
 </AnchorPane>

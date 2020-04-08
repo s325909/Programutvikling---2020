@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.Sete">
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.compGUI.CompController">
    <children>
       <ImageView fitHeight="94.0" fitWidth="200.0" layoutX="200.0" layoutY="14.0">
          <image>
@@ -44,7 +44,7 @@
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
       </Button>
-      <Button layoutX="14.0" layoutY="447.0" mnemonicParsing="false" text="TILBAKE">
+      <Button fx:id="backToAdd" layoutX="14.0" layoutY="447.0" mnemonicParsing="false" onAction="#backToAddComp" text="TILBAKE">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>

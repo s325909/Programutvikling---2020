@@ -17,7 +17,7 @@ public class AdminController implements Initializable {
     Button backBtn;
 
     @FXML
-    Button leggTil;
+    Button addComp;
 
 
     @Override
@@ -44,10 +44,10 @@ public class AdminController implements Initializable {
     }
 
     @FXML
-    public void tilLeggeTil() {
+    public void toAddComponent() {
         try {
-            Stage stage = (Stage) leggTil.getScene().getWindow();
-            URL url = getClass().getResource("/org/ccomp/admin/leggeTil.fxml");
+            Stage stage = (Stage) addComp.getScene().getWindow();
+            URL url = getClass().getResource("/org/ccomp/admin/addComponent.fxml");
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
             Scene scene = new Scene(root, 600, 500);
@@ -56,8 +56,5 @@ public class AdminController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-
     }
 }
