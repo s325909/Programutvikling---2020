@@ -11,6 +11,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import javax.swing.*;
+
 public class AddComponentController implements Initializable {
 
     @FXML
@@ -20,7 +22,7 @@ public class AddComponentController implements Initializable {
     Button next;
 
     @FXML
-    RadioButton engine, seat, spoiler, steeringwheel, wheelrim;
+    RadioButton gasoline, electric, hybrid, engine, seat, spoiler, steeringwheel, wheelrim;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -93,6 +95,10 @@ public class AddComponentController implements Initializable {
         } catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public void motorSelected() {
+
     }
 }
 
