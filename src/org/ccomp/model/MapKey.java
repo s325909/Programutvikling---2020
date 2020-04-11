@@ -6,10 +6,12 @@ import org.ccomp.model.component.SteeringWheel;
 import org.ccomp.model.component.WheelRim;
 import org.ccomp.model.component.engine.Engine;
 
-public class MapKey {
+import java.io.Serializable;
+
+public class MapKey implements Serializable {
 
     private Engine keyEngine;
-    private Seat seat;
+    private Seat keySeat;
     private Spoiler keySpoiler;
     private SteeringWheel keySteeringWheel;
     private WheelRim keyWheelRim;
@@ -22,12 +24,12 @@ public class MapKey {
         this.keyEngine = keyEngine;
     }
 
-    public Seat getSeat() {
-        return seat;
+    public Seat getKeySeat() {
+        return keySeat;
     }
 
-    public void setSeat(Seat seat) {
-        this.seat = seat;
+    public void setKeySeat(Seat keySeat) {
+        this.keySeat = keySeat;
     }
 
     public Spoiler getKeySpoiler() {
@@ -54,11 +56,5 @@ public class MapKey {
         this.keyWheelRim = keyWheelRim;
     }
 
-
-    //todo:
-    // Create first map entry with key <A,B>.
-    // MapKey mapKey1 = new MapKey();
-    // mapKey1.setKey1("A");
-    // mapKey1.setKey2("B");
 
 }

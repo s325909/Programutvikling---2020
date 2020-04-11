@@ -2,7 +2,9 @@ package org.ccomp.model.component;
 
 import org.ccomp.model.component.engine.Engine;
 
-public class CarComponent {
+import java.io.Serializable;
+
+public class CarComponent implements Serializable {
 
     private String compName;
     private double compPrice;

@@ -1,10 +1,16 @@
 package org.ccomp.fileHandling;
 
-public interface FileHandler {
+import org.ccomp.model.MapKey;
+import org.ccomp.model.component.CarComponent;
 
-    void saveComponent();
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.List;
 
-    void loadComponent();
+public interface FileHandler extends Serializable {
 
+    HashMap<String, List<CarComponent>> readComponent(HashMap<String, List<CarComponent>> loadCompMap);
+
+    void writeComponent(HashMap<String, List<CarComponent>> savedCompMap);
 
 }

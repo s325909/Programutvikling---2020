@@ -2,6 +2,9 @@ package org.ccomp.model.component;
 
 public class Seat extends CarComponent {
 
+    private final String KEY = "Seat";
+            //Seat.class.getName();
+
     private String material, color;
     private int price;
 
@@ -27,6 +30,9 @@ public class Seat extends CarComponent {
         this.color = color;
     }
 
+    public String getKEY() {
+        return KEY;
+    }
 
     @Override
     public String toString() {
