@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.compGUI.CompController">
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.compGUI.CompController">
    <children>
-      <ImageView fitHeight="94.0" fitWidth="200.0" layoutX="200.0" layoutY="14.0">
-         <image>
-            <Image url="@../../../../../../../../2.semester/Programutvikling-2020/CCOMPW-small.png" />
-         </image>
-      </ImageView>
       <Label layoutX="158.0" layoutY="126.0" text="NAVN">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
@@ -48,5 +44,10 @@
       </Button>
       <Button layoutX="282.0" layoutY="321.0" mnemonicParsing="false" text="OK" />
       <TextArea layoutX="188.0" layoutY="372.0" prefHeight="120.0" prefWidth="224.0" />
+      <ImageView fitHeight="94.0" fitWidth="200.0" layoutX="200.0" layoutY="14.0">
+         <image>
+            <Image url="@../../../../resources/CCOMPW-small.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

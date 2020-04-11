@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
@@ -10,13 +16,8 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.user.UserController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.user.UserController">
     <children>
-        <ImageView fitHeight="175.0" fitWidth="400.0" layoutX="200.0" layoutY="14.0">
-            <image>
-                <Image url="@/resources/CCOMPW-small.png" />
-            </image>
-        </ImageView>
         <ChoiceBox layoutX="56.0" layoutY="280.0" prefHeight="39.0" prefWidth="160.0">
             <effect>
                 <DropShadow />
@@ -58,13 +59,6 @@
             </font>
         </CheckBox>
         <Button layoutX="418.0" layoutY="530.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="303.0" text="SØK ETTER PRODUKT">
-            <graphic>
-                <ImageView fitHeight="28.0" fitWidth="30.0">
-                    <image>
-                        <Image url="@/resources/search-icon.png" />
-                    </image>
-                </ImageView>
-            </graphic>
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
@@ -73,9 +67,14 @@
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font></Button>
-      <ImageView fitHeight="157.0" fitWidth="333.0" layoutX="222.0" layoutY="-3.0">
+      <ImageView fitHeight="150.0" fitWidth="363.0" layoutX="219.0" layoutY="35.0">
          <image>
-            <Image url="@../../../../../../../2.semester/Programutvikling-2020/CCOMPW-small.png" />
+            <Image url="@../../../resources/CCOMPW-small.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="39.0" fitWidth="41.0" layoutX="680.0" layoutY="531.0">
+         <image>
+            <Image url="@../../../resources/search-icon.png" />
          </image>
       </ImageView>
     </children>
