@@ -1,33 +1,43 @@
 package org.ccomp.model.component;
 
+import javafx.beans.property.SimpleStringProperty;
+
 public class Seat extends CarComponent {
 
     private final String KEY = "Seat";
             //Seat.class.getName();
 
-    private String material, color;
+    private SimpleStringProperty material, color;
     private int price;
 
     public Seat(String compName, double compPrice, int compQuantity, String material, String color) {
         super(compName, compPrice, compQuantity);
-        this.material = material;
-        this.color = color;
+        this.material = new SimpleStringProperty(material) ;
+        this.color = new SimpleStringProperty(color) ;
     }
 
-    public String getMaterial() {
+    public SimpleStringProperty materialProperty() {
         return material;
     }
 
-    public void setMaterial(String material) {
-        this.material = material;
-    }
-
-    public String getColor() {
+    public SimpleStringProperty colorProperty() {
         return color;
     }
 
+    public String getMaterial() {
+        return material.get();
+    }
+
+    public void setMaterial(String material) {
+        this.material.set(material); ;
+    }
+
+    public String getColor() {
+        return color.get();
+    }
+
     public void setColor(String color) {
-        this.color = color;
+        this.color.set(color);
     }
 
     public String getKEY() {
