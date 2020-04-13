@@ -42,12 +42,18 @@
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
       </Button>
-      <TextArea layoutX="188.0" layoutY="366.0" prefHeight="120.0" prefWidth="224.0" />
-      <Button layoutX="282.0" layoutY="321.0" mnemonicParsing="false" text="OK" />
+      <Button layoutX="457.0" layoutY="321.0" mnemonicParsing="false" text="OK" />
       <ImageView fitHeight="94.0" fitWidth="200.0" layoutX="200.0" layoutY="14.0">
          <image>
             <Image url="@../../../../resources/CCOMPW-small.png" />
          </image>
       </ImageView>
+      <TextArea layoutX="188.0" layoutY="392.0" prefHeight="94.0" prefWidth="224.0" />
+      <Label layoutX="151.0" layoutY="327.0" text="ANTALL">
+         <font>
+            <Font name="Segoe UI Semilight" size="18.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="steeringWheelQuantity" layoutX="282.0" layoutY="321.0" prefWidth="150.0" />
    </children>
 </AnchorPane>
