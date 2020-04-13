@@ -48,12 +48,12 @@
             <Image url="@../../../../resources/CCOMPW-small.png" />
          </image>
       </ImageView>
-      <Label layoutX="165.0" layoutY="329.0" text="PRIS">
+      <Label layoutX="151.0" layoutY="329.0" text="ANTALL">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="wheelRimQuantity" layoutX="282.0" layoutY="323.0" prefWidth="150.0" />
       <TextArea layoutX="188.0" layoutY="392.0" prefHeight="94.0" prefWidth="224.0" />
+      <TextField fx:id="wheelRimQuantity" layoutX="282.0" layoutY="323.0" prefHeight="39.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

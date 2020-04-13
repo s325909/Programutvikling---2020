@@ -39,7 +39,7 @@
             <Image url="@../../../../resources/CCOMPW-small.png" />
          </image>
       </ImageView>
-      <ChoiceBox fx:id="engineQuantity" layoutX="272.0" layoutY="327.0" prefWidth="150.0" />
       <Label layoutX="150.0" layoutY="333.0" text="ANTALL" />
+      <TextField fx:id="engineQuantity" layoutX="272.0" layoutY="327.0" prefHeight="39.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

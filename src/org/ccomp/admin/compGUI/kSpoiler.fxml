@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="spoilerQuantity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.compGUI.CompController">
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.compGUI.CompController">
    <children>
       <Label layoutX="158.0" layoutY="126.0" text="NAVN">
          <font>
@@ -54,6 +54,6 @@
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
       </Label>
-      <ChoiceBox layoutX="282.0" layoutY="323.0" prefWidth="150.0" />
+      <TextField fx:id="spoilerQuantity" layoutX="282.0" layoutY="323.0" prefHeight="39.0" prefWidth="150.0" />
    </children>
 </AnchorPane>
