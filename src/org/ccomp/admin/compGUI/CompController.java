@@ -327,5 +327,11 @@ public class CompController {
             e.printStackTrace();
         }
     }
+
+
+    //validation
+
+    //hvis ikke tekstfields er fylt ut, feilmelding.
+
 }
 
