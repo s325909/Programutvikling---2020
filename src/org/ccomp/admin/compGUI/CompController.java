@@ -1,5 +1,6 @@
 package org.ccomp.admin.compGUI;
 
+import javafx.beans.property.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,6 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.ccomp.fileHandling.ComponentOBJHandler;
+import org.ccomp.fileHandling.ReadWriteObjectsHelper;
+import org.ccomp.model.CarComp;
 import org.ccomp.model.MapKey;
 import org.ccomp.model.component.*;
 import org.ccomp.model.component.engine.ElectricMotor;
@@ -41,6 +44,8 @@ public class CompController {
     private WheelRim wheelRim;
 
     private ComponentOBJHandler jobjHandler;
+
+    private ReadWriteObjectsHelper objectsHelper;
 
     @FXML
     public void initialize() {
@@ -82,6 +87,11 @@ public class CompController {
           //  jobjHandler.writeComponent(retrievedCompMap);
             System.out.println("\nADD SEAT PRESSED\n");
         } else if (event.getSource() == addSpoiler) {
+
+           // carComponents = new ArrayList<>();
+           // initSpoilerList(carComponents);
+
+
             System.out.println("ADD SPOILER PRESSED");
         } else if (event.getSource() == addSteeringWheel) {
             System.out.println("ADD STEERING WHEEL PRESSED");
@@ -168,10 +178,58 @@ public class CompController {
 
     @FXML
     public void addSpoilerComponent() {
-        if (addSpoiler.isPressed()) System.out.println("SPOILER BTN PRESSED!");
+       // if (addSpoiler.isPressed()) System.out.println("SPOILER BTN PRESSED!");
+
+        List<CarComp> carComps = new ArrayList<>();
+
+        SimpleStringProperty stringProperty = new SimpleStringProperty("COMP");
+        DoubleProperty doubleProperty = new SimpleDoubleProperty(120.9);
+        IntegerProperty integerProperty = new SimpleIntegerProperty(14);
+
+        CarComp carComp = new CarComp(stringProperty, doubleProperty, integerProperty);
+
+        carComps.add(carComp);
+        carComps.add(carComp);
+        carComps.add(carComp);
+        carComps.add(carComp);
+
+      //  CarComp carComp = new CarComp(spoilerName.getText(), Double.parseDouble(spoilerPrice.getText()), Integer.parseInt(spoilerQuantity.toString()));
+
+      //  carComps.add(new CarComp("COMP0", 120.0, 15));
+      //  carComps.add(new CarComp("COMP1", 135.0, 25));
+      //  carComps.add(new CarComp("COMP2", 150.0, 35));
+
+        System.out.println("SIZE: " + carComps.size());
+
+        HashMap<String, List<CarComp>> compMap2 = new HashMap<>();
+
+        compMap2.put("Comp", carComps);
+        System.out.println("(COMP) HASH MAP: " + compMap2);
+
+
+        System.out.println(carComps.get(0).getCompName());
+        System.out.println(carComps.get(0).getCompPrice());
+        System.out.println(carComps.get(0).getCompQuantity());
+
+
+
+            //serialize compMap
+            objectsHelper = new ReadWriteObjectsHelper();
+            objectsHelper.writeComponent(compMap2);
+
+            //deserialize compMap
+            HashMap<String, List<CarComp>> retrievedCompMap2 = new HashMap<>();
+            retrievedCompMap2 = objectsHelper.readComponent(retrievedCompMap2);
+
+            System.out.println("(RETRIEVED) HASH MAP: " + retrievedCompMap2);
+
+
+
+        // iterateHashMapList(retrievedCompMap2);
 
         System.out.println("ADD SPOILER BUTTON PRESSED");
     }
+
 
 
 

@@ -47,6 +47,7 @@ public class CarComponent implements Serializable {
         this.compQuantity = compQuantity;
     }
 
+
     @Override
     public String toString() {
         return "CarComponent{" +
