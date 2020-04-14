@@ -1,5 +1,8 @@
 package org.ccomp.model.component.engine;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.StringProperty;
 import org.ccomp.model.component.CarComponent;
 
 public class GasolineEngine extends CarComponent implements Engine {
@@ -7,7 +10,8 @@ public class GasolineEngine extends CarComponent implements Engine {
     String engineName;
     int horsePower, enginePrice;
 
-    public GasolineEngine(String compName, double compPrice, int compQuantity, String engineName, int horsePower, int enginePrice) {
+    public GasolineEngine(StringProperty compName, DoubleProperty compPrice, IntegerProperty compQuantity,
+                          String engineName, int horsePower, int enginePrice) {
         super(compName, compPrice, compQuantity);
         this.engineName = engineName;
         this.horsePower = horsePower;

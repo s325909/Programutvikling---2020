@@ -9,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.ccomp.fileHandling.ComponentOBJHandler;
-import org.ccomp.fileHandling.ReadWriteObjectsHelper;
 import org.ccomp.model.CarComp;
 import org.ccomp.model.MapKey;
 import org.ccomp.model.component.*;
@@ -27,15 +26,21 @@ public class CompController {
     Button addEngine, addSeat, addSpoiler, addSteeringWheel, addWheelRim;
 
     @FXML
-    TextField engineName, enginePower, enginePrice, engineQuantity,
-    seatName, seatColor, seatMaterial, seatPrice, seatQuantity,
-    spoilerName, spoilerColor, spoilerSide, spoilerPrice, spoilerQuantity,
-    steeringWheelName, steeringWheelColor, steeringWheelMaterial, steeringWheelPrice, steeringWheelQuantity,
-    wheelRimName, wheelRimColor, wheelRimDimension, wheelRimPrice, wheelRimQuantity;
+    TextField engineName, enginePrice, engineQuantity, enginePower,
+            seatName, seatPrice, seatQuantity, seatColor, seatMaterial,
+            spoilerName, spoilerPrice, spoilerQuantity, spoilerColor, spoilerSide,
+            steeringWheelName, steeringWheelPrice, steeringWheelQuantity, steeringWheelColor, steeringWheelMaterial,
+            wheelRimName, wheelRimPrice, wheelRimQuantity, wheelRimColor, wheelRimDimension;
+
+    private final String ENGINE_KEY = "Engine";
+    private final String SEAT_KEY = "Seat";
+    private final String SPOILER_KEY = "Spoiler";
+    private final String STEERING_WHEEL_KEY = "SteeringWheel";
+    private final String WHEEL_RIM_KEY = "WheelRim";
 
     private HashMap<String, List<CarComponent>> compMap, retrievedCompMap;
     private HashMap<MapKey, List<CarComponent>> compMap2;
-    private MapKey mapKey, mapKeySeat, mapKeySpoiler;
+   // private MapKey mapKey, mapKeySeat, mapKeySpoiler;
     private List<CarComponent> carComponents;
     private Engine engine;
     private Seat seat;
@@ -45,31 +50,39 @@ public class CompController {
 
     private ComponentOBJHandler jobjHandler;
 
-    private ReadWriteObjectsHelper objectsHelper;
+    private StringProperty compNameProperty, compColorProperty, compMaterialProperty, compTypeProperty;
+    private DoubleProperty compPriceProperty;
+    private IntegerProperty compQuantityProperty, compSizeProperty;
+
+    private String mapKey;
+
+
 
     @FXML
     public void initialize() {
-        compMap = new HashMap<>();
+        jobjHandler = new ComponentOBJHandler();
+        compMap = jobjHandler.readComponent(compMap);
+
        // mapKey = new MapKey();
     }
 
     @FXML
     public void addComponent(ActionEvent event) {
+        carComponents = new ArrayList<>();
+
+       // compMap = new HashMap<>();
 
         if (event.getSource() == addEngine) {
-            System.out.println("ADD ENGINE PRESSED");
+            System.out.println("\nADD ENGINE PRESSED\n");
         } else if (event.getSource() == addSeat) {
-            carComponents = new ArrayList<>();
-            initSeatList(carComponents);
+            System.out.println("\nADD SEAT PRESSED\n");
+            //up casting parent reference to child reference based on componentType
+            seat = (Seat) makeComponent(SEAT_KEY, seat);
+            carComponents.add(seat);
+            System.out.println("SEAT LIST SIZE: " + carComponents.size());
 
-            compMap.put("Seat", carComponents);
-            System.out.println("(SEAT) HASH MAP: " + compMap);
-
-            //todo: move to event.getSource() == addSpoiler
-            carComponents = new ArrayList<>();
-            initSpoilerList(carComponents);
-            compMap.put("Spoiler", carComponents);
-            System.out.println("(SPOILER) HASH MAP: " + compMap);
+            compMap.put(SEAT_KEY, carComponents);
+            System.out.println("("+SEAT_KEY+") HASH MAP: " + compMap);
 
             //serialize compMap
             jobjHandler = new ComponentOBJHandler();
@@ -81,29 +94,138 @@ public class CompController {
 
             System.out.println("(RETRIEVED) HASH MAP: " + retrievedCompMap);
 
-            iterateHashMapList(retrievedCompMap);
+          //  iterateHashMapList(retrievedCompMap);
 
+            //todo: add to component list instead of overwriting
           //  retrievedCompMap.get("Seat").addAll(carComponents);
           //  jobjHandler.writeComponent(retrievedCompMap);
-            System.out.println("\nADD SEAT PRESSED\n");
         } else if (event.getSource() == addSpoiler) {
+            System.out.println("\nADD SPOILER PRESSED\n");
+            //up casting parent reference to child reference based on componentType
+            spoiler = (Spoiler) makeComponent(SPOILER_KEY, spoiler);
+            carComponents.add(spoiler);
+            System.out.println("SPOILER LIST SIZE: " + carComponents.size());
 
-           // carComponents = new ArrayList<>();
-           // initSpoilerList(carComponents);
+            compMap.put(SPOILER_KEY, carComponents);
+            System.out.println("("+SPOILER_KEY+") HASH MAP: " + compMap);
 
+            System.out.println(carComponents.get(0).getCompName());
+            System.out.println(carComponents.get(0).getCompPrice());
+            System.out.println(carComponents.get(0).getCompQuantity());
 
-            System.out.println("ADD SPOILER PRESSED");
+            //serialize compMap
+            jobjHandler = new ComponentOBJHandler();
+            jobjHandler.writeComponent(compMap);
+
+            //deserialize compMap
+            retrievedCompMap = new HashMap<>();
+            retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
+
+            System.out.println("(RETRIEVED) HASH MAP: " + retrievedCompMap);
         } else if (event.getSource() == addSteeringWheel) {
-            System.out.println("ADD STEERING WHEEL PRESSED");
-        } else if (event.getSource() == addWheelRim) {
-            System.out.println("ADD WHEEL RIM PRESSED");
-        } else System.out.println("NO SUCH ADD BTN TO PRESS");
+            System.out.println("\nADD STEERING WHEEL PRESSED\n");
+            //up casting parent reference to child reference based on componentType
+            steeringWheel = (SteeringWheel) makeComponent(STEERING_WHEEL_KEY, steeringWheel);
+            carComponents.add(steeringWheel);
+            System.out.println("STEERING WHEEL LIST SIZE: " + carComponents.size());
 
-        System.out.println("ADDING COMPONENT..");
+            compMap.put(STEERING_WHEEL_KEY, carComponents);
+            System.out.println("("+STEERING_WHEEL_KEY+") HASH MAP: " + compMap);
+
+            //serialize compMap
+            jobjHandler = new ComponentOBJHandler();
+            jobjHandler.writeComponent(compMap);
+
+            //deserialize compMap
+            retrievedCompMap = new HashMap<>();
+            retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
+
+            System.out.println("(RETRIEVED) HASH MAP: " + retrievedCompMap);
+        } else if (event.getSource() == addWheelRim) {
+            System.out.println("\nADD WHEEL RIM PRESSED\n");
+            //up casting parent reference to child reference based on componentType
+           // wheelRim = (WheelRim) makeComponent(WHEEL_RIM_KEY, wheelRim);
+            carComponents.add(wheelRim);
+            System.out.println("WHEEL RIM LIST SIZE: " + carComponents.size());
+
+            compMap.put(WHEEL_RIM_KEY, carComponents);
+            System.out.println("("+WHEEL_RIM_KEY+") HASH MAP: " + compMap);
+
+            //serialize compMap
+            jobjHandler = new ComponentOBJHandler();
+            jobjHandler.writeComponent(compMap);
+
+            //deserialize compMap
+            retrievedCompMap = new HashMap<>();
+            retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
+
+            System.out.println("(RETRIEVED) HASH MAP: " + retrievedCompMap);
+        } else System.out.println("\nNO SUCH ADD BTN TO PRESS\n");
+
+        System.out.println("\nADDING COMPONENT..\n");
+    }
+
+
+    private CarComponent makeComponent(String compKey, CarComponent component) {
+        switch (compKey) {
+            case ENGINE_KEY:
+                System.out.println("MAKING" + compKey);
+                compNameProperty = new SimpleStringProperty(engineName.getText());
+                compPriceProperty = new SimpleDoubleProperty(Double.parseDouble(enginePrice.getText()));
+                compQuantityProperty = new SimpleIntegerProperty(Integer.parseInt(engineQuantity.getText()));
+               // compTypeProperty = new SimpleStringProperty(spoilerSide.getText());
+               // compPowerProperty
+                //Todo: Determine WHICH ENGINE TYPE
+               // component = new Engine(compNameProperty, compPriceProperty, compQuantityProperty, compTypeProperty);
+                break;
+            case SEAT_KEY:
+                System.out.println("MAKING " + compKey);
+                compNameProperty = new SimpleStringProperty(seatName.getText());
+                compPriceProperty = new SimpleDoubleProperty(Double.parseDouble(seatPrice.getText()));
+                compQuantityProperty = new SimpleIntegerProperty(Integer.parseInt(seatQuantity.getText()));
+                compColorProperty = new SimpleStringProperty(seatColor.getText());
+                compMaterialProperty = new SimpleStringProperty(seatMaterial.getText());
+                component = new Seat(compNameProperty, compPriceProperty, compQuantityProperty, compColorProperty, compMaterialProperty);
+                break;
+            case SPOILER_KEY:
+                System.out.println("MAKING " + compKey);
+                compNameProperty = new SimpleStringProperty(spoilerName.getText());
+                compPriceProperty = new SimpleDoubleProperty(Double.parseDouble(spoilerPrice.getText()));
+                compQuantityProperty = new SimpleIntegerProperty(Integer.parseInt(spoilerQuantity.getText()));
+                compTypeProperty = new SimpleStringProperty(spoilerSide.getText());
+                component = new Spoiler(compNameProperty, compPriceProperty, compQuantityProperty, compTypeProperty);
+                break;
+            case STEERING_WHEEL_KEY:
+                System.out.println("MAKING " + compKey);
+                compNameProperty = new SimpleStringProperty(steeringWheelName.getText());
+                compPriceProperty = new SimpleDoubleProperty(Double.parseDouble(steeringWheelPrice.getText()));
+                compQuantityProperty = new SimpleIntegerProperty(Integer.parseInt(steeringWheelQuantity.getText()));
+                compColorProperty = new SimpleStringProperty(steeringWheelColor.getText());
+                compMaterialProperty = new SimpleStringProperty(steeringWheelMaterial.getText());
+                component = new SteeringWheel(compNameProperty, compPriceProperty, compQuantityProperty, compColorProperty, compMaterialProperty);
+                break;
+            case WHEEL_RIM_KEY:
+                System.out.println("MAKING " + compKey);
+                compNameProperty = new SimpleStringProperty(wheelRimName.getText());
+                compPriceProperty = new SimpleDoubleProperty(Double.parseDouble(wheelRimPrice.getText()));
+                compQuantityProperty = new SimpleIntegerProperty(Integer.parseInt(wheelRimQuantity.getText()));
+                compColorProperty = new SimpleStringProperty(wheelRimColor.getText());
+                compMaterialProperty = new SimpleStringProperty(wheelRimDimension.getText());
+               // compSizeProperty = new SimpleIntegerProperty(Integer.parseInt(wheelRimDimension.getText()));
+                component = new WheelRim(compNameProperty, compPriceProperty, compQuantityProperty, compColorProperty, compMaterialProperty);
+                break;
+            default:
+                System.out.println("NO SUCH COMPONENT: " + compKey);
+        }
+        return component;
     }
 
 
 
+
+
+
+    /*
     private List<CarComponent> initSeatList(List<CarComponent> seatList) {
         seatList.add(new Seat(seatName.getText(), Double.parseDouble(seatPrice.getText()), 1,
                 seatColor.getText(), seatMaterial.getText()));
@@ -121,18 +243,20 @@ public class CompController {
                 seatMaterial.getText()));
         return spoilerList;
     }
-
+     */
 
     private void iterateHashMapList(HashMap<String, List<CarComponent>> compMap) {
         //Iterate over HashMap of ArrayList to get each component and its values
         for (String key : compMap.keySet()) {
             for (CarComponent component : compMap.get(key)) {
                 System.out.println("CompMAP KEY/TYPE: " + key);
-                switchComponentType(key, component);
+               // switchComponentType(key, component);
             }
         }
 
     }
+
+    /*
 
     private void switchComponentType(String componentType, CarComponent component) {
         //up casting parent reference to child reference based on componentType
@@ -176,6 +300,8 @@ public class CompController {
     }
 
 
+     */
+
     @FXML
     public void addSpoilerComponent() {
        // if (addSpoiler.isPressed()) System.out.println("SPOILER BTN PRESSED!");
@@ -212,6 +338,7 @@ public class CompController {
         System.out.println(carComps.get(0).getCompQuantity());
 
 
+        /*
 
             //serialize compMap
             objectsHelper = new ReadWriteObjectsHelper();
@@ -223,6 +350,8 @@ public class CompController {
 
             System.out.println("(RETRIEVED) HASH MAP: " + retrievedCompMap2);
 
+
+         */
 
 
         // iterateHashMapList(retrievedCompMap2);
