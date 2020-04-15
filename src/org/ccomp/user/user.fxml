@@ -58,7 +58,7 @@
                 <Font name="Segoe UI Semilight" size="22.0" />
             </font>
         </CheckBox>
-        <Button layoutX="418.0" layoutY="530.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="303.0" text="SØK ETTER PRODUKT">
+        <Button fx:id="sokProd" layoutX="418.0" layoutY="530.0" mnemonicParsing="false" onAction="#toChooseProduct" prefHeight="39.0" prefWidth="303.0" text="SØK ETTER PRODUKT">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>

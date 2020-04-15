@@ -14,20 +14,76 @@
                 <Tab text="SE PRODUKTER">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                            <children>
-                                <TableView layoutY="-2.0" prefHeight="460.0" prefWidth="800.0">
-                                    <columns>
-                                        <TableColumn prefWidth="75.0" text="TYPE" />
-                                        <TableColumn prefWidth="75.0" text="C2" />
-                                        <TableColumn prefWidth="75.0" text="C3" />
-                                        <TableColumn prefWidth="75.0" text="C4" />
-                                        <TableColumn prefWidth="75.0" text="PRIS" />
-                                    </columns>
-                                    <effect>
-                                        <InnerShadow choke="0.8" color="#eaae3d" />
-                                    </effect>
-                                </TableView>
-                            </children>
+                     <children>
+                        <TabPane prefHeight="453.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
+                           <tabs>
+                              <Tab text="Motor">
+                                 <content>
+                                    <TableView prefHeight="200.0" prefWidth="200.0">
+                                      <columns>
+                                        <TableColumn prefWidth="138.0" text="Navn" />
+                                          <TableColumn prefWidth="138.0" text="Hestekrefter" />
+                                          <TableColumn prefWidth="138.0" text="Pris" />
+                                          <TableColumn prefWidth="138.0" text="Antall" />
+                                      </columns>
+                                    </TableView>
+                                 </content>
+                              </Tab>
+                              <Tab text="Sete">
+                                 <content>
+                                    <TableView prefHeight="200.0" prefWidth="200.0">
+                                      <columns>
+                                        <TableColumn prefWidth="150.0" text="Navn" />
+                                          <TableColumn prefWidth="150.0" text="Materiale" />
+                                          <TableColumn prefWidth="150.0" text="Farge" />
+                                          <TableColumn prefWidth="150.0" text="Pris" />
+                                          <TableColumn prefWidth="150.0" text="Antall" />
+                                      </columns>
+                                    </TableView>
+                                 </content>
+                              </Tab>
+                              <Tab text="Spoiler">
+                                 <content>
+                                    <TableView prefHeight="200.0" prefWidth="200.0">
+                                      <columns>
+                                        <TableColumn prefWidth="146.0" text="Navn" />
+                                          <TableColumn prefWidth="146.0" text="Farge" />
+                                          <TableColumn prefWidth="146.0" text="Side" />
+                                          <TableColumn prefWidth="146.0" text="Pris" />
+                                          <TableColumn prefWidth="146.0" text="Antall" />
+                                      </columns>
+                                    </TableView>
+                                 </content>
+                              </Tab>
+                              <Tab text="Ratt">
+                                 <content>
+                                    <TableView prefHeight="200.0" prefWidth="200.0">
+                                      <columns>
+                                        <TableColumn prefWidth="150.0" text="Navn" />
+                                          <TableColumn prefWidth="150.0" text="Materiale" />
+                                          <TableColumn prefWidth="150.0" text="Farge" />
+                                          <TableColumn prefWidth="150.0" text="Pris" />
+                                          <TableColumn prefWidth="150.0" text="Antall" />
+                                      </columns>
+                                    </TableView>
+                                 </content>
+                              </Tab>
+                              <Tab text="Felg">
+                                 <content>
+                                    <TableView prefHeight="200.0" prefWidth="200.0">
+                                      <columns>
+                                        <TableColumn prefWidth="150.0" text="Navn" />
+                                          <TableColumn prefWidth="150.0" text="Dimensjon" />
+                                          <TableColumn prefWidth="150.0" text="Farge" />
+                                          <TableColumn prefWidth="150.0" text="Pris" />
+                                          <TableColumn prefWidth="150.0" text="Antall" />
+                                      </columns>
+                                    </TableView>
+                                 </content>
+                              </Tab>
+                           </tabs>
+                        </TabPane>
+                     </children>
                         </AnchorPane>
                     </content>
                 </Tab>
@@ -37,11 +93,11 @@
                             <children>
                                 <TableView layoutY="-2.0" prefHeight="460.0" prefWidth="800.0">
                                     <columns>
-                                        <TableColumn prefWidth="75.0" text="TYPE" />
-                                        <TableColumn prefWidth="75.0" text="NAVN" />
-                                        <TableColumn prefWidth="75.0" text="TLF" />
-                                        <TableColumn prefWidth="142.0" text="KOMPONENT" />
-                                        <TableColumn minWidth="8.0" text="PRIS" />
+                                        <TableColumn prefWidth="75.0" text="Type" />
+                                        <TableColumn prefWidth="75.0" text="Navn" />
+                                        <TableColumn prefWidth="75.0" text="Mobil" />
+                                        <TableColumn prefWidth="142.0" text="Komponent" />
+                                        <TableColumn minWidth="8.0" text="Pris" />
                                     </columns>
                                     <effect>
                                         <InnerShadow choke="0.8" color="#eaae3d" />

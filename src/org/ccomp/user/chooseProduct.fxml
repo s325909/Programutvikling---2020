@@ -1,14 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.ccomp.user.ChooseProductController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.user.ChooseProductController">
+   <children>
+      <ImageView fitHeight="150.0" fitWidth="363.0" layoutX="219.0" layoutY="14.0">
+         <image>
+            <Image url="@../../../resources/CCOMPW-small.png" />
+         </image>
+      </ImageView>
+      <TabPane layoutY="164.0" prefHeight="300.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="VELG PRODUKTET">
+               <content>
+                  <TableView prefHeight="297.0" prefWidth="800.0" />
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <Label layoutX="15.0" layoutY="447.0" text="Fyll ut informasjon for bestilling av vare:">
+         <font>
+            <Font name="Segoe UI Semilight" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="61.0" layoutY="496.0" text="Navn: ">
+         <font>
+            <Font name="Segoe UI Semilight" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="61.0" layoutY="545.0" text="Mobilnummer:">
+         <font>
+            <Font name="Segoe UI Semilight" size="20.0" />
+         </font>
+      </Label>
+      <TextField layoutX="219.0" layoutY="492.0" prefHeight="39.0" prefWidth="320.0" />
+      <TextField layoutX="219.0" layoutY="541.0" />
+      <Button layoutX="672.0" layoutY="539.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="114.0" text="BESTILL">
+         <font>
+            <Font name="Segoe UI Semilight" size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="backToU" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backToUser" text="TILBAKE">
+         <font>
+            <Font name="Segoe UI Semilight" size="20.0" />
+         </font>
+      </Button>
+   </children>
 </AnchorPane>

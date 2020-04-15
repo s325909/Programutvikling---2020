@@ -14,7 +14,7 @@ import java.util.ResourceBundle;
 public class UserController implements Initializable {
 
     @FXML
-    Button backBtn;
+    Button backBtn, sokProd;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -35,6 +35,21 @@ public class UserController implements Initializable {
             stage.setScene(scene);
             stage.show();
         } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void toChooseProduct() {
+        try {
+            Stage stage = (Stage) sokProd.getScene().getWindow();
+            URL url = getClass().getResource("/org/ccomp/user/chooseProduct.fxml");
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+            Scene scene = new Scene(root, 800, 600);
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
