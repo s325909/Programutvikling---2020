@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.AdminController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.AdminController">
     <children>
         <TabPane layoutY="100.0" prefHeight="500.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
@@ -31,39 +30,39 @@
                               </Tab>
                               <Tab text="Sete">
                                  <content>
-                                    <TableView prefHeight="200.0" prefWidth="200.0">
+                                    <TableView fx:id="seatView" prefHeight="200.0" prefWidth="200.0">
                                       <columns>
-                                        <TableColumn prefWidth="150.0" text="Navn" />
-                                          <TableColumn prefWidth="150.0" text="Materiale" />
-                                          <TableColumn prefWidth="150.0" text="Farge" />
-                                          <TableColumn prefWidth="150.0" text="Pris" />
-                                          <TableColumn prefWidth="150.0" text="Antall" />
+                                        <TableColumn fx:id="nameSeatColum"  prefWidth="150.0" text="Navn" />
+                                          <TableColumn fx:id="materiellColum"  prefWidth="150.0" text="Materiale" />
+                                          <TableColumn fx:id="colorSeatColum"  prefWidth="150.0" text="Farge" />
+                                          <TableColumn fx:id="seatPriceColum"  prefWidth="150.0" text="Pris" />
+                                          <TableColumn fx:id="quantitySeatColum"  prefWidth="150.0" text="Antall" />
                                       </columns>
                                     </TableView>
                                  </content>
                               </Tab>
                               <Tab text="Spoiler">
                                  <content>
-                                    <TableView prefHeight="200.0" prefWidth="200.0">
+                                    <TableView fx:id="spoilerView" prefHeight="200.0" prefWidth="200.0">
                                       <columns>
-                                        <TableColumn prefWidth="146.0" text="Navn" />
-                                          <TableColumn prefWidth="146.0" text="Farge" />
-                                          <TableColumn prefWidth="146.0" text="Side" />
-                                          <TableColumn prefWidth="146.0" text="Pris" />
-                                          <TableColumn prefWidth="146.0" text="Antall" />
+                                        <TableColumn fx:id="nameSpoilerColum" prefWidth="146.0" text="Navn" />
+                                          <TableColumn fx:id="colorSpoilerColum" prefWidth="146.0" text="Farge" />
+                                          <TableColumn fx:id="sideSpoilerColum" prefWidth="146.0" text="Side" />
+                                          <TableColumn fx:id="priceSpoilerColum" prefWidth="146.0" text="Pris" />
+                                          <TableColumn fx:id="quantitySpoilerColum" prefWidth="146.0" text="Antall" />
                                       </columns>
                                     </TableView>
                                  </content>
                               </Tab>
                               <Tab text="Ratt">
                                  <content>
-                                    <TableView prefHeight="200.0" prefWidth="200.0">
+                                    <TableView fx:id="sWheelView" prefHeight="200.0" prefWidth="200.0">
                                       <columns>
-                                        <TableColumn prefWidth="150.0" text="Navn" />
-                                          <TableColumn prefWidth="150.0" text="Materiale" />
-                                          <TableColumn prefWidth="150.0" text="Farge" />
-                                          <TableColumn prefWidth="150.0" text="Pris" />
-                                          <TableColumn prefWidth="150.0" text="Antall" />
+                                        <TableColumn fx:id="nameSWheelColum" prefWidth="150.0" text="Navn" />
+                                          <TableColumn fx:id="materiellSWeel" prefWidth="150.0" text="Materiale" />
+                                          <TableColumn fx:id="colorSWheelColum" prefWidth="150.0" text="Farge" />
+                                          <TableColumn fx:id="priceSWeelColum" prefWidth="150.0" text="Pris" />
+                                          <TableColumn fx:id="quantitySWeelColum" prefWidth="150.0" text="Antall" />
                                       </columns>
                                     </TableView>
                                  </content>
