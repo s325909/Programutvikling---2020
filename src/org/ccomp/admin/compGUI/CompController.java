@@ -17,6 +17,7 @@ import org.ccomp.model.component.engine.Engine;
 import org.ccomp.model.component.engine.GasolineEngine;
 import org.ccomp.model.component.engine.HybridEngine;
 
+import javax.swing.*;
 import java.net.URL;
 import java.util.*;
 
@@ -517,8 +518,20 @@ public class CompController {
 
 
     //validation
-
     //hvis ikke tekstfields er fylt ut, feilmelding.
+
+
+   /* public void inputValidation () {
+
+        String str = engineName.getText();
+
+        if (str.equals("")) {  //User have not entered anything.
+            JOptionPane.showMessageDialog(null, "Vennligst fyll ut alle felt!");
+            engineName.requestFocusInWindow();
+        }
+
+        else {
+*/
 
 }
 
