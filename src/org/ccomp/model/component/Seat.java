@@ -49,7 +49,7 @@ public class Seat extends CarComponent {
     }
 
     public void setMaterial(String material) {
-        this.material.set(material);
+        this.material = new SimpleStringProperty(material);
     }
 
     @Override

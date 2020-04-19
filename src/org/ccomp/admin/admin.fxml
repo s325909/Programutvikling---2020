@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.AdminController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.AdminController">
     <children>
         <TabPane layoutY="100.0" prefHeight="500.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
@@ -18,12 +23,13 @@
                            <tabs>
                               <Tab text="Motor">
                                  <content>
-                                    <TableView prefHeight="200.0" prefWidth="200.0">
+                                    <TableView fx:id="engineView" prefHeight="200.0" prefWidth="200.0">
                                       <columns>
-                                        <TableColumn prefWidth="138.0" text="Navn" />
-                                          <TableColumn prefWidth="138.0" text="Hestekrefter" />
-                                          <TableColumn prefWidth="138.0" text="Pris" />
-                                          <TableColumn prefWidth="138.0" text="Antall" />
+                                        <TableColumn fx:id="engintypeColum" prefWidth="138.0" text="Biltype" />
+                                          <TableColumn fx:id="nameEngineColum" prefWidth="138.0" text="Navn" />
+                                          <TableColumn fx:id="horsepowerColum" prefWidth="138.0" text="Hestekrefter" />
+                                          <TableColumn fx:id="priceEngineColum" prefWidth="138.0" text="Pris" />
+                                          <TableColumn fx:id="quantityEngineColum" prefWidth="138.0" text="Antall" />
                                       </columns>
                                     </TableView>
                                  </content>
@@ -32,11 +38,11 @@
                                  <content>
                                     <TableView fx:id="seatView" prefHeight="200.0" prefWidth="200.0">
                                       <columns>
-                                        <TableColumn fx:id="nameSeatColum"  prefWidth="150.0" text="Navn" />
-                                          <TableColumn fx:id="materiellColum"  prefWidth="150.0" text="Materiale" />
-                                          <TableColumn fx:id="colorSeatColum"  prefWidth="150.0" text="Farge" />
-                                          <TableColumn fx:id="seatPriceColum"  prefWidth="150.0" text="Pris" />
-                                          <TableColumn fx:id="quantitySeatColum"  prefWidth="150.0" text="Antall" />
+                                        <TableColumn fx:id="nameSeatColum" prefWidth="150.0" text="Navn" />
+                                          <TableColumn fx:id="materiellColum" prefWidth="150.0" text="Materiale" />
+                                          <TableColumn fx:id="colorSeatColum" prefWidth="150.0" text="Farge" />
+                                          <TableColumn fx:id="seatPriceColum" prefWidth="150.0" text="Pris" />
+                                          <TableColumn fx:id="quantitySeatColum" prefWidth="150.0" text="Antall" />
                                       </columns>
                                     </TableView>
                                  </content>
@@ -69,13 +75,13 @@
                               </Tab>
                               <Tab text="Felg">
                                  <content>
-                                    <TableView prefHeight="200.0" prefWidth="200.0">
+                                    <TableView fx:id="wheelRimView" prefHeight="200.0" prefWidth="200.0">
                                       <columns>
-                                        <TableColumn prefWidth="150.0" text="Navn" />
-                                          <TableColumn prefWidth="150.0" text="Dimensjon" />
-                                          <TableColumn prefWidth="150.0" text="Farge" />
-                                          <TableColumn prefWidth="150.0" text="Pris" />
-                                          <TableColumn prefWidth="150.0" text="Antall" />
+                                        <TableColumn fx:id="nameWheelRimColum" prefWidth="150.0" text="Navn" />
+                                          <TableColumn fx:id="dimensionWheelRim" prefWidth="150.0" text="Dimensjon" />
+                                          <TableColumn fx:id="colorWheelRim" prefWidth="150.0" text="Farge" />
+                                          <TableColumn fx:id="priceWheelRim" prefWidth="150.0" text="Pris" />
+                                          <TableColumn fx:id="quantityWheelRim" prefWidth="150.0" text="Antall" />
                                       </columns>
                                     </TableView>
                                  </content>
@@ -125,5 +131,6 @@
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
       </Button>
+      <Button layoutX="178.0" layoutY="37.0" mnemonicParsing="false" onAction="#deleteSelectedRow" text="Slett rad" />
     </children>
 </AnchorPane>
