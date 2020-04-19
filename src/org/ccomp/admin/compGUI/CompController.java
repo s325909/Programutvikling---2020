@@ -27,11 +27,14 @@ public class CompController {
     Button addEngine, addSeat, addSpoiler, addSteeringWheel, addWheelRim;
 
     @FXML
-    TextField engineName, enginePrice, engineQuantity, enginePower,
-            seatName, seatPrice, seatQuantity, seatColor, seatMaterial,
-            spoilerName, spoilerPrice, spoilerQuantity, spoilerColor, spoilerSide,
-            steeringWheelName, steeringWheelPrice, steeringWheelQuantity, steeringWheelColor, steeringWheelMaterial,
-            wheelRimName, wheelRimPrice, wheelRimQuantity, wheelRimColor, wheelRimDimension;
+    Spinner<Integer> spinnerQuantity;
+
+    @FXML
+    TextField engineName, enginePrice, enginePower, engineQuantity,
+            seatName, seatPrice, seatColor, seatMaterial, seatQuantity,
+            spoilerName, spoilerPrice, spoilerColor, spoilerSide, spoilerQuantity,
+            steeringWheelName, steeringWheelPrice, steeringWheelColor, steeringWheelMaterial, steeringWheelQuantity,
+            wheelRimName, wheelRimPrice, wheelRimColor, wheelRimDimension, wheelRimQuantity;
 
     private final String ENGINE_KEY = "Engine";
     private final String SEAT_KEY = "Seat";
@@ -63,6 +66,9 @@ public class CompController {
     public void initialize() {
         jobjHandler = new ComponentOBJHandler();
         compMap = jobjHandler.readComponent(compMap);
+
+        //spinner quantity for quantities of all types of components
+        System.out.println(spinnerQuantity.getValue());
 
        // mapKey = new MapKey();
     }

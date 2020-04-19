@@ -3,13 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Endret GUI">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Programutvikling---2020/org/ccomp/admin/admin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Programutvikling---2020/org/ccomp/admin/admin.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Programutvikling---2020/org/ccomp/user/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Programutvikling---2020/org/ccomp/user/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Programutvikling---2020/org/ccomp/user/user.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Programutvikling---2020/org/ccomp/user/user.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/ccomp/user/ChooseProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/ccomp/user/ChooseProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/ccomp/user/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/ccomp/user/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/ccomp/user/chooseProduct.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/ccomp/user/chooseProduct.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/ccomp/user/user.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/ccomp/user/user.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/ccomp/admin/compGUI/CompController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/ccomp/admin/compGUI/CompController.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -272,6 +266,7 @@
       <workItem from="1585330876581" duration="3956000" />
       <workItem from="1585766184294" duration="21748000" />
       <workItem from="1586884187317" duration="7314000" />
+      <workItem from="1587121100435" duration="21954000" />
     </task>
     <task id="LOCAL−00001" summary="Endret på admin og user">
       <created>1585336075198</created>
@@ -315,7 +310,31 @@
       <option name="presentableId" value="LOCAL−00007" />
       <updated>1586961991229</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL−00008" summary="Validation, et eksempel... kommer mer">
+      <created>1587293214723</created>
+      <option name="number" value="LOCAL−00008" />
+      <option name="presentableId" value="LOCAL−00008" />
+      <updated>1587293214723</updated>
+    </task>
+    <task id="LOCAL−00009" summary="Endret userInfor(registrering av kunde) + ny valiation klasse og metode.">
+      <created>1587309112197</created>
+      <option name="number" value="LOCAL−00009" />
+      <option name="presentableId" value="LOCAL−00009" />
+      <updated>1587309112197</updated>
+    </task>
+    <task id="LOCAL−00010" summary="Validation for input på admin og userInfo">
+      <created>1587320095112</created>
+      <option name="number" value="LOCAL−00010" />
+      <option name="presentableId" value="LOCAL−00010" />
+      <updated>1587320095112</updated>
+    </task>
+    <task id="LOCAL−00011" summary="Endret user sidene">
+      <created>1587320530002</created>
+      <option name="number" value="LOCAL−00011" />
+      <option name="presentableId" value="LOCAL−00011" />
+      <updated>1587320530002</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -341,7 +360,11 @@
     <MESSAGE value="Endret GUI" />
     <MESSAGE value="Endret admin, lagt til undertabs og nye tableview" />
     <MESSAGE value="Lagt til user side, velge produkt" />
-    <option name="LAST_COMMIT_MESSAGE" value="Lagt til user side, velge produkt" />
+    <MESSAGE value="Validation, et eksempel... kommer mer" />
+    <MESSAGE value="Endret userInfor(registrering av kunde) + ny valiation klasse og metode." />
+    <MESSAGE value="Validation for input på admin og userInfo" />
+    <MESSAGE value="Endret user sidene" />
+    <option name="LAST_COMMIT_MESSAGE" value="Endret user sidene" />
   </component>
   <component name="WindowStateProjectService">
     <state x="605" y="139" key="#com.intellij.ide.util.MemberChooser" timestamp="1585323973923">
