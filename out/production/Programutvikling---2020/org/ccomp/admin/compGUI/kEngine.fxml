@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.compGUI.CompController">
    <children>
@@ -27,6 +32,11 @@
       </Button>
       <TextField fx:id="enginePrice" layoutX="272.0" layoutY="260.0" />
       <TextField fx:id="enginePower" layoutX="272.0" layoutY="190.0" />
+      <Spinner fx:id="spinnerQuantity" BorderPane.alignment="CENTER">
+         <valueFactory>
+            <SpinnerValueFactory.IntegerSpinnerValueFactory max="10" min="0" />
+         </valueFactory>
+      </Spinner>
       <Button fx:id="backToAdd" layoutX="14.0" layoutY="447.0" mnemonicParsing="false" onAction="#backToAddComp" text="TILBAKE">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />

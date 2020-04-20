@@ -3,10 +3,10 @@ package org.ccomp.model;
 
 public class Validation {
     public static String valAdmin(String name, String price /*String quantity*/, String power, String color, String material,
-                                  String side, String dimension, Object quantity) {
+                                  String side, String dimension, Object carType, Object quantity) {
 
         return validateName(name) + /*validateQuantity(quantity)*/  validatePrice(price) + validatePower(power) + validateColor(color)
-                +validateMaterial(material) + validateSide(side) + validateDimension(dimension) + validateObjectOnNull(quantity);
+                +validateMaterial(material) + validateSide(side) + validateDimension(dimension) + validateObjectCarType(carType) + validateObjectOnNull(quantity);
     }
 
     public static String valUser(String name, String email, String number) {
@@ -151,6 +151,17 @@ public class Validation {
         } else if (input.isEmpty()) {
             lable = ("Vennligst fyll inn din e-postadresse! \n");
         }
+        return lable;
+    }
+
+    public static String validateObjectCarType(Object object) {
+        String lable = "";
+
+        if (object == null) {
+
+            lable = ("Velg riktig biltype for motor!! \n");
+        }
+
         return lable;
     }
 }

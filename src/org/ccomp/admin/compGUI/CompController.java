@@ -68,7 +68,7 @@ public class CompController {
         compMap = jobjHandler.readComponent(compMap);
 
         //spinner quantity for quantities of all types of components
-        System.out.println(spinnerQuantity.getValue());
+        //System.out.println(spinnerQuantity.getValue());
 
        // mapKey = new MapKey();
     }
