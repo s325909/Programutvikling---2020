@@ -1,5 +1,6 @@
 package org.ccomp.admin;
 
+import java.awt.event.ActionListener;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -81,23 +82,25 @@ public class AddComponentController implements Initializable {
         }
     }
 
-        @FXML
-        public void backToAdmin () {
-            try {
 
-                Stage stage = (Stage) backAdmin.getScene().getWindow();
-                URL url = getClass().getResource("/org/ccomp/admin/admin.fxml");
-                FXMLLoader loader = new FXMLLoader(url);
-                Parent root = loader.load();
-                Scene scene = new Scene(root, 800, 600);
-                stage.setScene(scene);
-                stage.show();
 
-                // loadWindow(backAdmin, "/org/ccomp/admin/admin.fxml", "@../../../resources/style.ccs");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+    @FXML
+    public void backToAdmin () {
+        try {
+
+            Stage stage = (Stage) backAdmin.getScene().getWindow();
+            URL url = getClass().getResource("/org/ccomp/admin/admin.fxml");
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+            Scene scene = new Scene(root, 800, 600);
+            stage.setScene(scene);
+            stage.show();
+
+            // loadWindow(backAdmin, "/org/ccomp/admin/admin.fxml", "@../../../resources/style.ccs");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+    }
 
         /***
          * Method used to create and load a window used when changing between fxml scenes when a button i clicked

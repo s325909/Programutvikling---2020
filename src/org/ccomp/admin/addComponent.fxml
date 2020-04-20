@@ -12,7 +12,7 @@
          <toggleGroup>
             <ToggleGroup fx:id="carTypeGroup" />
          </toggleGroup></RadioButton>
-      <RadioButton fx:id="electric" layoutX="24.0" layoutY="320.0" mnemonicParsing="false" text="Elbil" toggleGroup="$carTypeGroup" />
+      <RadioButton fx:id="electric"  layoutX="24.0" layoutY="320.0" mnemonicParsing="false" text="Elbil" toggleGroup="$carTypeGroup" />
       <RadioButton fx:id="hybrid" layoutX="24.0" layoutY="380.0" mnemonicParsing="false" text="Hybrid" toggleGroup="$carTypeGroup" />
       <Label alignment="CENTER" contentDisplay="TOP" layoutX="326.0" layoutY="173.0" prefHeight="60.0" prefWidth="260.0" style="-fx-border-color: #41a2a6;" text="VELG BILTYPE" textAlignment="RIGHT">
          <font>
