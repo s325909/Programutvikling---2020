@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.user.UserController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.user.Controllers.UserController">
     <children>
         <ChoiceBox layoutX="56.0" layoutY="280.0" prefHeight="39.0" prefWidth="160.0">
             <effect>
@@ -58,7 +58,7 @@
                 <Font name="Segoe UI Semilight" size="22.0" />
             </font>
         </CheckBox>
-        <Button fx:id="sokProd" layoutX="418.0" layoutY="530.0" mnemonicParsing="false" onAction="#toChooseProduct" prefHeight="39.0" prefWidth="303.0" text="SØK ETTER PRODUKT">
+        <Button fx:id="sokProd" layoutX="418.0" layoutY="530.0" mnemonicParsing="false" onAction="#toViewProduct" prefHeight="39.0" prefWidth="303.0" text="SØK ETTER PRODUKT">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>

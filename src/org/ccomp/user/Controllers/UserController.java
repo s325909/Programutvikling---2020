@@ -1,4 +1,4 @@
-package org.ccomp.user;
+package org.ccomp.user.Controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,10 +40,10 @@ public class UserController implements Initializable {
     }
 
     @FXML
-    public void toChooseProduct() {
+    public void toViewProduct() {
         try {
             Stage stage = (Stage) sokProd.getScene().getWindow();
-            URL url = getClass().getResource("/org/ccomp/user/chooseProduct.fxml");
+            URL url = getClass().getResource("/org/ccomp/user/viewProduct.fxml");
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
             Scene scene = new Scene(root, 800, 600);
