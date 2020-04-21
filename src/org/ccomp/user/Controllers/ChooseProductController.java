@@ -1,4 +1,4 @@
-package org.ccomp.user;
+package org.ccomp.user.Controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
