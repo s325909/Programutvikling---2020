@@ -12,7 +12,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import javafx.util.converter.DoubleStringConverter;
+import javafx.util.converter.IntegerStringConverter;
 import org.ccomp.fileHandling.ComponentOBJHandler;
+import org.ccomp.model.Car;
 import org.ccomp.model.component.*;
 import org.ccomp.model.component.engine.Engine;
 
@@ -22,11 +24,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class AdminController implements Initializable {
-
     Seat seat;
+    Spoiler spoiler;
     int row;
-
-
     @FXML
     Button backBtn;
 
@@ -45,37 +45,29 @@ public class AdminController implements Initializable {
     TableView<Engine> engineView;
 
     @FXML
-    TableColumn<Seat,String> nameSeatColum;
-    @FXML
-    TableColumn<Seat,String> materiellColum;
-    @FXML
-    TableColumn<Seat,String> colorSeatColum;
+    TableColumn<Seat, String> nameSeatColum, materiellColum, colorSeatColum;
     @FXML
     TableColumn<Seat, Double> seatPriceColum;
     @FXML
-    TableColumn<Seat,String> quantitySeatColum;
+    TableColumn<Seat, Integer> quantitySeatColum;
     @FXML
-    TableColumn<Spoiler,String> nameSpoilerColum;
+    TableColumn<Spoiler, String> nameSpoilerColum, colorSpoilerColum, sideSpoilerColum;
     @FXML
-    TableColumn<Spoiler,String> colorSpoilerColum;
+    TableColumn<Spoiler, Double> priceSpoilerColum;
     @FXML
-    TableColumn<Spoiler,String> sideSpoilerColum;
+    TableColumn<Spoiler, Integer> quantitySpoilerColum;
     @FXML
-    javafx.scene.control.TableColumn<Spoiler, Double> priceSpoilerColum;
+    TableColumn<SteeringWheel, String> nameSWheelColum, materiellSWeel, colorSWheelColum, priceSWeelColum, quantitySWeelColum;
     @FXML
-    TableColumn<Spoiler,String> quantitySpoilerColum;
+    TableColumn<WheelRim, String> nameWheelRimColum, dimensionWheelRim, colorWheelRim, priceWheelRim, quantityWheelRim;
     @FXML
-    TableColumn<SteeringWheel,String> nameSWheelColum,materiellSWeel,colorSWheelColum,priceSWeelColum,quantitySWeelColum;
-    @FXML
-    TableColumn<WheelRim,String> nameWheelRimColum,dimensionWheelRim,colorWheelRim,priceWheelRim,quantityWheelRim;
-    @FXML
-    TableColumn<Engine, String> engintypeColum,nameEngineColum,horsepowerColum, priceEngineColum, quantityEngineColum;
+    TableColumn<Engine, String> engintypeColum, nameEngineColum, horsepowerColum, priceEngineColum, quantityEngineColum;
 
     //@FXML
     //TableColumn<Seat, SimpleStringProperty> nameSeatColum,colorSeatColum,seatPriceColum,quantitySeatColum;
 
-  //  @FXML
-  //  TableColumn<Spoiler, SimpleStringProperty> nameSpoilerColum,colorSpoilerColum,sideSpoilerColum,priceSpoilerColum,quantitySpoilerColum;
+    //  @FXML
+    //  TableColumn<Spoiler, SimpleStringProperty> nameSpoilerColum,colorSpoilerColum,sideSpoilerColum,priceSpoilerColum,quantitySpoilerColum;
 
     //@FXML
     //TableColumn<SteeringWheel,SimpleStringProperty> nameSWheelColum,materiellSWeel,colorSWheelColum,priceSWeelColum,quantitySWeelColum;
@@ -83,7 +75,7 @@ public class AdminController implements Initializable {
     //@FXML
     //TableColumn<WheelRim,SimpleStringProperty> nameWheelRimColum,dimensionWheelRim,colorWheelRim,priceWheelRim,quantityWheelRim;
 
-   // @FXML
+    // @FXML
     //TableColumn<Engine, SimpleStringProperty> engintypeColum,nameEngineColum,horsepowerColum, priceEngineColum, quantityEngineColum;
 
     private ComponentOBJHandler jobjHandler;
@@ -95,11 +87,13 @@ public class AdminController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-
-
-
         seatView.setItems(seatTable());
+        editSeatTable();
+        seatView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
         spoilerView.setItems(spoilerTable());
+        editSpoilerTable();
+        spoilerView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         sWheelView.setItems(sWheelTable());
         wheelRimView.setItems(wheelRTable());
 
@@ -107,12 +101,10 @@ public class AdminController implements Initializable {
         sWheelView.setEditable(true);
         wheelRimView.setEditable(true);
 
-      editSeaTable();
-      seatView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         jobjHandler = new ComponentOBJHandler();
         retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
-       // retrievedCompMap.put("Seat", carComponents);
+        // retrievedCompMap.put("Seat", carComponents);
 
     }
 
@@ -149,29 +141,34 @@ public class AdminController implements Initializable {
         }
     }
 
+
+    //Metoden henter objektene fra arrayliste.
     public ObservableList<Seat> seatTable() {
 
-       Seat seat;
-       ObservableList<Seat> seats=  FXCollections.observableArrayList();
+        Seat seat;
+        ObservableList<Seat> seats = FXCollections.observableArrayList();
 
-       jobjHandler = new ComponentOBJHandler();
-       retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
-       carComponents = retrievedCompMap.get("Seat");
+        //Henter dem først ut her
+        jobjHandler = new ComponentOBJHandler();
+        retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
+        carComponents = retrievedCompMap.get("Seat");
+
+        //Presenter objektene i tableview ved sette inn riktige verdier til riktig tablecolonne
 
         for (CarComponent carComponent : carComponents) {
             seat = (Seat) carComponent;
-            nameSeatColum.setCellValueFactory(new PropertyValueFactory<Seat,String>("compName"));
-          materiellColum.setCellValueFactory(new PropertyValueFactory<Seat,String>("material"));
-            colorSeatColum.setCellValueFactory(new PropertyValueFactory<Seat,String>("color"));
-            seatPriceColum.setCellValueFactory(new PropertyValueFactory<Seat,Double>("compPrice"));
-            quantitySeatColum.setCellValueFactory(new PropertyValueFactory<Seat,String>("compQuantity"));
+            nameSeatColum.setCellValueFactory(new PropertyValueFactory<Seat, String>("compName"));
+            materiellColum.setCellValueFactory(new PropertyValueFactory<Seat, String>("material"));
+            colorSeatColum.setCellValueFactory(new PropertyValueFactory<Seat, String>("color"));
+            seatPriceColum.setCellValueFactory(new PropertyValueFactory<Seat, Double>("compPrice"));
+            quantitySeatColum.setCellValueFactory(new PropertyValueFactory<Seat, Integer>("compQuantity"));
             seats.add(seat);
         }
 
         return seats;
     }
 
-    public ObservableList<Spoiler> spoilerTable(){
+    public ObservableList<Spoiler> spoilerTable() {
 
         Spoiler spoiler;
         ObservableList<Spoiler> spoilers = FXCollections.observableArrayList();
@@ -181,11 +178,11 @@ public class AdminController implements Initializable {
 
         for (CarComponent carComponent : carComponents) {
             spoiler = (Spoiler) carComponent;
-            nameSpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler,String>("compName"));
-           // colorSpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler,String>("compName"));
-            sideSpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler,String>("spoilerSide"));
-            priceSpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler,Double>("compPrice"));
-            quantitySpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler,String>("compQuantity"));
+            nameSpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler, String>("compName"));
+            // colorSpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler,String>("compName"));
+            sideSpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler, String>("spoilerSide"));
+            priceSpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler, Double>("compPrice"));
+            quantitySpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler, Integer>("compQuantity"));
             spoilers.add(spoiler);
         }
 
@@ -193,7 +190,8 @@ public class AdminController implements Initializable {
     }
 
 
-    public ObservableList<SteeringWheel> sWheelTable(){
+    public ObservableList<SteeringWheel> sWheelTable() {
+
 
         SteeringWheel steeringWheel;
         ObservableList<SteeringWheel> steeringWheels = FXCollections.observableArrayList();
@@ -201,26 +199,26 @@ public class AdminController implements Initializable {
         retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
         carComponents = retrievedCompMap.get("SteeringWheel");
 
-       // steeringWheel = (SteeringWheel) carComponents.get(0);
+        // steeringWheel = (SteeringWheel) carComponents.get(0);
         //steeringWheel.setSteeringWheelMaterial(materiellColum.getText());
 
-       // carComponents.set(0, steeringWheel);
+        // carComponents.set(0, steeringWheel);
 
 
         for (CarComponent carComponent : carComponents) {
             steeringWheel = (SteeringWheel) carComponent;
-            nameSWheelColum.setCellValueFactory(new PropertyValueFactory<SteeringWheel,String>("compName"));
-            colorSWheelColum.setCellValueFactory(new PropertyValueFactory<SteeringWheel,String>("compName"));
-            materiellSWeel.setCellValueFactory(new PropertyValueFactory<SteeringWheel,String>("spoilerSide"));
-            priceSWeelColum.setCellValueFactory(new PropertyValueFactory<SteeringWheel,String>("compPrice"));
-            quantitySWeelColum.setCellValueFactory(new PropertyValueFactory<SteeringWheel,String>("compQuantity"));
+            nameSWheelColum.setCellValueFactory(new PropertyValueFactory<SteeringWheel, String>("compName"));
+            colorSWheelColum.setCellValueFactory(new PropertyValueFactory<SteeringWheel, String>("compName"));
+            materiellSWeel.setCellValueFactory(new PropertyValueFactory<SteeringWheel, String>("spoilerSide"));
+            priceSWeelColum.setCellValueFactory(new PropertyValueFactory<SteeringWheel, String>("compPrice"));
+            quantitySWeelColum.setCellValueFactory(new PropertyValueFactory<SteeringWheel, String>("compQuantity"));
             steeringWheels.add(steeringWheel);
         }
 
         return steeringWheels;
     }
 
-    public ObservableList<WheelRim> wheelRTable(){
+    public ObservableList<WheelRim> wheelRTable() {
 
         WheelRim wheelRim;
         ObservableList<WheelRim> wheelRims = FXCollections.observableArrayList();
@@ -231,7 +229,7 @@ public class AdminController implements Initializable {
 
         for (CarComponent carComponent : carComponents) {
             wheelRim = (WheelRim) carComponent;
-            nameWheelRimColum.setCellValueFactory(new PropertyValueFactory<WheelRim,String>("compName"));
+            nameWheelRimColum.setCellValueFactory(new PropertyValueFactory<WheelRim, String>("compName"));
             //dimensionWheelRim.setCellValueFactory(new PropertyValueFactory<SteeringWheel,SimpleStringProperty>("compName"));
             wheelRims.add(wheelRim);
 
@@ -242,56 +240,45 @@ public class AdminController implements Initializable {
     }
 
 
-    public void editSeaTable(){
-
+    public void editSeatTable() {
         seatView.setEditable(true);
         seat = (Seat) carComponents.get(row);
-
-            materiellColum.setCellFactory(new PropertyValueFactory("Materiale"));
-            materiellColum.setCellFactory(TextFieldTableCell.forTableColumn());
-            materiellColum.setOnEditCommit((TableColumn.CellEditEvent<Seat, String> t) -> {
-                t.getTableView().getItems();
-                row = t.getTablePosition().getRow();
-                String value = t.getNewValue();
-                System.out.println(value);
-                carComponents = retrievedCompMap.get("Seat");
-                // seat.setMaterial(value);
-                seat = ((Seat) carComponents.get(row));
-                seat.setMaterial(value);
-                retrievedCompMap.get("Seat").set(row, seat);
-                /// jobjHandler.writeComponent(retrievedCompMap, );
-                System.out.println(seat.getMaterial());
-                //        seat = (Seat) carComponents.get(t.getTablePosition().getRow());
-                //          seat.setMaterial(value);
-//            carComponents.set(t.getTablePosition().getRow(), seat);
-
-                //carComponents.set(row,value);
-                (t.getTableView().getItems().get(
-                        t.getTablePosition().getRow())
-                ).setMaterial(t.getNewValue()
-                );
-            });
-
-
-        nameSeatColum.setCellFactory(new PropertyValueFactory("Navn"));
-        nameSeatColum.setCellFactory(TextFieldTableCell.forTableColumn());
-        nameSeatColum.setOnEditCommit((TableColumn.CellEditEvent<Seat, String> t) -> {
-                    t.getTableView().getItems();
-                    row = t.getTablePosition().getRow();
-                    String value = t.getNewValue();
-                    System.out.println(value);
-                    carComponents = retrievedCompMap.get("Seat");
-                    seat = ((Seat) carComponents.get(row));
-                    seat.setCompName(value);
-                    retrievedCompMap.get("Seat").set(row, seat);
+        materiellColum.setCellFactory(new PropertyValueFactory("Materiale"));
+        materiellColum.setCellFactory(TextFieldTableCell.forTableColumn());
+        materiellColum.setOnEditCommit((TableColumn.CellEditEvent<Seat, String> t) -> {
+            t.getTableView().getItems();
+            row = t.getTablePosition().getRow();
+            String value = t.getNewValue();
+            System.out.println(value);
+            carComponents = retrievedCompMap.get("Seat");
+            seat = ((Seat) carComponents.get(row));
+            seat.setMaterial(value);
+            retrievedCompMap.get("Seat").set(row, seat);
+            System.out.println(seat.getMaterial());
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setMaterial(t.getNewValue()
             );
         });
 
+        nameSeatColum.setCellFactory(new PropertyValueFactory("Navn"));
+        nameSeatColum.setCellFactory(TextFieldTableCell.forTableColumn());
+        nameSeatColum.setOnEditCommit((TableColumn.CellEditEvent<Seat, String> t) -> {
+            t.getTableView().getItems();
+            row = t.getTablePosition().getRow();
+            String value = t.getNewValue();
+            System.out.println(value);
+            carComponents = retrievedCompMap.get("Seat");
+            seat = ((Seat) carComponents.get(row));
+            seat.setCompName(value);
+            retrievedCompMap.get("Seat").set(row, seat);
+            (t.getTableView().getItems().get(
+                    t.getTablePosition().getRow())
+            ).setMaterial(t.getNewValue()
+            );
+        });
 
-        colorSeatColum.setCellFactory(new PropertyValueFactory("Navn"));
+        colorSeatColum.setCellFactory(new PropertyValueFactory("Farge"));
         colorSeatColum.setCellFactory(TextFieldTableCell.forTableColumn());
         colorSeatColum.setOnEditCommit((TableColumn.CellEditEvent<Seat, String> t) -> {
             t.getTableView().getItems();
@@ -308,53 +295,160 @@ public class AdminController implements Initializable {
             );
         });
 
-
-
-      /*  seatPriceColum.setCellFactory(new PropertyValueFactory("Navn"));
+        seatPriceColum.setCellFactory(new PropertyValueFactory("Pris"));
         seatPriceColum.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
         seatPriceColum.setOnEditCommit((TableColumn.CellEditEvent<Seat, Double> t) -> {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
-             Double value = t.getNewValue();
+            Double value = t.getNewValue();
             System.out.println(value);
             carComponents = retrievedCompMap.get("Seat");
             seat = ((Seat) carComponents.get(row));
             seat.setCompPrice(value);
             retrievedCompMap.get("Seat").set(row, seat);
-            Double.parseDouble((t.getTableView().getItems().get(
+            (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
-            )).setCompPrice(t.getNewValue()
+            ).setCompPrice(t.getNewValue()
             );
 
-        });*/
+        });
 
-
-
-
-
-
-        // seat.setMaterial(materiellColum.getText());
+        quantitySeatColum.setCellFactory(new PropertyValueFactory("Navn"));
+        quantitySeatColum.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        quantitySeatColum.setOnEditCommit((TableColumn.CellEditEvent<Seat, Integer> t) -> {
+            t.getTableView().getItems();
+            row = t.getTablePosition().getRow();
+            Integer value = t.getNewValue();
+            System.out.println(value);
+            carComponents = retrievedCompMap.get("Seat");
+            seat = ((Seat) carComponents.get(row));
+            seat.setCompPrice(value);
+            retrievedCompMap.get("Seat").set(row, seat);
+            (t.getTableView().getItems().get(
+                    t.getTablePosition().getRow())
+            ).setCompQuantity(t.getNewValue()
+            );
+        });
 
     }
+
+
+    public void editSpoilerTable() {
+        spoilerView.setEditable(true);
+        spoiler = (Spoiler) carComponents.get(row);
+        nameSpoilerColum.setCellFactory(new PropertyValueFactory("Navn"));
+        nameSpoilerColum.setCellFactory(TextFieldTableCell.forTableColumn());
+        nameSpoilerColum.setOnEditCommit((TableColumn.CellEditEvent<Spoiler, String> t) -> {
+            t.getTableView().getItems();
+            row = t.getTablePosition().getRow();
+            String value = t.getNewValue();
+            System.out.println(value);
+            carComponents = retrievedCompMap.get("Spoiler");
+            spoiler = ((Spoiler) carComponents.get(row));
+            spoiler.setCompName(value);
+            retrievedCompMap.get("Spoiler").set(row, seat);
+            System.out.println(seat.getMaterial());
+            (t.getTableView().getItems().get(
+                    t.getTablePosition().getRow())
+            ).setCompName(t.getNewValue()
+            );
+        });
+
+        colorSpoilerColum.setCellFactory(new PropertyValueFactory("Farge"));
+        colorSpoilerColum.setCellFactory(TextFieldTableCell.forTableColumn());
+        colorSpoilerColum.setOnEditCommit((TableColumn.CellEditEvent<Spoiler, String> t) -> {
+            t.getTableView().getItems();
+            row = t.getTablePosition().getRow();
+            String value = t.getNewValue();
+            System.out.println(value);
+            carComponents = retrievedCompMap.get("Spoiler");
+            spoiler = ((Spoiler) carComponents.get(row));
+            spoiler.setCompName(value);
+            retrievedCompMap.get("Spoiler").set(row, seat);
+            System.out.println(seat.getMaterial());
+            (t.getTableView().getItems().get(
+                    t.getTablePosition().getRow())
+            ).setCompName(t.getNewValue()
+            );
+        });
+
+        sideSpoilerColum.setCellFactory(new PropertyValueFactory("Side"));
+        sideSpoilerColum.setCellFactory(TextFieldTableCell.forTableColumn());
+        sideSpoilerColum.setOnEditCommit((TableColumn.CellEditEvent<Spoiler, String> t) -> {
+            t.getTableView().getItems();
+            row = t.getTablePosition().getRow();
+            String value = t.getNewValue();
+            System.out.println(value);
+            carComponents = retrievedCompMap.get("Spoiler");
+            spoiler = ((Spoiler) carComponents.get(row));
+            spoiler.setCompName(value);
+            retrievedCompMap.get("Spoiler").set(row, seat);
+            System.out.println(seat.getMaterial());
+            (t.getTableView().getItems().get(
+                    t.getTablePosition().getRow())
+            ).setCompName(t.getNewValue()
+            );
+        });
+
+        priceSpoilerColum.setCellFactory(new PropertyValueFactory("Pris"));
+        priceSpoilerColum.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
+        priceSpoilerColum.setOnEditCommit((TableColumn.CellEditEvent<Spoiler, Double> t) -> {
+            t.getTableView().getItems();
+            row = t.getTablePosition().getRow();
+            Double value = t.getNewValue();
+            System.out.println(value);
+            carComponents = retrievedCompMap.get("Spoiler");
+            seat = ((Seat) carComponents.get(row));
+            seat.setCompPrice(value);
+            retrievedCompMap.get("Spoiler").set(row, seat);
+            (t.getTableView().getItems().get(
+                    t.getTablePosition().getRow())
+            ).setCompPrice(t.getNewValue()
+            );
+
+        });
+
+
+        nameSpoilerColum.setCellFactory(new PropertyValueFactory("Navn"));
+        nameSpoilerColum.setCellFactory(TextFieldTableCell.forTableColumn());
+        nameSpoilerColum.setOnEditCommit((TableColumn.CellEditEvent<Spoiler, String> t) -> {
+            t.getTableView().getItems();
+            row = t.getTablePosition().getRow();
+            String value = t.getNewValue();
+            System.out.println(value);
+            carComponents = retrievedCompMap.get("Spoiler");
+            spoiler = ((Spoiler) carComponents.get(row));
+            seat.setMaterial(value);
+            retrievedCompMap.get("Seat").set(row, seat);
+            System.out.println(seat.getMaterial());
+            (t.getTableView().getItems().get(
+                    t.getTablePosition().getRow())
+            ).setCompName(t.getNewValue()
+            );
+        });
+
+    }
+
 
     @FXML
-    public void deleteSelectedRow(){
-/*
+    public void deleteSelectedRow() {
+
+        jobjHandler = new ComponentOBJHandler();
+        retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
         carComponents = retrievedCompMap.get("Seat");
-        ObservableList<Seat> selectedRow,allseats;
-        allseats= seatView.getItems();
-
-          selectedRow = seatView.getSelectionModel().getSelectedItem();
-
-        for (Seat seat : selectedRow){
-
-            allseats.remove(seat);
+        retrievedCompMap.get("Seat").set(row, seat);
+        Seat selectedRow;
+        ObservableList<Seat> allseats;
+        allseats = seatView.getItems();
+        selectedRow = seatView.getSelectionModel().getSelectedItem();
+        
+        for(CarComponent carComponent : carComponents) {
+            allseats.remove(carComponent);
+            retrievedCompMap.get("Seat").set(row, seat);
         }
 
-        seat  = ((Seat) carComponents.get(row));
-        */
+        System.out.println(allseats.remove(carComponents));
 
-    }
 
 
     /*public ObservableList<Engine> engineTable(){
@@ -374,4 +468,5 @@ public class AdminController implements Initializable {
 
     }*/
 
+    }
 }
