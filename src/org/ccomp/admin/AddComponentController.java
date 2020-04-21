@@ -9,18 +9,19 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.ccomp.model.Validation;
 
 import javax.swing.*;
 
 public class AddComponentController implements Initializable {
 
     @FXML
-    Button backAdmin;
+    Button backAdmin, next;
 
     @FXML
-    Button next;
+    Label out;
 
     @FXML
     RadioButton gasoline, electric, hybrid, engine, seat, spoiler, steeringwheel, wheelrim;
@@ -31,6 +32,24 @@ public class AddComponentController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+    }
+
+    @FXML
+    public void disableCarTypes() {
+        final ToggleGroup carTypes = new ToggleGroup();
+        final VBox vbox = new VBox(5);
+
+        for (int i = 1; i <= 3; i++) {
+            vbox.getChildren().add(gasoline);
+            vbox.getChildren().add(electric);
+            vbox.getChildren().add(hybrid);
+
+            for (Toggle t : carTypes.getToggles()) {
+                if (t instanceof RadioButton) {
+                    ((RadioButton) t).setVisible(true);
+                }
+            }
+        }
     }
 
     @FXML
@@ -48,14 +67,14 @@ public class AddComponentController implements Initializable {
         electric.setToggleGroup(carTypeGroup);
         hybrid.setToggleGroup(carTypeGroup);
 
+
+
         if (engine.isSelected()) {
-
             if (carTypeGroup.getSelectedToggle() == null ) {
-                JOptionPane.showMessageDialog(null, "Du må velge biltype for komponentet motor!");}
-
-            else {
-                loadWindow(next, "/org/ccomp/admin/compGUI/kEngine.fxml", "@../../../resources/style.ccs");
+                JOptionPane.showMessageDialog(null, "Du må velge biltype for komponentet motor!");
             }
+            else
+                loadWindow(next, "/org/ccomp/admin/compGUI/kEngine.fxml", "@../../../resources/style.ccs");
         }
 
         else if (seat.isSelected()) {
@@ -81,23 +100,25 @@ public class AddComponentController implements Initializable {
         }
     }
 
-        @FXML
-        public void backToAdmin () {
-            try {
 
-                Stage stage = (Stage) backAdmin.getScene().getWindow();
-                URL url = getClass().getResource("/org/ccomp/admin/admin.fxml");
-                FXMLLoader loader = new FXMLLoader(url);
-                Parent root = loader.load();
-                Scene scene = new Scene(root, 800, 600);
-                stage.setScene(scene);
-                stage.show();
 
-                // loadWindow(backAdmin, "/org/ccomp/admin/admin.fxml", "@../../../resources/style.ccs");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+    @FXML
+    public void backToAdmin () {
+        try {
+
+            Stage stage = (Stage) backAdmin.getScene().getWindow();
+            URL url = getClass().getResource("/org/ccomp/admin/admin.fxml");
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+            Scene scene = new Scene(root, 800, 600);
+            stage.setScene(scene);
+            stage.show();
+
+            // loadWindow(backAdmin, "/org/ccomp/admin/admin.fxml", "@../../../resources/style.ccs");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+    }
 
         /***
          * Method used to create and load a window used when changing between fxml scenes when a button i clicked

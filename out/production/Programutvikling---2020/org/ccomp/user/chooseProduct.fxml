@@ -29,7 +29,7 @@
             <Font name="Segoe UI Semilight" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="backToU" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backToUser" text="TILBAKE">
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="TILBAKE">
          <font>
             <Font name="Segoe UI Semilight" size="20.0" />
          </font>
