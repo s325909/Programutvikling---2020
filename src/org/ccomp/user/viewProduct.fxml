@@ -1,14 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.ccomp.user.Controllers.ViewProductController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.user.Controllers.ViewProductController">
+   <children>
+      <ImageView fitHeight="117.0" fitWidth="252.0" layoutX="274.0" layoutY="14.0">
+         <image>
+            <Image url="@../../../resources/CCOMPW-small.png" />
+         </image>
+      </ImageView>
+      <TitledPane layoutY="131.0" prefHeight="401.0" prefWidth="800.0" text="VELG PRODUKT">
+         <content>
+            <TableView prefHeight="387.0" prefWidth="798.0">
+              <columns>
+                <TableColumn minWidth="20.0" prefWidth="160.0" />
+                <TableColumn prefWidth="160.0" />
+                  <TableColumn prefWidth="160.0" />
+                  <TableColumn prefWidth="160.0" />
+                  <TableColumn prefWidth="160.0" />
+              </columns>
+            </TableView>
+         </content>
+      </TitledPane>
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="TILBAKE">
+         <font>
+            <Font name="Segoe UI Semilight" size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="693.0" layoutY="547.0" mnemonicParsing="false" text="LEGG TIL">
+         <font>
+            <Font name="Segoe UI Semilight" size="18.0" />
+         </font>
+      </Button>
+   </children>
 </AnchorPane>
