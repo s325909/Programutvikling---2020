@@ -1,14 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.ccomp.user.Controllers.UserRegController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.user.Controllers.UserRegController">
+   <children>
+      <ImageView fitHeight="126.0" fitWidth="261.0" layoutX="120.0" layoutY="14.0">
+         <image>
+            <Image url="@../../../resources/CCOMPW-small.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="12.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FYLL UT KONTAKTINFORMASJON FOR BESTILLING AV VARE" />
+      <Label layoutX="76.0" layoutY="224.0" text="Fullt navn:">
+         <font>
+            <Font name="Segoe UI Semilight" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="66.0" layoutY="285.0" text="E-postadresse:">
+         <font>
+            <Font name="Segoe UI Semilight" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="66.0" layoutY="351.0" text="Mobilnummer:">
+         <font>
+            <Font name="Segoe UI Semilight" size="20.0" />
+         </font>
+      </Label>
+      <TextField layoutX="204.0" layoutY="346.0" prefHeight="39.0" prefWidth="240.0" />
+      <TextField layoutX="204.0" layoutY="281.0" prefHeight="39.0" prefWidth="240.0" />
+      <TextField layoutX="204.0" layoutY="219.0" prefHeight="39.0" prefWidth="240.0" />
+      <Text layoutX="14.0" layoutY="554.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Du vil bli kontaktet så fort vi har klargjort din bestilling. Du kan da hente din ordre." wrappingWidth="323.392578125" AnchorPane.rightAnchor="162.607421875">
+         <font>
+            <Font name="Segoe UI Semilight" size="16.0" />
+         </font>
+      </Text>
+      <Button layoutX="372.0" layoutY="547.0" mnemonicParsing="false" text="REGISTRER" />
+      <TextField layoutX="204.0" layoutY="408.0" prefHeight="39.0" prefWidth="240.0" />
+      <TextField layoutX="204.0" layoutY="467.0" prefHeight="39.0" prefWidth="240.0" />
+      <Label layoutX="71.0" layoutY="413.0" text="Postnummer:">
+         <font>
+            <Font name="Segoe UI Semilight" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="83.0" layoutY="472.0" text="Poststed:">
+         <font>
+            <Font name="Segoe UI Semilight" size="20.0" />
+         </font>
+      </Label>
+   </children>
 </AnchorPane>
