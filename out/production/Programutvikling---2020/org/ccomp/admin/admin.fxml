@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.effect.InnerShadow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.AdminController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.AdminController">
     <children>
         <TabPane layoutY="100.0" prefHeight="500.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
@@ -95,20 +91,77 @@
                 <Tab text="BESTILLINGER">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                            <children>
-                                <TableView layoutY="-2.0" prefHeight="460.0" prefWidth="800.0">
-                                    <columns>
-                                        <TableColumn prefWidth="75.0" text="Type" />
-                                        <TableColumn prefWidth="75.0" text="Navn" />
-                                        <TableColumn prefWidth="75.0" text="Mobil" />
-                                        <TableColumn prefWidth="142.0" text="Komponent" />
-                                        <TableColumn minWidth="8.0" text="Pris" />
-                                    </columns>
-                                    <effect>
-                                        <InnerShadow choke="0.8" color="#eaae3d" />
-                                    </effect>
-                                </TableView>
-                            </children>
+                     <children>
+                        <TabPane prefHeight="453.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
+                           <tabs>
+                              <Tab text="Motor">
+                                 <content>
+                                    <TableView fx:id="engineView1" prefHeight="200.0" prefWidth="200.0">
+                                       <columns>
+                                          <TableColumn fx:id="engintypeColum1" prefWidth="138.0" text="Biltype" />
+                                          <TableColumn fx:id="nameEngineColum1" prefWidth="138.0" text="Navn" />
+                                          <TableColumn fx:id="horsepowerColum1" prefWidth="138.0" text="Hestekrefter" />
+                                          <TableColumn fx:id="priceEngineColum1" prefWidth="138.0" text="Pris" />
+                                          <TableColumn fx:id="quantityEngineColum1" prefWidth="138.0" text="Antall" />
+                                       </columns>
+                                    </TableView>
+                                 </content>
+                              </Tab>
+                              <Tab text="Sete">
+                                 <content>
+                                    <TableView fx:id="seatView1" prefHeight="200.0" prefWidth="200.0">
+                                       <columns>
+                                          <TableColumn fx:id="nameSeatColum1" prefWidth="150.0" text="Navn" />
+                                          <TableColumn fx:id="materiellColum1" prefWidth="150.0" text="Materiale" />
+                                          <TableColumn fx:id="colorSeatColum1" prefWidth="150.0" text="Farge" />
+                                          <TableColumn fx:id="seatPriceColum1" prefWidth="150.0" text="Pris" />
+                                          <TableColumn fx:id="quantitySeatColum1" prefWidth="150.0" text="Antall" />
+                                       </columns>
+                                    </TableView>
+                                 </content>
+                              </Tab>
+                              <Tab text="Spoiler">
+                                 <content>
+                                    <TableView fx:id="spoilerView1" prefHeight="200.0" prefWidth="200.0">
+                                       <columns>
+                                          <TableColumn fx:id="nameSpoilerColum1" prefWidth="146.0" text="Navn" />
+                                          <TableColumn fx:id="colorSpoilerColum1" prefWidth="146.0" text="Farge" />
+                                          <TableColumn fx:id="sideSpoilerColum1" prefWidth="146.0" text="Side" />
+                                          <TableColumn fx:id="priceSpoilerColum1" prefWidth="146.0" text="Pris" />
+                                          <TableColumn fx:id="quantitySpoilerColum1" prefWidth="146.0" text="Antall" />
+                                       </columns>
+                                    </TableView>
+                                 </content>
+                              </Tab>
+                              <Tab text="Ratt">
+                                 <content>
+                                    <TableView fx:id="sWheelView1" prefHeight="200.0" prefWidth="200.0">
+                                       <columns>
+                                          <TableColumn fx:id="nameSWheelColum1" prefWidth="150.0" text="Navn" />
+                                          <TableColumn fx:id="materiellSWeel1" prefWidth="150.0" text="Materiale" />
+                                          <TableColumn fx:id="colorSWheelColum1" prefWidth="150.0" text="Farge" />
+                                          <TableColumn fx:id="priceSWeelColum1" prefWidth="150.0" text="Pris" />
+                                          <TableColumn fx:id="quantitySWeelColum1" prefWidth="150.0" text="Antall" />
+                                       </columns>
+                                    </TableView>
+                                 </content>
+                              </Tab>
+                              <Tab text="Felg">
+                                 <content>
+                                    <TableView fx:id="wheelRimView1" prefHeight="200.0" prefWidth="200.0">
+                                       <columns>
+                                          <TableColumn fx:id="nameWheelRimColum1" prefWidth="150.0" text="Navn" />
+                                          <TableColumn fx:id="dimensionWheelRim1" prefWidth="150.0" text="Dimensjon" />
+                                          <TableColumn fx:id="colorWheelRim1" prefWidth="150.0" text="Farge" />
+                                          <TableColumn fx:id="priceWheelRim1" prefWidth="150.0" text="Pris" />
+                                          <TableColumn fx:id="quantityWheelRim1" prefWidth="150.0" text="Antall" />
+                                       </columns>
+                                    </TableView>
+                                 </content>
+                              </Tab>
+                           </tabs>
+                        </TabPane>
+                     </children>
                         </AnchorPane>
                     </content>
                 </Tab>
@@ -122,7 +175,7 @@
                 <Image url="@../../../resources/CCOMPW-small.png" />
             </image>
         </ImageView>
-        <Button fx:id="backBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backToMain" prefHeight="40.0" prefWidth="67.0" text="BACK">
+        <Button fx:id="backBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backToMain" prefHeight="40.0" prefWidth="106.0" text="TILBAKE">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font></Button>
@@ -131,6 +184,9 @@
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
       </Button>
-      <Button layoutX="178.0" layoutY="37.0" mnemonicParsing="false" onAction="#deleteSelectedRow" text="Slett rad" />
+      <Button layoutX="582.0" layoutY="15.0" mnemonicParsing="false" onAction="#deleteSelectedRow" text="SLETT">
+         <font>
+            <Font name="Segoe UI Semilight" size="18.0" />
+         </font></Button>
     </children>
 </AnchorPane>

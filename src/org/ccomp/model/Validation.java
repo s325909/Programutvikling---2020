@@ -9,9 +9,9 @@ public class Validation {
                 +validateMaterial(material) + validateSide(side) + validateDimension(dimension) + validateObjectCarType(carType) + validateObjectOnNull(quantity);
     }
 
-    public static String valUser(String name, String email, String number, String PoNr, String city) {
+    public static String valUser(String name, String email, String number, String Zip, String city) {
 
-        return validateName(name) + validateEmail(email) + validateNumber(number) + validatePoNr(PoNr) + validateCity(city);
+        return validateName(name) + validateEmail(email) + validateNumber(number) + validateZip(Zip) + validateCity(city);
     }
 
     public static String validateName(String input) {
@@ -154,7 +154,7 @@ public class Validation {
         return lable;
     }
 
-    public static String validatePoNr(String input) {
+    public static String validateZip(String input) {
         String lable = "";
 
         String regex = "[0-9]{4}";
@@ -170,7 +170,8 @@ public class Validation {
     public static String validateCity(String input) {
         String lable = "";
 
-        String regex = "[a-zæøåA-ZÆØÅ]*";
+        String regex = "[a-zæøåA-ZÆØÅ]{2,25}";
+
 
         if (!input.matches(regex)) {
             lable = ("Poststed er skrevet inn i feil format! \n");

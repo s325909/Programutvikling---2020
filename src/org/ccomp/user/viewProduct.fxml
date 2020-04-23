@@ -8,36 +8,110 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.user.Controllers.ViewProductController">
    <children>
+      <Button fx:id="addComp" layoutX="693.0" layoutY="14.0" mnemonicParsing="false" onAction="#toUserCart" text="LEGG TIL">
+         <font>
+            <Font name="Segoe UI Semilight" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="backBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backToMain" text="TILBAKE">
+         <font>
+            <Font name="Segoe UI Semilight" size="18.0" />
+         </font>
+      </Button>
       <ImageView fitHeight="117.0" fitWidth="252.0" layoutX="274.0" layoutY="14.0">
          <image>
             <Image url="@../../../resources/CCOMPW-small.png" />
          </image>
       </ImageView>
-      <TitledPane layoutY="131.0" prefHeight="401.0" prefWidth="800.0" text="VELG PRODUKT">
-         <content>
-            <TableView prefHeight="387.0" prefWidth="798.0">
-              <columns>
-                <TableColumn minWidth="20.0" prefWidth="160.0" />
-                <TableColumn prefWidth="160.0" />
-                  <TableColumn prefWidth="160.0" />
-                  <TableColumn prefWidth="160.0" />
-                  <TableColumn prefWidth="160.0" />
-              </columns>
-            </TableView>
-         </content>
-      </TitledPane>
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="TILBAKE">
-         <font>
-            <Font name="Segoe UI Semilight" size="18.0" />
-         </font>
-      </Button>
-      <Button layoutX="693.0" layoutY="547.0" mnemonicParsing="false" text="LEGG TIL">
-         <font>
-            <Font name="Segoe UI Semilight" size="18.0" />
-         </font>
-      </Button>
+      <Accordion layoutY="131.0" prefHeight="472.0" prefWidth="800.0">
+        <panes>
+          <TitledPane animated="false" text="VELG PRODUKT - Motor">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView prefHeight="280.0" prefWidth="800.0">
+                          <columns>
+                            <TableColumn prefWidth="200.0" text="Navn" />
+                            <TableColumn prefWidth="200.0" text="Hestekrefter" />
+                              <TableColumn prefWidth="200.0" text="Pris" />
+                              <TableColumn prefWidth="200.0" text="Antall" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </TitledPane>
+            <TitledPane animated="false" text="VELG PRODUKT - Sete">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView layoutX="-1.0" layoutY="-2.0" prefHeight="280.0" prefWidth="800.0">
+                          <columns>
+                            <TableColumn prefWidth="160.0" text="Navn" />
+                              <TableColumn prefWidth="160.0" text="Materiale" />
+                              <TableColumn prefWidth="160.0" text="Farge" />
+                              <TableColumn prefWidth="160.0" text="Pris" />
+                              <TableColumn prefWidth="160.0" text="Antall" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </TitledPane>
+            <TitledPane animated="false" text="VELG PRODUKT - Spoiler">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tableVie" layoutX="-1.0" prefHeight="280.0" prefWidth="800.0">
+                          <columns>
+                            <TableColumn prefWidth="160.0" text="Navn" />
+                              <TableColumn prefWidth="160.0" text="Monteringsside" />
+                              <TableColumn prefWidth="160.0" text="Farge" />
+                              <TableColumn prefWidth="160.0" text="Pris" />
+                              <TableColumn prefWidth="160.0" text="Antall" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </TitledPane>
+          <TitledPane animated="false" text="VELG PRODUKT - Ratt">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView prefHeight="280.0" prefWidth="800.0">
+                           <columns>
+                              <TableColumn prefWidth="160.0" text="Navn" />
+                              <TableColumn prefWidth="160.0" text="Materiale" />
+                              <TableColumn prefWidth="160.0" text="Farge" />
+                              <TableColumn prefWidth="160.0" text="Pris" />
+                              <TableColumn prefWidth="160.0" text="Antall" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </TitledPane>
+          <TitledPane animated="false" text="VELG PRODUKT - Felg">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView prefHeight="280.0" prefWidth="800.0">
+                           <columns>
+                              <TableColumn prefWidth="160.0" text="Navn" />
+                              <TableColumn prefWidth="160.0" text="Dimensjon" />
+                              <TableColumn prefWidth="160.0" text="Farge" />
+                              <TableColumn prefWidth="160.0" text="Pris" />
+                              <TableColumn prefWidth="160.0" text="Antall" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </TitledPane>
+        </panes>
+      </Accordion>
    </children>
 </AnchorPane>

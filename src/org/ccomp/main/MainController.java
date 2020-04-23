@@ -45,11 +45,11 @@ public class MainController implements Initializable {
     @FXML
     public void openUserPage() {
         try{
-            Stage stage = (Stage) adminBtn.getScene().getWindow();
+            Stage stage = (Stage) userBtn.getScene().getWindow();
             URL url = getClass().getResource("/org/ccomp/user/user.fxml");
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
-            Scene scene = new Scene(root, 800, 600);
+            Scene scene = new Scene(root, 600, 500);
             stage.setScene(scene);
             stage.show();
         } catch (Exception e){
