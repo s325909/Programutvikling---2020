@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.user.Controllers.UserCartController">
+   <children>
+      <ImageView fitHeight="117.0" fitWidth="252.0" layoutX="274.0" layoutY="14.0">
+         <image>
+            <Image url="@../../../resources/CCOMPW-small.png" />
+         </image>
+      </ImageView>
+      <TableView fx:id="tableView" layoutY="171.0" prefHeight="243.0" prefWidth="800.0">
+        <columns>
+          <TableColumn fx:id="value" prefWidth="160.0" />
+            <TableColumn fx:id="value2" prefWidth="160.0" />
+            <TableColumn fx:id="value3" prefWidth="160.0" />
+            <TableColumn fx:id="value4" prefWidth="160.0" />
+            <TableColumn fx:id="value5" prefWidth="160.0" />
+        </columns>
+      </TableView>
+      <Label layoutX="317.0" layoutY="144.0" text="VALGTE PRODUKTER" />
+      <Label layoutX="526.0" layoutY="481.0" text="TOTAL" />
+      <TextFlow layoutX="627.0" layoutY="481.0" prefHeight="27.0" prefWidth="159.0" />
+      <Button fx:id="userReg" layoutX="701.0" layoutY="547.0" mnemonicParsing="false" onAction="#toUserReg" text="BESTILL">
+         <font>
+            <Font name="Segoe UI Semilight" size="18.0" />
+         </font>
+      </Button>
+      <Label layoutX="516.0" layoutY="438.0" text="Mva 25%" />
+      <TextFlow layoutX="627.0" layoutY="438.0" prefHeight="27.0" prefWidth="159.0" />
+      <Button fx:id="backBtn" layoutX="14.0" layoutY="547.0" mnemonicParsing="false" onAction="#backToViewProd" text="TILBAKE">
+         <font>
+            <Font name="Segoe UI Semilight" size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="714.0" layoutY="125.0" mnemonicParsing="false" text="FJERN">
+         <font>
+            <Font name="Segoe UI Semilight" size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

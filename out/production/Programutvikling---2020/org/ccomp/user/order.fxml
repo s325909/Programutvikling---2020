@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.user.Controllers.OrderController">
+   <children>
+      <ImageView fitHeight="126.0" fitWidth="261.0" layoutX="120.0" layoutY="14.0">
+         <image>
+            <Image url="@../../../resources/CCOMPW-small.png" />
+         </image>
+      </ImageView>
+      <TextArea layoutX="3.0" layoutY="189.0" prefHeight="160.0" prefWidth="500.0" />
+      <Text layoutX="31.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DU ER NÅ REGISTRERT MED DENNE INFORMASJONEN:" />
+      <Text layoutX="146.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DETTE ER DIN BESTILLING:" />
+      <TextArea layoutX="1.0" layoutY="380.0" prefHeight="160.0" prefWidth="500.0" />
+      <Text layoutX="88.0" layoutY="579.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Du kan nå krysse ut. Ha en fin dag videre!" />
+   </children>
+</AnchorPane>

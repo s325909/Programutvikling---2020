@@ -6,6 +6,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -15,6 +18,15 @@ public class UserController implements Initializable {
 
     @FXML
     Button backBtn, sokProd;
+
+    @FXML
+    RadioButton gasoline,electric,hybrid;
+
+    @FXML
+    ToggleGroup carTypeGroup;
+
+    @FXML
+    CheckBox engine,wheelrim,steeringwheel,seat,spoiler;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

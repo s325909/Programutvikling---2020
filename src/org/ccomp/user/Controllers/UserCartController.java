@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.ccomp.fileHandling.ComponentOBJHandler;
 import org.ccomp.model.component.Seat;
 import org.ccomp.model.component.Spoiler;
 import org.ccomp.model.component.SteeringWheel;
@@ -23,23 +24,24 @@ public class UserCartController implements Initializable {
     @FXML
     Button backBtn, userReg;
 
-    @FXML
+    /*@FXML
     TableColumn<Object, String> value, value2, value3, value4, value5;
 
     @FXML
-    TableView<Object> tableView;
+    TableView<Object> tableView;*/
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        tableView.setEditable(true);
+        /*tableView.setEditable(true);
         engineTableCol(value, value2, value3, value4);
         seatTableCol(value, value2, value3, value4, value5);
         spoilerTableCol(value, value2, value3, value4, value5);
         steeringTableCol(value, value2, value3, value4, value5);
-        rimTableCol(value, value2, value3, value4, value5);
+        rimTableCol(value, value2, value3, value4, value5);*/
+
     }
 
-    public void engineTableCol(TableColumn tCol1, TableColumn tCol2, TableColumn tCol3, TableColumn tCol4){
+   /* public void engineTableCol(TableColumn tCol1, TableColumn tCol2, TableColumn tCol3, TableColumn tCol4){
         tCol1 = new TableColumn<Engine, String>("Navn");
         tCol2 = new TableColumn<Engine, String>("Hestekrefter");
         tCol3 = new TableColumn<Engine, String>("Pris");
@@ -88,6 +90,8 @@ public class UserCartController implements Initializable {
         tableView.getColumns().setAll(tCol1, tCol2, tCol3, tCol4, tCol5);
     }
 
+
+*/
 
     @FXML
     public void backToViewProd() {
