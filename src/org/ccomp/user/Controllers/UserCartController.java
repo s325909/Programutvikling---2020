@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.ccomp.fileHandling.ComponentOBJHandler;
 import org.ccomp.model.component.Seat;
@@ -23,6 +24,9 @@ public class UserCartController implements Initializable {
 
     @FXML
     Button backBtn, userReg;
+
+    @FXML
+    VBox viewCart;
 
     /*@FXML
     TableColumn<Object, String> value, value2, value3, value4, value5;
