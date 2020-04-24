@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.ccomp.fileHandling.ComponentOBJHandler;
@@ -26,7 +27,7 @@ public class UserCartController implements Initializable {
     Button backBtn, userReg;
 
     @FXML
-    VBox viewCart;
+    Label viewCart;
 
     /*@FXML
     TableColumn<Object, String> value, value2, value3, value4, value5;
@@ -36,13 +37,28 @@ public class UserCartController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        /*tableView.setEditable(true);
+
+
+        ViewProductController string = new ViewProductController();
+       String test = string.toString();
+        System.out.println("TEST: " + test);
+
+        // viewCart.setText(string.toString());
+
+
+        /*ViewProductController view = new ViewProductController();
+        viewCart.setText(view.addCompnent());*/
+       /*tableView.setEditable(true);
         engineTableCol(value, value2, value3, value4);
         seatTableCol(value, value2, value3, value4, value5);
         spoilerTableCol(value, value2, value3, value4, value5);
         steeringTableCol(value, value2, value3, value4, value5);
         rimTableCol(value, value2, value3, value4, value5);*/
 
+    }
+
+    public void transferMessage(String message) {
+        viewCart.setText(message);
     }
 
    /* public void engineTableCol(TableColumn tCol1, TableColumn tCol2, TableColumn tCol3, TableColumn tCol4){
@@ -130,13 +146,8 @@ public class UserCartController implements Initializable {
     }
 
 
-    /*public String getProduct(){
-
-        ViewProductController viewProd = new ViewProductController();
-        viewProd.addCompnent();
-
-
-
-    }*/
-
+    public void setLable() {
+        ViewProductController string = new ViewProductController();
+        viewCart.setText(string.toString());
+    }
 }

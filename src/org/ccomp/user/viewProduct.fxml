@@ -7,7 +7,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.user.Controllers.ViewProductController">
    <children>
-      <Button fx:id="addComp" layoutX="693.0" layoutY="14.0" mnemonicParsing="false" onAction="#addCompnent" text="LEGG TIL">
+      <Button fx:id="addComp" layoutX="693.0" layoutY="14.0" mnemonicParsing="false" onAction="#toUserCart" text="LEGG TIL">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>

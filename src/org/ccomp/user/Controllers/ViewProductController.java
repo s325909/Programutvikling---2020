@@ -30,12 +30,12 @@ public class ViewProductController implements Initializable {
     private HashMap<String, List<CarComponent>> compMap, retrievedCompMap;
     private List<CarComponent> carComponents;
 
-    Seat seat;
-    Spoiler spoiler;
-
 
     @FXML
-    Button backBtn, addComp;
+    Label viewCart;
+
+    @FXML
+    Button backBtn, addComp, getBackBtnC, userReg;
 
     @FXML
     TitledPane seatPane, spoilerPane;
@@ -141,13 +141,20 @@ public class ViewProductController implements Initializable {
         }
     }
 
+
     @FXML
     public void toUserCart() {
+
         try {
             Stage stage = (Stage) addComp.getScene().getWindow();
             URL url = getClass().getResource("/org/ccomp/user/userCart.fxml");
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
+
+
+            UserCartController userCartController = loader.getController();
+            userCartController.transferMessage(stringValue());
+
             Scene scene = new Scene(root, 800, 600);
             stage.setScene(scene);
             stage.show();
@@ -156,31 +163,27 @@ public class ViewProductController implements Initializable {
         }
     }
 
-    @FXML
-    public String addCompnent() {
-        String txt = "";
 
+    public String stringValue (){
+            String txt = "";
 
-        if (seatPane.isExpanded()) {
-            int index = customerSeatView.getSelectionModel().getSelectedIndex();
-            Seat item = customerSeatView.getItems().get(index);
-            txt =  "Navn: " + item.getCompName() + "\n " +
-                    "Farge: " + item.getColor();
-        }
+            if (seatPane.isExpanded()) {
+                int index = customerSeatView.getSelectionModel().getSelectedIndex();
+                Seat item = customerSeatView.getItems().get(index);
+                txt = "Navn: " + item.getCompName() + "\n " +
+                        "Farge: " + item.getColor();
+            }
 
-        if (spoilerPane.isExpanded()) {
-            int index = customerSpoilerView.getSelectionModel().getSelectedIndex();
-            Spoiler item = customerSpoilerView.getItems().get(index);
-            txt = "Navn: " + item.getCompName() + "\n" +
-                    "Side: " + item.getSpoilerSide();
-        }
-        toUserCart();
-        return txt ;
-
+            if (spoilerPane.isExpanded()) {
+                int index = customerSpoilerView.getSelectionModel().getSelectedIndex();
+                Spoiler item = customerSpoilerView.getItems().get(index);
+                txt = "Navn: " + item.getCompName() + "\n" +
+                        "Side: " + item.getSpoilerSide();
+            }
+        return txt;
     }
-
-
 }
+
 
 
 
