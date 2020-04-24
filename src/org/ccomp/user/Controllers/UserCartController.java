@@ -126,4 +126,13 @@ public class UserCartController implements Initializable {
     }
 
 
+    /*public String getProduct(){
+
+        ViewProductController viewProd = new ViewProductController();
+        viewProd.addCompnent();
+
+
+
+    }*/
+
 }

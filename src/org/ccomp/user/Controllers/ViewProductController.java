@@ -1,7 +1,9 @@
 package org.ccomp.user.Controllers;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -14,6 +16,7 @@ import org.ccomp.fileHandling.ComponentOBJHandler;
 import org.ccomp.model.component.*;
 import org.ccomp.model.component.engine.Engine;
 
+import java.awt.print.Book;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -30,8 +33,12 @@ public class ViewProductController implements Initializable {
     Seat seat;
     Spoiler spoiler;
 
+
     @FXML
     Button backBtn, addComp;
+
+    @FXML
+    TitledPane seatPane, spoilerPane;
 
     @FXML
     TableView<Seat> customerSeatView;
@@ -108,7 +115,7 @@ public class ViewProductController implements Initializable {
         for (CarComponent carComponent : carComponents) {
             spoiler = (Spoiler) carComponent;
             nameSpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler, String>("compName"));
-            colorSpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler,String>("compName"));
+            colorSpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler, String>("compName"));
             sideSpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler, String>("spoilerSide"));
             priceSpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler, Double>("compPrice"));
             quantitySpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler, Integer>("compQuantity"));
@@ -118,14 +125,10 @@ public class ViewProductController implements Initializable {
         return spoilers;
     }
 
-    
-
-
-
 
     @FXML
     public void backToMain() {
-        try{
+        try {
             Stage stage = (Stage) backBtn.getScene().getWindow();
             URL url = getClass().getResource("/org/ccomp/user/user.fxml");
             FXMLLoader loader = new FXMLLoader(url);
@@ -133,7 +136,7 @@ public class ViewProductController implements Initializable {
             Scene scene = new Scene(root, 600, 500);
             stage.setScene(scene);
             stage.show();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -152,4 +155,50 @@ public class ViewProductController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    public String addCompnent() {
+        String txt = "";
+
+
+        if (seatPane.isExpanded()) {
+            int index = customerSeatView.getSelectionModel().getSelectedIndex();
+            Seat item = customerSeatView.getItems().get(index);
+            txt =  "Navn: " + item.getCompName() + "\n " +
+                    "Farge: " + item.getColor();
+        }
+
+        if (spoilerPane.isExpanded()) {
+            int index = customerSpoilerView.getSelectionModel().getSelectedIndex();
+            Spoiler item = customerSpoilerView.getItems().get(index);
+            txt = "Navn: " + item.getCompName() + "\n" +
+                    "Side: " + item.getSpoilerSide();
+        }
+        toUserCart();
+        return txt ;
+
+    }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+        //TableColumn col = pos.getTableColumn();
+
+// this gives the value in the selected cell:
+
+       // String data = (String) col.getColumns(item).getValue();
+
+
+
+
+
+

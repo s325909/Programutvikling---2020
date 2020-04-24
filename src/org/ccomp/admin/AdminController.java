@@ -2,6 +2,7 @@ package org.ccomp.admin;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.IntegerStringConverter;
@@ -22,6 +24,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 
 public class AdminController implements Initializable {
     Seat seat;
@@ -32,6 +35,9 @@ public class AdminController implements Initializable {
 
     @FXML
     Button addComp;
+
+    @FXML
+    TextField search;
 
     @FXML
     TableView<Seat> seatView;
@@ -83,9 +89,14 @@ public class AdminController implements Initializable {
     private List<CarComponent> carComponents;
     private Object TableColumn;
 
+    ObservableList<Seat> seats = FXCollections.observableArrayList();
+    FilteredList filteredList  = new FilteredList(seats ,e->true);
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+
 
         seatView.setItems(seatTable());
         editSeatTable();
@@ -147,6 +158,7 @@ public class AdminController implements Initializable {
 
         Seat seat;
         ObservableList<Seat> seats = FXCollections.observableArrayList();
+       // FilteredList filteredList  = new FilteredList(seats ,e->true);
 
         //Henter dem først ut her
         jobjHandler = new ComponentOBJHandler();
@@ -430,6 +442,7 @@ public class AdminController implements Initializable {
     }
 
 
+
     @FXML
     public void deleteSelectedRow() {
 
@@ -451,6 +464,8 @@ public class AdminController implements Initializable {
 
 
 
+
+
     /*public ObservableList<Engine> engineTable(){
 
         Engine engine;
@@ -469,4 +484,19 @@ public class AdminController implements Initializable {
     }*/
 
     }
+
+    /*public void searchComponent(KeyEvent keyEvent) {
+
+        search.textProperty().addListener((observable, oldValue, newValue) ->{
+
+            if (newValue.isEmpty() ||  newValue == null){
+
+                return true;
+            }
+
+        }
+
+
+    }*/
+
 }

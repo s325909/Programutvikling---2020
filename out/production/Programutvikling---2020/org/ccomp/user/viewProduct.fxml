@@ -7,7 +7,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.user.Controllers.ViewProductController">
    <children>
-      <Button fx:id="addComp" layoutX="693.0" layoutY="14.0" mnemonicParsing="false" onAction="#toUserCart" text="LEGG TIL">
+      <Button fx:id="addComp" layoutX="693.0" layoutY="14.0" mnemonicParsing="false" onAction="#addCompnent" text="LEGG TIL">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
@@ -24,11 +24,11 @@
       </ImageView>
       <Accordion layoutY="131.0" prefHeight="472.0" prefWidth="800.0">
         <panes>
-          <TitledPane  animated="false" text="VELG PRODUKT - Motor">
+          <TitledPane animated="false" text="VELG PRODUKT - Motor">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="customorEngineView"  prefHeight="280.0" prefWidth="800.0">
+                        <TableView fx:id="customorEngineView" prefHeight="280.0" prefWidth="800.0">
                           <columns>
                             <TableColumn prefWidth="200.0" text="Navn" />
                             <TableColumn prefWidth="200.0" text="Hestekrefter" />
@@ -40,7 +40,7 @@
                   </AnchorPane>
             </content>
           </TitledPane>
-            <TitledPane  animated="false" text="VELG PRODUKT - Sete">
+            <TitledPane fx:id="seatPane" animated="false" text="VELG PRODUKT - Sete">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -57,7 +57,7 @@
                   </AnchorPane>
                </content>
             </TitledPane>
-            <TitledPane  animated="false" text="VELG PRODUKT - Spoiler">
+            <TitledPane fx:id="spoilerPane" animated="false" text="VELG PRODUKT - Spoiler">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -74,7 +74,7 @@
                   </AnchorPane>
                </content>
             </TitledPane>
-          <TitledPane  animated="false" text="VELG PRODUKT - Ratt">
+          <TitledPane animated="false" text="VELG PRODUKT - Ratt">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -91,7 +91,7 @@
                   </AnchorPane>
             </content>
           </TitledPane>
-          <TitledPane  animated="false" text="VELG PRODUKT - Felg">
+          <TitledPane animated="false" text="VELG PRODUKT - Felg">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
