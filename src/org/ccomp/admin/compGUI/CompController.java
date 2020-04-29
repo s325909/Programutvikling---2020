@@ -27,9 +27,6 @@ public class CompController {
     Button addEngine, addSeat, addSpoiler, addSteeringWheel, addWheelRim;
 
     @FXML
-    Spinner<Integer> spinnerQuantity;
-
-    @FXML
     TextField engineName, enginePrice, enginePower, engineQuantity,
             seatName, seatPrice, seatColor, seatMaterial, seatQuantity,
             spoilerName, spoilerPrice, spoilerColor, spoilerSide, spoilerQuantity,

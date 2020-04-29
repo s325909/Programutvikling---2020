@@ -32,11 +32,6 @@
       </Button>
       <TextField fx:id="enginePrice" layoutX="272.0" layoutY="260.0" />
       <TextField fx:id="enginePower" layoutX="272.0" layoutY="190.0" />
-      <Spinner fx:id="spinnerQuantity" BorderPane.alignment="CENTER">
-         <valueFactory>
-            <SpinnerValueFactory.IntegerSpinnerValueFactory max="10" min="0" />
-         </valueFactory>
-      </Spinner>
       <Button fx:id="backToAdd" layoutX="14.0" layoutY="447.0" mnemonicParsing="false" onAction="#backToAddComp" text="TILBAKE">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
