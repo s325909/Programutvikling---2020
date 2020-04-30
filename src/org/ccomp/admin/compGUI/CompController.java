@@ -8,9 +8,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.ccomp.admin.AdminController;
 import org.ccomp.fileHandling.ComponentOBJHandler;
 import org.ccomp.model.CarComp;
 import org.ccomp.model.MapKey;
+import org.ccomp.model.Validation;
 import org.ccomp.model.component.*;
 import org.ccomp.model.component.engine.ElectricMotor;
 import org.ccomp.model.component.engine.Engine;
@@ -24,7 +26,10 @@ import java.util.*;
 public class CompController {
 
     @FXML
-    Button addEngine, addSeat, addSpoiler, addSteeringWheel, addWheelRim;
+    Button addEngine, addSeat, addSpoiler, addSteeringWheel, addWheelRim, ok;
+
+    @FXML
+    Label label;
 
     @FXML
     TextField engineName, enginePrice, enginePower, engineQuantity,
@@ -71,7 +76,14 @@ public class CompController {
     }
 
     @FXML
+    public void setLabel() {
+            label.setText(validationSeat());
+
+    }
+
+    @FXML
     public void addComponent(ActionEvent event) {
+
         carComponents = new ArrayList<>();
 
        // compMap = new HashMap<>();
@@ -167,6 +179,8 @@ public class CompController {
         } else System.out.println("\nNO SUCH ADD BTN TO PRESS\n");
 
         System.out.println("\nADDING COMPONENT..\n");
+
+
     }
 
 
@@ -534,7 +548,13 @@ public class CompController {
         }
 
         else {
+
+
 */
 
+    public String validationSeat() {
+        return Validation.valAdminSeat( seatName.getId(),
+                seatMaterial.getText(), seatColor.getText(), seatPrice.getText(), seatQuantity.getText());
+    }
 }
 

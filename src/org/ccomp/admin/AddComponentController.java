@@ -1,5 +1,7 @@
 package org.ccomp.admin;
 
+import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -7,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -35,22 +38,8 @@ public class AddComponentController implements Initializable {
 
     }
 
-    @FXML
-    public void disableCarTypes() {
-        final ToggleGroup carTypes = new ToggleGroup();
-        final VBox vbox = new VBox(5);
-
-        for (int i = 1; i <= 3; i++) {
-            vbox.getChildren().add(gasoline);
-            vbox.getChildren().add(electric);
-            vbox.getChildren().add(hybrid);
-
-            for (Toggle t : carTypes.getToggles()) {
-                if (t instanceof RadioButton) {
-                    ((RadioButton) t).setVisible(true);
-                }
-            }
-        }
+    public void disableToggegroup(){
+        carTypeGroup.getSelectedToggle();
     }
 
     @FXML
@@ -74,15 +63,46 @@ public class AddComponentController implements Initializable {
                 JOptionPane.showMessageDialog(null, "Du må velge biltype for komponentet motor!");
             } else
                 loadWindow(next, "/org/ccomp/admin/compGUI/kEngine.fxml", "@../../../resources/style.ccs");
-        } else if (seat.isSelected()) {
-            loadWindow(next, "/org/ccomp/admin/compGUI/kSeat.fxml", "@../../../resources/style.ccs");
-        } else if (spoiler.isSelected()) {
-            loadWindow(next, "/org/ccomp/admin/compGUI/kSpoiler.fxml", "@../../../resources/style.ccs");
-        } else if (steeringwheel.isSelected()) {
-            loadWindow(next, "/org/ccomp/admin/compGUI/kSteeringwheel.fxml", "@../../../resources/style.ccs");
-        } else if (wheelrim.isSelected()) {
-            loadWindow(next, "/org/ccomp/admin/compGUI/kWheelRim.fxml", "@../../../resources/style.ccs");
-        } else {
+        }
+
+        else if (seat.isSelected()) {
+            if (carTypeGroup.getSelectedToggle() == null) {
+                loadWindow(next, "/org/ccomp/admin/compGUI/kSeat.fxml", "@../../../resources/style.ccs");
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Du kan ikke velge biltype for dette komponentet!");
+            }
+        }
+
+        else if (spoiler.isSelected()) {
+            if (carTypeGroup.getSelectedToggle() == null) {
+                loadWindow(next, "/org/ccomp/admin/compGUI/kSpoiler.fxml", "@../../../resources/style.ccs");
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Du kan ikke velge biltype for dette komponentet!");
+            }
+        }
+
+        else if (steeringwheel.isSelected()) {
+            if (carTypeGroup.getSelectedToggle() == null) {
+                loadWindow(next, "/org/ccomp/admin/compGUI/kSteeringwheel.fxml", "@../../../resources/style.ccs");
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Du kan ikke velge biltype for dette komponentet!");
+            }
+        }
+
+        else if (wheelrim.isSelected()) {
+            if (carTypeGroup.getSelectedToggle() == null) {
+                loadWindow(next, "/org/ccomp/admin/compGUI/kWheelRim.fxml", "@../../../resources/style.ccs");
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Du kan ikke velge biltype for dette komponentet!");
+            }
+
+        }
+
+        else {
             if (componentTypeGroup.getSelectedToggle() == null) {
                 JOptionPane.showMessageDialog(null, "Du må velge et komponent for å kunne legge til! \n" +
                         "Du kan ikke velge biltype for andre komponenter enn motor.");

@@ -327,6 +327,7 @@ public class AdminController implements Initializable {
 
         quantitySeatColum.setCellFactory(new PropertyValueFactory("Navn"));
         quantitySeatColum.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+
         quantitySeatColum.setOnEditCommit((TableColumn.CellEditEvent<Seat, Integer> t) -> {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();

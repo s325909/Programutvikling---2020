@@ -1,12 +1,19 @@
 package org.ccomp.model;
 
 
-public class Validation {
-    public static String valAdmin(String name, String price /*String quantity*/, String power, String color, String material,
-                                  String side, String dimension, Object carType, Object quantity) {
+import javafx.scene.control.Alert;
 
-        return validateName(name) + /*validateQuantity(quantity)*/  validatePrice(price) + validatePower(power) + validateColor(color)
-                +validateMaterial(material) + validateSide(side) + validateDimension(dimension) + validateObjectCarType(carType) + validateObjectOnNull(quantity);
+import javax.swing.*;
+
+public class Validation {
+    public static String valAdminEngine(String enginename, String engineprice, String enginequantity, String enginepower) {
+
+        return validateName(enginename) + validateQuantity(enginequantity) + validatePrice(engineprice) + validatePower(enginepower);
+    }
+
+    public static String valAdminSeat (String seatname, String seatmaterial, String seatcolor, String seatprice, String seatquantity) {
+
+        return validateName(seatname) + validateMaterial(seatmaterial) + validateColor(seatcolor) + validatePrice(seatprice) + validateQuantity(seatquantity);
     }
 
     public static String valUser(String name, String email, String number, String Zip, String city) {
@@ -21,24 +28,26 @@ public class Validation {
 
         if (!input.matches(regex)) {
             lable = ("Navnet er skrevet inn i feil format! \n");
+            //alert("Navn er i feil format!");
         } else if (input.isEmpty()) {
-            lable = ("Vennligst fyll inn navn på komponentet! \n");
+            lable = ("Vennligst fyll inn navn på komponentet!");
+            alert("Vennligst fyll inn navn på komponentet!");
         }
         return lable;
     }
 
-  /*  public static String validateQuantity (String input) {
+    public static String validateQuantity (String input) {
         String lable = "";
 
-        String regex = "[0-9]\\d{0,5}";
+        String regex = "[0-9]\\d{1,5}";
 
         if (!input.matches(regex)) {
             lable = ("Feil format i antall komponenter!\n");
         } else if (input.isEmpty()) {
-            lable = ("Vennligst fyll inn riktig antall komponenter! \n");
+            alert("Vennligst fyll inn riktig antall komponenter! \n");
         }
         return lable;
-    }*/
+    }
 
     public static String validatePrice (String input) {
         String lable = "";
@@ -48,20 +57,21 @@ public class Validation {
         if (!input.matches(regex)) {
             lable = ("Pris er skrevet inn i feil format!\n");
         } else if (input.isEmpty()) {
-            lable = ("Vennligst fyll inn pris for komponentet! \n");
+            alert("Vennligst fyll inn pris for komponentet!\n");
         }
+
         return lable;
     }
 
     public static String validatePower (String input) {
         String lable = "";
 
-        String regex = "[0-9]\\d{0,3}";
+        String regex = "[0-9]\\d{3}";
 
         if (!input.matches(regex)) {
             lable = ("Antall hestekrefter er skrevet inn i feil format!\n");
         } else if (input.isEmpty()) {
-            lable = ("Vennligst fyll inn antallet hestekrefter for komponent!\n");
+            alert("Vennligst fyll inn antallet hestekrefter for komponent!\\n");
         }
         return lable;
     }
@@ -72,9 +82,9 @@ public class Validation {
         String regex = "[a-zæøåA-ZÆØÅ]{3,10}";
 
         if (!input.matches(regex)) {
-            lable = ("Farge er skrevet inn i feil format! \n");
+           lable  = ("Farge er skrevet inn i feil format! \n");
         } else if (input.isEmpty()) {
-            lable = ("Vennligst fyll inn en farge på komponentet! \n");
+            alert("Vennligst fyll inn en farge på komponentet! \\n");
         }
         return lable;
     }
@@ -82,12 +92,12 @@ public class Validation {
     public static String validateMaterial(String input) {
         String lable = "";
 
-        String regex = "[a-zæøåA-ZÆØÅ]";
+        String regex = "[a-zæøåA-ZÆØÅ]{1,10}";
 
         if (!input.matches(regex)) {
             lable = ("Materiale er skrevet inn i feil format! \n");
         } else if (input.isEmpty()) {
-            lable = ("Vennligst fyll inn materiale på komponentet! \n");
+            alert("Vennligst fyll inn materiale på komponentet! \\n");
         }
         return lable;
     }
@@ -190,5 +200,13 @@ public class Validation {
         }
 
         return lable;
+    }
+
+    public static void alert(String msg) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("CCOMP");
+        alert.setHeaderText("Feil!");
+        alert.setContentText(msg);
+        alert.showAndWait();
     }
 }
