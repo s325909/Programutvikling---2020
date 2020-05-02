@@ -1,5 +1,7 @@
 package org.ccomp.user.Controllers;
 
+import com.sun.jndi.toolkit.url.Uri;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,11 +11,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.ccomp.fileHandling.ComponentOBJHandler;
 import org.ccomp.model.component.*;
 import org.ccomp.model.component.engine.Engine;
+
+import java.awt.event.ActionEvent;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -26,6 +32,10 @@ public class UserViewCartController  {
     private ComponentOBJHandler jobjHandler;
     private HashMap<String, List<CarComponent>> compMap, retrievedCompMap;
     private List<CarComponent> carComponents;
+
+
+    @FXML
+    AnchorPane contentProducts, contentCart;
 
     @FXML
     Label viewCart;
@@ -82,13 +92,17 @@ public class UserViewCartController  {
     @FXML
     TableColumn<Engine, String> engintypeColum, nameEngineColum, horsepowerColum, priceEngineColum, quantityEngineColum;*/
 
+    private Scene scene;
+    private static List<CarComponent> componentsCart = new ArrayList<>();
+
+
     @FXML
     public void initialize() {
         jobjHandler = new ComponentOBJHandler();
         retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
 
-        customerSeatView.setItems(seatTable());
-        customerSpoilerView.setItems(spoilerTable());
+      //  customerSeatView.setItems(seatTable());
+      //  customerSpoilerView.setItems(spoilerTable());
 
        /*tableView.setEditable(true);
         engineTableCol(value, value2, value3, value4);
@@ -97,6 +111,9 @@ public class UserViewCartController  {
         steeringTableCol(value, value2, value3, value4, value5);
         rimTableCol(value, value2, value3, value4, value5);*/
 
+
+       componentsCart = getComponentsCart();
+       System.out.println("(INIT) COMP CART: " + componentsCart.size());
     }
 
     @FXML
@@ -118,32 +135,53 @@ public class UserViewCartController  {
     @FXML
     public void toUserCart() {
 
+        System.out.println("TO USER CART");
+
+
+        if (componentsCart == null) componentsCart = new ArrayList<>();
+
+        //todo: fjernes etter testing
+        StringProperty compNameProperty = new SimpleStringProperty("COMP NAME");
+        DoubleProperty compPriceProperty = new SimpleDoubleProperty(230);
+        IntegerProperty compQuantityProperty = new SimpleIntegerProperty(15);
+
+
+        componentsCart.add(new CarComponent(compNameProperty, compPriceProperty, compQuantityProperty));
+
         try {
-            Stage stage = (Stage) addToCart.getScene().getWindow();
             URL url = getClass().getResource("/org/ccomp/user/userCart.fxml");
-            FXMLLoader loader = new FXMLLoader(url);
-            Parent root = loader.load();
-            Scene scene = new Scene(root, 800, 600);
-            stage.setScene(scene);
-            stage.show();
+
+
+            scene = contentProducts.getScene();
+            scene.setRoot(FXMLLoader.load(url));
+
+          //  FXMLLoader loader = new FXMLLoader(url);
+          //  AnchorPane newCartScene = (AnchorPane) loader.load();
+          //  contentProducts.getChildren().setAll(newCartScene.getChildren());
+           // scene.setRoot(screenMap.get("userCart"));
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
     }
 
     @FXML
     public void backToViewProd() {
+
+        System.out.println("TO VIEW PRODUCTS");
+
+
+        componentsCart = getComponentsCart();
+
         try {
-            Stage stage = (Stage) backBtnCart.getScene().getWindow();
-            URL url = getClass().getResource("/org/ccomp/user/user.fxml");
-            FXMLLoader loader = new FXMLLoader(url);
-            Parent root = loader.load();
-            Scene scene = new Scene(root, 600, 500);
-            stage.setScene(scene);
-            stage.show();
+            URL url = getClass().getResource("/org/ccomp/user/viewProduct.fxml");
+            scene = contentCart.getScene();
+            scene.setRoot(FXMLLoader.load(url));
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     @FXML
@@ -200,5 +238,16 @@ public class UserViewCartController  {
             spoilers.add(spoiler);
         }
         return spoilers;
+    }
+
+
+
+
+    public List<CarComponent> getComponentsCart() {
+        return componentsCart;
+    }
+
+    public void setComponentsCart(List<CarComponent> componentsCart) {
+        this.componentsCart = componentsCart;
     }
 }

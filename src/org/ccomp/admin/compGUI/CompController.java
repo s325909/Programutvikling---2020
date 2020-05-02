@@ -69,6 +69,8 @@ public class CompController {
         jobjHandler = new ComponentOBJHandler();
         compMap = jobjHandler.readComponent(compMap);
 
+        System.out.println("INITIALIZED COMP MAP SIZE: " + compMap.size());
+
         //spinner quantity for quantities of all types of components
         //System.out.println(spinnerQuantity.getValue());
 
@@ -392,7 +394,7 @@ public class CompController {
      //   engine.enginePrice(Integer.parseInt(pricetxt));
         return engine;
     }
-    
+
 
     //Tilbake knapp
     @FXML
