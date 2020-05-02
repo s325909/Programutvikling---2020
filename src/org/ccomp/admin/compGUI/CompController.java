@@ -92,10 +92,16 @@ public class CompController {
             System.out.println("\nADD ENGINE PRESSED\n");
         } else if (event.getSource() == addSeat) {
             System.out.println("\nADD SEAT PRESSED\n");
+
+            //Getting all saved Seat components from HashMap and assigning them to new List of CarComponent
+            carComponents = compMap.get(SEAT_KEY);
+
+
             //up casting parent reference to child reference based on componentType
             seat = (Seat) makeComponent(SEAT_KEY, seat);
+            System.out.println("("+SEAT_KEY+") CarComponents size: " + carComponents.size());
             carComponents.add(seat);
-            System.out.println("SEAT LIST SIZE: " + carComponents.size());
+            System.out.println("("+SEAT_KEY+") CarComponents size: " + carComponents.size());
 
             compMap.put(SEAT_KEY, carComponents);
             System.out.println("("+SEAT_KEY+") HASH MAP: " + compMap);
@@ -117,10 +123,15 @@ public class CompController {
           //  jobjHandler.writeComponent(retrievedCompMap);
         } else if (event.getSource() == addSpoiler) {
             System.out.println("\nADD SPOILER PRESSED\n");
+
+            //Getting all saved Spoiler components from HashMap and assigning them to new List of CarComponent
+            carComponents = compMap.get(SPOILER_KEY);
+
             //up casting parent reference to child reference based on componentType
             spoiler = (Spoiler) makeComponent(SPOILER_KEY, spoiler);
+            System.out.println("("+SPOILER_KEY+") CarComponents size: " + carComponents.size());
             carComponents.add(spoiler);
-            System.out.println("SPOILER LIST SIZE: " + carComponents.size());
+            System.out.println("("+SPOILER_KEY+") CarComponents size: " + carComponents.size());
 
             compMap.put(SPOILER_KEY, carComponents);
             System.out.println("("+SPOILER_KEY+") HASH MAP: " + compMap);
@@ -140,10 +151,15 @@ public class CompController {
             System.out.println("(RETRIEVED) HASH MAP: " + retrievedCompMap);
         } else if (event.getSource() == addSteeringWheel) {
             System.out.println("\nADD STEERING WHEEL PRESSED\n");
+
+            //Getting all saved SteeringWheel components from HashMap and assigning them to new List of CarComponent
+            carComponents = compMap.get(STEERING_WHEEL_KEY);
+
             //up casting parent reference to child reference based on componentType
             steeringWheel = (SteeringWheel) makeComponent(STEERING_WHEEL_KEY, steeringWheel);
+            System.out.println("("+STEERING_WHEEL_KEY+") CarComponents size: " + carComponents.size());
             carComponents.add(steeringWheel);
-            System.out.println("STEERING WHEEL LIST SIZE: " + carComponents.size());
+            System.out.println("("+STEERING_WHEEL_KEY+") CarComponents size: " + carComponents.size());
 
             compMap.put(STEERING_WHEEL_KEY, carComponents);
             System.out.println("("+STEERING_WHEEL_KEY+") HASH MAP: " + compMap);
@@ -159,10 +175,16 @@ public class CompController {
             System.out.println("(RETRIEVED) HASH MAP: " + retrievedCompMap);
         } else if (event.getSource() == addWheelRim) {
             System.out.println("\nADD WHEEL RIM PRESSED\n");
+
+            //Getting all saved Spoiler components from HashMap and assigning them to new List of CarComponent
+            carComponents = compMap.get(WHEEL_RIM_KEY);
+
             //up casting parent reference to child reference based on componentType
-           // wheelRim = (WheelRim) makeComponent(WHEEL_RIM_KEY, wheelRim);
+            //todo: FIX serialization of WheelRim object
+            // wheelRim = (WheelRim) makeComponent(WHEEL_RIM_KEY, wheelRim);
+            System.out.println("("+WHEEL_RIM_KEY+") CarComponents size: " + carComponents.size());
             carComponents.add(wheelRim);
-            System.out.println("WHEEL RIM LIST SIZE: " + carComponents.size());
+            System.out.println("("+WHEEL_RIM_KEY+") CarComponents size: " + carComponents.size());
 
             compMap.put(WHEEL_RIM_KEY, carComponents);
             System.out.println("("+WHEEL_RIM_KEY+") HASH MAP: " + compMap);
@@ -240,29 +262,6 @@ public class CompController {
 
 
 
-
-
-
-    /*
-    private List<CarComponent> initSeatList(List<CarComponent> seatList) {
-        seatList.add(new Seat(seatName.getText(), Double.parseDouble(seatPrice.getText()), 1,
-                seatColor.getText(), seatMaterial.getText()));
-        seatList.add(new Seat(seatName.getText(), Double.parseDouble(seatPrice.getText()), 3,
-                seatColor.getText(), seatMaterial.getText()));
-        seatList.add(new Seat(seatName.getText(), Double.parseDouble(seatPrice.getText()), 5,
-                seatColor.getText(), seatMaterial.getText()));
-        return seatList;
-    }
-
-    private List<CarComponent> initSpoilerList(List<CarComponent> spoilerList) {
-        spoilerList.add(new Spoiler(seatName.getText(), Double.parseDouble(seatPrice.getText()), 1,
-                seatMaterial.getText()));
-        spoilerList.add(new Spoiler(seatName.getText(), Double.parseDouble(seatPrice.getText()), 1,
-                seatMaterial.getText()));
-        return spoilerList;
-    }
-     */
-
     private void iterateHashMapList(HashMap<String, List<CarComponent>> compMap) {
         //Iterate over HashMap of ArrayList to get each component and its values
         for (String key : compMap.keySet()) {
@@ -320,65 +319,6 @@ public class CompController {
 
      */
 
-    @FXML
-    public void addSpoilerComponent() {
-       // if (addSpoiler.isPressed()) System.out.println("SPOILER BTN PRESSED!");
-
-        List<CarComp> carComps = new ArrayList<>();
-
-        SimpleStringProperty stringProperty = new SimpleStringProperty("COMP");
-        DoubleProperty doubleProperty = new SimpleDoubleProperty(120.9);
-        IntegerProperty integerProperty = new SimpleIntegerProperty(14);
-
-        CarComp carComp = new CarComp(stringProperty, doubleProperty, integerProperty);
-
-        carComps.add(carComp);
-        carComps.add(carComp);
-        carComps.add(carComp);
-        carComps.add(carComp);
-
-      //  CarComp carComp = new CarComp(spoilerName.getText(), Double.parseDouble(spoilerPrice.getText()), Integer.parseInt(spoilerQuantity.toString()));
-
-      //  carComps.add(new CarComp("COMP0", 120.0, 15));
-      //  carComps.add(new CarComp("COMP1", 135.0, 25));
-      //  carComps.add(new CarComp("COMP2", 150.0, 35));
-
-        System.out.println("SIZE: " + carComps.size());
-
-        HashMap<String, List<CarComp>> compMap2 = new HashMap<>();
-
-        compMap2.put("Comp", carComps);
-        System.out.println("(COMP) HASH MAP: " + compMap2);
-
-
-        System.out.println(carComps.get(0).getCompName());
-        System.out.println(carComps.get(0).getCompPrice());
-        System.out.println(carComps.get(0).getCompQuantity());
-
-
-        /*
-
-            //serialize compMap
-            objectsHelper = new ReadWriteObjectsHelper();
-            objectsHelper.writeComponent(compMap2);
-
-            //deserialize compMap
-            HashMap<String, List<CarComp>> retrievedCompMap2 = new HashMap<>();
-            retrievedCompMap2 = objectsHelper.readComponent(retrievedCompMap2);
-
-            System.out.println("(RETRIEVED) HASH MAP: " + retrievedCompMap2);
-
-
-         */
-
-
-        // iterateHashMapList(retrievedCompMap2);
-
-        System.out.println("ADD SPOILER BUTTON PRESSED");
-    }
-
-
-
 
     private GasolineEngine gasolineEngine;
     private ElectricMotor electricMotor;
@@ -421,22 +361,6 @@ public class CompController {
     ToggleGroup carTypeGroup, componentTypeGroup;
 
 
-    @FXML
-    //Metod for hvis begge knappene er valgt. Altså biltype & komponent.
-    /*void utText() {
-
-       if (carTypeGroup.getSelectedToggle().isSelected() && componentTypeGroup.getSelectedToggle().isSelected() ) {
-            selectedCarType();
-
-        }
-
-
-        selectedCarType();
-
-
-    }*/
-
-
     private void selectedCarType() {
         if (gasoline.isSelected()) {
             System.out.println("Bensin");
@@ -468,54 +392,7 @@ public class CompController {
      //   engine.enginePrice(Integer.parseInt(pricetxt));
         return engine;
     }
-
-
-    //kode for hvis sete er valgt TODO må gjøre om på variabler ,opp til deg im du vil bruke den.
-   /* private void selectedAthoerComp(){
-        if (seat.isSelected()){
-            Seat seat1 = new Seat();
-            selectedSeat(seat1);
-            System.out.println("ok");
-        }
-
-        if(spoiler.isSelected()){
-            Spoiler spoiler = new Spoiler();
-            selectedSpoiler(spoiler);
-
-        }*/
-
-
-    //TODO må bare forsette videre med flere komponenter, er bare å legge det inn med arraylist
-
-
-
-    /*private Seat selectedSeat(Seat seat){
-
-        seattxt= seatstuff.getText();
-        materolltxt = materiell.getText();
-        pricetxt = price.getText();
-        seat.getColor(seattxt);
-        seat.getMaterial(materolltxt);
-        seat.getPrice(pricetxt);
-        return seat;
-
-    }*/
-
-
-    /*private Spoiler selectedSpoiler(Spoiler spoiler){
-        return spoiler;
-
-    }
-
-    private SteeringWheel selectedSteerinWheel(SteeringWheel steeringWheel){
-        return steeringWheel;
-
-    }
-*/
-
-
-
-
+    
 
     //Tilbake knapp
     @FXML
