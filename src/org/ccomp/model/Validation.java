@@ -16,6 +16,21 @@ public class Validation {
         return validateName(seatname) + validateMaterial(seatmaterial) + validateColor(seatcolor) + validatePrice(seatprice) + validateQuantity(seatquantity);
     }
 
+    public static String valAdminSpiler (String spoilername, String spoilercolor, String spoilerside, String spoilerprice, String spoilerquantity) {
+
+        return validateName(spoilername) + validateColor(spoilercolor) + validateSide(spoilerside) + validatePrice(spoilerprice) + validateQuantity(spoilerquantity);
+    }
+
+    public static String valAdminSteering (String steeringname, String steeringmaterial, String steeringcolor, String steeringprice, String steeringquantity) {
+
+        return validateName(steeringname) + validateMaterial(steeringmaterial) + validateColor(steeringcolor) + validatePrice(steeringprice) + validateQuantity(steeringquantity);
+    }
+
+    public static String valAdminRim (String rimname, String rimcolor, String rimdimension, String rimprice, String rimquantity) {
+
+        return validateName(rimname) + validateColor(rimcolor) + validateDimension(rimdimension) + validatePrice(rimprice) + validateQuantity(rimquantity);
+    }
+
     public static String valUser(String name, String email, String number, String Zip, String city) {
 
         return validateName(name) + validateEmail(email) + validateNumber(number) + validateZip(Zip) + validateCity(city);
@@ -109,15 +124,6 @@ public class Validation {
         return lable;
     }
 
-    public static String validateObjectOnNull(Object object) {
-        String lable = "";
-        if (object == null) {
-
-            lable = ("Velg antall av samme komponenter du vil legge til! \n");
-        }
-
-        return lable;
-    }
 
     public static String validateNumber(String input) {
         String lable = "";
@@ -163,12 +169,14 @@ public class Validation {
         return lable;
     }
 
-    public static String validateObjectCarType(Object object) {
+    //validation for quantity etter spinner, skal ersattes med validation for quantity over.....
+    public static String validateObjectOnNull(Object object) {
         String lable = "";
-
         if (object == null) {
-            lable = ("Velg riktig biltype for motor!! \n");
+
+            lable = ("Velg antall av samme komponenter du vil legge til! \n");
         }
+
         return lable;
     }
 }

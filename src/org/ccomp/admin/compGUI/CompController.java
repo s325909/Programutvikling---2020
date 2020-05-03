@@ -450,6 +450,7 @@ public class CompController {
     public void inputEmpty() {
         if (seatName.getText().isEmpty()) {
             alert("Du må fylle ut alle felt!");
+
         }
     }
 }
