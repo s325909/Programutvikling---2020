@@ -78,14 +78,14 @@ public class CompController {
     }
 
     @FXML
-    public void setLabel() {
+    public void checkValidation() {
             label.setText(validationSeat());
-
+            inputEmpty();
     }
 
     @FXML
     public void addComponent(ActionEvent event) {
-
+        inputEmpty();
         carComponents = new ArrayList<>();
 
        // compMap = new HashMap<>();
@@ -430,10 +430,27 @@ public class CompController {
 
 
 */
+   //denne funker
+    public static void alert(String msg) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("CCOMP");
+        alert.setHeaderText("Feil!");
+        alert.setContentText(msg);
+        alert.showAndWait();
 
+    }
+
+    //denne funker
     public String validationSeat() {
         return Validation.valAdminSeat( seatName.getId(),
                 seatMaterial.getText(), seatColor.getText(), seatPrice.getText(), seatQuantity.getText());
+    }
+
+    //denne funker
+    public void inputEmpty() {
+        if (seatName.getText().isEmpty()) {
+            alert("Du må fylle ut alle felt!");
+        }
     }
 }
 

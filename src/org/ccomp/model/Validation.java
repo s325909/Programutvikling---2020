@@ -28,10 +28,6 @@ public class Validation {
 
         if (!input.matches(regex)) {
             lable = ("Navnet er skrevet inn i feil format! \n");
-            //alert("Navn er i feil format!");
-        } else if (input.isEmpty()) {
-            lable = ("Vennligst fyll inn navn på komponentet!");
-            alert("Vennligst fyll inn navn på komponentet!");
         }
         return lable;
     }
@@ -43,8 +39,6 @@ public class Validation {
 
         if (!input.matches(regex)) {
             lable = ("Feil format i antall komponenter!\n");
-        } else if (input.isEmpty()) {
-            alert("Vennligst fyll inn riktig antall komponenter! \n");
         }
         return lable;
     }
@@ -56,10 +50,7 @@ public class Validation {
 
         if (!input.matches(regex)) {
             lable = ("Pris er skrevet inn i feil format!\n");
-        } else if (input.isEmpty()) {
-            alert("Vennligst fyll inn pris for komponentet!\n");
         }
-
         return lable;
     }
 
@@ -70,8 +61,6 @@ public class Validation {
 
         if (!input.matches(regex)) {
             lable = ("Antall hestekrefter er skrevet inn i feil format!\n");
-        } else if (input.isEmpty()) {
-            alert("Vennligst fyll inn antallet hestekrefter for komponent!\\n");
         }
         return lable;
     }
@@ -83,8 +72,6 @@ public class Validation {
 
         if (!input.matches(regex)) {
            lable  = ("Farge er skrevet inn i feil format! \n");
-        } else if (input.isEmpty()) {
-            alert("Vennligst fyll inn en farge på komponentet! \\n");
         }
         return lable;
     }
@@ -96,8 +83,6 @@ public class Validation {
 
         if (!input.matches(regex)) {
             lable = ("Materiale er skrevet inn i feil format! \n");
-        } else if (input.isEmpty()) {
-            alert("Vennligst fyll inn materiale på komponentet! \\n");
         }
         return lable;
     }
@@ -109,8 +94,6 @@ public class Validation {
 
         if (!input.matches(regex)) {
             lable = ("Side på spoiler er skrevet inn i feil format! \n");
-        } else if (input.isEmpty()) {
-            lable = ("Vennligst fyll inn monteringsside for komponentet! \n");
         }
         return lable;
     }
@@ -122,8 +105,6 @@ public class Validation {
 
         if (!input.matches(regex)) {
             lable = ("Dimensjonen på felg er skrevet inn i feil format! \n");
-        } else if (input.isEmpty()) {
-            lable = ("Vennligst fyll inn dimensjonen for komponentet! \n");
         }
         return lable;
     }
@@ -145,8 +126,6 @@ public class Validation {
 
         if (!input.matches(regex)) {
             lable = ("Mobilnummer er skrevet inn i feil format! \n");
-        } else if (input.isEmpty()) {
-            lable = ("Vennligst fyll inn ditt mobilnummer! \n");
         }
         return lable;
     }
@@ -158,8 +137,6 @@ public class Validation {
 
         if (!input.matches(regex)) {
             lable = ("E-postadresse er skrevet inn i feil format! \n");
-        } else if (input.isEmpty()) {
-            lable = ("Vennligst fyll inn din e-postadresse! \n");
         }
         return lable;
     }
@@ -171,8 +148,6 @@ public class Validation {
 
         if (!input.matches(regex)) {
             lable = ("Postnummer er skrevet inn i feil format! \n");
-        } else if (input.isEmpty()) {
-            lable = ("Vennligst fyll inn ditt postnummer! \n");
         }
         return lable;
     }
@@ -182,11 +157,8 @@ public class Validation {
 
         String regex = "[a-zæøåA-ZÆØÅ]{2,25}";
 
-
         if (!input.matches(regex)) {
             lable = ("Poststed er skrevet inn i feil format! \n");
-        } else if (input.isEmpty()) {
-            lable = ("Vennligst fyll inn ditt poststed! \n");
         }
         return lable;
     }
@@ -195,18 +167,8 @@ public class Validation {
         String lable = "";
 
         if (object == null) {
-
             lable = ("Velg riktig biltype for motor!! \n");
         }
-
         return lable;
-    }
-
-    public static void alert(String msg) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("CCOMP");
-        alert.setHeaderText("Feil!");
-        alert.setContentText(msg);
-        alert.showAndWait();
     }
 }
