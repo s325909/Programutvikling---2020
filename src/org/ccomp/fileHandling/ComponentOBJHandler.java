@@ -8,6 +8,11 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ComponentOBJHandler implements FileHandler {
+
+
+
+    private File file = new File("testComponents");
+
     @Override
     public HashMap<String, List<CarComponent>> readComponent(HashMap<String, List<CarComponent>> loadCompMap) {
         System.out.println("DE-SERIALIZING COMPONENT");
@@ -15,6 +20,7 @@ public class ComponentOBJHandler implements FileHandler {
         try {
             //todo: handle if file not found / exists
             FileInputStream fis = new FileInputStream("components.obj");
+           // FileInputStream fis = new FileInputStream("testComponents.obj");
             ObjectInputStream ois = new ObjectInputStream(fis);
 
             loadCompMap = (HashMap<String, List<CarComponent>>) ois.readObject();
@@ -35,6 +41,7 @@ public class ComponentOBJHandler implements FileHandler {
     public void writeComponent(HashMap<String, List<CarComponent>> compMap) {
         try {
             FileOutputStream fos = new FileOutputStream("components.obj");
+           // FileOutputStream fos = new FileOutputStream("testComponents.obj");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(compMap);
             oos.flush();

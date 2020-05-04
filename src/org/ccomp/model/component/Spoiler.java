@@ -11,11 +11,13 @@ import java.io.ObjectOutputStream;
 
 public class Spoiler extends CarComponent {
 
+    private static final String compType = "Spoiler";
+
     private transient StringProperty spoilerSide, spoilerType; //sport, normal, etc.
 
     public Spoiler(StringProperty compName, DoubleProperty compPrice, IntegerProperty compQuantity,
                    StringProperty spoilerSide) {
-        super(compName, compPrice, compQuantity);
+        super(compName, compPrice, compQuantity, compType);
         this.spoilerSide = spoilerSide;
     }
 

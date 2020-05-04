@@ -67,7 +67,11 @@ public class CompController {
     @FXML
     public void initialize() {
         jobjHandler = new ComponentOBJHandler();
+        //todo: Handle if file is empty
+        // java.io.FileNotFoundException: testComponents.obj (Systemet finner ikke angitt fil)
         compMap = jobjHandler.readComponent(compMap);
+
+        if (compMap == null) compMap = new HashMap<>();
 
         System.out.println("INITIALIZED COMP MAP SIZE: " + compMap.size());
 
@@ -85,13 +89,16 @@ public class CompController {
 
     @FXML
     public void addComponent(ActionEvent event) {
-        inputEmpty();
-        carComponents = new ArrayList<>();
+       // inputEmpty();
+
+       // carComponents = new ArrayList<>();
 
        // compMap = new HashMap<>();
 
         if (event.getSource() == addEngine) {
             System.out.println("\nADD ENGINE PRESSED\n");
+
+            if (carComponents == null) carComponents = new ArrayList<>();
         } else if (event.getSource() == addSeat) {
             System.out.println("\nADD SEAT PRESSED\n");
 
@@ -101,6 +108,8 @@ public class CompController {
 
             //up casting parent reference to child reference based on componentType
             seat = (Seat) makeComponent(SEAT_KEY, seat);
+            if (carComponents == null) carComponents = new ArrayList<>();
+
             System.out.println("("+SEAT_KEY+") CarComponents size: " + carComponents.size());
             carComponents.add(seat);
             System.out.println("("+SEAT_KEY+") CarComponents size: " + carComponents.size());
@@ -128,6 +137,7 @@ public class CompController {
 
             //Getting all saved Spoiler components from HashMap and assigning them to new List of CarComponent
             carComponents = compMap.get(SPOILER_KEY);
+            if (carComponents == null) carComponents = new ArrayList<>();
 
             //up casting parent reference to child reference based on componentType
             spoiler = (Spoiler) makeComponent(SPOILER_KEY, spoiler);
@@ -156,6 +166,7 @@ public class CompController {
 
             //Getting all saved SteeringWheel components from HashMap and assigning them to new List of CarComponent
             carComponents = compMap.get(STEERING_WHEEL_KEY);
+            if (carComponents == null) carComponents = new ArrayList<>();
 
             //up casting parent reference to child reference based on componentType
             steeringWheel = (SteeringWheel) makeComponent(STEERING_WHEEL_KEY, steeringWheel);
@@ -180,6 +191,7 @@ public class CompController {
 
             //Getting all saved Spoiler components from HashMap and assigning them to new List of CarComponent
             carComponents = compMap.get(WHEEL_RIM_KEY);
+            if (carComponents == null) carComponents = new ArrayList<>();
 
             //up casting parent reference to child reference based on componentType
             //todo: FIX serialization of WheelRim object

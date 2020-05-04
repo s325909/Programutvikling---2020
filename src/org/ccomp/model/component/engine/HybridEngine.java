@@ -7,11 +7,13 @@ import org.ccomp.model.component.CarComponent;
 
 public class HybridEngine extends CarComponent implements Engine {
 
+    private static final String compType = "Gasoline_Engine";
+
    // String engineName;
     int horsePower; //enginePrice;
 
     public HybridEngine(StringProperty compName, DoubleProperty compPrice, IntegerProperty compQuantity, int horsePower) {
-        super(compName, compPrice, compQuantity);
+        super(compName, compPrice, compQuantity, compType);
         this.horsePower = horsePower;
     }
 

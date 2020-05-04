@@ -8,6 +8,8 @@ import java.io.ObjectOutputStream;
 
 public class WheelRim extends CarComponent{
 
+    private static final String compType = "Wheel_Rim";
+
     private transient StringProperty wheelRimColor, wheelRimMaterial;
     private transient IntegerProperty wheelRimSize;
     private String winterSeason;
@@ -16,7 +18,7 @@ public class WheelRim extends CarComponent{
     public WheelRim(StringProperty compName, DoubleProperty compPrice, IntegerProperty compQuantity,
                     StringProperty wheelRimColor, StringProperty wheelRimMaterial) {
                      //, IntegerProperty wheelRimSize) {
-        super(compName, compPrice, compQuantity);
+        super(compName, compPrice, compQuantity, compType);
         this.wheelRimColor = wheelRimColor;
         this.wheelRimMaterial = wheelRimMaterial;
       //  this.wheelRimSize = wheelRimSize;

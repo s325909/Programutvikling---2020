@@ -11,11 +11,13 @@ import java.io.ObjectOutputStream;
 
 public class SteeringWheel extends CarComponent {
 
+    private static final String compType = "Steering_Wheel";
+
     private transient StringProperty steeringWheelColor, steeringWheelMaterial;
 
     public SteeringWheel(StringProperty compName, DoubleProperty compPrice, IntegerProperty compQuantity,
                          StringProperty steeringWheelColor, StringProperty steeringWheelMaterial) {
-        super(compName, compPrice, compQuantity);
+        super(compName, compPrice, compQuantity, compType);
         this.steeringWheelColor = steeringWheelColor;
         this.steeringWheelMaterial = steeringWheelMaterial;
     }

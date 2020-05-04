@@ -97,6 +97,8 @@ public class AdminController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
 
+        //todo: ikke ha i initialize; fileN kan være tom eller ikke ekistere
+
 
         seatView.setItems(seatTable());
         editSeatTable();
@@ -113,10 +115,16 @@ public class AdminController implements Initializable {
         wheelRimView.setEditable(true);
 
 
-        jobjHandler = new ComponentOBJHandler();
-        retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
-        // retrievedCompMap.put("Seat", carComponents);
 
+
+
+
+        jobjHandler = new ComponentOBJHandler();
+        //todo: fila kan være null eller tom
+       // retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
+
+
+        // retrievedCompMap.put("Seat", carComponents);
     }
 
     /**

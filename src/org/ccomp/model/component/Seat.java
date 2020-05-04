@@ -8,11 +8,13 @@ import java.io.ObjectOutputStream;
 
 public class Seat extends CarComponent {
 
+    private static final String compType = "Seat";
+
     private transient StringProperty color, material;
 
     public Seat(StringProperty compName, DoubleProperty compPrice, IntegerProperty compQuantity,
                 StringProperty color, StringProperty material) {
-        super(compName, compPrice, compQuantity);
+        super(compName, compPrice, compQuantity, compType);
         this.material = material;
         this.color = color;
     }

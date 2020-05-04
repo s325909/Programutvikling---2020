@@ -7,12 +7,14 @@ import org.ccomp.model.component.CarComponent;
 
 public class ElectricMotor extends CarComponent implements Engine {
 
+    private static final String compType = "Electric_Motor";
+
     String engineName;
     int horsePower, enginePrice;
 
     public ElectricMotor(StringProperty compName, DoubleProperty compPrice, IntegerProperty compQuantity,
                          String engineName, int horsePower, int enginePrice) {
-        super(compName, compPrice, compQuantity);
+        super(compName, compPrice, compQuantity, compType);
         this.engineName = engineName;
         this.horsePower = horsePower;
         this.enginePrice = enginePrice;

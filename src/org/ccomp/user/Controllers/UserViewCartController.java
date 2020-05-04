@@ -146,7 +146,7 @@ public class UserViewCartController  {
         IntegerProperty compQuantityProperty = new SimpleIntegerProperty(15);
 
 
-        componentsCart.add(new CarComponent(compNameProperty, compPriceProperty, compQuantityProperty));
+        componentsCart.add(new CarComponent(compNameProperty, compPriceProperty, compQuantityProperty, "COMP TYPE"));
 
         try {
             URL url = getClass().getResource("/org/ccomp/user/userCart.fxml");

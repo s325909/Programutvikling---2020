@@ -8,7 +8,6 @@
       <change beforePath="$PROJECT_DIR$/src/org/ccomp/admin/compGUI/kWheelrim.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/ccomp/admin/compGUI/kWheelrim.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/org/ccomp/model/Validation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/ccomp/model/Validation.java" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -129,19 +128,13 @@
       <recent name="C:\Users\Jasotharan\Documents\GitHub\Programutvikling---2020\src\ccomp\main" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
   <component name="RunManager" selected="Application.Main (2)">
+    <configuration default="true" type="Applet">
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
       <option name="VMOptions" />
       <option name="arguments" />
@@ -153,12 +146,6 @@
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
       <Port>5050</Port>
-    </configuration>
-    <configuration default="true" type="Applet">
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
     </configuration>
     <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ccomp.main.Main" />
@@ -378,26 +365,26 @@
     <option name="LAST_COMMIT_MESSAGE" value="Fått til metoder for validering." />
   </component>
   <component name="WindowStateProjectService">
-    <state x="605" y="139" key="#com.intellij.ide.util.MemberChooser" timestamp="1585323973923">
+    <state x="605" y="139" key="#com.intellij.ide.util.MemberChooser" timestamp="1588627460008">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="605" y="139" key="#com.intellij.ide.util.MemberChooser/0.0.1600.860@0.0.1600.860" timestamp="1585323973923" />
-    <state width="1557" height="247" key="GridCell.Tab.0.bottom" timestamp="1585325047878">
+    <state x="605" y="139" key="#com.intellij.ide.util.MemberChooser/0.0.1600.860@0.0.1600.860" timestamp="1588627460008" />
+    <state width="1557" height="264" key="GridCell.Tab.0.bottom" timestamp="1588628447195">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="247" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1585325047878" />
-    <state width="1557" height="247" key="GridCell.Tab.0.center" timestamp="1585325047878">
+    <state width="1557" height="264" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1588628447195" />
+    <state width="1557" height="264" key="GridCell.Tab.0.center" timestamp="1588628447194">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="247" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1585325047878" />
-    <state width="1557" height="247" key="GridCell.Tab.0.left" timestamp="1585325047878">
+    <state width="1557" height="264" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1588628447194" />
+    <state width="1557" height="264" key="GridCell.Tab.0.left" timestamp="1588628447194">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="247" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1585325047878" />
-    <state width="1557" height="247" key="GridCell.Tab.0.right" timestamp="1585325047878">
+    <state width="1557" height="264" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1588628447194" />
+    <state width="1557" height="264" key="GridCell.Tab.0.right" timestamp="1588628447195">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="247" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1585325047878" />
+    <state width="1557" height="264" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1588628447195" />
     <state x="280" y="4" key="SettingsEditor" timestamp="1585321418910">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
@@ -406,9 +393,9 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="456" y="195" key="run.anything.popup/0.0.1600.860@0.0.1600.860" timestamp="1585912976902" />
-    <state x="463" y="180" width="672" height="678" key="search.everywhere.popup" timestamp="1585323155123">
+    <state x="463" y="180" width="672" height="678" key="search.everywhere.popup" timestamp="1588625423767">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="463" y="180" width="672" height="678" key="search.everywhere.popup/0.0.1600.860@0.0.1600.860" timestamp="1585323155123" />
+    <state x="463" y="180" width="672" height="678" key="search.everywhere.popup/0.0.1600.860@0.0.1600.860" timestamp="1588625423767" />
   </component>
 </project>

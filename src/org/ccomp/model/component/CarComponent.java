@@ -14,10 +14,15 @@ public class CarComponent implements ObjectHandler {
     private transient DoubleProperty compPrice;
     private transient IntegerProperty compQuantity;
 
-    public CarComponent(StringProperty compName, DoubleProperty compPrice, IntegerProperty compQuantity) {
+    private transient StringProperty compType;
+
+   // private String compType;
+
+    public CarComponent(StringProperty compName, DoubleProperty compPrice, IntegerProperty compQuantity, String compType) {
         this.compName = compName;
         this.compPrice = compPrice;
         this.compQuantity = compQuantity;
+        this.compType = new SimpleStringProperty(compType);
     }
 
     // Callback method to be executed automatically by the jvm at the time of serialization
@@ -75,12 +80,35 @@ public class CarComponent implements ObjectHandler {
         this.compQuantity.set(compQuantity);
     }
 
+    public String getCompType() {
+        return compType.get();
+    }
+
+    public StringProperty compTypeProperty() {
+        return compType;
+    }
+
+    public void setCompType(String compType) {
+        this.compType.set(compType);
+    }
+
+    /*
+    public String getCompType() {
+        return compType;
+    }
+
+    public void setCompType(String compType) {
+        this.compType = compType;
+    }
+    */
+
     @Override
     public String toString() {
         return "CarComponent{" +
                 "compName=" + compName +
                 ", compPrice=" + compPrice +
                 ", compQuantity=" + compQuantity +
+                ", compType='" + compType + '\'' +
                 '}';
     }
 
@@ -90,6 +118,8 @@ public class CarComponent implements ObjectHandler {
         oos.writeUTF(getCompName());
         oos.writeDouble(getCompPrice());
         oos.writeInt(getCompQuantity());
+        oos.writeUTF(getCompType());
+       // oos.writeUTF(getCompType());
     }
 
     @Override
@@ -97,6 +127,8 @@ public class CarComponent implements ObjectHandler {
         compName = new SimpleStringProperty(ois.readUTF());
         compPrice = new SimpleDoubleProperty(ois.readDouble());
         compQuantity = new SimpleIntegerProperty(ois.readInt());
+        compType = new SimpleStringProperty(ois.readUTF());
+       // compType = ois.readUTF();
     }
 
 }
