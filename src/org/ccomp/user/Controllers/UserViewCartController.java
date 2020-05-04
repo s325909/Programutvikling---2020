@@ -14,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.ccomp.fileHandling.ComponentOBJHandler;
+import org.ccomp.model.Car;
 import org.ccomp.model.component.*;
 import org.ccomp.model.component.engine.Engine;
 
@@ -226,19 +227,41 @@ public class UserViewCartController  {
         Spoiler spoiler;
         ObservableList<Spoiler> spoilers = FXCollections.observableArrayList();
 
-        carComponents = retrievedCompMap.get("Spoiler");
-
-        for (CarComponent carComponent : carComponents) {
-            spoiler = (Spoiler) carComponent;
-            nameSpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler, String>("compName"));
-            colorSpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler, String>("compName"));
-            sideSpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler, String>("spoilerSide"));
-            priceSpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler, Double>("compPrice"));
-            quantitySpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler, Integer>("compQuantity"));
-            spoilers.add(spoiler);
+        if (carComponents == null) {
+            carComponents = retrievedCompMap.get("Spoiler");
         }
-        return spoilers;
+
+       for (CarComponent carComponent : carComponents) {
+                spoiler = (Spoiler) carComponent;
+                nameSpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler, String>("compName"));
+                colorSpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler, String>("compName"));
+                sideSpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler, String>("spoilerSide"));
+                priceSpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler, Double>("compPrice"));
+                quantitySpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler, Integer>("compQuantity"));
+                spoilers.add(spoiler);
+            }
+            return spoilers;
+
     }
+
+
+
+    public void viewTheComponents(){
+
+        if (seatPane.isExpanded()) {
+
+            customerSeatView.setItems(seatTable());
+        }
+
+        if (spoilerPane.isExpanded()){
+            customerSpoilerView.setItems(spoilerTable());
+
+        }
+
+
+
+    }
+
 
 
 

@@ -1,8 +1,10 @@
 package org.ccomp.admin;
 
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,9 +23,11 @@ import org.ccomp.model.component.*;
 import org.ccomp.model.component.engine.Engine;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.function.DoublePredicate;
 import java.util.function.Predicate;
 
 public class AdminController implements Initializable {
@@ -49,6 +53,19 @@ public class AdminController implements Initializable {
     TableView<WheelRim> wheelRimView;
     @FXML
     TableView<Engine> engineView;
+
+    @FXML
+    TableView<CarComponent> carCompView;
+
+    @FXML
+    TableColumn<CarComponent, String> orderTypeColum,orderNameColum;
+
+    @FXML
+    TableColumn<CarComponent,Double> orderPriceColum;
+
+    @FXML
+    TableColumn<CarComponent,Integer> orderQuntityColum;
+
 
     @FXML
     TableColumn<Seat, String> nameSeatColum, materiellColum, colorSeatColum;
@@ -100,9 +117,10 @@ public class AdminController implements Initializable {
         //todo: ikke ha i initialize; fileN kan være tom eller ikke ekistere
 
 
-        seatView.setItems(seatTable());
+        /*seatView.setItems(seatTable());
         editSeatTable();
         seatView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
 
         spoilerView.setItems(spoilerTable());
         editSpoilerTable();
@@ -112,16 +130,17 @@ public class AdminController implements Initializable {
 
         spoilerView.setEditable(true);
         sWheelView.setEditable(true);
-        wheelRimView.setEditable(true);
+        wheelRimView.setEditable(true);*/
 
 
+        carCompView.setItems(carComTable());
 
 
 
 
         jobjHandler = new ComponentOBJHandler();
         //todo: fila kan være null eller tom
-       // retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
+        //retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
 
 
         // retrievedCompMap.put("Seat", carComponents);
@@ -169,9 +188,9 @@ public class AdminController implements Initializable {
        // FilteredList filteredList  = new FilteredList(seats ,e->true);
 
         //Henter dem først ut her
-        jobjHandler = new ComponentOBJHandler();
-        retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
+
         carComponents = retrievedCompMap.get("Seat");
+        if (carComponents == null) carComponents = new ArrayList<>();
 
         //Presenter objektene i tableview ved sette inn riktige verdier til riktig tablecolonne
 
@@ -188,13 +207,16 @@ public class AdminController implements Initializable {
         return seats;
     }
 
+
+
     public ObservableList<Spoiler> spoilerTable() {
 
         Spoiler spoiler;
         ObservableList<Spoiler> spoilers = FXCollections.observableArrayList();
-        jobjHandler = new ComponentOBJHandler();
-        retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
+        //jobjHandler = new ComponentOBJHandler();
         carComponents = retrievedCompMap.get("Spoiler");
+        if (carComponents == null) carComponents = new ArrayList<>();
+
 
         for (CarComponent carComponent : carComponents) {
             spoiler = (Spoiler) carComponent;
@@ -215,9 +237,9 @@ public class AdminController implements Initializable {
 
         SteeringWheel steeringWheel;
         ObservableList<SteeringWheel> steeringWheels = FXCollections.observableArrayList();
-        jobjHandler = new ComponentOBJHandler();
-        retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
+
         carComponents = retrievedCompMap.get("SteeringWheel");
+        if (carComponents == null) carComponents = new ArrayList<>();
 
         // steeringWheel = (SteeringWheel) carComponents.get(0);
         //steeringWheel.setSteeringWheelMaterial(materiellColum.getText());
@@ -242,8 +264,7 @@ public class AdminController implements Initializable {
 
         WheelRim wheelRim;
         ObservableList<WheelRim> wheelRims = FXCollections.observableArrayList();
-        jobjHandler = new ComponentOBJHandler();
-        retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
+        if (carComponents == null) carComponents = new ArrayList<>();
         carComponents = retrievedCompMap.get("WheelRim");
 
 
@@ -257,6 +278,30 @@ public class AdminController implements Initializable {
         }
 
         return wheelRims;
+    }
+
+    public  ObservableList<CarComponent> carComTable(){
+
+        StringProperty compNameProperty = new SimpleStringProperty("Jaso");
+        IntegerProperty compQuantityProperty = new SimpleIntegerProperty(382);
+        DoubleProperty compPriceProperty= new SimpleDoubleProperty(264);
+        CarComponent component = new CarComponent(compNameProperty, compPriceProperty, compQuantityProperty, "CompType");
+
+        orderNameColum.setCellValueFactory(new PropertyValueFactory<CarComponent,String>("compName"));
+        orderTypeColum.setCellValueFactory(new PropertyValueFactory<CarComponent,String>("compType"));
+        orderPriceColum.setCellValueFactory(new PropertyValueFactory<CarComponent,Double>("compPrice"));
+        orderQuntityColum.setCellValueFactory(new PropertyValueFactory<CarComponent,Integer>("compQuantity"));
+
+       // CarComponent carComTest;
+        ObservableList<CarComponent> carComps = FXCollections.observableArrayList();
+        //carComponents = new ArrayList<>();
+        carComps.add(component);
+        carComps.add(component);
+        carComps.add(component);
+        carComps.add(component);
+        carComps.add(component);
+        carComps.add(component);
+        return carComps ;
     }
 
 
@@ -463,16 +508,14 @@ public class AdminController implements Initializable {
         ObservableList<Seat> allseats;
         allseats = seatView.getItems();
         selectedRow = seatView.getSelectionModel().getSelectedItem();
-        
-        for(CarComponent carComponent : carComponents) {
+
+        for (CarComponent carComponent : carComponents) {
             allseats.remove(carComponent);
             retrievedCompMap.get("Seat").set(row, seat);
         }
 
         System.out.println(allseats.remove(carComponents));
-
-
-
+    }
 
 
     /*public ObservableList<Engine> engineTable(){
@@ -492,20 +535,9 @@ public class AdminController implements Initializable {
 
     }*/
 
-    }
-
-    /*public void searchComponent(KeyEvent keyEvent) {
-
-        search.textProperty().addListener((observable, oldValue, newValue) ->{
-
-            if (newValue.isEmpty() ||  newValue == null){
-
-                return true;
-            }
-
-        }
 
 
-    }*/
 
 }
+
+
