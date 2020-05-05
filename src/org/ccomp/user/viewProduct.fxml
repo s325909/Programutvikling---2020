@@ -7,7 +7,7 @@
 
 <AnchorPane fx:id="contentProducts" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.user.Controllers.UserViewCartController">
    <children>
-      <Button fx:id="addToCart" layoutX="693.0" layoutY="14.0" mnemonicParsing="false" onAction="#toUserCart" text="LEGG TIL">
+      <Button fx:id="addToCart" layoutX="622.0" layoutY="14.0" mnemonicParsing="false" onAction="#toUserCart" text="Til handlekurv">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
@@ -40,7 +40,7 @@
                   </AnchorPane>
             </content>
           </TitledPane>
-            <TitledPane fx:id="seatPane" animated="false" text="VELG PRODUKT - Sete">
+            <TitledPane fx:id="seatPane" animated="false" onMouseClicked="#viewTheComponents" text="VELG PRODUKT - Sete">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -57,7 +57,7 @@
                   </AnchorPane>
                </content>
             </TitledPane>
-            <TitledPane fx:id="spoilerPane" animated="false" text="VELG PRODUKT - Spoiler">
+            <TitledPane fx:id="spoilerPane" animated="false" onMouseClicked="#viewTheComponents" text="VELG PRODUKT - Spoiler">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -110,5 +110,11 @@
           </TitledPane>
         </panes>
       </Accordion>
+      <Button fx:id="addtoChart" layoutX="598.0" layoutY="55.0" mnemonicParsing="false" onAction="#chooseProduct" text="legge til i handlekurv">
+         <font>
+            <Font name="Segoe UI Semilight" size="18.0" />
+         </font>
+      </Button>
+      <Label fx:id="numberofProduct" layoutX="612.0" layoutY="105.0" prefHeight="17.0" prefWidth="148.0" text="Label" />
    </children>
 </AnchorPane>
