@@ -16,7 +16,7 @@
                      <children>
                         <TabPane prefHeight="453.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
                            <tabs>
-                              <Tab text="Motor">
+                              <Tab fx:id="engineTab" onSelectionChanged="#allTables" text="Motor">
                                  <content>
                                     <TableView fx:id="engineView" prefHeight="200.0" prefWidth="200.0">
                                       <columns>
@@ -29,7 +29,7 @@
                                     </TableView>
                                  </content>
                               </Tab>
-                              <Tab text="Sete">
+                              <Tab fx:id="seatTab" onSelectionChanged="#allTables" text="Sete">
                                  <content>
                                     <TableView fx:id="seatView" prefHeight="200.0" prefWidth="200.0">
                                       <columns>
@@ -42,7 +42,7 @@
                                     </TableView>
                                  </content>
                               </Tab>
-                              <Tab text="Spoiler">
+                              <Tab fx:id="spoilerTab" onSelectionChanged="#allTables" text="Spoiler">
                                  <content>
                                     <TableView fx:id="spoilerView" prefHeight="200.0" prefWidth="200.0">
                                       <columns>
@@ -55,7 +55,7 @@
                                     </TableView>
                                  </content>
                               </Tab>
-                              <Tab text="Ratt">
+                              <Tab fx:id="steeringWTab" onSelectionChanged="#allTables" text="Ratt">
                                  <content>
                                     <TableView fx:id="sWheelView" prefHeight="200.0" prefWidth="200.0">
                                       <columns>
@@ -68,7 +68,7 @@
                                     </TableView>
                                  </content>
                               </Tab>
-                              <Tab text="Felg">
+                              <Tab fx:id="wheelRimTab" onSelectionChanged="#allTables" text="Felg">
                                  <content>
                                     <TableView fx:id="wheelRimView" prefHeight="200.0" prefWidth="200.0">
                                       <columns>
@@ -93,7 +93,7 @@
                      <children>
                         <TabPane prefHeight="453.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
                            <tabs>
-                              <Tab text="Motor">
+                              <Tab fx:id="orderEngineTab" onSelectionChanged="#allTables" text="Motor">
                                  <content>
                                     <TableView fx:id="carCompView" prefHeight="200.0" prefWidth="200.0">
                                        <columns>
