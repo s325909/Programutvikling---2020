@@ -14,7 +14,7 @@ public class GasolineEngine extends CarComponent implements Engine {
 
     public GasolineEngine(StringProperty compName, DoubleProperty compPrice, IntegerProperty compQuantity,
                           String engineName, int horsePower, int enginePrice) {
-        super(compType, compName, compPrice, compQuantity);
+        super(compName, compPrice, compQuantity, compType);
         this.engineName = engineName;
         this.horsePower = horsePower;
         this.enginePrice = enginePrice;

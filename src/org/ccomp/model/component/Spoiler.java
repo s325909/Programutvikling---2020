@@ -17,7 +17,7 @@ public class Spoiler extends CarComponent {
 
     public Spoiler(StringProperty compName, DoubleProperty compPrice, IntegerProperty compQuantity,
                    StringProperty spoilerSide) {
-        super(compType, compName, compPrice, compQuantity);
+        super(compName, compPrice, compQuantity, compType);
         this.spoilerSide = spoilerSide;
     }
 
