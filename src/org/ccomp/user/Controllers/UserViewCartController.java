@@ -12,6 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.ccomp.fileHandling.ComponentOBJHandler;
+import org.ccomp.model.Car;
 import org.ccomp.model.component.*;
 import org.ccomp.model.component.engine.Engine;
 
@@ -154,8 +155,15 @@ public class UserViewCartController {
             URL url = getClass().getResource("/org/ccomp/user/userCart.fxml");
 
 
+            FXMLLoader loader = new FXMLLoader(url);
             scene = contentProducts.getScene();
-            scene.setRoot(FXMLLoader.load(url));
+            scene.setRoot(loader.load());
+
+            cartProduct = (TextArea) loader.getNamespace().get("cartProduct");
+
+           // cartProduct.setText(componentsCart.get(0).getCompName());
+
+            orderdPrductCar();
 
             //  FXMLLoader loader = new FXMLLoader(url);
             //  AnchorPane newCartScene = (AnchorPane) loader.load();
@@ -274,8 +282,14 @@ public class UserViewCartController {
 
     public void orderdPrductCar() {
 
-        Seat seat = (Seat) componentsCart.get(0);
-        cartProduct.setText(seat.getCompName());
+       // Seat seat = (Seat) componentsCart.get(0);
+
+        String s = "";
+        for (CarComponent carComponent : componentsCart) {
+            s += carComponent.toCSVFormat() + "\n";
+        }
+
+        cartProduct.setText(s);
     }
 
 

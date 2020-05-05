@@ -24,6 +24,9 @@ public class ComponentCSVHandler implements CSVFileHandler {
 
             pw.println("TYPE, NAME, PRICE, QUANTITY");
 
+
+
+
             for (CarComponent carComponent : compList) {
                 pw.println(carComponent.toCSVFormat());
             }
@@ -39,4 +42,6 @@ public class ComponentCSVHandler implements CSVFileHandler {
             System.out.println("FILE NOT SAVED: " + e.toString());
         }
     }
+
+
 }

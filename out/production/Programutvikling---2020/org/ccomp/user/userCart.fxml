@@ -33,7 +33,6 @@
          </font>
       </Button>
       <Label fx:id="viewCart" layoutY="175.0" prefHeight="250.0" prefWidth="800.0" />
-      <TextArea fx:id="cartProduct" layoutX="279.0" layoutY="214.0" onMouseEntered="#orderdPrductCar" prefHeight="200.0" prefWidth="200.0" />
+      <TextArea fx:id="cartProduct" layoutX="279.0" layoutY="214.0" prefHeight="200.0" prefWidth="200.0" />
    </children>
 </AnchorPane>
-
