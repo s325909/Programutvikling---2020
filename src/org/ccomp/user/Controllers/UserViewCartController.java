@@ -111,6 +111,8 @@ public class UserViewCartController  {
 
        componentsCart = getComponentsCart();
        System.out.println("(INIT) COMP CART: " + componentsCart.size());
+
+        System.out.println("TESTING");
     }
 
     @FXML
