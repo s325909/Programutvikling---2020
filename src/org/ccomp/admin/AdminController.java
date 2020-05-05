@@ -1,10 +1,13 @@
 package org.ccomp.admin;
 
 import javafx.beans.property.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -22,11 +25,9 @@ import org.ccomp.model.Car;
 import org.ccomp.model.component.*;
 import org.ccomp.model.component.engine.Engine;
 
+import java.awt.event.ActionEvent;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.function.DoublePredicate;
 import java.util.function.Predicate;
 
@@ -42,6 +43,9 @@ public class AdminController implements Initializable {
 
     @FXML
     TextField search;
+
+    @FXML
+    TabPane tabPane;
 
     @FXML
     Tab engineTab,seatTab,spoilerTab,steeringWTab,wheelRimTab,orderEngineTab;
@@ -108,10 +112,10 @@ public class AdminController implements Initializable {
     private HashMap<String, List<CarComponent>> compMap, retrievedCompMap;
     private List<CarComponent> carComponents;
     private Object TableColumn;
+   // ObservableList<Seat> seatsList;
 
 
-    ObservableList<Seat> seats = FXCollections.observableArrayList();
-    FilteredList filteredList  = new FilteredList(seats ,e->true);
+
 
 
 
@@ -127,12 +131,20 @@ public class AdminController implements Initializable {
 
 
 
-
+        jobjHandler = new ComponentOBJHandler();
 
 
 
         //todo: fila kan være null eller tom
-        //retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
+        retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
+
+        System.out.println("INIT COMP MAP: " + retrievedCompMap );
+
+
+
+//        tables();
+
+       // allTables();
 
 
         // retrievedCompMap.put("Seat", carComponents);
@@ -181,7 +193,7 @@ public class AdminController implements Initializable {
 
         //Henter dem først ut her
         carComponents = retrievedCompMap.get("Seat");
-        if (carComponents == null) carComponents = new ArrayList<>();
+       if (carComponents == null) carComponents = new ArrayList<>();
 
         //Presenter objektene i tableview ved sette inn riktige verdier til riktig tablecolonne
 
@@ -205,6 +217,7 @@ public class AdminController implements Initializable {
         Spoiler spoiler;
         ObservableList<Spoiler> spoilers = FXCollections.observableArrayList();
         carComponents = retrievedCompMap.get("Spoiler");
+
         if (carComponents == null) carComponents = new ArrayList<>();
         for (CarComponent carComponent : carComponents) {
             spoiler = (Spoiler) carComponent;
@@ -217,6 +230,8 @@ public class AdminController implements Initializable {
         }
 
         return spoilers;
+
+
     }
 
 
@@ -292,21 +307,35 @@ public class AdminController implements Initializable {
         return carComps ;
     }
 
+
+
+    public void tables()
+    {
+        tabPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
+            @Override
+            public void changed(ObservableValue<? extends Tab> observable, Tab oldTab, Tab newTab) {
+                if (newTab == seatTab) System.out.println("SEAT TAB ´" + seatTab.isSelected());
+                else if (newTab == spoilerTab) System.out.println("SPILER TAB: " + spoilerTab.isSelected());
+            }
+        });
+    }
+
+
+    @FXML
     public void allTables(){
-        jobjHandler = new ComponentOBJHandler();
-        retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
 
         if (seatTab.isSelected()){
             seatView.setItems(seatTable());
             editSeatTable();
             seatView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
-
+            System.out.println("SEAT TAB");
+            searchComp();
         }
         if (spoilerTab.isSelected()){
             spoilerView.setItems(spoilerTable());
             editSpoilerTable();
             spoilerView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+            System.out.println("SPOILER SATB");
         }
 
         if (orderEngineTab.isSelected()){
@@ -549,6 +578,48 @@ public class AdminController implements Initializable {
 
     }*/
 
+        public void  searchComp() {
+            ObservableList<Seat> seatsList = seatTable();
+            FilteredList<Seat> filteredList  = new FilteredList(seatsList ,b->true);
+            //predicater når filter skifter
+            search.textProperty().addListener(((observable, oldValue, newValue) -> {
+
+                filteredList.setPredicate(seat -> {
+
+                    //Hvis filter er tommt , vis alt
+                    if (newValue == null || newValue.isEmpty()){
+                        return true;
+                    }
+
+                    String lowerCaseFiler = newValue.toLowerCase();
+
+                    if (seat.getCompName().toLowerCase().indexOf(lowerCaseFiler) != -1){
+                        System.out.println("Er lik");
+                        return true; //Filter sammenligner navn
+                    }
+                    else if (seat.getColor().toLowerCase().indexOf(lowerCaseFiler) != -1){
+
+                        return true; //Filter sammenligner farge
+                    }
+
+                    else if (String.valueOf(seat.getCompPrice()).toLowerCase().indexOf(lowerCaseFiler) != -1)
+                        return true;
+                    else return false; //hvis den ikke kan sammenlinges
+                });
+                }));
+
+            //Setter filteredlist i en sortedlist, binder de sammen til tableviewvet og legger sorted og filterreing til tabellen,
+             SortedList<Seat> sortedData = new SortedList<>(seatsList);
+             sortedData.comparatorProperty().bind(seatView.comparatorProperty());
+             seatView.setItems(sortedData);
+
+
+
+
+
+
+
+        }
 
 
 
