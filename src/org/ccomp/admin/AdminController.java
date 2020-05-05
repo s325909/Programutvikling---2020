@@ -7,7 +7,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,20 +15,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.IntegerStringConverter;
-import org.ccomp.fileHandling.ComponentOBJHandler;
-import org.ccomp.model.Car;
+import org.ccomp.fileHandling.ComponentObjHandler;
 import org.ccomp.model.component.*;
 import org.ccomp.model.component.engine.Engine;
 
-import java.awt.event.ActionEvent;
 import java.net.URL;
 import java.util.*;
-import java.util.function.DoublePredicate;
-import java.util.function.Predicate;
 
 public class AdminController implements Initializable {
     Seat seat;
@@ -108,7 +102,9 @@ public class AdminController implements Initializable {
     // @FXML
     //TableColumn<Engine, SimpleStringProperty> engintypeColum,nameEngineColum,horsepowerColum, priceEngineColum, quantityEngineColum;
 
-    private ComponentOBJHandler jobjHandler;
+    private ComponentObjHandler jobjHandler;
+
+   // private ComponentOBJHandler jobjHandler;
     private HashMap<String, List<CarComponent>> compMap, retrievedCompMap;
     private List<CarComponent> carComponents;
     private Object TableColumn;
@@ -129,9 +125,9 @@ public class AdminController implements Initializable {
 
 
 
+        jobjHandler = new ComponentObjHandler();
 
-
-        jobjHandler = new ComponentOBJHandler();
+       // jobjHandler = new ComponentOBJHandler();
 
 
 
@@ -288,7 +284,7 @@ public class AdminController implements Initializable {
         StringProperty compNameProperty = new SimpleStringProperty("Jaso");
         IntegerProperty compQuantityProperty = new SimpleIntegerProperty(382);
         DoubleProperty compPriceProperty= new SimpleDoubleProperty(264);
-        CarComponent component = new CarComponent(compNameProperty, compPriceProperty, compQuantityProperty, "CompType");
+        CarComponent component = new CarComponent("CompType", compNameProperty, compPriceProperty, compQuantityProperty);
 
         orderNameColum.setCellValueFactory(new PropertyValueFactory<CarComponent,String>("compName"));
         orderTypeColum.setCellValueFactory(new PropertyValueFactory<CarComponent,String>("compType"));
@@ -543,7 +539,7 @@ public class AdminController implements Initializable {
     @FXML
     public void deleteSelectedRow() {
 
-        jobjHandler = new ComponentOBJHandler();
+       // jobjHandler = new ComponentOBJHandler();
         retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
         carComponents = retrievedCompMap.get("Seat");
         retrievedCompMap.get("Seat").set(row, seat);

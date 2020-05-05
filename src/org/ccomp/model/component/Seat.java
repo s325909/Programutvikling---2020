@@ -14,7 +14,7 @@ public class Seat extends CarComponent {
 
     public Seat(StringProperty compName, DoubleProperty compPrice, IntegerProperty compQuantity,
                 StringProperty color, StringProperty material) {
-        super(compName, compPrice, compQuantity, compType);
+        super(compType, compName, compPrice, compQuantity);
         this.material = material;
         this.color = color;
     }

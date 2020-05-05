@@ -9,7 +9,7 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.List;
 
-public interface ObjectHandler extends Serializable {
+public interface OLDObjectHandler extends Serializable {
 
     void writeObjectHandler(ObjectOutputStream oos) throws IOException;
 

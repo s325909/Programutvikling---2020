@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
-public interface FileHandler extends Serializable {
+public interface OLDFileHandler extends Serializable {
 
     HashMap<String, List<CarComponent>> readComponent(HashMap<String, List<CarComponent>> loadCompMap);
 

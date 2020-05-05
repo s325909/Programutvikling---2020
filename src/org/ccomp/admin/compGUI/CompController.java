@@ -8,9 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import org.ccomp.admin.AdminController;
-import org.ccomp.fileHandling.ComponentOBJHandler;
-import org.ccomp.model.CarComp;
+import org.ccomp.fileHandling.ComponentObjHandler;
 import org.ccomp.model.MapKey;
 import org.ccomp.model.Validation;
 import org.ccomp.model.component.*;
@@ -19,7 +17,6 @@ import org.ccomp.model.component.engine.Engine;
 import org.ccomp.model.component.engine.GasolineEngine;
 import org.ccomp.model.component.engine.HybridEngine;
 
-import javax.swing.*;
 import java.net.URL;
 import java.util.*;
 
@@ -54,7 +51,9 @@ public class CompController {
     private SteeringWheel steeringWheel;
     private WheelRim wheelRim;
 
-    private ComponentOBJHandler jobjHandler;
+   // private ComponentOBJHandler jobjHandler;
+
+    private ComponentObjHandler jobjHandler;
 
     private StringProperty compNameProperty, compColorProperty, compMaterialProperty, compTypeProperty;
     private DoubleProperty compPriceProperty;
@@ -66,7 +65,10 @@ public class CompController {
 
     @FXML
     public void initialize() {
-        jobjHandler = new ComponentOBJHandler();
+
+
+        jobjHandler = new ComponentObjHandler();
+      //  jobjHandler = new ComponentOBJHandler();
         //todo: Handle if file is empty
         // java.io.FileNotFoundException: testComponents.obj (Systemet finner ikke angitt fil)
         compMap = jobjHandler.readComponent(compMap);
@@ -79,6 +81,9 @@ public class CompController {
         //System.out.println(spinnerQuantity.getValue());
 
        // mapKey = new MapKey();
+
+
+
     }
 
     @FXML
@@ -118,12 +123,13 @@ public class CompController {
             System.out.println("("+SEAT_KEY+") HASH MAP: " + compMap);
 
             //serialize compMap
-            jobjHandler = new ComponentOBJHandler();
+            //jobjHandler = new ComponentOBJHandler();
             jobjHandler.writeComponent(compMap);
 
             //deserialize compMap
             retrievedCompMap = new HashMap<>();
             retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
+
 
             System.out.println("(RETRIEVED) HASH MAP: " + retrievedCompMap);
 
@@ -153,7 +159,7 @@ public class CompController {
             System.out.println(carComponents.get(0).getCompQuantity());
 
             //serialize compMap
-            jobjHandler = new ComponentOBJHandler();
+          //  jobjHandler = new ComponentOBJHandler();
             jobjHandler.writeComponent(compMap);
 
             //deserialize compMap
@@ -178,7 +184,7 @@ public class CompController {
             System.out.println("("+STEERING_WHEEL_KEY+") HASH MAP: " + compMap);
 
             //serialize compMap
-            jobjHandler = new ComponentOBJHandler();
+           // jobjHandler = new ComponentOBJHandler();
             jobjHandler.writeComponent(compMap);
 
             //deserialize compMap
@@ -204,7 +210,7 @@ public class CompController {
             System.out.println("("+WHEEL_RIM_KEY+") HASH MAP: " + compMap);
 
             //serialize compMap
-            jobjHandler = new ComponentOBJHandler();
+           // jobjHandler = new ComponentOBJHandler();
             jobjHandler.writeComponent(compMap);
 
             //deserialize compMap
