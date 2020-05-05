@@ -4,7 +4,7 @@ import org.ccomp.model.component.CarComponent;
 
 import java.util.List;
 
-public interface CsvHandler {
+public interface CSVFileHandler {
 
     List<CarComponent> readComponent(List<CarComponent> loadCompList);
 

@@ -12,7 +12,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.ccomp.fileHandling.ComponentObjHandler;
-import org.ccomp.fileHandling.OLDComponentOBJHandlerOLD;
 import org.ccomp.model.component.*;
 import org.ccomp.model.component.engine.Engine;
 
