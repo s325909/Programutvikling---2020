@@ -21,11 +21,11 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class UserViewCartController  {
+public class UserViewCartController {
 
     private ComponentOBJHandler jobjHandler;
 
-  //  private OLDComponentOBJHandlerOLD jobjHandler;
+    //  private OLDComponentOBJHandlerOLD jobjHandler;
     private HashMap<String, List<CarComponent>> compMap, retrievedCompMap;
     private List<CarComponent> carComponents;
 
@@ -34,7 +34,10 @@ public class UserViewCartController  {
     AnchorPane contentProducts, contentCart;
 
     @FXML
-    Label viewCart;
+    Label viewCart,numberofProduct;
+
+    @FXML
+    TextArea cartProduct;
 
     /*@FXML
     TableColumn<Object, String> value, value2, value3, value4, value5;
@@ -43,7 +46,7 @@ public class UserViewCartController  {
     TableView<Object> tableView;*/
 
     @FXML
-    Button backBtnView, backBtnCart, addToCart, userReg;
+    Button backBtnView, backBtnCart, addToCart, userReg,toTheChart;
 
     @FXML
     TitledPane seatPane, spoilerPane;
@@ -95,11 +98,11 @@ public class UserViewCartController  {
     @FXML
     public void initialize() {
         jobjHandler = new ComponentOBJHandler();
-       // jobjHandler = new OLDComponentOBJHandlerOLD();
+        // jobjHandler = new OLDComponentOBJHandlerOLD();
         retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
 
-      //  customerSeatView.setItems(seatTable());
-      //  customerSpoilerView.setItems(spoilerTable());
+        //  customerSeatView.setItems(seatTable());
+        //  customerSpoilerView.setItems(spoilerTable());
 
        /*tableView.setEditable(true);
         engineTableCol(value, value2, value3, value4);
@@ -109,8 +112,8 @@ public class UserViewCartController  {
         rimTableCol(value, value2, value3, value4, value5);*/
 
 
-       componentsCart = getComponentsCart();
-       System.out.println("(INIT) COMP CART: " + componentsCart.size());
+        componentsCart = getComponentsCart();
+        System.out.println("(INIT) COMP CART: " + componentsCart.size());
 
         System.out.println("TESTING");
     }
@@ -154,16 +157,18 @@ public class UserViewCartController  {
             scene = contentProducts.getScene();
             scene.setRoot(FXMLLoader.load(url));
 
-          //  FXMLLoader loader = new FXMLLoader(url);
-          //  AnchorPane newCartScene = (AnchorPane) loader.load();
-          //  contentProducts.getChildren().setAll(newCartScene.getChildren());
-           // scene.setRoot(screenMap.get("userCart"));
+            //  FXMLLoader loader = new FXMLLoader(url);
+            //  AnchorPane newCartScene = (AnchorPane) loader.load();
+            //  contentProducts.getChildren().setAll(newCartScene.getChildren());
+            // scene.setRoot(screenMap.get("userCart"));
         } catch (Exception e) {
             e.printStackTrace();
         }
 
 
     }
+
+
 
     @FXML
     public void backToViewProd() {
@@ -229,46 +234,78 @@ public class UserViewCartController  {
             carComponents = retrievedCompMap.get("Spoiler");
         }
 
-       for (CarComponent carComponent : carComponents) {
-                spoiler = (Spoiler) carComponent;
-                nameSpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler, String>("compName"));
-                colorSpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler, String>("compName"));
-                sideSpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler, String>("spoilerSide"));
-                priceSpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler, Double>("compPrice"));
-                quantitySpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler, Integer>("compQuantity"));
-                spoilers.add(spoiler);
-            }
-            return spoilers;
+        for (CarComponent carComponent : carComponents) {
+            spoiler = (Spoiler) carComponent;
+            nameSpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler, String>("compName"));
+            colorSpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler, String>("compName"));
+            sideSpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler, String>("spoilerSide"));
+            priceSpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler, Double>("compPrice"));
+            quantitySpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler, Integer>("compQuantity"));
+            spoilers.add(spoiler);
+        }
+        return spoilers;
 
     }
 
 
-
-    public void viewTheComponents(){
+    public void viewTheComponents() {
 
         if (seatPane.isExpanded()) {
 
             customerSeatView.setItems(seatTable());
+            customerSeatView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
         }
 
-        if (spoilerPane.isExpanded()){
+        if (spoilerPane.isExpanded()) {
             customerSpoilerView.setItems(spoilerTable());
 
         }
 
 
+    }
+
+    public void countProducts() {
+
+        numberofProduct.setText("Antall produkter valgt:" + String.valueOf(componentsCart.size()));
 
     }
 
 
+    public void orderdPrductCar() {
+
+        Seat seat = (Seat) componentsCart.get(0);
+        cartProduct.setText(seat.getCompName());
+    }
 
 
+    @FXML
+    public void chooseProduct() {
 
-    public List<CarComponent> getComponentsCart() {
+        int index = customerSeatView.getSelectionModel().getSelectedIndex();
+
+
+        if (customerSeatView.getSelectionModel().isSelected(index)) {
+            Seat item = customerSeatView.getItems().get(index);
+            StringProperty compNameProperty = new SimpleStringProperty(item.getCompName());
+            StringProperty compColorProperty = new SimpleStringProperty(item.getColor());
+            StringProperty compMaterialProperty = new SimpleStringProperty(item.getColor());
+            DoubleProperty compPriceProperty = new SimpleDoubleProperty(item.getCompPrice());
+            IntegerProperty compQuantityProperty = new SimpleIntegerProperty(item.getCompQuantity());
+            carComponents = getComponentsCart();
+            componentsCart.add(new Seat(compNameProperty, compPriceProperty, compQuantityProperty, compColorProperty, compMaterialProperty));
+            countProducts();
+            // cartProduct.setText( "Navn" + compNameProperty  );
+        }
+
+
+    }
+
+    public static List<CarComponent> getComponentsCart() {
         return componentsCart;
     }
 
-    public void setComponentsCart(List<CarComponent> componentsCart) {
-        this.componentsCart = componentsCart;
+    public static void setComponentsCart(List<CarComponent> componentsCart) {
+        UserViewCartController.componentsCart = componentsCart;
     }
 }

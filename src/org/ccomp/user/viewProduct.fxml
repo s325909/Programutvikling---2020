@@ -6,109 +6,116 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane fx:id="contentProducts" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.user.Controllers.UserViewCartController">
-   <children>
-      <Button fx:id="addToCart" layoutX="693.0" layoutY="14.0" mnemonicParsing="false" onAction="#toUserCart" text="LEGG TIL">
-         <font>
-            <Font name="Segoe UI Semilight" size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="backBtnView" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backToMain" text="TILBAKE">
-         <font>
-            <Font name="Segoe UI Semilight" size="18.0" />
-         </font>
-      </Button>
-      <ImageView fitHeight="117.0" fitWidth="252.0" layoutX="274.0" layoutY="14.0">
-         <image>
-            <Image url="@../../../resources/CCOMPW-small.png" />
-         </image>
-      </ImageView>
-      <Accordion layoutY="131.0" prefHeight="472.0" prefWidth="800.0">
-        <panes>
-          <TitledPane animated="false" text="VELG PRODUKT - Motor">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView fx:id="customorEngineView" prefHeight="280.0" prefWidth="800.0">
-                          <columns>
-                            <TableColumn prefWidth="200.0" text="Navn" />
-                            <TableColumn prefWidth="200.0" text="Hestekrefter" />
-                              <TableColumn prefWidth="200.0" text="Pris" />
-                              <TableColumn prefWidth="200.0" text="Antall" />
-                          </columns>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </TitledPane>
-            <TitledPane fx:id="seatPane" animated="false" text="VELG PRODUKT - Sete">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView fx:id="customerSeatView" layoutX="-1.0" layoutY="-2.0" prefHeight="280.0" prefWidth="800.0">
-                          <columns>
-                            <TableColumn fx:id="nameSeatColum" prefWidth="160.0" text="Navn" />
-                              <TableColumn fx:id="materiellColum" prefWidth="160.0" text="Materiale" />
-                              <TableColumn fx:id="colorSeatColum" prefWidth="160.0" text="Farge" />
-                              <TableColumn fx:id="seatPriceColum" prefWidth="160.0" text="Pris" />
-                              <TableColumn fx:id="quantitySeatColum" prefWidth="160.0" text="Antall" />
-                          </columns>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </TitledPane>
-            <TitledPane fx:id="spoilerPane" animated="false" text="VELG PRODUKT - Spoiler">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView fx:id="customerSpoilerView" layoutX="-1.0" prefHeight="280.0" prefWidth="800.0">
-                          <columns>
-                            <TableColumn fx:id="nameSpoilerColum" prefWidth="160.0" text="Navn" />
-                              <TableColumn fx:id="sideSpoilerColum" prefWidth="160.0" text="Monteringsside" />
-                              <TableColumn fx:id="colorSpoilerColum" prefWidth="160.0" text="Farge" />
-                              <TableColumn fx:id="priceSpoilerColum" prefWidth="160.0" text="Pris" />
-                              <TableColumn fx:id="quantitySpoilerColum" prefWidth="160.0" text="Antall" />
-                          </columns>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </TitledPane>
-          <TitledPane animated="false" text="VELG PRODUKT - Ratt">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView fx:id="CustomersWheelView" prefHeight="280.0" prefWidth="800.0">
-                           <columns>
-                              <TableColumn prefWidth="160.0" text="Navn" />
-                              <TableColumn prefWidth="160.0" text="Materiale" />
-                              <TableColumn prefWidth="160.0" text="Farge" />
-                              <TableColumn prefWidth="160.0" text="Pris" />
-                              <TableColumn prefWidth="160.0" text="Antall" />
-                           </columns>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </TitledPane>
-          <TitledPane animated="false" text="VELG PRODUKT - Felg">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView fx:id="customerWheelRimView" prefHeight="280.0" prefWidth="800.0">
-                           <columns>
-                              <TableColumn prefWidth="160.0" text="Navn" />
-                              <TableColumn prefWidth="160.0" text="Dimensjon" />
-                              <TableColumn prefWidth="160.0" text="Farge" />
-                              <TableColumn prefWidth="160.0" text="Pris" />
-                              <TableColumn prefWidth="160.0" text="Antall" />
-                           </columns>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </TitledPane>
-        </panes>
-      </Accordion>
-   </children>
+    <children>
+        <Button fx:id="addToCart" layoutX="678.0" layoutY="58.0" mnemonicParsing="false" onAction="#chooseProduct" text="LEGG TIL">
+            <font>
+                <Font name="Segoe UI Semilight" size="18.0" />
+            </font>
+        </Button>
+        <Button fx:id="backBtnView" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backToMain" text="TILBAKE">
+            <font>
+                <Font name="Segoe UI Semilight" size="18.0" />
+            </font>
+        </Button>
+        <ImageView fitHeight="117.0" fitWidth="252.0" layoutX="274.0" layoutY="14.0">
+            <image>
+                <Image url="@../../../resources/CCOMPW-small.png" />
+            </image>
+        </ImageView>
+        <Accordion layoutY="131.0" prefHeight="472.0" prefWidth="800.0">
+            <panes>
+                <TitledPane animated="false" text="VELG PRODUKT - Motor">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TableView fx:id="customorEngineView" prefHeight="280.0" prefWidth="800.0">
+                                    <columns>
+                                        <TableColumn prefWidth="200.0" text="Navn" />
+                                        <TableColumn prefWidth="200.0" text="Hestekrefter" />
+                                        <TableColumn prefWidth="200.0" text="Pris" />
+                                        <TableColumn prefWidth="200.0" text="Antall" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </TitledPane>
+                <TitledPane fx:id="seatPane" animated="false" onMouseClicked="#viewTheComponents" text="VELG PRODUKT - Sete">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TableView fx:id="customerSeatView" layoutX="-1.0" layoutY="-2.0" prefHeight="280.0" prefWidth="800.0">
+                                    <columns>
+                                        <TableColumn fx:id="nameSeatColum" prefWidth="160.0" text="Navn" />
+                                        <TableColumn fx:id="materiellColum" prefWidth="160.0" text="Materiale" />
+                                        <TableColumn fx:id="colorSeatColum" prefWidth="160.0" text="Farge" />
+                                        <TableColumn fx:id="seatPriceColum" prefWidth="160.0" text="Pris" />
+                                        <TableColumn fx:id="quantitySeatColum" prefWidth="160.0" text="Antall" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </TitledPane>
+                <TitledPane fx:id="spoilerPane" animated="false" onMouseClicked="#viewTheComponents" text="VELG PRODUKT - Spoiler">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TableView fx:id="customerSpoilerView" layoutX="-1.0" prefHeight="280.0" prefWidth="800.0">
+                                    <columns>
+                                        <TableColumn fx:id="nameSpoilerColum" prefWidth="160.0" text="Navn" />
+                                        <TableColumn fx:id="sideSpoilerColum" prefWidth="160.0" text="Monteringsside" />
+                                        <TableColumn fx:id="colorSpoilerColum" prefWidth="160.0" text="Farge" />
+                                        <TableColumn fx:id="priceSpoilerColum" prefWidth="160.0" text="Pris" />
+                                        <TableColumn fx:id="quantitySpoilerColum" prefWidth="160.0" text="Antall" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </TitledPane>
+                <TitledPane animated="false" text="VELG PRODUKT - Ratt">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TableView fx:id="CustomersWheelView" prefHeight="280.0" prefWidth="800.0">
+                                    <columns>
+                                        <TableColumn prefWidth="160.0" text="Navn" />
+                                        <TableColumn prefWidth="160.0" text="Materiale" />
+                                        <TableColumn prefWidth="160.0" text="Farge" />
+                                        <TableColumn prefWidth="160.0" text="Pris" />
+                                        <TableColumn prefWidth="160.0" text="Antall" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </TitledPane>
+                <TitledPane animated="false" text="VELG PRODUKT - Felg">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TableView fx:id="customerWheelRimView" prefHeight="280.0" prefWidth="800.0">
+                                    <columns>
+                                        <TableColumn prefWidth="160.0" text="Navn" />
+                                        <TableColumn prefWidth="160.0" text="Dimensjon" />
+                                        <TableColumn prefWidth="160.0" text="Farge" />
+                                        <TableColumn prefWidth="160.0" text="Pris" />
+                                        <TableColumn prefWidth="160.0" text="Antall" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </TitledPane>
+            </panes>
+        </Accordion>
+        <Button fx:id="toTheChart" layoutX="539.0" layoutY="23.0" mnemonicParsing="false" onAction="#toUserCart" text="Til handlekurv">
+            <font>
+                <Font name="Segoe UI Semilight" size="18.0" />
+            </font>
+        </Button>
+        <Label fx:id="numberofProduct" layoutX="604.0" layoutY="104.0" prefHeight="17.0" prefWidth="184.0" text="Label" />
+    </children>
 </AnchorPane>
+
