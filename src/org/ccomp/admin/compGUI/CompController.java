@@ -9,7 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.ccomp.fileHandling.ComponentCSVHandler;
-import org.ccomp.fileHandling.ComponentObjHandler;
+import org.ccomp.fileHandling.ComponentOBJHandler;
 import org.ccomp.model.MapKey;
 import org.ccomp.model.Validation;
 import org.ccomp.model.component.*;
@@ -54,7 +54,7 @@ public class CompController {
 
    // private ComponentOBJHandler jobjHandler;
 
-    private ComponentObjHandler jobjHandler;
+    private ComponentOBJHandler jobjHandler;
 
     private StringProperty compNameProperty, compColorProperty, compMaterialProperty, compTypeProperty;
     private DoubleProperty compPriceProperty;
@@ -68,7 +68,7 @@ public class CompController {
     public void initialize() {
 
 
-        jobjHandler = new ComponentObjHandler();
+        jobjHandler = new ComponentOBJHandler();
       //  jobjHandler = new ComponentOBJHandler();
         //todo: Handle if file is empty
         // java.io.FileNotFoundException: testComponents.obj (Systemet finner ikke angitt fil)
@@ -117,7 +117,10 @@ public class CompController {
 
             ComponentCSVHandler csvHandler = new ComponentCSVHandler();
 
-            csvHandler.writeComponent(carComponents, "testComp.csv");
+          //  csvHandler.writeComponent(carComponents, "testComp.csv");
+
+            csvHandler.writeComponent(carComponents, "testComponent.csv");
+
 
         } else if (event.getSource() == addSeat) {
             System.out.println("\nADD SEAT PRESSED\n");

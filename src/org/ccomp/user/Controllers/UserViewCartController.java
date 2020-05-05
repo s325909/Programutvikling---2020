@@ -11,7 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import org.ccomp.fileHandling.ComponentObjHandler;
+import org.ccomp.fileHandling.ComponentOBJHandler;
 import org.ccomp.model.component.*;
 import org.ccomp.model.component.engine.Engine;
 
@@ -23,7 +23,7 @@ import java.util.List;
 
 public class UserViewCartController  {
 
-    private ComponentObjHandler jobjHandler;
+    private ComponentOBJHandler jobjHandler;
 
   //  private OLDComponentOBJHandlerOLD jobjHandler;
     private HashMap<String, List<CarComponent>> compMap, retrievedCompMap;
@@ -94,7 +94,7 @@ public class UserViewCartController  {
 
     @FXML
     public void initialize() {
-        jobjHandler = new ComponentObjHandler();
+        jobjHandler = new ComponentOBJHandler();
        // jobjHandler = new OLDComponentOBJHandlerOLD();
         retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
 

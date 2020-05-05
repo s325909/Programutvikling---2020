@@ -1,6 +1,6 @@
 package org.ccomp.user;
 
-import org.ccomp.fileHandling.ComponentObjHandler;
+import org.ccomp.fileHandling.ComponentOBJHandler;
 import org.ccomp.model.component.CarComponent;
 
 import java.util.HashMap;
@@ -14,7 +14,7 @@ public class Order {
     private String color;
     private String price;
     private String material;
-    private ComponentObjHandler jobjHandler;
+    private ComponentOBJHandler jobjHandler;
   //  private OLDComponentOBJHandlerOLD jobjHandler;
     private HashMap<String, List<CarComponent>> compMap, retrievedCompMap;
     private List<CarComponent> carComponents;
@@ -30,7 +30,7 @@ public class Order {
     }
 
     public void selectedItems(){
-        jobjHandler = new ComponentObjHandler();
+        jobjHandler = new ComponentOBJHandler();
        // jobjHandler = new OLDComponentOBJHandlerOLD();
         retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
         carComponents = retrievedCompMap.get("Seat");

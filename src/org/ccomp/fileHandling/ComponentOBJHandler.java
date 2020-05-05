@@ -6,7 +6,7 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.List;
 
-public class ComponentObjHandler implements ObjectFileHandler {
+public class ComponentOBJHandler implements ObjectFileHandler {
     @Override
     public HashMap<String, List<CarComponent>> readComponent(HashMap<String, List<CarComponent>> compMap) {
         System.out.println("DE-SERIALIZING COMPONENT");

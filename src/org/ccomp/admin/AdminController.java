@@ -18,7 +18,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.IntegerStringConverter;
-import org.ccomp.fileHandling.ComponentObjHandler;
+import org.ccomp.fileHandling.ComponentOBJHandler;
 import org.ccomp.model.component.*;
 import org.ccomp.model.component.engine.Engine;
 
@@ -102,7 +102,7 @@ public class AdminController implements Initializable {
     // @FXML
     //TableColumn<Engine, SimpleStringProperty> engintypeColum,nameEngineColum,horsepowerColum, priceEngineColum, quantityEngineColum;
 
-    private ComponentObjHandler jobjHandler;
+    private ComponentOBJHandler jobjHandler;
 
    // private ComponentOBJHandler jobjHandler;
     private HashMap<String, List<CarComponent>> compMap, retrievedCompMap;
@@ -125,7 +125,7 @@ public class AdminController implements Initializable {
 
 
 
-        jobjHandler = new ComponentObjHandler();
+        jobjHandler = new ComponentOBJHandler();
 
        // jobjHandler = new ComponentOBJHandler();
 
