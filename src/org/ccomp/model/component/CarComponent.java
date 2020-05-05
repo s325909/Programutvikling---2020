@@ -102,6 +102,11 @@ public class CarComponent implements ObjectFileHandler {
     }
     */
 
+    public String toCSVFormat() {
+        return getCompType() + "," + getCompName() + "," + getCompPrice() + "," + getCompQuantity();
+    }
+
+
     @Override
     public String toString() {
         return "CarComponent{" +

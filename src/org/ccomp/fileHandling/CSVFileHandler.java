@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface CSVFileHandler {
 
-    List<CarComponent> readComponent(List<CarComponent> loadCompList);
+    List<CarComponent> readComponent(List<CarComponent> compList, String filePath);
 
-    void writeComponent(List<CarComponent> savedCompList);
+    void writeComponent(List<CarComponent> compList, String filePath);
 
 }

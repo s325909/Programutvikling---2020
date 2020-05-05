@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.ccomp.fileHandling.ComponentCSVHandler;
 import org.ccomp.fileHandling.ComponentObjHandler;
 import org.ccomp.model.MapKey;
 import org.ccomp.model.Validation;
@@ -104,6 +105,20 @@ public class CompController {
             System.out.println("\nADD ENGINE PRESSED\n");
 
             if (carComponents == null) carComponents = new ArrayList<>();
+
+
+            //todo: fjern etter testing
+            compNameProperty = new SimpleStringProperty(engineName.getText());
+            compPriceProperty = new SimpleDoubleProperty(Double.parseDouble(enginePrice.getText()));
+            compQuantityProperty = new SimpleIntegerProperty(Integer.parseInt(engineQuantity.getText()));
+
+
+            carComponents.add(new CarComponent("TYPE", compNameProperty, compPriceProperty, compQuantityProperty));
+
+            ComponentCSVHandler csvHandler = new ComponentCSVHandler();
+
+            csvHandler.writeComponent(carComponents, "testComp.csv");
+
         } else if (event.getSource() == addSeat) {
             System.out.println("\nADD SEAT PRESSED\n");
 
