@@ -1,28 +1,29 @@
 package org.ccomp.model.component;
 
 import javafx.beans.property.*;
-import org.ccomp.fileHandling.ObjectHandler;
+import org.ccomp.fileHandling.ObjectFileHandler;
 import org.ccomp.model.component.engine.Engine;
 
 import java.io.*;
+import java.util.HashMap;
+import java.util.List;
 
-public class CarComponent implements ObjectHandler {
+public class CarComponent implements ObjectFileHandler {
 
     private static final long serialVersionUID = 1L;
 
+    private transient StringProperty compType;
     private transient StringProperty compName;
     private transient DoubleProperty compPrice;
     private transient IntegerProperty compQuantity;
 
-    private transient StringProperty compType;
-
    // private String compType;
 
-    public CarComponent(StringProperty compName, DoubleProperty compPrice, IntegerProperty compQuantity, String compType) {
+    public CarComponent(String compType, StringProperty compName, DoubleProperty compPrice, IntegerProperty compQuantity) {
+        this.compType = new SimpleStringProperty(compType);
         this.compName = compName;
         this.compPrice = compPrice;
         this.compQuantity = compQuantity;
-        this.compType = new SimpleStringProperty(compType);
     }
 
     // Callback method to be executed automatically by the jvm at the time of serialization
@@ -43,6 +44,17 @@ public class CarComponent implements ObjectHandler {
         else return "ukjent";
     }
 
+    public String getCompType() {
+        return compType.get();
+    }
+
+    public StringProperty compTypeProperty() {
+        return compType;
+    }
+
+    public void setCompType(String compType) {
+        this.compType.set(compType);
+    }
 
     public String getCompName() {
         return compName.get();
@@ -80,18 +92,6 @@ public class CarComponent implements ObjectHandler {
         this.compQuantity.set(compQuantity);
     }
 
-    public String getCompType() {
-        return compType.get();
-    }
-
-    public StringProperty compTypeProperty() {
-        return compType;
-    }
-
-    public void setCompType(String compType) {
-        this.compType.set(compType);
-    }
-
     /*
     public String getCompType() {
         return compType;
@@ -102,32 +102,47 @@ public class CarComponent implements ObjectHandler {
     }
     */
 
+    public String toCSVFormat() {
+        return getCompType() + "," + getCompName() + "," + getCompPrice() + "," + getCompQuantity();
+    }
+
+
     @Override
     public String toString() {
         return "CarComponent{" +
-                "compName=" + compName +
+                "compType=" + compType +
+                ", compName=" + compName +
                 ", compPrice=" + compPrice +
                 ", compQuantity=" + compQuantity +
-                ", compType='" + compType + '\'' +
                 '}';
+    }
+
+    @Override
+    public HashMap<String, List<CarComponent>> readComponent(HashMap<String, List<CarComponent>> compMap) {
+        return null;
+    }
+
+    @Override
+    public void writeComponent(HashMap<String, List<CarComponent>> compMap) {
+
     }
 
     @Override
     public void writeObjectHandler(ObjectOutputStream oos) throws IOException {
         oos.defaultWriteObject();
+        oos.writeUTF(getCompType());
         oos.writeUTF(getCompName());
         oos.writeDouble(getCompPrice());
         oos.writeInt(getCompQuantity());
-        oos.writeUTF(getCompType());
        // oos.writeUTF(getCompType());
     }
 
     @Override
     public void readObjectHandler(ObjectInputStream ois) throws IOException, ClassNotFoundException {
+        compType = new SimpleStringProperty(ois.readUTF());
         compName = new SimpleStringProperty(ois.readUTF());
         compPrice = new SimpleDoubleProperty(ois.readDouble());
         compQuantity = new SimpleIntegerProperty(ois.readInt());
-        compType = new SimpleStringProperty(ois.readUTF());
        // compType = ois.readUTF();
     }
 
