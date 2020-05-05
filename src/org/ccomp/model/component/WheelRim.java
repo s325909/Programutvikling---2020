@@ -18,7 +18,7 @@ public class WheelRim extends CarComponent{
     public WheelRim(StringProperty compName, DoubleProperty compPrice, IntegerProperty compQuantity,
                     StringProperty wheelRimColor, StringProperty wheelRimMaterial) {
                      //, IntegerProperty wheelRimSize) {
-        super(compType, compName, compPrice, compQuantity);
+        super(compName, compPrice, compQuantity, compType);
         this.wheelRimColor = wheelRimColor;
         this.wheelRimMaterial = wheelRimMaterial;
       //  this.wheelRimSize = wheelRimSize;

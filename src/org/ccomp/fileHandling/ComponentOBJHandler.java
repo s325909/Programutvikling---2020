@@ -1,42 +1,47 @@
 package org.ccomp.fileHandling;
 
+import org.ccomp.model.MapKey;
 import org.ccomp.model.component.CarComponent;
 
 import java.io.*;
 import java.util.HashMap;
 import java.util.List;
 
-public class ComponentObjHandler implements ObjectFileHandler {
+public class ComponentOBJHandler implements FileHandler {
+
+
+
+    private File file = new File("testComponents");
+
     @Override
-    public HashMap<String, List<CarComponent>> readComponent(HashMap<String, List<CarComponent>> compMap) {
+    public HashMap<String, List<CarComponent>> readComponent(HashMap<String, List<CarComponent>> loadCompMap) {
         System.out.println("DE-SERIALIZING COMPONENT");
 
         try {
             //todo: handle if file not found / exists
-           // FileInputStream fis = new FileInputStream("components.obj");
-            FileInputStream fis = new FileInputStream("testComponents.obj");
+            FileInputStream fis = new FileInputStream("components.obj");
+           // FileInputStream fis = new FileInputStream("testComponents.obj");
             ObjectInputStream ois = new ObjectInputStream(fis);
 
-            compMap = (HashMap<String, List<CarComponent>>) ois.readObject();
+            loadCompMap = (HashMap<String, List<CarComponent>>) ois.readObject();
 
             fis.close();
 
-            System.out.println("COMP MAP: " + compMap);
+            System.out.println("COMP MAP: " + loadCompMap);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
 
-
-        return compMap;
+        return loadCompMap;
     }
 
     @Override
     public void writeComponent(HashMap<String, List<CarComponent>> compMap) {
         try {
-            // FileOutputStream fos = new FileOutputStream("components.obj");
-            FileOutputStream fos = new FileOutputStream("testComponents.obj");
+            FileOutputStream fos = new FileOutputStream("components.obj");
+           // FileOutputStream fos = new FileOutputStream("testComponents.obj");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(compMap);
             oos.flush();
@@ -45,15 +50,5 @@ public class ComponentObjHandler implements ObjectFileHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void writeObjectHandler(ObjectOutputStream oos) throws IOException {
-
-    }
-
-    @Override
-    public void readObjectHandler(ObjectInputStream ois) throws IOException, ClassNotFoundException {
-
     }
 }
