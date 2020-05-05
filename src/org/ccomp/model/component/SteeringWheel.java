@@ -17,7 +17,7 @@ public class SteeringWheel extends CarComponent {
 
     public SteeringWheel(StringProperty compName, DoubleProperty compPrice, IntegerProperty compQuantity,
                          StringProperty steeringWheelColor, StringProperty steeringWheelMaterial) {
-        super(compName, compPrice, compQuantity, compType);
+        super(compType, compName, compPrice, compQuantity);
         this.steeringWheelColor = steeringWheelColor;
         this.steeringWheelMaterial = steeringWheelMaterial;
     }

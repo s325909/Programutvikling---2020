@@ -14,7 +14,7 @@ public class ElectricMotor extends CarComponent implements Engine {
 
     public ElectricMotor(StringProperty compName, DoubleProperty compPrice, IntegerProperty compQuantity,
                          String engineName, int horsePower, int enginePrice) {
-        super(compName, compPrice, compQuantity, compType);
+        super(compType, compName, compPrice, compQuantity);
         this.engineName = engineName;
         this.horsePower = horsePower;
         this.enginePrice = enginePrice;

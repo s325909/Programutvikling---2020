@@ -1,36 +1,31 @@
 package org.ccomp.user.Controllers;
 
-import com.sun.jndi.toolkit.url.Uri;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import org.ccomp.fileHandling.ComponentOBJHandler;
-import org.ccomp.model.Car;
+import org.ccomp.fileHandling.ComponentObjHandler;
 import org.ccomp.model.component.*;
 import org.ccomp.model.component.engine.Engine;
 
-import java.awt.event.ActionEvent;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.ResourceBundle;
-
-
 
 
 public class UserViewCartController  {
 
-    private ComponentOBJHandler jobjHandler;
+    private ComponentObjHandler jobjHandler;
+
+  //  private OLDComponentOBJHandlerOLD jobjHandler;
     private HashMap<String, List<CarComponent>> compMap, retrievedCompMap;
     private List<CarComponent> carComponents;
 
@@ -99,7 +94,8 @@ public class UserViewCartController  {
 
     @FXML
     public void initialize() {
-        jobjHandler = new ComponentOBJHandler();
+        jobjHandler = new ComponentObjHandler();
+       // jobjHandler = new OLDComponentOBJHandlerOLD();
         retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
 
       //  customerSeatView.setItems(seatTable());
@@ -149,7 +145,7 @@ public class UserViewCartController  {
         IntegerProperty compQuantityProperty = new SimpleIntegerProperty(15);
 
 
-        componentsCart.add(new CarComponent(compNameProperty, compPriceProperty, compQuantityProperty, "COMP TYPE"));
+        componentsCart.add(new CarComponent("COMP TYPE", compNameProperty, compPriceProperty, compQuantityProperty));
 
         try {
             URL url = getClass().getResource("/org/ccomp/user/userCart.fxml");

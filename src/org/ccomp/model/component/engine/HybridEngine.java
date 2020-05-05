@@ -13,7 +13,7 @@ public class HybridEngine extends CarComponent implements Engine {
     int horsePower; //enginePrice;
 
     public HybridEngine(StringProperty compName, DoubleProperty compPrice, IntegerProperty compQuantity, int horsePower) {
-        super(compName, compPrice, compQuantity, compType);
+        super(compType, compName, compPrice, compQuantity);
         this.horsePower = horsePower;
     }
 
