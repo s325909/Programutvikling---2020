@@ -39,10 +39,7 @@ public class UserViewCartController  {
     AnchorPane contentProducts, contentCart;
 
     @FXML
-    Label viewCart,numberofProduct;
-
-    @FXML
-    public TextArea  cartProduct;
+    Label viewCart;
 
     /*@FXML
     TableColumn<Object, String> value, value2, value3, value4, value5;
@@ -51,7 +48,7 @@ public class UserViewCartController  {
     TableView<Object> tableView;*/
 
     @FXML
-    Button backBtnView, backBtnCart, addToCart, userReg,addtoChart;
+    Button backBtnView, backBtnCart, addToCart, userReg;
 
     @FXML
     TitledPane seatPane, spoilerPane;
@@ -104,15 +101,20 @@ public class UserViewCartController  {
     public void initialize() {
         jobjHandler = new ComponentOBJHandler();
         retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
+
+      //  customerSeatView.setItems(seatTable());
+      //  customerSpoilerView.setItems(spoilerTable());
+
        /*tableView.setEditable(true);
         engineTableCol(value, value2, value3, value4);
         seatTableCol(value, value2, value3, value4, value5);
         spoilerTableCol(value, value2, value3, value4, value5);
         steeringTableCol(value, value2, value3, value4, value5);
         rimTableCol(value, value2, value3, value4, value5);*/
+
+
        componentsCart = getComponentsCart();
        System.out.println("(INIT) COMP CART: " + componentsCart.size());
-
     }
 
     @FXML
@@ -140,13 +142,12 @@ public class UserViewCartController  {
         if (componentsCart == null) componentsCart = new ArrayList<>();
 
         //todo: fjernes etter testing
-       /* StringProperty compNameProperty = new SimpleStringProperty("COMP NAME");
+        StringProperty compNameProperty = new SimpleStringProperty("COMP NAME");
         DoubleProperty compPriceProperty = new SimpleDoubleProperty(230);
         IntegerProperty compQuantityProperty = new SimpleIntegerProperty(15);
 
 
         componentsCart.add(new CarComponent(compNameProperty, compPriceProperty, compQuantityProperty, "COMP TYPE"));
-        */
 
         try {
             URL url = getClass().getResource("/org/ccomp/user/userCart.fxml");
@@ -154,7 +155,6 @@ public class UserViewCartController  {
 
             scene = contentProducts.getScene();
             scene.setRoot(FXMLLoader.load(url));
-
 
           //  FXMLLoader loader = new FXMLLoader(url);
           //  AnchorPane newCartScene = (AnchorPane) loader.load();
@@ -164,10 +164,6 @@ public class UserViewCartController  {
             e.printStackTrace();
         }
 
-
-
-      //  componentsCart = getComponentsCart();
-        //cartProduct.setText(componentsCart.get(0).getCompName());
 
     }
 
@@ -183,7 +179,6 @@ public class UserViewCartController  {
             URL url = getClass().getResource("/org/ccomp/user/viewProduct.fxml");
             scene = contentCart.getScene();
             scene.setRoot(FXMLLoader.load(url));
-            //orderdPrductCar();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -208,7 +203,6 @@ public class UserViewCartController  {
     public ObservableList<Seat> seatTable() {
         Seat seat;
         ObservableList<Seat> seats = FXCollections.observableArrayList();
-
 
         //Henter dem først ut her
 
@@ -251,51 +245,23 @@ public class UserViewCartController  {
     }
 
 
-    @FXML
+
     public void viewTheComponents(){
 
         if (seatPane.isExpanded()) {
+
             customerSeatView.setItems(seatTable());
-            customerSeatView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         }
 
         if (spoilerPane.isExpanded()){
             customerSpoilerView.setItems(spoilerTable());
-        }
-    }
 
-    public void countProducts(){
-
-            numberofProduct.setText( "Antall produkter valgt:"  + String.valueOf(componentsCart.size()));
-
-    }
-
-    public void orderdPrductCar(){
-
-        Seat seat = (Seat) componentsCart.get(0);
-        cartProduct.setText(seat.getCompName());
-    }
-
-    @FXML
-    public void chooseProduct(){
-
-        int index = customerSeatView.getSelectionModel().getSelectedIndex();
-
-
-        if (customerSeatView.getSelectionModel().isSelected(index)){
-            Seat item = customerSeatView.getItems().get(index);
-            StringProperty compNameProperty = new SimpleStringProperty(item.getCompName());
-            StringProperty compColorProperty = new SimpleStringProperty(item.getColor());
-            StringProperty compMaterialProperty = new SimpleStringProperty(item.getColor());
-            DoubleProperty compPriceProperty = new SimpleDoubleProperty(item.getCompPrice());
-            IntegerProperty compQuantityProperty = new SimpleIntegerProperty(item.getCompQuantity());
-            carComponents = getComponentsCart();
-            componentsCart.add(new Seat(compNameProperty,compPriceProperty,compQuantityProperty,compColorProperty,compMaterialProperty));
-            countProducts();
-           // cartProduct.setText( "Navn" + compNameProperty  );
         }
 
+
+
     }
+
 
 
 
