@@ -144,13 +144,13 @@ public class UserViewCartController {
         if (componentsCart == null) componentsCart = new ArrayList<>();
 
         //todo: fjernes etter testing
-        StringProperty compNameProperty = new SimpleStringProperty("COMP NAME");
+       /* StringProperty compNameProperty = new SimpleStringProperty("COMP NAME");
         DoubleProperty compPriceProperty = new SimpleDoubleProperty(230);
         IntegerProperty compQuantityProperty = new SimpleIntegerProperty(15);
 
 
         componentsCart.add(new CarComponent("COMP TYPE", compNameProperty, compPriceProperty, compQuantityProperty));
-
+        */
         try {
             URL url = getClass().getResource("/org/ccomp/user/userCart.fxml");
 
@@ -297,6 +297,7 @@ public class UserViewCartController {
     public void chooseProduct() {
 
         int index = customerSeatView.getSelectionModel().getSelectedIndex();
+        int spoilerindex = customerSpoilerView.getSelectionModel().getSelectedIndex();
 
 
         if (customerSeatView.getSelectionModel().isSelected(index)) {
@@ -312,7 +313,17 @@ public class UserViewCartController {
             // cartProduct.setText( "Navn" + compNameProperty  );
         }
 
+        if (customerSpoilerView.getSelectionModel().isSelected(spoilerindex)) {
+            Spoiler item = customerSpoilerView.getItems().get(spoilerindex);
+            StringProperty compNameProperty = new SimpleStringProperty(item.getCompName());
+            StringProperty compSpoilerSideProperty = new SimpleStringProperty(item.getSpoilerSide());
+            DoubleProperty compPriceProperty = new SimpleDoubleProperty(item.getCompPrice());
+            IntegerProperty compQuantityProperty = new SimpleIntegerProperty(item.getCompQuantity());
+            carComponents = getComponentsCart();
+            componentsCart.add(new Spoiler(compNameProperty, compPriceProperty, compQuantityProperty,compSpoilerSideProperty));
+            countProducts();
 
+        }
     }
 
     public static List<CarComponent> getComponentsCart() {
