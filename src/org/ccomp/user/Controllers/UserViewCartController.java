@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.ccomp.fileHandling.ComponentOBJHandler;
 import org.ccomp.model.Car;
+import org.ccomp.model.CarComp;
 import org.ccomp.model.component.*;
 import org.ccomp.model.component.engine.Engine;
 
@@ -36,9 +37,6 @@ public class UserViewCartController {
 
     @FXML
     Label viewCart,numberofProduct;
-
-    @FXML
-    TextArea cartProduct;
 
     /*@FXML
     TableColumn<Object, String> value, value2, value3, value4, value5;
@@ -84,6 +82,19 @@ public class UserViewCartController {
 
     @FXML
     TableColumn<Spoiler, Integer> quantitySpoilerColum;
+
+    @FXML
+    TableView<CarComponent> cartTable;
+
+    @FXML
+    TableColumn<CarComponent, String> compNameColumn, compTypeColumn;
+
+    @FXML
+    TableColumn<CarComponent, Double> compPriceColumn;
+
+    @FXML
+    TableColumn<CarComponent, Integer> compQuantityColumn;
+
 
     /*@FXML
     TableColumn<SteeringWheel, String> nameSWheelColum, materiellSWeel, colorSWheelColum, priceSWeelColum, quantitySWeelColum;
@@ -159,11 +170,19 @@ public class UserViewCartController {
             scene = contentProducts.getScene();
             scene.setRoot(loader.load());
 
-            cartProduct = (TextArea) loader.getNamespace().get("cartProduct");
+
+            cartTable = (TableView<CarComponent>) loader.getNamespace().get("cartTable");
+
+            compNameColumn = (TableColumn<CarComponent, String>) loader.getNamespace().get("compNameColumn");
+            compTypeColumn = (TableColumn<CarComponent, String>) loader.getNamespace().get("compTypeColumn");
+            compPriceColumn = (TableColumn<CarComponent, Double>) loader.getNamespace().get("compPriceColumn");
+            compQuantityColumn = (TableColumn<CarComponent, Integer>) loader.getNamespace().get("compQuantityColumn");
+
+            cartTable.setItems(cartTable());
 
            // cartProduct.setText(componentsCart.get(0).getCompName());
 
-            orderdPrductCar();
+            //orderdPrductCar(); kall på metode for å se carten
 
             //  FXMLLoader loader = new FXMLLoader(url);
             //  AnchorPane newCartScene = (AnchorPane) loader.load();
@@ -280,7 +299,7 @@ public class UserViewCartController {
     }
 
 
-    public void orderdPrductCar() {
+    /*public void orderdPrductCar() {
 
        // Seat seat = (Seat) componentsCart.get(0);
 
@@ -291,8 +310,7 @@ public class UserViewCartController {
 
         cartProduct.setText(s);
     }
-
-
+*/
     @FXML
     public void chooseProduct() {
 
@@ -326,11 +344,43 @@ public class UserViewCartController {
         }
     }
 
+
+    //for å hente ut i tableview
+    public ObservableList<CarComponent> cartTable() {
+       // CarComponent carComp;
+        ObservableList<CarComponent> carComps = FXCollections.observableArrayList();
+        carComponents = retrievedCompMap.get("CarComp");
+
+
+        for (CarComponent carComponent : componentsCart) {
+
+            compNameColumn.setCellValueFactory(new PropertyValueFactory<CarComponent, String>("compType"));
+            compTypeColumn.setCellValueFactory(new PropertyValueFactory<CarComponent, String>("compType"));
+            compPriceColumn.setCellValueFactory(new PropertyValueFactory<CarComponent, Double>("compPrice"));
+            compQuantityColumn.setCellValueFactory(new PropertyValueFactory<CarComponent, Integer>("compQuantity"));
+            carComps.add(carComponent);
+
+        }
+            return carComps;
+
+    }
+
+    /*public void orderdCart() {
+        for (CarComponent carComponent : componentsCart) {
+
+
+        }
+    }*/
+
+
+
     public static List<CarComponent> getComponentsCart() {
         return componentsCart;
     }
 
     public static void setComponentsCart(List<CarComponent> componentsCart) {
         UserViewCartController.componentsCart = componentsCart;
+
     }
+
 }
