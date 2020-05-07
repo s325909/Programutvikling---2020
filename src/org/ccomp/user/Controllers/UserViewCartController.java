@@ -36,7 +36,7 @@ public class UserViewCartController {
     AnchorPane contentProducts, contentCart;
 
     @FXML
-    Label viewCart,numberofProduct;
+    Label viewCart, numberofProduct, sumText;
 
     /*@FXML
     TableColumn<Object, String> value, value2, value3, value4, value5;
@@ -45,7 +45,7 @@ public class UserViewCartController {
     TableView<Object> tableView;*/
 
     @FXML
-    Button backBtnView, backBtnCart, addToCart, userReg,toTheChart;
+    Button backBtnView, backBtnCart, addToCart, userReg, toTheChart, deleteRow;
 
     @FXML
     TitledPane seatPane, spoilerPane;
@@ -170,15 +170,21 @@ public class UserViewCartController {
             scene = contentProducts.getScene();
             scene.setRoot(loader.load());
 
-
+            //sende inn kolonnene og viewet
             cartTable = (TableView<CarComponent>) loader.getNamespace().get("cartTable");
-
             compNameColumn = (TableColumn<CarComponent, String>) loader.getNamespace().get("compNameColumn");
             compTypeColumn = (TableColumn<CarComponent, String>) loader.getNamespace().get("compTypeColumn");
             compPriceColumn = (TableColumn<CarComponent, Double>) loader.getNamespace().get("compPriceColumn");
             compQuantityColumn = (TableColumn<CarComponent, Integer>) loader.getNamespace().get("compQuantityColumn");
 
+
+            //legger inn i table
             cartTable.setItems(cartTable());
+
+            //sender inn totalsum
+            sumText = (Label) loader.getNamespace().get("sumText");
+           double sum = totalPrice();
+            sumText.setText(String.valueOf(sum));
 
            // cartProduct.setText(componentsCart.get(0).getCompName());
 
@@ -288,29 +294,14 @@ public class UserViewCartController {
             customerSpoilerView.setItems(spoilerTable());
 
         }
-
-
     }
 
     public void countProducts() {
 
-        numberofProduct.setText("Antall produkter valgt:" + String.valueOf(componentsCart.size()));
+        numberofProduct.setText("Antall lagt til: " + String.valueOf(componentsCart.size()));
 
     }
 
-
-    /*public void orderdPrductCar() {
-
-       // Seat seat = (Seat) componentsCart.get(0);
-
-        String s = "";
-        for (CarComponent carComponent : componentsCart) {
-            s += carComponent.toCSVFormat() + "\n";
-        }
-
-        cartProduct.setText(s);
-    }
-*/
     @FXML
     public void chooseProduct() {
 
@@ -345,11 +336,10 @@ public class UserViewCartController {
     }
 
 
-    //for å hente ut i tableview
+    //for å hente ut i tableview fra viewSiden til cartsiden
     public ObservableList<CarComponent> cartTable() {
-       // CarComponent carComp;
         ObservableList<CarComponent> carComps = FXCollections.observableArrayList();
-        carComponents = retrievedCompMap.get("CarComp");
+      //  carComponents = retrievedCompMap.get("CarComp");
 
 
         for (CarComponent carComponent : componentsCart) {
@@ -362,17 +352,17 @@ public class UserViewCartController {
 
         }
             return carComps;
-
     }
 
-    /*public void orderdCart() {
-        for (CarComponent carComponent : componentsCart) {
+    //Sletter rader i cartTabel
+    public void deleteCartRow() {
+            CarComponent selectedRow = cartTable.getSelectionModel().getSelectedItem();
+            cartTable.getItems().remove(selectedRow);
+            componentsCart.remove(selectedRow);
 
-
-        }
-    }*/
-
-
+            double sum = totalPrice();
+            sumText.setText(String.valueOf(sum));
+    }
 
     public static List<CarComponent> getComponentsCart() {
         return componentsCart;
@@ -383,4 +373,28 @@ public class UserViewCartController {
 
     }
 
+    //metode for å regne ut totalsummen av
+
+    public double totalPrice(){
+
+        /*ist<Double>  columnData = new ArrayList<>();
+
+        for (CarComponent carcomponet : cartTable.getItems()) {
+            columnData.add(compPriceColumn.getCellObservableValue(carcomponet).getValue());
+        }
+
+        sumText.setText(String.valueOf(columnData.get(0)));*/
+
+        double sum = 0;
+
+        for (CarComponent carComponent : componentsCart) {
+            sum += carComponent.getCompPrice();
+        }
+
+      /*  for (int i = 0; i < cartTable.getItems().size(); i++) {
+            sum = sum + Integer.parseInt(cartTable.getValueAt(i, 2).toString());
+        }*/
+
+        return sum;
+    }
 }

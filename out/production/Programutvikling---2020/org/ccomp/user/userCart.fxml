@@ -6,40 +6,40 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="contentCart" prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.user.Controllers.UserViewCartController">
+<AnchorPane fx:id="contentCart" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.user.Controllers.UserViewCartController">
    <children>
-      <ImageView fitHeight="117.0" fitWidth="252.0" layoutX="126.0" layoutY="14.0">
+      <ImageView fitHeight="117.0" fitWidth="252.0" layoutX="284.0" layoutY="14.0">
          <image>
             <Image url="@../../../resources/CCOMPW-small.png" />
          </image>
       </ImageView>
-      <Label layoutX="197.0" layoutY="136.0" text="VALGTE PRODUKTER" />
-      <Label layoutX="316.0" layoutY="482.0" text="TOTAL" />
-      <TextFlow layoutX="359.0" layoutY="477.0" prefHeight="27.0" prefWidth="140.0" />
-      <Button fx:id="userReg" layoutX="410.0" layoutY="547.0" mnemonicParsing="false" onAction="#toUserReg" text="BESTILL">
+      <Label layoutX="355.0" layoutY="131.0" text="VALGTE PRODUKTER" />
+      <Label layoutX="555.0" layoutY="477.0" prefHeight="31.0" prefWidth="61.0" text="TOTAL" />
+      <Button fx:id="userReg" layoutX="703.0" layoutY="547.0" mnemonicParsing="false" onAction="#toUserReg" text="BESTILL">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
       </Button>
-      <Label layoutX="310.0" layoutY="425.0" text="Mva 25%" />
+      <Label layoutX="555.0" layoutY="444.0" text="Mva 25%" />
       <Button fx:id="backBtnCart" layoutX="14.0" layoutY="547.0" mnemonicParsing="false" onAction="#backToViewProd" text="TILBAKE">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
       </Button>
-      <Button layoutX="421.0" layoutY="166.0" mnemonicParsing="false" text="FJERN">
+      <Button fx:id="deleteRow" layoutX="714.0" layoutY="154.0" mnemonicParsing="false" onAction="#deleteCartRow" text="FJERN">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
       </Button>
-      <Label fx:id="viewCart" layoutY="175.0" prefHeight="250.0" prefWidth="504.0" />
-      <TableView fx:id="cartTable" layoutY="213.0" prefHeight="200.0" prefWidth="504.0">
+      <Label fx:id="viewCart" layoutX="12.0" layoutY="238.0" prefHeight="216.0" prefWidth="777.0" />
+      <TableView fx:id="cartTable" layoutY="213.0" prefHeight="200.0" prefWidth="800.0">
         <columns>
-          <TableColumn fx:id="compNameColumn" prefWidth="125.0" />
-            <TableColumn fx:id="compTypeColumn" prefWidth="125.0" />
-            <TableColumn fx:id="compPriceColumn" prefWidth="125.0" />
-            <TableColumn fx:id="compQuantityColumn" prefWidth="128.0" />
+          <TableColumn fx:id="compNameColumn" prefWidth="200.0" text="NAVN" />
+            <TableColumn fx:id="compTypeColumn" prefWidth="200.0" text="TYPE" />
+            <TableColumn fx:id="compPriceColumn" prefWidth="200.0" text="PRIS" />
+            <TableColumn fx:id="compQuantityColumn" prefWidth="200.0" text="ANTALL" />
         </columns>
       </TableView>
+      <Label fx:id="sumText" layoutX="630.0" layoutY="477.0" prefHeight="31.0" prefWidth="147.0" />
    </children>
 </AnchorPane>
