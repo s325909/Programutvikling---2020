@@ -186,6 +186,6 @@
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font></Button>
-      <TextField fx:id="search" layoutX="14.0" layoutY="61.0" onKeyReleased="#searchComp" promptText="Søk" />
+      <TextField fx:id="search" layoutX="14.0" layoutY="61.0" onKeyPressed="#searchComp" promptText="Søk" />
     </children>
 </AnchorPane>

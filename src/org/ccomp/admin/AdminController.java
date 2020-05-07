@@ -19,11 +19,13 @@ import javafx.stage.Stage;
 import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import org.ccomp.fileHandling.ComponentOBJHandler;
+import org.ccomp.model.Validation;
 import org.ccomp.model.component.*;
 import org.ccomp.model.component.engine.Engine;
 
 import java.net.URL;
 import java.util.*;
+import java.util.function.Predicate;
 
 public class AdminController implements Initializable {
     Seat seat;
@@ -332,6 +334,7 @@ public class AdminController implements Initializable {
             editSpoilerTable();
             spoilerView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
             System.out.println("SPOILER SATB");
+            searchComp();
         }
 
         if (orderEngineTab.isSelected()){
@@ -575,48 +578,69 @@ public class AdminController implements Initializable {
     }*/
 
         public void  searchComp() {
-            ObservableList<Seat> seatsList = seatTable();
-            FilteredList<Seat> filteredList  = new FilteredList(seatsList ,b->true);
-            //predicater når filter skifter
-            search.textProperty().addListener(((observable, oldValue, newValue) -> {
 
-                filteredList.setPredicate(seat -> {
+            if (seatTab.isSelected()) {
+                ObservableList<Seat> seatsList = seatTable();
+                FilteredList<Seat> filteredList = new FilteredList(seatsList, b -> true);
+                //predicater når filter skifter
+                search.textProperty().addListener(((observable, oldValue, newValue) -> {
 
-                    //Hvis filter er tommt , vis alt
-                    if (newValue == null || newValue.isEmpty()){
-                        return true;
-                    }
+                    filteredList.setPredicate(seat -> {
 
-                    String lowerCaseFiler = newValue.toLowerCase();
+                        //Hvis filter er tommt , vis alt
+                        if (newValue == null || newValue.isEmpty()) {
+                            return true;
+                        }
+                        String lowerCaseFiler = newValue.toLowerCase();
+                        if (seat.getCompName().toLowerCase().indexOf(lowerCaseFiler) != -1) {
+                            System.out.println("Er lik");
+                            return true; //Filter sammenligner navn
+                        } else if (seat.getColor().toLowerCase().indexOf(lowerCaseFiler) != -1) {
+                            return true; //Filter sammenligner farge
+                        } else if (String.valueOf(seat.getCompPrice()).toLowerCase().indexOf(lowerCaseFiler) != -1)
+                            return true;
+                        else return false; //hvis den ikke kan sammenlinges
+                    });
+                }));
+                //Setter filteredlist i en sortedlist, binder de sammen til tableviewvet og legger sorted og filterreing til tabellen,
+                SortedList<Seat> sortedData = new SortedList<>(filteredList);
+                sortedData.comparatorProperty().bind(seatView.comparatorProperty());
+                seatView.setItems(sortedData);
+            }
 
-                    if (seat.getCompName().toLowerCase().indexOf(lowerCaseFiler) != -1){
-                        System.out.println("Er lik");
-                        return true; //Filter sammenligner navn
-                    }
-                    else if (seat.getColor().toLowerCase().indexOf(lowerCaseFiler) != -1){
+            if (spoilerTab.isSelected()){
+                ObservableList<Spoiler> spoilerList = spoilerTable();
+                FilteredList<Spoiler> filteredList = new FilteredList(spoilerList, b -> true);
+                //predicater når filter skifter
+                search.textProperty().addListener(((observable, oldValue, newValue) -> {
 
-                        return true; //Filter sammenligner farge
-                    }
+                    filteredList.setPredicate(spoiler -> {
 
-                    else if (String.valueOf(seat.getCompPrice()).toLowerCase().indexOf(lowerCaseFiler) != -1)
-                        return true;
-                    else return false; //hvis den ikke kan sammenlinges
-                });
+                        //Hvis filter er tommt , vis alt
+                        if (newValue == null || newValue.isEmpty()) {
+                            return true;
+                        }
+                        String lowerCaseFiler = newValue.toLowerCase();
+                        if (spoiler.getCompName().toLowerCase().indexOf(lowerCaseFiler) != -1) {
+                            System.out.println("Er lik");
+                            return true; //Filter sammenligner navn
+                        } else if (spoiler.getSpoilerSide().toLowerCase().indexOf(lowerCaseFiler) != -1) {
+                            return true; //Filter sammenligner farge
+                        } else if (String.valueOf(spoiler.getCompPrice()).toLowerCase().indexOf(lowerCaseFiler) != -1)
+                            return true;
+                        else return false; //hvis den ikke kan sammenlinges
+                    });
                 }));
 
-            //Setter filteredlist i en sortedlist, binder de sammen til tableviewvet og legger sorted og filterreing til tabellen,
-             SortedList<Seat> sortedData = new SortedList<>(seatsList);
-             sortedData.comparatorProperty().bind(seatView.comparatorProperty());
-             seatView.setItems(sortedData);
-
-
-
-
+                //Setter filteredlist i en sortedlist, binder de sammen til tableviewvet og legger sorted og filterreing til tabellen,
+                SortedList<Spoiler> sortedData = new SortedList<>(filteredList);
+                sortedData.comparatorProperty().bind(spoilerView.comparatorProperty());
+                spoilerView.setItems(sortedData);
+            }
 
 
 
         }
-
 
 
 }
