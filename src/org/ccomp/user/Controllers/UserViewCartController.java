@@ -104,7 +104,7 @@ public class UserViewCartController {
     TableColumn<Engine, String> engintypeColum, nameEngineColum, horsepowerColum, priceEngineColum, quantityEngineColum;*/
 
     private Scene scene;
-    private static List<CarComponent> componentsCart = new ArrayList<>();
+    static List<CarComponent> componentsCart = new ArrayList<>();
 
 
     @FXML
@@ -222,12 +222,19 @@ public class UserViewCartController {
     }
 
     @FXML
-    public void toUserReg() {
+    public void toOrder() {
         try {
             Stage stage = (Stage) userReg.getScene().getWindow();
             URL url = getClass().getResource("/org/ccomp/user/userReg.fxml");
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
+
+
+            UserRegController userRegController = loader.getController();
+            userRegController.setCarComponents(componentsCart);
+
+
+
             Scene scene = new Scene(root, 800, 600);
             stage.setScene(scene);
             stage.show();
@@ -235,6 +242,12 @@ public class UserViewCartController {
             e.printStackTrace();
         }
     }
+
+
+
+
+
+
 
     public ObservableList<Seat> seatTable() {
         Seat seat;
@@ -339,7 +352,7 @@ public class UserViewCartController {
     //for å hente ut i tableview fra viewSiden til cartsiden
     public ObservableList<CarComponent> cartTable() {
         ObservableList<CarComponent> carComps = FXCollections.observableArrayList();
-      //  carComponents = retrievedCompMap.get("CarComp");
+        //  carComponents = retrievedCompMap.get("CarComp");
 
 
         for (CarComponent carComponent : componentsCart) {
@@ -351,8 +364,10 @@ public class UserViewCartController {
             carComps.add(carComponent);
 
         }
-            return carComps;
+        return carComps;
     }
+
+
 
     //Sletter rader i cartTabel
     public void deleteCartRow() {
