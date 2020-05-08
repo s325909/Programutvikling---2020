@@ -2,23 +2,17 @@ package org.ccomp.user.Controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import org.ccomp.fileHandling.ComponentOBJHandler;
-import org.ccomp.model.Car;
-import org.ccomp.model.CarComp;
 import org.ccomp.model.component.CarComponent;
 import org.ccomp.user.Customer;
 
 import java.net.URL;
-import java.util.HashMap;
 import java.util.List;
 
 
@@ -36,9 +30,12 @@ public class UserRegController {
     TableColumn<CarComponent, Integer> orderQuantity;
 
     @FXML
-    TextArea orderTxt,customerTxt;
-
+    TextArea customerTxt;
     List<CarComponent> carComponents;
+
+    @FXML
+    TextField name, mail, phone, zip, city;
+
 
     @FXML
     Button register;
@@ -54,8 +51,6 @@ public class UserRegController {
 
 
     UserViewCartController userViewCartController = new UserViewCartController();
-
-
 
 
     public void toRecipt() {
@@ -79,24 +74,16 @@ public class UserRegController {
             countOrder = (Label) loader.getNamespace().get("countOrder");
             countOrder.setText(String.valueOf(carComponents.size()) + " produkter ");
 
-
+            customerTxt = (TextArea) loader.getNamespace().get("customerTxt");
+            String txt = getRegister();
+            customerTxt.setText(txt);
 
             //legger inn i table
             ordedView.setItems(orderTable());
 
-
-
-
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-
-
-
     }
 
 
@@ -104,8 +91,7 @@ public class UserRegController {
         ObservableList<CarComponent> carComps = FXCollections.observableArrayList();
         //  carComponents = retrievedCompMap.get("CarComp");
 
-
-        for (CarComponent carComponent :  getCarComponents()) {
+        for (CarComponent carComponent : getCarComponents()) {
 
             orderType.setCellValueFactory(new PropertyValueFactory<CarComponent, String>("compType"));
             orderName.setCellValueFactory(new PropertyValueFactory<CarComponent, String>("compType"));
@@ -113,16 +99,10 @@ public class UserRegController {
             orderQuantity.setCellValueFactory(new PropertyValueFactory<CarComponent, Integer>("compQuantity"));
             carComps.add(carComponent);
 
-
-
         }
 
         return carComps;
     }
-
-    
-
-
 
     public List<CarComponent> getCarComponents() {
         return carComponents;
@@ -132,7 +112,15 @@ public class UserRegController {
         this.carComponents = carComponents;
     }
 
+    public String getRegister() {
+        Customer customer = new Customer(name.getText(), mail.getText(), phone.getText(), zip.getText(), city.getText());
+        String txt = "Navn:   " + customer.getFullName() + "\n" +
+                "E-post:   " + customer.getEmailadress() + "\n" +
+                "Mobilnr:   " + customer.getNumber() + "\n" +
+                "Postnr:   " + customer.getZipcode() + "\n" +
+                "By:   " + customer.getCity();
 
-
+        return txt;
+    }
 }
 
