@@ -254,8 +254,11 @@ public class UserViewCartController {
         ObservableList<Seat> seats = FXCollections.observableArrayList();
 
         //Henter dem først ut her
-
+      /*  if (carComponents == null) {
+            carComponents = retrievedCompMap.get("Seat");
+        }*/
         carComponents = retrievedCompMap.get("Seat");
+
 
         //Presenter objektene i tableview ved sette inn riktige verdier til riktig tablecolonne
 
@@ -275,10 +278,11 @@ public class UserViewCartController {
     public ObservableList<Spoiler> spoilerTable() {
         Spoiler spoiler;
         ObservableList<Spoiler> spoilers = FXCollections.observableArrayList();
-
+/*
         if (carComponents == null) {
             carComponents = retrievedCompMap.get("Spoiler");
-        }
+        }*/
+        carComponents = retrievedCompMap.get("Spoiler");
 
         for (CarComponent carComponent : carComponents) {
             spoiler = (Spoiler) carComponent;
@@ -305,6 +309,7 @@ public class UserViewCartController {
 
         if (spoilerPane.isExpanded()) {
             customerSpoilerView.setItems(spoilerTable());
+            customerSpoilerView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         }
     }
