@@ -19,13 +19,12 @@ import javafx.stage.Stage;
 import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import org.ccomp.fileHandling.ComponentOBJHandler;
-import org.ccomp.model.Validation;
+import org.ccomp.model.CompOrder;
 import org.ccomp.model.component.*;
 import org.ccomp.model.component.engine.Engine;
 
 import java.net.URL;
 import java.util.*;
-import java.util.function.Predicate;
 
 public class AdminController implements Initializable {
     Seat seat;
@@ -302,6 +301,24 @@ public class AdminController implements Initializable {
         carComps.add(component);
         carComps.add(component);
         carComps.add(component);
+
+
+
+
+        CompOrder compOrder;
+        int orderNr = 0;
+        for (CarComponent carComponent : carComps) {
+            compOrder = new CompOrder(orderNr, carComponent);
+            System.out.println("COMP ORDER: " + compOrder.toCSVFormat());
+            orderNr++;
+        }
+
+        /*
+        compOrder = new CompOrder(orderNr, carComps);
+        System.out.println("COMP ORDER TOSTRING(): " + compOrder.toString());
+        */
+
+
         return carComps ;
     }
 

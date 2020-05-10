@@ -92,15 +92,6 @@ public class CarComponent implements ObjectFileHandler {
         this.compQuantity.set(compQuantity);
     }
 
-    /*
-    public String getCompType() {
-        return compType;
-    }
-
-    public void setCompType(String compType) {
-        this.compType = compType;
-    }
-    */
 
     public String toCSVFormat() {
         return getCompType() + "," + getCompName() + "," + getCompPrice() + "," + getCompQuantity();

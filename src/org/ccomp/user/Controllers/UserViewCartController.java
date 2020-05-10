@@ -11,14 +11,17 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.ccomp.fileHandling.ComponentCSVHandler;
 import org.ccomp.fileHandling.ComponentOBJHandler;
 import org.ccomp.model.Car;
 import org.ccomp.model.CarComp;
+import org.ccomp.model.CompOrder;
 import org.ccomp.model.component.*;
 import org.ccomp.model.component.engine.Engine;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -232,6 +235,39 @@ public class UserViewCartController {
 
             UserRegController userRegController = loader.getController();
             userRegController.setCarComponents(componentsCart);
+
+
+
+
+            /*
+
+            ComponentCSVHandler csvHandler = new ComponentCSVHandler();
+
+            String[] lastRow = csvHandler.readLast();
+
+            System.out.println("RETREIVED LAST ROW: " + Arrays.toString(lastRow));
+
+            int orderNr = Integer.parseInt(lastRow[0]);
+            orderNr++;
+
+
+            List<CompOrder> compOrderList = new ArrayList<>();
+           // int orderNr = 1;
+            System.out.println("ORDER NR: " + orderNr);
+            for (CarComponent carComponent : componentsCart) {
+                CompOrder compOrder = new CompOrder(orderNr, carComponent);
+                System.out.println(compOrder.toCSVFormat());
+                compOrderList.add(compOrder);
+            }
+
+          //  ComponentCSVHandler csvHandler = new ComponentCSVHandler();
+            csvHandler.writeCompOrder(compOrderList, "testCompOrders.csv");
+
+
+
+             */
+
+
 
 
 

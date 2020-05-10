@@ -8,11 +8,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import org.ccomp.fileHandling.ComponentCSVHandler;
 import org.ccomp.fileHandling.ComponentOBJHandler;
+import org.ccomp.model.CompOrder;
 import org.ccomp.model.component.CarComponent;
 import org.ccomp.user.Customer;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -55,6 +59,8 @@ public class UserRegController {
 
     public void toRecipt() {
 
+        System.out.println("SAVING COMP ORDER...");
+        saveCompOrder(carComponents);
 
         try {
             URL url = getClass().getResource("/org/ccomp/user/order.fxml");
@@ -102,6 +108,43 @@ public class UserRegController {
         }
 
         return carComps;
+    }
+
+
+    private void saveCompOrder(List<CarComponent> componentsCart) {
+        List<CompOrder> compOrderList = new ArrayList<>();
+       // int orderNr = 2;
+        int orderNr = getNextOrderNr();
+        System.out.println("ORDER NR: " + orderNr);
+        for (CarComponent carComponent : componentsCart) {
+            CompOrder compOrder = new CompOrder(orderNr, carComponent);
+            System.out.println(compOrder.toCSVFormat());
+            compOrderList.add(compOrder);
+        }
+
+        ComponentCSVHandler csvHandler = new ComponentCSVHandler();
+
+        csvHandler.writeCompOrder(compOrderList, "testCompOrders.csv");
+    }
+
+    private int getNextOrderNr() {
+        ComponentCSVHandler csvHandler = new ComponentCSVHandler();
+
+      //  String[] lastRow = csvHandler.readLast();
+
+        String[] lastRow = csvHandler.readLastRow();
+
+        if (lastRow[0] == null) {
+            System.out.println("LAST ROW IS NULL!");
+            lastRow[0] = "0";
+        }
+
+        System.out.println("RETREIVED LAST ROW: " + Arrays.toString(lastRow));
+
+        int orderNr = Integer.parseInt(lastRow[0]);
+        orderNr++;
+
+        return orderNr;
     }
 
     public List<CarComponent> getCarComponents() {
