@@ -17,6 +17,11 @@ public class CustomerOrder {
     private int orderId;
     private Customer customer;
 
+    public CustomerOrder(int orderId, Customer customer) {
+        this.orderId = orderId;
+        this.customer = customer;
+    }
+
     public CustomerOrder(int orderId, String fullName, String emailadress, String number, String zipcode, String city) {
         this.orderId = orderId;
 

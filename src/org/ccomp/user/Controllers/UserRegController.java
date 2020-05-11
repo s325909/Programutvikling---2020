@@ -145,7 +145,7 @@ public class UserRegController {
     private void saveCustomerOrder(CustomerOrder customerOrder) {
         ComponentCSVHandler csvHandler = new ComponentCSVHandler();
 
-        csvHandler.writeCustomer(customerOrder, "testCustomerOrders.csv");
+        csvHandler.writeCustomerOrder(customerOrder, "testCustomerOrders.csv");
     }
 
 
@@ -188,7 +188,8 @@ public class UserRegController {
 
         System.out.println("CUSTOMER ORDER NR: " + orderNr);
 
-        CustomerOrder customerOrder = new CustomerOrder(orderNr, name.getText(), mail.getText(), phone.getText(), zip.getText(), city.getText());
+       // CustomerOrder customerOrder = new CustomerOrder(orderNr, name.getText(), mail.getText(), phone.getText(), zip.getText(), city.getText());
+        CustomerOrder customerOrder = new CustomerOrder(orderNr, customer);
         saveCustomerOrder(customerOrder);
 
 

@@ -7,7 +7,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -35,6 +34,7 @@ import java.util.*;
 public class AdminController implements Initializable {
     Seat seat;
     Spoiler spoiler;
+    CustomerOrder customer;
     int row;
     @FXML
     Button backBtn;
@@ -159,6 +159,7 @@ public class AdminController implements Initializable {
     private HashMap<String, List<CarComponent>> compMap, retrievedCompMap;
     private List<CarComponent> carComponents;
     private List<Customer> customerList;
+    List<CustomerOrder> customerOrders1 = new ArrayList<>();
     private Object TableColumn;
     private Scene setRoot;
    // ObservableList<Seat> seatsList;
@@ -188,6 +189,7 @@ public class AdminController implements Initializable {
         retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
 
         System.out.println("INIT COMP MAP: " + retrievedCompMap );
+
 
 
 
@@ -290,7 +292,8 @@ public class AdminController implements Initializable {
         Seat seat;
         ObservableList<Seat> seats = FXCollections.observableArrayList();
        // FilteredList filteredList  = new FilteredList(seats ,e->true);
-
+        jobjHandler = new ComponentOBJHandler();
+        retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
         //Henter dem først ut her
         carComponents = retrievedCompMap.get("Seat");
        if (carComponents == null) carComponents = new ArrayList<>();
@@ -387,8 +390,13 @@ public class AdminController implements Initializable {
 
         ComponentCSVHandler csvHandler = new ComponentCSVHandler();
 
-        List<CustomerOrder> customerOrders1 = new ArrayList<>();
+<<<<<<< HEAD
+
         customerOrders1 = csvHandler.readCustomer(customerOrders1, "testCustomerOrders.csv");
+=======
+        List<CustomerOrder> customerOrders1 = new ArrayList<>();
+        customerOrders1 = csvHandler.readCustomerOrder(customerOrders1, "testCustomerOrders.csv");
+>>>>>>> ff0a8b344e21ef3a565f8b38da2c2ba59cd35c48
         System.out.println("CUSTOMER LIST: " + customerOrders1.size());
 
         //Customer
@@ -535,13 +543,14 @@ public class AdminController implements Initializable {
     @FXML
     public void allTables(){
 
-        if (seatTab.isSelected()){
+
             seatView.setItems(seatTable());
             editSeatTable();
             seatView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
             System.out.println("SEAT TAB");
             searchComp();
-        }
+
+
         if (spoilerTab.isSelected()){
             spoilerView.setItems(spoilerTable());
             editSpoilerTable();
@@ -558,7 +567,7 @@ public class AdminController implements Initializable {
            // carCompView.setItems(carComTable());
            // System.out.println("Customer");
             customerOrderInfoView.setItems(OrderInfoCustomer());
-
+            editOrderCustomer();
         }
 
        // sWheelView.setItems(sWheelTable());
@@ -758,25 +767,138 @@ public class AdminController implements Initializable {
     }
 
 
+    public void editOrderCustomer(){
+        customerOrderInfoView.setEditable(true);
+        customer = (CustomerOrder) customerOrders1.get(row);
+        customerInfoOrderName.setCellFactory(new PropertyValueFactory("Navn"));
+        customerInfoOrderName.setCellFactory(TextFieldTableCell.forTableColumn());
+        customerInfoOrderName.setOnEditCommit((TableColumn.CellEditEvent<CustomerOrder, String> t) -> {
+            t.getTableView().getItems();
+            row = t.getTablePosition().getRow();
+            String value = t.getNewValue();
+            System.out.println(value);
+            customer = ((CustomerOrder) customerOrders1.get(row));
+            customer.setCustomerName(value);
+            (t.getTableView().getItems().get(
+                    t.getTablePosition().getRow())
+            ).setCustomerName(t.getNewValue()
+            );
+        });
+
+        customerInfoOrderEmail.setCellFactory(new PropertyValueFactory("E-postadresse"));
+        customerInfoOrderEmail.setCellFactory(TextFieldTableCell.forTableColumn());
+        customerInfoOrderEmail.setOnEditCommit((TableColumn.CellEditEvent<CustomerOrder, String> t) -> {
+            t.getTableView().getItems();
+            row = t.getTablePosition().getRow();
+            String value = t.getNewValue();
+            System.out.println(value);
+            customer = ((CustomerOrder) customerOrders1.get(row));
+            customer.setCustomerMail(value);
+           // retrievedCompMap.get("CustomerOrder").set(row, seat);
+            (t.getTableView().getItems().get(
+                    t.getTablePosition().getRow())
+            ).setCustomerMail(t.getNewValue()
+            );
+        });
+
+        customerInfoOrderMobilNr.setCellFactory(new PropertyValueFactory("Mobilnummer"));
+        customerInfoOrderMobilNr.setCellFactory(TextFieldTableCell.forTableColumn());
+        customerInfoOrderMobilNr.setOnEditCommit((TableColumn.CellEditEvent<CustomerOrder, String> t) -> {
+            t.getTableView().getItems();
+            row = t.getTablePosition().getRow();
+            String value = t.getNewValue();
+            System.out.println(value);
+            customer = ((CustomerOrder) customerOrders1.get(row));
+            customer.setCustomerNumber(value);
+            retrievedCompMap.get("CustomerOrder").set(row, seat);
+            (t.getTableView().getItems().get(
+                    t.getTablePosition().getRow())
+            ).setCustomerNumber(t.getNewValue()
+            );
+        });
+
+        customerInfoOrderCity.setCellFactory(new PropertyValueFactory("Poststed"));
+        customerInfoOrderCity.setCellFactory(TextFieldTableCell.forTableColumn());
+        customerInfoOrderCity.setOnEditCommit((TableColumn.CellEditEvent<CustomerOrder, String> t) -> {
+            t.getTableView().getItems();
+            row = t.getTablePosition().getRow();
+            String value = t.getNewValue();
+            System.out.println(value);
+            customer = ((CustomerOrder) customerOrders1.get(row));
+            customer.setCustomerCity(value);
+            (t.getTableView().getItems().get(
+                    t.getTablePosition().getRow())
+            ).setCustomerCity(t.getNewValue()
+            );
+        });
+
+
+        customerInfoOrderZip.setCellFactory(new PropertyValueFactory("Postnummer"));
+        customerInfoOrderZip.setCellFactory(TextFieldTableCell.forTableColumn());
+        customerInfoOrderZip.setOnEditCommit((TableColumn.CellEditEvent<CustomerOrder, String> t) -> {
+            t.getTableView().getItems();
+            row = t.getTablePosition().getRow();
+            String value = t.getNewValue();
+            System.out.println(value);
+
+            customer = ((CustomerOrder) customerOrders1.get(row));
+            customer.setCustomerZipCode(value);
+            (t.getTableView().getItems().get(
+                    t.getTablePosition().getRow())
+            ).setCustomerZipCode(t.getNewValue()
+            );
+        });
+
+    }
+
+
 
     @FXML
     public void deleteSelectedRow() {
-
-       // jobjHandler = new ComponentOBJHandler();
+        /*
+        jobjHandler = new ComponentOBJHandler();
         retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
+        System.out.println(retrievedCompMap.size());
         carComponents = retrievedCompMap.get("Seat");
         retrievedCompMap.get("Seat").set(row, seat);
-        Seat selectedRow;
-        ObservableList<Seat> allseats;
-        allseats = seatView.getItems();
-        selectedRow = seatView.getSelectionModel().getSelectedItem();
+       //ObservableList<Seat> allseats;
+       //  allseats = seatView.getItems();
+
+        ObservableList<Seat>selectedItem = seatView.getSelectionModel().getSelectedItems();
 
         for (CarComponent carComponent : carComponents) {
-            allseats.remove(carComponent);
+
+            Seat seat = (Seat) carComponent;
+            seatView.getItems().removeAll(selectedItem);
+            seatTable().remove(seat);
             retrievedCompMap.get("Seat").set(row, seat);
         }
 
-        System.out.println(allseats.remove(carComponents));
+         */
+
+
+        jobjHandler = new ComponentOBJHandler();
+        retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
+        Seat selectedRow = seatView.getSelectionModel().getSelectedItem();
+        System.out.println("SELECTED SEAT " + selectedRow.toCSVFormat());
+        if (selectedRow != null) {
+            seatView.getItems().remove(seat);
+            seatView.getItems().remove(selectedRow);
+            retrievedCompMap.get("Seat").remove(selectedRow);
+        }
+
+
+
+
+      //  System.out.println(allseats.remove(carComponents));
+
+
+
+      // seatView.getItems().removeAll(seatView.getSelectionModel().getSelectedItem());
+
+
+
+
     }
 
 
