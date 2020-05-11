@@ -37,4 +37,9 @@ public class Customer {
     public String getCity() {
         return city;
     }
+
+
+    public String toCSVFormat() {
+        return getFullName() + "," + getEmailadress() + "," + getNumber() + "," + getZipcode() + "," + getCity();
+    }
 }

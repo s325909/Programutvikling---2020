@@ -1,6 +1,7 @@
 package org.ccomp.fileHandling;
 
 import org.ccomp.model.CompOrder;
+import org.ccomp.model.CustomerOrder;
 import org.ccomp.model.component.CarComponent;
 import org.ccomp.user.Customer;
 
@@ -19,5 +20,5 @@ public interface CSVFileHandler {
 
     void writeComponent(List<CarComponent> compList, String filePath);
 
-    void writeCustomer(List<Customer> customerList, String filePath);
+    void writeCustomer(CustomerOrder customerOrder, String filePath);
 }

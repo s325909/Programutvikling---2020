@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import org.ccomp.fileHandling.ComponentCSVHandler;
 import org.ccomp.fileHandling.ComponentOBJHandler;
 import org.ccomp.model.CompOrder;
+import org.ccomp.model.CustomerOrder;
 import org.ccomp.model.component.CarComponent;
 import org.ccomp.user.Customer;
 
@@ -53,6 +54,7 @@ public class UserRegController {
     private Scene scene;
     private ComponentOBJHandler jobjHandler;
 
+    private int orderNr;
 
     UserViewCartController userViewCartController = new UserViewCartController();
 
@@ -60,6 +62,9 @@ public class UserRegController {
     public void toRecipt() {
 
         System.out.println("SAVING COMP ORDER...");
+
+        orderNr = getNextOrderNr();
+
         saveCompOrder(carComponents);
 
         try {
@@ -114,8 +119,8 @@ public class UserRegController {
     private void saveCompOrder(List<CarComponent> componentsCart) {
         List<CompOrder> compOrderList = new ArrayList<>();
        // int orderNr = 2;
-        int orderNr = getNextOrderNr();
-        System.out.println("ORDER NR: " + orderNr);
+       // int orderNr = getNextOrderNr();
+        System.out.println("COMP ORDER NR: " + orderNr);
         for (CarComponent carComponent : componentsCart) {
             CompOrder compOrder = new CompOrder(orderNr, carComponent);
             System.out.println(compOrder.toCSVFormat());
@@ -126,6 +131,15 @@ public class UserRegController {
 
         csvHandler.writeCompOrder(compOrderList, "testCompOrders.csv");
     }
+
+
+    private void saveCustomerOrder(CustomerOrder customerOrder) {
+        ComponentCSVHandler csvHandler = new ComponentCSVHandler();
+
+        csvHandler.writeCustomer(customerOrder, "testCustomerOrders.csv");
+    }
+
+
 
     private int getNextOrderNr() {
         ComponentCSVHandler csvHandler = new ComponentCSVHandler();
@@ -162,6 +176,14 @@ public class UserRegController {
                 "Mobilnr:   " + customer.getNumber() + "\n" +
                 "Postnr:   " + customer.getZipcode() + "\n" +
                 "By:   " + customer.getCity();
+
+
+
+        System.out.println("CUSTOMER ORDER NR: " + orderNr);
+
+        CustomerOrder customerOrder = new CustomerOrder(orderNr, customer);
+        saveCustomerOrder(customerOrder);
+
 
         return txt;
     }

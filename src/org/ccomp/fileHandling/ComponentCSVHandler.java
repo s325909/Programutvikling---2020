@@ -1,6 +1,7 @@
 package org.ccomp.fileHandling;
 
 import org.ccomp.model.CompOrder;
+import org.ccomp.model.CustomerOrder;
 import org.ccomp.model.component.CarComponent;
 import org.ccomp.user.Customer;
 
@@ -110,8 +111,64 @@ public class ComponentCSVHandler implements CSVFileHandler {
     }
 
     @Override
-    public void writeCustomer(List<Customer> customerList, String filePath) {
+    public void writeCustomer(CustomerOrder customerOrder, String filePath) {
+        try {
 
+            File file = new File(filePath);
+
+            FileWriter fw = new FileWriter(filePath, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+
+            firstLine = true;
+            if (file.length() == 0 && firstLine) {
+                System.out.println("FILE EMPTY ; FirstLine == " + firstLine + " ; ADD SEP");
+                pw.println("sep=,");
+                firstLine = false;
+            } else System.out.println("FILE NOT EMPTY ; SEP ADDED == " + firstLine);
+
+
+
+            /*
+            this.emailadress = emailadress;
+        this.number = number;
+        this.zipcode = zipcode;
+        this.city = city;
+             */
+
+            secondLine = true;
+            if (file.length() == 0 && secondLine) {
+                System.out.println("FILE EMPTY ; SecondLine == " + secondLine + " ; ADD HEADER");
+                pw.println("ORDRE NR,NAVN,EPOST,TLF NR,POST NR,POSTSTED");
+                secondLine = false;
+            } else System.out.println("FILE NOT EMPTY ; HEADER ADDED == " + secondLine);
+
+
+
+            // if (fw.)
+
+            // pw.println("TYPE, NAME, PRICE, QUANTITY");
+
+
+
+            /*
+            for (CompOrder compOrder : compOrderList) {
+                pw.println(compOrder.toCSVFormat());
+            }
+            */
+
+            pw.println(customerOrder.toCSVFormat());
+
+            //  pw.println();
+
+            pw.flush();
+            pw.close();
+
+            System.out.println("FILE SAVED");
+
+        } catch (Exception e) {
+            System.out.println("FILE NOT SAVED: " + e.toString());
+        }
     }
 
 
