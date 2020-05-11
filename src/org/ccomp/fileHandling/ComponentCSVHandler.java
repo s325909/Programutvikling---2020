@@ -1,5 +1,6 @@
 package org.ccomp.fileHandling;
 
+import javafx.beans.property.*;
 import org.ccomp.model.CompOrder;
 import org.ccomp.model.CustomerOrder;
 import org.ccomp.model.component.CarComponent;
@@ -276,6 +277,38 @@ public class ComponentCSVHandler implements CSVFileHandler {
     }
 
 
+    public List<CompOrder> searchOrderRow(String filepath, String orderId) {
+        List<CompOrder> compOrders = new ArrayList<>();
+        try {
+            String splitBy = ",";
+            BufferedReader br = new BufferedReader(new FileReader(filepath));
+            String line;
+            while((line = br.readLine()) != null) {
+                String[] b = line.split(splitBy);
+                System.out.println(b[0]);
+
+
+                if (orderId.equals(b[0])) {
+                    System.out.println("ORDER ID FOUND");
+                    System.out.println(b[0] + ";" + b[1] + ";" + b[2] + ";" + b[3] + ";" + b[4]);
+                    int orderNr = Integer.parseInt(b[0]);
+                    String compType = b[1];
+                    StringProperty compName = new SimpleStringProperty(b[2]);
+                    DoubleProperty compPrice = new SimpleDoubleProperty(Double.valueOf(b[3]));
+                    IntegerProperty compQuantity = new SimpleIntegerProperty(Integer.valueOf(b[4]));
+
+                    CarComponent carComponent = new CarComponent(b[1], compName, compPrice, compQuantity);
+                    compOrders.add(new CompOrder(orderNr, carComponent));
+                }
+
+            }
+            br.close();
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }
+
+        return compOrders;
+    }
 
     public void removeCustomerOrderRow(String filepath, CustomerOrder customerOrder){
 
