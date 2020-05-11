@@ -2,11 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Endret GUI">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Programutvikling---2020/META-INF/Programutvikling---2020.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/ccomp/admin/compGUI/CompController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/ccomp/admin/compGUI/CompController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/ccomp/admin/compGUI/kWheelrim.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/ccomp/admin/compGUI/kWheelrim.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/ccomp/model/Validation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/ccomp/model/Validation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Programutvikling---2020/org/ccomp/admin/AdminController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Programutvikling---2020/org/ccomp/admin/AdminController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Programutvikling---2020/org/ccomp/admin/AdminController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Programutvikling---2020/org/ccomp/admin/AdminController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Programutvikling---2020/org/ccomp/admin/OrderdCustomerInfo.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Programutvikling---2020/org/ccomp/admin/admin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Programutvikling---2020/org/ccomp/admin/admin.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/ccomp/admin/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/ccomp/admin/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/ccomp/admin/OrderdCustomerInfo.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/ccomp/admin/orderCusInfo.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/ccomp/admin/admin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/ccomp/admin/admin.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

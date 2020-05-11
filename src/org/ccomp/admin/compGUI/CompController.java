@@ -482,12 +482,32 @@ public class CompController {
                 seatMaterial.getText(), seatColor.getText(), seatPrice.getText(), seatQuantity.getText());
     }
 
+    public String validationSpoiler() {
+        return Validation.valAdminSpiler(spoilerName.getText(), spoilerColor.getText(),
+                spoilerSide.getText(), spoilerPrice.getText(), spoilerQuantity.getText());
+    }
+
+    public String validationSteering() {
+        return Validation.valAdminSteering(steeringWheelName.getText(), steeringWheelColor.getText(),
+                steeringWheelMaterial.getText(), steeringWheelPrice.getText(), steeringWheelQuantity.getText());
+    }
+
+    public String validationEngine() {
+        return Validation.valAdminEngine(engineName.getText(), enginePower.getText(), enginePrice.getText(), engineQuantity.getText());
+    }
+
+    public String validationRim() {
+        return Validation.valAdminRim(wheelRimName.getText(), wheelRimDimension.getText(), wheelRimColor.getText(), wheelRimPrice.getText(),
+                wheelRimQuantity.getText());
+    }
+
     //denne funker
     public void inputEmpty() {
-        if (seatName.getText().isEmpty()) {
+        if (validationSeat().isEmpty()) {
             alert("Du må fylle ut alle felt!");
 
         }
+
     }
 }
 
