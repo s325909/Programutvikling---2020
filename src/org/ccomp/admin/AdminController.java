@@ -389,11 +389,14 @@ public class AdminController implements Initializable {
     public ObservableList<CustomerOrder> OrderInfoCustomer(){
 
         ComponentCSVHandler csvHandler = new ComponentCSVHandler();
-        
-        
+
+<<<<<<< HEAD
+
+        customerOrders1 = csvHandler.readCustomer(customerOrders1, "testCustomerOrders.csv");
+=======
         List<CustomerOrder> customerOrders1 = new ArrayList<>();
         customerOrders1 = csvHandler.readCustomerOrder(customerOrders1, "testCustomerOrders.csv");
-
+>>>>>>> ff0a8b344e21ef3a565f8b38da2c2ba59cd35c48
         System.out.println("CUSTOMER LIST: " + customerOrders1.size());
 
         //Customer
