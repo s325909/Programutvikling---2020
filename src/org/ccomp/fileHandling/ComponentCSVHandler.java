@@ -72,11 +72,17 @@ public class ComponentCSVHandler implements CSVFileHandler {
 
                 System.out.println("VALUES: " + Arrays.toString(values));
 
-                Customer customer = new Customer(values[1], values[2], values[3], values[4], values[5]);
+              //  Customer customer = new Customer(values[1], values[2], values[3], values[4], values[5]);
 
                 int orderNr = Integer.parseInt(values[0]);
+                String customerName = values[1];
+                String customerMail = values[2];
+                String customerNumber = values[3];
+                String customerZipCode = values[4];
+                String customerCity = values[5];
 
-                CustomerOrder customerOrder = new CustomerOrder(orderNr, customer);
+                CustomerOrder customerOrder = new CustomerOrder(orderNr, customerName, customerMail,customerNumber,
+                                                                customerZipCode, customerCity);
 
                 customerOrderList.add(customerOrder);
             }

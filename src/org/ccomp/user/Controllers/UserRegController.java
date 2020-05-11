@@ -181,7 +181,7 @@ public class UserRegController {
 
         System.out.println("CUSTOMER ORDER NR: " + orderNr);
 
-        CustomerOrder customerOrder = new CustomerOrder(orderNr, customer);
+        CustomerOrder customerOrder = new CustomerOrder(orderNr, name.getText(), mail.getText(), phone.getText(), zip.getText(), city.getText());
         saveCustomerOrder(customerOrder);
 
 

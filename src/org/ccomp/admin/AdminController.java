@@ -18,6 +18,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.IntegerStringConverter;
+import org.ccomp.fileHandling.ComponentCSVHandler;
 import org.ccomp.fileHandling.ComponentOBJHandler;
 import org.ccomp.model.Car;
 import org.ccomp.model.CompOrder;
@@ -87,10 +88,19 @@ public class AdminController implements Initializable {
     @FXML
     TableColumn<CustomerOrder,Integer> customerInfoOderNr;
 
+
+    @FXML
+    TableColumn<CustomerOrder,String>customerInfoOrderName,customerInfoOrderEmail,
+            customerInfoOrderZip,customerInfoOrderMobilNr,customerInfoOrderCity,
+            customerInfoOrderButton;
+
+    /*
     @FXML
     TableColumn<Customer,String>customerInfoOrderName,customerInfoOrderEmail,
             customerInfoOrderZip,customerInfoOrderMobilNr,customerInfoOrderCity,
             customerInfoOrderButton;
+
+     */
 
 
     //Seat
@@ -314,6 +324,17 @@ public class AdminController implements Initializable {
 
     public ObservableList<CustomerOrder> OrderInfoCustomer(){
 
+        ComponentCSVHandler csvHandler = new ComponentCSVHandler();
+
+        List<CustomerOrder> customerOrders1 = new ArrayList<>();
+        customerOrders1 = csvHandler.readCustomer(customerOrders1, "testCustomerOrders.csv");
+        System.out.println("CUSTOMER LIST: " + customerOrders1.size());
+
+
+
+
+
+
         //Customer
         String  customerName = "Jaso";
         String customerEmail ="athisaiyan@hotmail.com";
@@ -324,8 +345,10 @@ public class AdminController implements Initializable {
 
 
 
+
         ObservableList<CustomerOrder> customerOrders = FXCollections.observableArrayList();
-        CustomerOrder customerOrder = new CustomerOrder(2,customer);
+       // CustomerOrder customerOrder = new CustomerOrder(2,customer);
+        CustomerOrder customerOrder = new CustomerOrder(5, customerName, customerEmail, customerNumber, customerZip, customerCity);
 
         List<CustomerOrder> customerOrderList = new ArrayList<>();
 
@@ -340,22 +363,20 @@ public class AdminController implements Initializable {
 
         customerList = new ArrayList<>();
 
-        for (CustomerOrder customerOrder1 : customerOrderList) {
-            customer = customerOrder1.getCustomer();
-
+        for (CustomerOrder customerOrder1 : customerOrders1) {
+           // customer = customerOrder1.getCustomer();
             customerInfoOderNr.setCellValueFactory(new PropertyValueFactory<CustomerOrder,Integer>("customerOrderNr"));
-            customerInfoOrderName.setCellValueFactory(new PropertyValueFactory<Customer,String>("fullName"));
-            customerInfoOrderEmail.setCellValueFactory(new PropertyValueFactory<Customer,String>("emailadress"));
-            customerInfoOrderZip.setCellValueFactory(new PropertyValueFactory<Customer,String>("zipcode"));
-            customerInfoOrderMobilNr.setCellValueFactory(new PropertyValueFactory<Customer,String>("number"));
-            customerInfoOrderCity.setCellValueFactory(new PropertyValueFactory<Customer,String>("city"));
+            customerInfoOrderName.setCellValueFactory(new PropertyValueFactory<CustomerOrder,String>("customerName"));
+            customerInfoOrderEmail.setCellValueFactory(new PropertyValueFactory<CustomerOrder,String>("customerMail"));
+            customerInfoOrderZip.setCellValueFactory(new PropertyValueFactory<CustomerOrder,String>("customerNumber"));
+            customerInfoOrderMobilNr.setCellValueFactory(new PropertyValueFactory<CustomerOrder,String>("customerZipCode"));
+            customerInfoOrderCity.setCellValueFactory(new PropertyValueFactory<CustomerOrder,String>("customerCity"));
 
-            customerList.add(customer);
-            customerOrders.add(customerOrder);
+           // customerList.add(customer);
+            customerOrders.add(customerOrder1);
         }
 
         return customerOrders;
-
     }
 
 
