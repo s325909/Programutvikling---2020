@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="515.0" prefWidth="1066.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.AdminController">
+   <children>
+       <TableView fx:id="carCompView" id="orderCustomerView" prefHeight="200.0" prefWidth="200.0">
+           <columns>
+               <TableColumn fx:id="orderNrColum" prefWidth="138.0" text="OrderNR" />
+               <TableColumn fx:id="orderTypeColum" prefWidth="138.0" text="Type" />
+               <TableColumn fx:id="orderNameColum" prefWidth="138.0" text="Navn" />
+               <TableColumn fx:id="orderPriceColum" prefWidth="138.0" text="Pris" />
+               <TableColumn fx:id="orderQuntityColum" prefWidth="138.0" text="Antall" />
+           </columns>
+       </TableView>
+   </children>
+</AnchorPane>
