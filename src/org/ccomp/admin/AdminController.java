@@ -304,13 +304,26 @@ public class AdminController implements Initializable {
         ObservableList<CompOrder> compOrders = FXCollections.observableArrayList();
 
 
+        List<CompOrder> compOrderList = new ArrayList<>();
 
+        compOrderList.add(compOrder);
+        compOrderList.add(compOrder);
+        compOrderList.add(compOrder);
+        compOrderList.add(compOrder);
+        compOrderList.add(compOrder);
+
+        carComponents = new ArrayList<>();
+
+        for (CompOrder compOrder1 : compOrderList) {
+            CarComponent carComponent = compOrder1.getCarComponent();
+            carComponents.add(carComponent);
+        }
 
 
        orderNameColum.setCellValueFactory(new PropertyValueFactory<CarComponent,String>("CompName"));
 
 
-       // orderNrColum.setCellValueFactory(new PropertyValueFactory<CompOrder,Integer>(compOrder.getCompOrderNr()));
+        orderNrColum.setCellValueFactory(new PropertyValueFactory<CompOrder,Integer>("compOrderNr"));
         orderTypeColum.setCellValueFactory(new PropertyValueFactory<CompOrder,String>(compOrder.getCompType()));
 
        orderPriceColum.setCellValueFactory(new PropertyValueFactory<CarComponent,Double>("compPrice"));
