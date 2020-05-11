@@ -11,17 +11,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import org.ccomp.fileHandling.ComponentCSVHandler;
 import org.ccomp.fileHandling.ComponentOBJHandler;
-import org.ccomp.model.Car;
-import org.ccomp.model.CarComp;
-import org.ccomp.model.CompOrder;
 import org.ccomp.model.component.*;
 import org.ccomp.model.component.engine.Engine;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
