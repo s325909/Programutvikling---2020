@@ -12,6 +12,7 @@ import org.ccomp.fileHandling.ComponentCSVHandler;
 import org.ccomp.fileHandling.ComponentOBJHandler;
 import org.ccomp.model.CompOrder;
 import org.ccomp.model.CustomerOrder;
+import org.ccomp.model.Validation;
 import org.ccomp.model.component.CarComponent;
 import org.ccomp.user.Customer;
 
@@ -67,35 +68,43 @@ public class UserRegController {
 
         saveCompOrder(carComponents);
 
-        try {
-            URL url = getClass().getResource("/org/ccomp/user/order.fxml");
+        emptyFields();
+
+        if (!validationUser().isEmpty()) {
+            alert(validationUser());
+
+        } else {
+            try {
+                URL url = getClass().getResource("/org/ccomp/user/order.fxml");
 
 
-            FXMLLoader loader = new FXMLLoader(url);
-            scene = contentcustomer.getScene();
-            scene.setRoot(loader.load());
+                FXMLLoader loader = new FXMLLoader(url);
+                scene = contentcustomer.getScene();
+                scene.setRoot(loader.load());
 
-            //sende inn kolonnene og viewet
-            ordedView = (TableView<CarComponent>) loader.getNamespace().get("ordedView");
-            orderName = (TableColumn<CarComponent, String>) loader.getNamespace().get("orderName");
-            orderType = (TableColumn<CarComponent, String>) loader.getNamespace().get("orderType");
-            orderPrice = (TableColumn<CarComponent, Double>) loader.getNamespace().get("orderPrice");
-            orderQuantity = (TableColumn<CarComponent, Integer>) loader.getNamespace().get("orderQuantity");
+                //sende inn kolonnene og viewet
+                ordedView = (TableView<CarComponent>) loader.getNamespace().get("ordedView");
+                orderName = (TableColumn<CarComponent, String>) loader.getNamespace().get("orderName");
+                orderType = (TableColumn<CarComponent, String>) loader.getNamespace().get("orderType");
+                orderPrice = (TableColumn<CarComponent, Double>) loader.getNamespace().get("orderPrice");
+                orderQuantity = (TableColumn<CarComponent, Integer>) loader.getNamespace().get("orderQuantity");
 
-            countOrder = (Label) loader.getNamespace().get("countOrder");
-            countOrder.setText(String.valueOf(carComponents.size()) + " produkter ");
+                countOrder = (Label) loader.getNamespace().get("countOrder");
+                countOrder.setText(String.valueOf(carComponents.size()) + " produkter ");
 
-            customerTxt = (TextArea) loader.getNamespace().get("customerTxt");
-            String txt = getRegister();
-            customerTxt.setText(txt);
+                customerTxt = (TextArea) loader.getNamespace().get("customerTxt");
+                String txt = getRegister();
+                customerTxt.setText(txt);
 
-            //legger inn i table
-            ordedView.setItems(orderTable());
+                //legger inn i table
+                ordedView.setItems(orderTable());
 
-        } catch (Exception e) {
-            e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
+
 
 
     public ObservableList<CarComponent> orderTable() {
@@ -118,8 +127,8 @@ public class UserRegController {
 
     private void saveCompOrder(List<CarComponent> componentsCart) {
         List<CompOrder> compOrderList = new ArrayList<>();
-       // int orderNr = 2;
-       // int orderNr = getNextOrderNr();
+        // int orderNr = 2;
+        // int orderNr = getNextOrderNr();
         System.out.println("COMP ORDER NR: " + orderNr);
         for (CarComponent carComponent : componentsCart) {
             CompOrder compOrder = new CompOrder(orderNr, carComponent);
@@ -140,11 +149,10 @@ public class UserRegController {
     }
 
 
-
     private int getNextOrderNr() {
         ComponentCSVHandler csvHandler = new ComponentCSVHandler();
 
-      //  String[] lastRow = csvHandler.readLast();
+        //  String[] lastRow = csvHandler.readLast();
 
         String[] lastRow = csvHandler.readLastRow();
 
@@ -178,7 +186,6 @@ public class UserRegController {
                 "By:   " + customer.getCity();
 
 
-
         System.out.println("CUSTOMER ORDER NR: " + orderNr);
 
         CustomerOrder customerOrder = new CustomerOrder(orderNr, name.getText(), mail.getText(), phone.getText(), zip.getText(), city.getText());
@@ -186,6 +193,27 @@ public class UserRegController {
 
 
         return txt;
+    }
+
+    //validation
+    public String validationUser() {
+        return Validation.valUser(name.getText(), mail.getText(), phone.getText(), zip.getText(),
+                city.getText());
+    }
+
+    public static void alert(String msg) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("CCOMP");
+        alert.setHeaderText("Feil!");
+        alert.setContentText(msg);
+        alert.showAndWait();
+
+    }
+
+    public void emptyFields() {
+        if (name.getText().isEmpty() || mail.getText().isEmpty() || phone.getText().isEmpty() || zip.getText().isEmpty() || city.getText().isEmpty()) {
+            alert("Fyll inn alle felt!");
+        }
     }
 }
 

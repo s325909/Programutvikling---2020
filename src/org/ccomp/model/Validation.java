@@ -167,16 +167,6 @@ public class Validation {
             lable = ("Poststed er skrevet inn i feil format! \n");
         }
         return lable;
-    }
 
-    //validation for quantity etter spinner, skal ersattes med validation for quantity over.....
-    public static String validateObjectOnNull(Object object) {
-        String lable = "";
-        if (object == null) {
-
-            lable = ("Velg antall av samme komponenter du vil legge til! \n");
-        }
-
-        return lable;
     }
 }
