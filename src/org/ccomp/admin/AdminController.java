@@ -7,7 +7,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -388,7 +387,7 @@ public class AdminController implements Initializable {
         ComponentCSVHandler csvHandler = new ComponentCSVHandler();
 
         List<CustomerOrder> customerOrders1 = new ArrayList<>();
-        customerOrders1 = csvHandler.readCustomer(customerOrders1, "testCustomerOrders.csv");
+        customerOrders1 = csvHandler.readCustomerOrder(customerOrders1, "testCustomerOrders.csv");
         System.out.println("CUSTOMER LIST: " + customerOrders1.size());
 
         //Customer

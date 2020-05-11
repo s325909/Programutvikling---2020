@@ -30,7 +30,7 @@ public class ComponentCSVHandler implements CSVFileHandler {
     }
 
     @Override
-    public List<CustomerOrder> readCustomer(List<CustomerOrder> customerOrderList, String filePath) {
+    public List<CustomerOrder> readCustomerOrder(List<CustomerOrder> customerOrderList, String filePath) {
 
         File file = new File(filePath);
 
@@ -194,7 +194,7 @@ public class ComponentCSVHandler implements CSVFileHandler {
     //todo:  refactor name to "writeCustomerOrder"
 
     @Override
-    public void writeCustomer(CustomerOrder customerOrder, String filePath) {
+    public void writeCustomerOrder(CustomerOrder customerOrder, String filePath) {
         try {
 
             File file = new File(filePath);
