@@ -17,6 +17,9 @@ public class ComponentCSVHandler implements CSVFileHandler {
 
     @Override
     public List<CompOrder> readCompOrder(List<CompOrder> compOrderList, String filePath) {
+
+
+
         return null;
     }
 
@@ -26,8 +29,69 @@ public class ComponentCSVHandler implements CSVFileHandler {
     }
 
     @Override
-    public List<Customer> readCustomer(List<Customer> customerList, String filePath) {
-        return null;
+    public List<CustomerOrder> readCustomer(List<CustomerOrder> customerOrderList, String filePath) {
+
+        File file = new File(filePath);
+
+        if (file.length() == 0) {
+            System.out.println("CUSTOMER ORDER EMPTY");
+            return new ArrayList<>();
+        }
+
+        try(BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+
+
+            firstLine = true;
+            secondLine = true;
+
+            while ((line = br.readLine()) != null) {
+
+                System.out.println("#0 ; FirstLine == " + firstLine + " ; " + "SecondLine == " + secondLine);
+
+
+                if (firstLine) {
+                    System.out.println("FIRST LINE ; CONTINUE == " + firstLine);
+                    firstLine = false;
+                    continue;
+                }
+
+                System.out.println("#1 ; FirstLine == " + firstLine + " ; " + "SecondLine == " + secondLine);
+
+                if (secondLine) {
+                    System.out.println("FIRST LINE ; CONTINUE == " + secondLine);
+                    secondLine = false;
+                    continue;
+                }
+
+                System.out.println("#2 ; FirstLine == " + firstLine + " ; " + "SecondLine == " + secondLine);
+
+
+                String[] values = line.split(",");
+
+
+                System.out.println("VALUES: " + Arrays.toString(values));
+
+                Customer customer = new Customer(values[1], values[2], values[3], values[4], values[5]);
+
+                int orderNr = Integer.parseInt(values[0]);
+
+                CustomerOrder customerOrder = new CustomerOrder(orderNr, customer);
+
+                customerOrderList.add(customerOrder);
+            }
+
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+       // return datalist;
+
+
+        return customerOrderList;
+
+       // return null;
     }
 
     @Override
