@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,18 +16,19 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import org.ccomp.fileHandling.ComponentCSVHandler;
 import org.ccomp.fileHandling.ComponentOBJHandler;
-import org.ccomp.model.Car;
 import org.ccomp.model.CompOrder;
 import org.ccomp.model.CustomerOrder;
 import org.ccomp.model.component.*;
 import org.ccomp.model.component.engine.Engine;
 import org.ccomp.user.Customer;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
@@ -38,7 +40,7 @@ public class AdminController implements Initializable {
     Button backBtn;
 
     @FXML
-    Button addComp;
+    Button addComp,backAdmin;
 
     @FXML
     TextField search;
@@ -49,46 +51,29 @@ public class AdminController implements Initializable {
     @FXML
     Tab engineTab,seatTab,spoilerTab,steeringWTab,wheelRimTab,orderEngineTab;
 
-    //View
     @FXML
-    TableView<Seat> seatView;
-    @FXML
-    TableView<Spoiler> spoilerView;
-    @FXML
-    TableView<SteeringWheel> sWheelView;
-    @FXML
-    TableView<WheelRim> wheelRimView;
-    @FXML
-    TableView<Engine> engineView;
+    AnchorPane adminPane,custermerInfoPane;
 
     //OrderView
     @FXML
     TableView<CompOrder> carCompView;
-
     @FXML
     TableColumn<CompOrder, String> orderTypeColum;
-
     @FXML
     TableColumn<CompOrder,Integer> orderNrColum;
 
     @FXML
     TableColumn<CarComponent, String> orderNameColum;
-
     @FXML
     TableColumn<CarComponent,Double> orderPriceColum;
-
     @FXML
     TableColumn<CarComponent,Integer> orderQuntityColum;
 
     //OrderCustomer
-
     @FXML
     TableView<CustomerOrder> customerOrderInfoView;
-
     @FXML
     TableColumn<CustomerOrder,Integer> customerInfoOderNr;
-
-
     @FXML
     TableColumn<CustomerOrder,String>customerInfoOrderName,customerInfoOrderEmail,
             customerInfoOrderZip,customerInfoOrderMobilNr,customerInfoOrderCity,
@@ -105,6 +90,8 @@ public class AdminController implements Initializable {
 
     //Seat
     @FXML
+    TableView<Seat> seatView;
+    @FXML
     TableColumn<Seat, String> nameSeatColum, materiellColum, colorSeatColum;
     @FXML
     TableColumn<Seat, Double> seatPriceColum;
@@ -113,21 +100,43 @@ public class AdminController implements Initializable {
 
     //Spoiler
     @FXML
+    TableView<Spoiler> spoilerView;
+    @FXML
     TableColumn<Spoiler, String> nameSpoilerColum, colorSpoilerColum, sideSpoilerColum;
     @FXML
     TableColumn<Spoiler, Double> priceSpoilerColum;
     @FXML
     TableColumn<Spoiler, Integer> quantitySpoilerColum;
 
-    //StWeel
+    //SteeringWheel
     @FXML
-    TableColumn<SteeringWheel, String> nameSWheelColum, materiellSWeel, colorSWheelColum, priceSWeelColum, quantitySWeelColum;
+    TableView<SteeringWheel> sWheelView;
     @FXML
-    TableColumn<WheelRim, String> nameWheelRimColum, dimensionWheelRim, colorWheelRim, priceWheelRim, quantityWheelRim;
+    TableColumn<SteeringWheel, String> nameSWheelColum, materiellSWeel, colorSWheelColum;
+    @FXML
+    TableColumn<SteeringWheel, Double> priceSWeelColum;
+    @FXML
+    TableColumn<SteeringWheel, Integer>  quantitySWeelColum;;
+
+    //WheelRim
+    @FXML
+    TableView<WheelRim> wheelRimView;
+    @FXML
+    TableColumn<WheelRim, String> nameWheelRimColum, dimensionWheelRim, colorWheelRim;
+    @FXML
+    TableColumn<WheelRim, Double> priceWheelRim;
+    @FXML
+    TableColumn<WheelRim,Integer> quantityWheelRim;
 
     //Engine
     @FXML
-    TableColumn<Engine, String> engintypeColum, nameEngineColum, horsepowerColum, priceEngineColum, quantityEngineColum;
+    TableView<Engine> engineView;
+    @FXML
+    TableColumn<Engine, String> engintypeColum, nameEngineColum, horsepowerColum;
+    @FXML
+    TableColumn<Engine, Double>priceEngineColum;
+    @FXML
+    TableColumn<Engine, Integer>quantityEngineColum;
 
     //@FXML
     //TableColumn<Seat, SimpleStringProperty> nameSeatColum,colorSeatColum,seatPriceColum,quantitySeatColum;
@@ -151,6 +160,7 @@ public class AdminController implements Initializable {
     private List<CarComponent> carComponents;
     private List<Customer> customerList;
     private Object TableColumn;
+    private Scene setRoot;
    // ObservableList<Seat> seatsList;
 
 
@@ -221,6 +231,57 @@ public class AdminController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    public void toContact(){
+        System.out.println("Til contact list ");
+
+
+
+        try {
+
+            URL url = getClass().getResource("/org/ccomp/admin/orderCusInfo.fxml");
+
+            FXMLLoader loader = new FXMLLoader(url);
+            setRoot = adminPane.getScene();
+            setRoot.setRoot(loader.load());
+
+
+            carCompView =  (TableView<CompOrder>) loader.getNamespace().get("carCompView");
+            orderTypeColum =  (TableColumn<CompOrder,String>) loader.getNamespace().get("orderTypeColum");
+            orderNrColum =  (TableColumn<CompOrder,Integer>) loader.getNamespace().get("orderNrColum");
+            orderNameColum =  (TableColumn<CarComponent,String>) loader.getNamespace().get("orderNameColum");
+            orderPriceColum =  (TableColumn<CarComponent,Double>) loader.getNamespace().get("orderPriceColum");
+            orderQuntityColum =  (TableColumn<CarComponent,Integer>) loader.getNamespace().get("orderQuntityColum");
+
+            carCompView.setItems(carComTable());
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public void backToAdmin() {
+
+        try {
+            Stage stage = (Stage) backAdmin.getScene().getWindow();
+            URL url = getClass().getResource("/org/ccomp/admin/admin.fxml");
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+            Scene scene = new Scene(root, 600, 500);
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+
 
 
     //Metoden henter objektene fra arrayliste.
@@ -294,8 +355,8 @@ public class AdminController implements Initializable {
             nameSWheelColum.setCellValueFactory(new PropertyValueFactory<SteeringWheel, String>("compName"));
             colorSWheelColum.setCellValueFactory(new PropertyValueFactory<SteeringWheel, String>("compName"));
             materiellSWeel.setCellValueFactory(new PropertyValueFactory<SteeringWheel, String>("spoilerSide"));
-            priceSWeelColum.setCellValueFactory(new PropertyValueFactory<SteeringWheel, String>("compPrice"));
-            quantitySWeelColum.setCellValueFactory(new PropertyValueFactory<SteeringWheel, String>("compQuantity"));
+            priceSWeelColum.setCellValueFactory(new PropertyValueFactory<SteeringWheel, Double>("compPrice"));
+            quantitySWeelColum.setCellValueFactory(new PropertyValueFactory<SteeringWheel, Integer>("compQuantity"));
             steeringWheels.add(steeringWheel);
         }
 
@@ -330,11 +391,6 @@ public class AdminController implements Initializable {
         customerOrders1 = csvHandler.readCustomer(customerOrders1, "testCustomerOrders.csv");
         System.out.println("CUSTOMER LIST: " + customerOrders1.size());
 
-
-
-
-
-
         //Customer
         String  customerName = "Jaso";
         String customerEmail ="athisaiyan@hotmail.com";
@@ -342,9 +398,6 @@ public class AdminController implements Initializable {
         String customerZip = "1187";
         String customerCity ="Oslo";
         Customer customer = new Customer(customerName,customerEmail,customerNumber,customerZip,customerCity);
-
-
-
 
         ObservableList<CustomerOrder> customerOrders = FXCollections.observableArrayList();
        // CustomerOrder customerOrder = new CustomerOrder(2,customer);
@@ -359,9 +412,11 @@ public class AdminController implements Initializable {
         customerOrderList.add(customerOrder);
         customerOrderList.add(customerOrder);
 
-
-
         customerList = new ArrayList<>();
+
+
+
+
 
         for (CustomerOrder customerOrder1 : customerOrders1) {
            // customer = customerOrder1.getCustomer();
@@ -399,8 +454,10 @@ public class AdminController implements Initializable {
         compOrderList.add(compOrder);
         compOrderList.add(compOrder);
 
-        carComponents = new ArrayList<>();
 
+
+        carComponents = new ArrayList<>();
+       // if (customerOrderInfoView.getSelectionModel().isSelected(row))
         for (CompOrder compOrder1 : compOrderList) {
             CarComponent carComponent = compOrder1.getCarComponent();
             orderNameColum.setCellValueFactory(new PropertyValueFactory<CarComponent,String>("CompName"));
@@ -411,6 +468,7 @@ public class AdminController implements Initializable {
             carComponents.add(carComponent);
             compOrders.add(compOrder);
         }
+
 
         // carComps.add(component);
 
@@ -444,6 +502,22 @@ public class AdminController implements Initializable {
         return compOrders;
     }
 
+    @FXML
+    public void clickedOrderNr(){
+        //Tabl tablePosition = customerOrderInfoView.getSelectionModel().getSelectedItems().get(0);
+/*
+        CustomerOrder  customerOrder2 = customerOrderInfoView.getItems().get(row);
+        TableColumn tableColumn = customerOrderInfoView.get
+        int data = (int) tableColumn.getCellObservableValue(customerOrder2).getValue();
+        System.out.println(data);*/
+
+        int index = customerOrderInfoView.getSelectionModel().getSelectedIndex();
+        CustomerOrder customerOrder3 = customerOrderInfoView.getItems().get(index);
+        String txt = "Ordernr" + customerOrder3.getCustomerOrderNr();
+        System.out.println(txt);
+
+    }
+
 
 
     public void tables()
@@ -475,11 +549,16 @@ public class AdminController implements Initializable {
             System.out.println("SPOILER SATB");
             searchComp();
         }
+        if (steeringWTab.isSelected()){
+            sWheelView.setItems(sWheelTable());
+            sWheelView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        }
 
         if (orderEngineTab.isSelected()){
            // carCompView.setItems(carComTable());
            // System.out.println("Customer");
             customerOrderInfoView.setItems(OrderInfoCustomer());
+
         }
 
        // sWheelView.setItems(sWheelTable());
@@ -784,6 +863,8 @@ public class AdminController implements Initializable {
         }
 
 
+
 }
+
 
 
