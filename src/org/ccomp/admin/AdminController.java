@@ -297,9 +297,6 @@ public class AdminController implements Initializable {
         DoubleProperty compPriceProperty= new SimpleDoubleProperty(264);
         CarComponent component = new CarComponent("CompType", compNameProperty, compPriceProperty, compQuantityProperty);
 
-
-
-
         CompOrder compOrder = new CompOrder(2,component);
         ObservableList<CompOrder> compOrders = FXCollections.observableArrayList();
 
@@ -316,22 +313,28 @@ public class AdminController implements Initializable {
 
         for (CompOrder compOrder1 : compOrderList) {
             CarComponent carComponent = compOrder1.getCarComponent();
+            orderNameColum.setCellValueFactory(new PropertyValueFactory<CarComponent,String>("CompName"));
+            orderNrColum.setCellValueFactory(new PropertyValueFactory<CompOrder,Integer>("compOrderNr"));
+            orderTypeColum.setCellValueFactory(new PropertyValueFactory<CompOrder,String>(compOrder.getCompType()));
+            orderPriceColum.setCellValueFactory(new PropertyValueFactory<CarComponent,Double>("compPrice"));
+            orderQuntityColum.setCellValueFactory(new PropertyValueFactory<CarComponent,Integer>("compQuantity"));
             carComponents.add(carComponent);
+            compOrders.add(compOrder);
         }
 
 
-       orderNameColum.setCellValueFactory(new PropertyValueFactory<CarComponent,String>("CompName"));
-
-
-        orderNrColum.setCellValueFactory(new PropertyValueFactory<CompOrder,Integer>("compOrderNr"));
-        orderTypeColum.setCellValueFactory(new PropertyValueFactory<CompOrder,String>(compOrder.getCompType()));
-
-       orderPriceColum.setCellValueFactory(new PropertyValueFactory<CarComponent,Double>("compPrice"));
-       orderQuntityColum.setCellValueFactory(new PropertyValueFactory<CarComponent,Integer>("compQuantity"));
 
 
 
-        compOrders.add(compOrder);
+
+
+
+
+
+
+
+
+
 
 
         // carComps.add(component);
