@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import org.ccomp.fileHandling.ComponentOBJHandler;
+import org.ccomp.model.Car;
 import org.ccomp.model.CompOrder;
 import org.ccomp.model.component.*;
 import org.ccomp.model.component.engine.Engine;
@@ -59,14 +60,24 @@ public class AdminController implements Initializable {
     @FXML
     TableView<CompOrder> carCompView;
 
-    @FXML
-    TableColumn<CompOrder, String> orderTypeColum,orderNameColum;
 
     @FXML
-    TableColumn<CompOrder,Double> orderPriceColum;
+    TableColumn<CompOrder, String> orderTypeColum;
 
     @FXML
-    TableColumn<CompOrder,Integer> orderQuntityColum, orderNrColum;
+    TableColumn<CompOrder,Integer> orderNrColum;
+
+    @FXML
+    TableColumn<CarComponent, String> orderNameColum;
+        ;
+
+    @FXML
+    TableColumn<CarComponent,Double> orderPriceColum;
+
+    @FXML
+    TableColumn<CarComponent,Integer> orderQuntityColum;
+
+
 
     @FXML
     TableColumn<Seat, String> nameSeatColum, materiellColum, colorSeatColum;
@@ -287,27 +298,39 @@ public class AdminController implements Initializable {
         CarComponent component = new CarComponent("CompType", compNameProperty, compPriceProperty, compQuantityProperty);
 
 
+
+
         CompOrder compOrder = new CompOrder(2,component);
         ObservableList<CompOrder> compOrders = FXCollections.observableArrayList();
 
 
 
 
-     //   orderNameColum.setCellValueFactory(new SimpleStringProperty(compOrder.getCompName()));
-        orderTypeColum.setCellValueFactory(new PropertyValueFactory<CompOrder,String>(compOrder.getCompType()));
-        orderPriceColum.setCellValueFactory(new PropertyValueFactory<CompOrder,Double>(String.valueOf(compOrder.getCompPrice())));
-        orderQuntityColum.setCellValueFactory(new PropertyValueFactory<CompOrder,Integer>(String.valueOf(compOrder.getCompQuantity())));
-        orderNrColum.setCellValueFactory(new PropertyValueFactory<CompOrder,Integer>("oderId"));
 
+       orderNameColum.setCellValueFactory(new PropertyValueFactory<CarComponent,String>("CompName"));
+
+
+       // orderNrColum.setCellValueFactory(new PropertyValueFactory<CompOrder,Integer>(compOrder.getCompOrderNr()));
+        orderTypeColum.setCellValueFactory(new PropertyValueFactory<CompOrder,String>(compOrder.getCompType()));
+
+       orderPriceColum.setCellValueFactory(new PropertyValueFactory<CarComponent,Double>("compPrice"));
+       orderQuntityColum.setCellValueFactory(new PropertyValueFactory<CarComponent,Integer>("compQuantity"));
+
+
+
+        compOrders.add(compOrder);
+
+
+        // carComps.add(component);
 
        // CarComponent carComTest;
-      //  ObservableList<CarComponent> carComps = FXCollections.observableArrayList();
+
 
         //carComponents = new ArrayList<>();
       //  carComps.add(component);
 
 
-        compOrders.add(compOrder);
+
 
         /*CompOrder compOrder;
         int orderNr = 0;
