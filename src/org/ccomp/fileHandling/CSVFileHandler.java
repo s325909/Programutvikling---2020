@@ -13,12 +13,12 @@ public interface CSVFileHandler {
 
     List<CarComponent> readComponent(List<CarComponent> compList, String filePath);
 
-    List<CustomerOrder> readCustomerOrder(List<CustomerOrder> customerOrderList, String filePath);
+    List<CustomerOrder> readCustomer(List<CustomerOrder> customerOrderList, String filePath);
 
 
     void writeCompOrder(List<CompOrder> compOrderList, String filePath);
 
     void writeComponent(List<CarComponent> compList, String filePath);
 
-    void writeCustomerOrder(CustomerOrder customerOrder, String filePath);
+    void writeCustomer(CustomerOrder customerOrder, String filePath);
 }

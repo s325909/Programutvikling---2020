@@ -1,6 +1,5 @@
 package org.ccomp.fileHandling;
 
-import javafx.beans.property.*;
 import org.ccomp.model.CompOrder;
 import org.ccomp.model.CustomerOrder;
 import org.ccomp.model.component.CarComponent;
@@ -15,7 +14,6 @@ import java.util.Scanner;
 public class ComponentCSVHandler implements CSVFileHandler {
 
     private boolean firstLine, secondLine;
-    private Scanner scanner;
 
     @Override
     public List<CompOrder> readCompOrder(List<CompOrder> compOrderList, String filePath) {
@@ -31,7 +29,7 @@ public class ComponentCSVHandler implements CSVFileHandler {
     }
 
     @Override
-    public List<CustomerOrder> readCustomerOrder(List<CustomerOrder> customerOrderList, String filePath) {
+    public List<CustomerOrder> readCustomer(List<CustomerOrder> customerOrderList, String filePath) {
 
         File file = new File(filePath);
 
@@ -74,9 +72,7 @@ public class ComponentCSVHandler implements CSVFileHandler {
 
                 System.out.println("VALUES: " + Arrays.toString(values));
 
-                Customer customer = new Customer(values[1], values[2], values[3], values[4], values[5]);
-
-                /*
+              //  Customer customer = new Customer(values[1], values[2], values[3], values[4], values[5]);
 
                 int orderNr = Integer.parseInt(values[0]);
                 String customerName = values[1];
@@ -87,13 +83,6 @@ public class ComponentCSVHandler implements CSVFileHandler {
 
                 CustomerOrder customerOrder = new CustomerOrder(orderNr, customerName, customerMail,customerNumber,
                                                                 customerZipCode, customerCity);
-
-
-                 */
-
-
-                int orderNr = Integer.parseInt(values[0]);
-                CustomerOrder customerOrder = new CustomerOrder(orderNr, customer);
 
                 customerOrderList.add(customerOrder);
             }
@@ -191,11 +180,8 @@ public class ComponentCSVHandler implements CSVFileHandler {
         }
     }
 
-
-    //todo:  refactor name to "writeCustomerOrder"
-
     @Override
-    public void writeCustomerOrder(CustomerOrder customerOrder, String filePath) {
+    public void writeCustomer(CustomerOrder customerOrder, String filePath) {
         try {
 
             File file = new File(filePath);
@@ -211,6 +197,14 @@ public class ComponentCSVHandler implements CSVFileHandler {
                 firstLine = false;
             } else System.out.println("FILE NOT EMPTY ; SEP ADDED == " + firstLine);
 
+
+
+            /*
+            this.emailadress = emailadress;
+        this.number = number;
+        this.zipcode = zipcode;
+        this.city = city;
+             */
 
             secondLine = true;
             if (file.length() == 0 && secondLine) {
@@ -277,125 +271,25 @@ public class ComponentCSVHandler implements CSVFileHandler {
     }
 
 
-    public List<CompOrder> searchOrderRow(String filepath, String orderId) {
-        List<CompOrder> compOrders = new ArrayList<>();
-        try {
-            String splitBy = ",";
-            BufferedReader br = new BufferedReader(new FileReader(filepath));
-            String line;
-            while((line = br.readLine()) != null) {
-                String[] b = line.split(splitBy);
-                System.out.println(b[0]);
-
-
-                if (orderId.equals(b[0])) {
-                    System.out.println("ORDER ID FOUND");
-                    System.out.println(b[0] + ";" + b[1] + ";" + b[2] + ";" + b[3] + ";" + b[4]);
-                    int orderNr = Integer.parseInt(b[0]);
-                    String compType = b[1];
-                    StringProperty compName = new SimpleStringProperty(b[2]);
-                    DoubleProperty compPrice = new SimpleDoubleProperty(Double.valueOf(b[3]));
-                    IntegerProperty compQuantity = new SimpleIntegerProperty(Integer.valueOf(b[4]));
-
-                    CarComponent carComponent = new CarComponent(b[1], compName, compPrice, compQuantity);
-                    compOrders.add(new CompOrder(orderNr, carComponent));
-                }
-
-            }
-            br.close();
-        } catch (IOException e) {
-            System.out.println(e.toString());
+    public String[] readLast() throws IOException {
+        FileReader file = new FileReader("testCompOrders.csv");  //address of the file
+        List<String> lines = new ArrayList<>();  //to store all lines
+        Scanner scanner = new Scanner(file);
+        while(scanner.hasNextLine()){  //checking for the presence of next Line
+            lines.add(scanner.nextLine());  //reading and storing all lines
         }
+        scanner.close();  //close the scanner
 
-        return compOrders;
+
+        if (lines.size() == 0) lines.add("0");
+
+        String lastLine = lines.get(lines.size()-1);
+        System.out.println("LAST LINE: " + lastLine);
+
+        String[] lastRow = lastLine.split(",");
+        System.out.println("LAST ROW: " + Arrays.toString(lastRow));
+
+        return lastRow;
     }
-
-    public void removeCustomerOrderRow(String filepath, CustomerOrder customerOrder){
-
-
-        String[] customerOrderValues = getCustomerOrderValues(customerOrder);
-
-        System.out.println("CUSTOMER ORDER VALUES: " + Arrays.toString(customerOrderValues));
-
-        /*
-        //todo: make method that returns String[];
-        String ordreId = String.valueOf(customerOrder.getOrderId());
-        String customerName = customerOrder.getCustomerName();
-        String customerMail = customerOrder.getCustomerMail();
-        String customerPhoneNr = customerOrder.getCustomerNumber();
-        String customerZipCode = customerOrder.getCustomerZipCode();
-        String customerCity = customerOrder.getCustomerCity();
-        */
-
-        String tempFile = "temp.csv";
-        File oldFile = new File(filepath);
-        File newFile = new File(tempFile);
-        String ordreNr = ""; String fullName = ""; String emailadress = ""; String phoneNr = "";
-        String zipcode = ""; String city = "";
-
-
-        try {
-            FileWriter fw = new FileWriter(tempFile, true);
-            BufferedWriter bw = new BufferedWriter(fw);
-            PrintWriter pw = new PrintWriter(bw);
-            scanner = new Scanner(new File(filepath));
-            scanner.useDelimiter("[,\n]");
-
-
-
-
-            System.out.println("TEMP FILE ; ADD SEP");
-            pw.println("sep=,");
-
-            System.out.println("TEMP FILE ; ADD HEADER");
-            pw.println("ORDRE NR,NAVN,EPOST,TLF NR,POST NR,POSTSTED");
-
-
-            while (scanner.hasNext()){
-                ordreNr = scanner.next();
-                fullName = scanner.next();
-                emailadress = scanner.next();
-                phoneNr = scanner.next();
-                zipcode = scanner.next();
-                city = scanner.next();
-
-
-                if (!ordreNr.equals(customerOrderValues[0]) && !fullName.equals(customerOrderValues[1])
-                        && !emailadress.equals(customerOrderValues[2]) && !zipcode.equals(customerOrderValues[3])
-                        && !zipcode.equals(customerOrderValues[4]) && !city.equals(customerOrderValues[5])) {
-
-                    pw.println(customerOrder.toCSVFormat());
-                    System.out.println("WRITING ROW TO TMP FILE");
-                } else System.out.println("IGNORING ROW");
-            }
-            scanner.close();
-            pw.flush();
-            pw.close();
-            System.out.println(oldFile + " has been deleted!");
-            oldFile.delete();
-            File contactperson = new File(filepath);
-            newFile.renameTo(contactperson);
-            System.out.println("temp file has been renamed to " + newFile);
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println(e);
-        }
-    }
-
-    private String[] getCustomerOrderValues(CustomerOrder customerOrder) {
-
-        String ordreId = String.valueOf(customerOrder.getOrderId());
-        String customerName = customerOrder.getCustomerName();
-        String customerMail = customerOrder.getCustomerMail();
-        String customerPhoneNr = customerOrder.getCustomerNumber();
-        String customerZipCode = customerOrder.getCustomerZipCode();
-        String customerCity = customerOrder.getCustomerCity();
-
-
-        String customerOrderValues[] = new String[] {ordreId, customerName, customerMail, customerPhoneNr, customerZipCode, customerCity};
-
-        return customerOrderValues;
-    }
-
 
 }

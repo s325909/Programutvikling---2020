@@ -13,10 +13,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.ccomp.fileHandling.ComponentCSVHandler;
 import org.ccomp.fileHandling.ComponentOBJHandler;
-import org.ccomp.model.CompOrder;
 import org.ccomp.model.CustomerOrder;
 import org.ccomp.model.component.*;
 import org.ccomp.model.component.engine.Engine;
+import org.ccomp.user.Customer;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -239,17 +239,8 @@ public class UserViewCartController {
             ComponentCSVHandler csvHandler = new ComponentCSVHandler();
 
             List<CustomerOrder> customerOrders = new ArrayList<>();
-            customerOrders = csvHandler.readCustomerOrder(customerOrders, "testCustomerOrders.csv");
+            customerOrders = csvHandler.readCustomer(customerOrders, "testCustomerOrders.csv");
             System.out.println("CUSTOMER LIST: " + customerOrders.size());
-
-
-
-
-            List<CompOrder> compOrders = csvHandler.searchOrderRow("testCompOrders.csv", "5");
-            System.out.println("COMP ORDERS SIZE: " + compOrders.size());
-            for (CompOrder compOrder : compOrders) {
-                System.out.println(compOrder.toCSVFormat());
-            }
 
             /*
 
