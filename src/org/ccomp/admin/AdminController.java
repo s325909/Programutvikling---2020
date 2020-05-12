@@ -140,38 +140,16 @@ public class AdminController implements Initializable {
     @FXML
     TableColumn<Engine, Integer>quantityEngineColum;
 
-    //@FXML
-    //TableColumn<Seat, SimpleStringProperty> nameSeatColum,colorSeatColum,seatPriceColum,quantitySeatColum;
-
-    //  @FXML
-    //  TableColumn<Spoiler, SimpleStringProperty> nameSpoilerColum,colorSpoilerColum,sideSpoilerColum,priceSpoilerColum,quantitySpoilerColum;
-
-    //@FXML
-    //TableColumn<SteeringWheel,SimpleStringProperty> nameSWheelColum,materiellSWeel,colorSWheelColum,priceSWeelColum,quantitySWeelColum;
-
-    //@FXML
-    //TableColumn<WheelRim,SimpleStringProperty> nameWheelRimColum,dimensionWheelRim,colorWheelRim,priceWheelRim,quantityWheelRim;
-
-    // @FXML
-    //TableColumn<Engine, SimpleStringProperty> engintypeColum,nameEngineColum,horsepowerColum, priceEngineColum, quantityEngineColum;
-
     private ComponentOBJHandler jobjHandler;
 
    // private ComponentOBJHandler jobjHandler;
     private HashMap<String, List<CarComponent>> compMap, retrievedCompMap;
     private List<CarComponent> carComponents;
-    List<CustomerOrder> customerOrders1 = new ArrayList<>();
     private List<Customer> customerList;
-    private Object TableColumn;
     private Scene setRoot;
-   // ObservableList<Seat> seatsList;
-
-
-
     private ObservableList<Seat> seats;
+    private ObservableList<Spoiler> spoilers;
     private SortedList<Seat> sortedData;
-
-
     private ObservableList<CustomerOrder> customerOrders;
 
 
@@ -225,7 +203,7 @@ public class AdminController implements Initializable {
     public ObservableList<Spoiler> spoilerTable() {
 
         Spoiler spoiler;
-        ObservableList<Spoiler> spoilers = FXCollections.observableArrayList();
+        spoilers = FXCollections.observableArrayList();
         carComponents = retrievedCompMap.get("Spoiler");
 
         if (carComponents == null) carComponents = new ArrayList<>();
@@ -414,33 +392,11 @@ public class AdminController implements Initializable {
 
     @FXML
     public void clickedOrderNr(){
-        //Tabl tablePosition = customerOrderInfoView.getSelectionModel().getSelectedItems().get(0);
-/*
-        CustomerOrder  customerOrder2 = customerOrderInfoView.getItems().get(row);
-        TableColumn tableColumn = customerOrderInfoView.get
-        int data = (int) tableColumn.getCellObservableValue(customerOrder2).getValue();
-        System.out.println(data);*/
-
         int index = customerOrderInfoView.getSelectionModel().getSelectedIndex();
         CustomerOrder customerOrder3 = customerOrderInfoView.getItems().get(index);
         String txt = "Ordernr" + customerOrder3.getCustomerOrderNr();
         System.out.println(txt);
-
     }
-
-
-
-    public void tables()
-    {
-        tabPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
-            @Override
-            public void changed(ObservableValue<? extends Tab> observable, Tab oldTab, Tab newTab) {
-                if (newTab == seatTab) System.out.println("SEAT TAB ´" + seatTab.isSelected());
-                else if (newTab == spoilerTab) System.out.println("SPILER TAB: " + spoilerTab.isSelected());
-            }
-        });
-    }
-
 
     @FXML
     public void allTables(){
@@ -756,25 +712,47 @@ public class AdminController implements Initializable {
 
     @FXML
     public void deleteSelectedRow() {
+        if(seatTab.isSelected()) {
+            int retrievedCompMapSize = retrievedCompMap.size();
 
-        int retrievedCompMapSize = retrievedCompMap.size();
+            // The index of the sorted and filtered list
+            int visibleIndex = seatView.getSelectionModel().getSelectedIndex();
 
-        // The index of the sorted and filtered list
-        int visibleIndex = seatView.getSelectionModel().getSelectedIndex();
+            // Source index of ObservableList
+            int sourceIndex = sortedData.getSourceIndexFor(seats, visibleIndex);
 
-        // Source index of ObservableList
-        int sourceIndex = sortedData.getSourceIndexFor(seats, visibleIndex);
+            // Remove from ObservableList using the index
+            seats.remove(sourceIndex);
 
-        // Remove from ObservableList using the index
-        seats.remove(sourceIndex);
+            //Remove selected component from HashMap containing all components
+            retrievedCompMap.get("Seat").remove(sourceIndex);
 
-        //Remove selected component from HashMap containing all components
-        retrievedCompMap.get("Seat").remove(sourceIndex);
-        
 
-        // Write Components HashMap to file if changes has been made
-        if (retrievedCompMapSize != retrievedCompMap.size())
-            jobjHandler.writeComponent(retrievedCompMap);
+            // Write Components HashMap to file if changes has been made
+            if (retrievedCompMapSize != retrievedCompMap.size())
+                jobjHandler.writeComponent(retrievedCompMap);
+        }
+
+        if(spoilerTab.isSelected()) {
+            int retrievedCompMapSize = retrievedCompMap.size();
+
+            // The index of the sorted and filtered list
+            int visibleIndex = spoilerView.getSelectionModel().getSelectedIndex();
+
+            // Source index of ObservableList
+            int sourceIndex = sortedData.getSourceIndexFor(spoilers, visibleIndex);
+
+            // Remove from ObservableList using the index
+            spoilers.remove(sourceIndex);
+
+            //Remove selected component from HashMap containing all components
+            retrievedCompMap.get("Spoiler").remove(sourceIndex);
+
+
+            // Write Components HashMap to file if changes has been made
+            if (retrievedCompMapSize != retrievedCompMap.size())
+                jobjHandler.writeComponent(retrievedCompMap);
+        }
     }
 
 
@@ -901,9 +879,6 @@ public class AdminController implements Initializable {
     @FXML
     public void toContact(){
         System.out.println("Til contact list ");
-
-
-
         try {
 
             URL url = getClass().getResource("/org/ccomp/admin/orderCusInfo.fxml");

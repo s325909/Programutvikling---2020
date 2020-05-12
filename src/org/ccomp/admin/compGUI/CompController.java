@@ -371,67 +371,11 @@ public class CompController {
     String materolltxt;
 
 
-  //  @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-    }
-
-    //bilType
-    @FXML
-    RadioButton gasoline, electric, hybrid;
 
 
-    //komponent
-    @FXML
-    RadioButton engine1, seat1, spoiler1, steeringwheel, wheelrim;
 
-    //Skrive inn
-
-    @FXML
-    TextField navn, /*horsepower*/variable, price;
-    //her må det komme inn en felles verdig for tekstfelt 2
-
-    //leggtilKnapp
     @FXML
     Button backToAdd;
-
-    @FXML
-    ToggleGroup carTypeGroup, componentTypeGroup;
-
-
-    private void selectedCarType() {
-        if (gasoline.isSelected()) {
-            System.out.println("Bensin");
-           // GasolineEngine gasolineEngine = new GasolineEngine();
-            selectedEngine(gasolineEngine);
-            gasolineEngine.printEngine();
-
-        } else if (electric.isSelected()) {
-            System.out.println("El");
-           // ElectricMotor electricMotor = new ElectricMotor();
-            selectedEngine(electricMotor);
-            electricMotor.printEngine();
-
-        } else if (hybrid.isSelected()) {
-            System.out.println("hybrid");
-           // HybridEngine hybridEngine = new HybridEngine();
-            selectedEngine(hybridEngine);
-            hybridEngine.printEngine();
-        }
-    }
-
-    private Engine selectedEngine(Engine engine) {
-
-        namegivingEngine = navn.getText();
-        horsePowertxt = String.valueOf(variable.getText());
-        pricetxt = price.getText();
-     //   engine.engineName(namegivingEngine);
-        engine.enginePower(Integer.parseInt(horsePowertxt));
-     //   engine.enginePrice(Integer.parseInt(pricetxt));
-        return engine;
-    }
-
-
     //Tilbake knapp
     @FXML
     public void backToAddComp() {
