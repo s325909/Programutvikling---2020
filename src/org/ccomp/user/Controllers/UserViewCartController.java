@@ -375,10 +375,39 @@ public class UserViewCartController {
                 DoubleProperty compPriceProperty = new SimpleDoubleProperty(item.getCompPrice());
                 IntegerProperty compQuantityProperty = new SimpleIntegerProperty(item.getCompQuantity());
                 carComponents = getComponentsCart();
-                componentsCart.add(new Seat(compNameProperty, compPriceProperty, compQuantityProperty, compColorProperty, compMaterialProperty));
+                Seat seat = new Seat(compNameProperty, compPriceProperty, compQuantityProperty, compColorProperty, compMaterialProperty);
+                seat.setCompQuantity(1);
+                componentsCart.add(seat);
                 countProducts();
+
+
+                int count = 0;
+                for(CarComponent carComponent : componentsCart){
+
+
+                    if (carComponent.getCompType().equals("Seat")){
+
+                        Seat tempSeat = (Seat) carComponent;
+
+                        tempSeat.setCompQuantity(1);
+
+                       if (tempSeat.equals(seat)){
+
+                           componentsCart.get(count).setCompQuantity(carComponent.getCompQuantity() + 1);
+
+
+                       }
+
+
+                    }
+                    count++;
+                }
+
+
                 // cartProduct.setText( "Navn" + compNameProperty  );
+                countProducts();
             }
+
 
         if (customerSpoilerView.getSelectionModel().isSelected(spoilerindex) && spoilerPane.isExpanded()) {
 
