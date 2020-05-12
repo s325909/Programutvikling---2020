@@ -98,7 +98,7 @@
                            <tabs>
                               <Tab fx:id="orderEngineTab" onSelectionChanged="#allTables" text="Motor">
                                  <content>
-                                     <TableView fx:id="customerOrderInfoView" layoutX="57.0" layoutY="71.0" onMouseClicked="#clickedOrderNr" prefHeight="374.0" prefWidth="915.0">
+                                     <TableView fx:id="customerOrderInfoView" layoutX="57.0" layoutY="71.0" prefHeight="374.0" prefWidth="915.0">
                                          <columns>
                                              <TableColumn fx:id="customerInfoOderNr" prefWidth="111.0" text="OrderNr" />
                                              <TableColumn fx:id="customerInfoOrderName" prefWidth="136.0" text="Navn" />

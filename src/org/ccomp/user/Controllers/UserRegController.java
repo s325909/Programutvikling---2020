@@ -64,14 +64,14 @@ public class UserRegController {
 
         System.out.println("SAVING COMP ORDER...");
 
-        orderNr = getNextOrderNr();
-
-        saveCompOrder(carComponents);
 
         emptyFields();
 
         if (!validationUser().isEmpty()) {
-            alert(validationUser());
+            if (!name.getText().isEmpty() || !mail.getText().isEmpty() || !phone.getText().isEmpty() || !zip.getText().isEmpty() || !city.getText().isEmpty()) {
+                alert(validationUser());
+            }
+           // alert(validationUser());
 
         } else {
             try {
@@ -93,11 +93,35 @@ public class UserRegController {
                 countOrder.setText(String.valueOf(carComponents.size()) + " produkter ");
 
                 customerTxt = (TextArea) loader.getNamespace().get("customerTxt");
-                String txt = getRegister();
+
+
+                String txt = getRegister().toCSVFormat();
+
+
                 customerTxt.setText(txt);
 
                 //legger inn i table
                 ordedView.setItems(orderTable());
+
+
+
+                orderNr = getNextOrderNr();
+
+                System.out.println("CUSTOMER ORDER NR: " + orderNr);
+
+               // CustomerOrder customerOrder = new CustomerOrder(orderNr, name.getText(), mail.getText(), phone.getText(), zip.getText(), city.getText());
+
+
+
+
+                saveCompOrder(carComponents);
+
+
+                CustomerOrder customerOrder = new CustomerOrder(orderNr, getRegister());
+                saveCustomerOrder(customerOrder);
+
+
+
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -177,7 +201,7 @@ public class UserRegController {
         this.carComponents = carComponents;
     }
 
-    public String getRegister() {
+    public Customer getRegister() {
         Customer customer = new Customer(name.getText(), mail.getText(), phone.getText(), zip.getText(), city.getText());
         String txt = "Navn:   " + customer.getFullName() + "\n" +
                 "E-post:   " + customer.getEmailadress() + "\n" +
@@ -186,13 +210,9 @@ public class UserRegController {
                 "By:   " + customer.getCity();
 
 
-        System.out.println("CUSTOMER ORDER NR: " + orderNr);
-
-        CustomerOrder customerOrder = new CustomerOrder(orderNr, name.getText(), mail.getText(), phone.getText(), zip.getText(), city.getText());
-        saveCustomerOrder(customerOrder);
 
 
-        return txt;
+        return customer;
     }
 
     //validation
@@ -211,7 +231,7 @@ public class UserRegController {
     }
 
     public void emptyFields() {
-        if (name.getText().isEmpty() || mail.getText().isEmpty() || phone.getText().isEmpty() || zip.getText().isEmpty() || city.getText().isEmpty()) {
+        if (name.getText().isEmpty() && mail.getText().isEmpty() && phone.getText().isEmpty() && zip.getText().isEmpty() && city.getText().isEmpty()) {
             alert("Fyll inn alle felt!");
         }
     }

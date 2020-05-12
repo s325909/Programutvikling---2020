@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.ccomp.fileHandling.ComponentCSVHandler;
 import org.ccomp.fileHandling.ComponentOBJHandler;
+import org.ccomp.model.Car;
 import org.ccomp.model.CustomerOrder;
 import org.ccomp.model.component.*;
 import org.ccomp.model.component.engine.Engine;
@@ -153,6 +154,8 @@ public class UserViewCartController {
 
 
         if (componentsCart == null) componentsCart = new ArrayList<>();
+
+        if (componentsCart.size() == 0) System.out.println("VELG PRODUKT");
 
         //todo: fjernes etter testing
        /* StringProperty compNameProperty = new SimpleStringProperty("COMP NAME");
@@ -448,6 +451,17 @@ public class UserViewCartController {
             CarComponent selectedRow = cartTable.getSelectionModel().getSelectedItem();
             cartTable.getItems().remove(selectedRow);
             componentsCart.remove(selectedRow);
+
+            /*
+            for (CarComponent carComponent : componentsCart) {
+                cartTable.getItems().remove(carComponent);
+
+            }
+
+            cartTable.getItems().removeAll(componentsCart);
+            componentsCart.clear();
+
+             */
 
             double sum = totalPrice();
             sumText.setText(String.valueOf(sum));
