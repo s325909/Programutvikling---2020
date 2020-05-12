@@ -168,6 +168,13 @@ public class AdminController implements Initializable {
 
 
 
+    private ObservableList<Seat> seats;
+    private SortedList<Seat> sortedData;
+
+
+    private ObservableList<CustomerOrder> customerOrders;
+
+
 
 
 
@@ -175,114 +182,14 @@ public class AdminController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
 
-        //todo: ikke ha i initialize; fileN kan være tom eller ikke ekistere
-
-
-
-
-
         jobjHandler = new ComponentOBJHandler();
-
-       // jobjHandler = new ComponentOBJHandler();
-
-
 
         //todo: fila kan være null eller tom
         retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
 
         System.out.println("INIT COMP MAP: " + retrievedCompMap );
 
-
-
-//        tables();
-
-       // allTables();
-
-
-        // retrievedCompMap.put("Seat", carComponents);
     }
-
-    /**
-     * Method that opens main.fxml when the Back Button is clicked
-     */
-    @FXML
-    public void backToMain() {
-        try {
-            Stage stage = (Stage) backBtn.getScene().getWindow();
-            URL url = getClass().getResource("/org/ccomp/main/main.fxml");
-            FXMLLoader loader = new FXMLLoader(url);
-            Parent root = loader.load();
-            Scene scene = new Scene(root, 500, 500);
-            stage.setScene(scene);
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    public void toAddComponent() {
-        try {
-            Stage stage = (Stage) addComp.getScene().getWindow();
-            URL url = getClass().getResource("/org/ccomp/admin/addComponent.fxml");
-            FXMLLoader loader = new FXMLLoader(url);
-            Parent root = loader.load();
-            Scene scene = new Scene(root, 600, 500);
-            stage.setScene(scene);
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    public void toContact(){
-        System.out.println("Til contact list ");
-
-
-
-        try {
-
-            URL url = getClass().getResource("/org/ccomp/admin/orderCusInfo.fxml");
-
-            FXMLLoader loader = new FXMLLoader(url);
-            setRoot = adminPane.getScene();
-            setRoot.setRoot(loader.load());
-
-
-            carCompView =  (TableView<CompOrder>) loader.getNamespace().get("carCompView");
-            orderTypeColum =  (TableColumn<CompOrder,String>) loader.getNamespace().get("orderTypeColum");
-            orderNrColum =  (TableColumn<CompOrder,Integer>) loader.getNamespace().get("orderNrColum");
-            orderNameColum =  (TableColumn<CarComponent,String>) loader.getNamespace().get("orderNameColum");
-            orderPriceColum =  (TableColumn<CarComponent,Double>) loader.getNamespace().get("orderPriceColum");
-            orderQuntityColum =  (TableColumn<CarComponent,Integer>) loader.getNamespace().get("orderQuntityColum");
-
-            carCompView.setItems(carComTable());
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-    }
-
-    public void backToAdmin() {
-
-        try {
-            Stage stage = (Stage) backAdmin.getScene().getWindow();
-            URL url = getClass().getResource("/org/ccomp/admin/admin.fxml");
-            FXMLLoader loader = new FXMLLoader(url);
-            Parent root = loader.load();
-            Scene scene = new Scene(root, 600, 500);
-            stage.setScene(scene);
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
 
 
 
@@ -291,7 +198,7 @@ public class AdminController implements Initializable {
     public ObservableList<Seat> seatTable() {
 
         Seat seat;
-        ObservableList<Seat> seats = FXCollections.observableArrayList();
+        seats = FXCollections.observableArrayList();
        // FilteredList filteredList  = new FilteredList(seats ,e->true);
 
         //Henter dem først ut her
@@ -402,7 +309,7 @@ public class AdminController implements Initializable {
         String customerCity ="Oslo";
         Customer customer = new Customer(customerName,customerEmail,customerNumber,customerZip,customerCity);
 
-        ObservableList<CustomerOrder> customerOrders = FXCollections.observableArrayList();
+        customerOrders = FXCollections.observableArrayList();
        // CustomerOrder customerOrder = new CustomerOrder(2,customer);
         CustomerOrder customerOrder = new CustomerOrder(5, customerName, customerEmail, customerNumber, customerZip, customerCity);
 
@@ -573,6 +480,9 @@ public class AdminController implements Initializable {
 
     public void editSeatTable() {
         seatView.setEditable(true);
+
+        if (carComponents.size() == 0) return;
+
         seat = (Seat) carComponents.get(row);
         materiellColum.setCellFactory(new PropertyValueFactory("Materiale"));
         materiellColum.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -667,6 +577,10 @@ public class AdminController implements Initializable {
 
     public void editSpoilerTable() {
         spoilerView.setEditable(true);
+
+        if (carComponents.size() == 0) return;
+
+
         spoiler = (Spoiler) carComponents.get(row);
         nameSpoilerColum.setCellFactory(new PropertyValueFactory("Navn"));
         nameSpoilerColum.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -843,21 +757,24 @@ public class AdminController implements Initializable {
     @FXML
     public void deleteSelectedRow() {
 
-       // jobjHandler = new ComponentOBJHandler();
-        retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
-        carComponents = retrievedCompMap.get("Seat");
-        retrievedCompMap.get("Seat").set(row, seat);
-        Seat selectedRow;
-        ObservableList<Seat> allseats;
-        allseats = seatView.getItems();
-        selectedRow = seatView.getSelectionModel().getSelectedItem();
+        int retrievedCompMapSize = retrievedCompMap.size();
 
-        for (CarComponent carComponent : carComponents) {
-            allseats.remove(carComponent);
-            retrievedCompMap.get("Seat").set(row, seat);
-        }
+        // The index of the sorted and filtered list
+        int visibleIndex = seatView.getSelectionModel().getSelectedIndex();
 
-        System.out.println(allseats.remove(carComponents));
+        // Source index of ObservableList
+        int sourceIndex = sortedData.getSourceIndexFor(seats, visibleIndex);
+
+        // Remove from ObservableList using the index
+        seats.remove(sourceIndex);
+
+        //Remove selected component from HashMap containing all components
+        retrievedCompMap.get("Seat").remove(sourceIndex);
+        
+
+        // Write Components HashMap to file if changes has been made
+        if (retrievedCompMapSize != retrievedCompMap.size())
+            jobjHandler.writeComponent(retrievedCompMap);
     }
 
 
@@ -904,7 +821,7 @@ public class AdminController implements Initializable {
                     });
                 }));
                 //Setter filteredlist i en sortedlist, binder de sammen til tableviewvet og legger sorted og filterreing til tabellen,
-                SortedList<Seat> sortedData = new SortedList<>(filteredList);
+                sortedData = new SortedList<>(filteredList);
                 sortedData.comparatorProperty().bind(seatView.comparatorProperty());
                 seatView.setItems(sortedData);
             }
@@ -944,6 +861,90 @@ public class AdminController implements Initializable {
         }
 
 
+
+
+
+
+    /**
+     * Method that opens main.fxml when the Back Button is clicked
+     */
+    @FXML
+    public void backToMain() {
+        try {
+            Stage stage = (Stage) backBtn.getScene().getWindow();
+            URL url = getClass().getResource("/org/ccomp/main/main.fxml");
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+            Scene scene = new Scene(root, 500, 500);
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void toAddComponent() {
+        try {
+            Stage stage = (Stage) addComp.getScene().getWindow();
+            URL url = getClass().getResource("/org/ccomp/admin/addComponent.fxml");
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+            Scene scene = new Scene(root, 600, 500);
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void toContact(){
+        System.out.println("Til contact list ");
+
+
+
+        try {
+
+            URL url = getClass().getResource("/org/ccomp/admin/orderCusInfo.fxml");
+
+            FXMLLoader loader = new FXMLLoader(url);
+            setRoot = adminPane.getScene();
+            setRoot.setRoot(loader.load());
+
+
+            carCompView =  (TableView<CompOrder>) loader.getNamespace().get("carCompView");
+            orderTypeColum =  (TableColumn<CompOrder,String>) loader.getNamespace().get("orderTypeColum");
+            orderNrColum =  (TableColumn<CompOrder,Integer>) loader.getNamespace().get("orderNrColum");
+            orderNameColum =  (TableColumn<CarComponent,String>) loader.getNamespace().get("orderNameColum");
+            orderPriceColum =  (TableColumn<CarComponent,Double>) loader.getNamespace().get("orderPriceColum");
+            orderQuntityColum =  (TableColumn<CarComponent,Integer>) loader.getNamespace().get("orderQuntityColum");
+
+            carCompView.setItems(carComTable());
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public void backToAdmin() {
+
+        try {
+            Stage stage = (Stage) backAdmin.getScene().getWindow();
+            URL url = getClass().getResource("/org/ccomp/admin/admin.fxml");
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+            Scene scene = new Scene(root, 600, 500);
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 
 }
 
