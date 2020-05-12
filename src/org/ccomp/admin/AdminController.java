@@ -1,13 +1,9 @@
 package org.ccomp.admin;
 
-import javafx.beans.property.*;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -276,7 +272,7 @@ public class AdminController implements Initializable {
         ComponentCSVHandler csvHandler = new ComponentCSVHandler();
 
         List<CustomerOrder> customerOrders1 = new ArrayList<>();
-        customerOrders1 = csvHandler.readCustomer(customerOrders1, "testCustomerOrders.csv");
+        customerOrders1 = csvHandler.readCustomerOrder(customerOrders1, "testCustomerOrders.csv");
         System.out.println("CUSTOMER LIST: " + customerOrders1.size());
 
         //Customer
@@ -323,80 +319,62 @@ public class AdminController implements Initializable {
     }
 
 
+
+    private String orderId;
+    private List<CompOrder> compOrderList;
+
     public  ObservableList<CompOrder> carComTable(){
 
-        StringProperty compNameProperty = new SimpleStringProperty("Jaso");
-        IntegerProperty compQuantityProperty = new SimpleIntegerProperty(382);
-        DoubleProperty compPriceProperty= new SimpleDoubleProperty(264);
-        CarComponent component = new CarComponent("CompType", compNameProperty, compPriceProperty, compQuantityProperty);
-
-        CompOrder compOrder = new CompOrder(2,component);
         ObservableList<CompOrder> compOrders = FXCollections.observableArrayList();
 
+        int index = customerOrderInfoView.getSelectionModel().getSelectedIndex();
+        System.out.println("SELECTED CUSTOMER INDEX: " + index);
 
-        List<CompOrder> compOrderList = new ArrayList<>();
-
-        compOrderList.add(compOrder);
-        compOrderList.add(compOrder);
-        compOrderList.add(compOrder);
-        compOrderList.add(compOrder);
-        compOrderList.add(compOrder);
+        boolean orderSelected = true;
+        if (index == -1) {
+            System.out.println("NO INDEX SELECTED!!!");
+            orderSelected = false;
+        }
 
 
+        if (orderSelected) {
+            CustomerOrder selectedCustomerOrder = customerOrderInfoView.getItems().get(index);
+            orderId = String.valueOf(selectedCustomerOrder.getOrderId());
+            System.out.println("SELECTED CUSTOMER ORDER ID: " + orderId);
+        }
+
+
+
+        ComponentCSVHandler csvHandler = new ComponentCSVHandler();
+        if (orderSelected) compOrderList = csvHandler.searchOrderRow("testCompOrders.csv", orderId);
+        else {
+            System.out.println("NO CUSTOMER ORDER SELECTED!!!");
+            compOrderList = csvHandler.readCompOrder(compOrderList, "testCompOrders.csv");
+        }
+
+
+        for (CompOrder compOrder : compOrders) {
+            System.out.println(compOrder.toCSVFormat());
+        }
 
         carComponents = new ArrayList<>();
        // if (customerOrderInfoView.getSelectionModel().isSelected(row))
-        for (CompOrder compOrder1 : compOrderList) {
-            CarComponent carComponent = compOrder1.getCarComponent();
+        for (CompOrder compOrder : compOrderList) {
+            CarComponent carComponent = compOrder.getCarComponent();
             orderNameColum.setCellValueFactory(new PropertyValueFactory<CarComponent,String>("CompName"));
             orderNrColum.setCellValueFactory(new PropertyValueFactory<CompOrder,Integer>("compOrderNr"));
-            orderTypeColum.setCellValueFactory(new PropertyValueFactory<CompOrder,String>(compOrder.getCompType()));
+            orderTypeColum.setCellValueFactory(new PropertyValueFactory<CompOrder,String>("CompType"));
             orderPriceColum.setCellValueFactory(new PropertyValueFactory<CarComponent,Double>("compPrice"));
             orderQuntityColum.setCellValueFactory(new PropertyValueFactory<CarComponent,Integer>("compQuantity"));
             carComponents.add(carComponent);
+
             compOrders.add(compOrder);
         }
-
-
-        // carComps.add(component);
-
-       // CarComponent carComTest;
-
-
-        //carComponents = new ArrayList<>();
-      //  carComps.add(component);
-
-
-
-
-        /*CompOrder compOrder;
-        int orderNr = 0;
-        for (CarComponent carComponent : carComps) {
-            compOrder = new CompOrder(orderNr, carComponent);
-            System.out.println("COMP ORDER: " + compOrder.toCSVFormat());
-            orderNr++;
-        }
-
-        */
-
-
-
-        /*
-        compOrder = new CompOrder(orderNr, carComps);
-        System.out.println("COMP ORDER TOSTRING(): " + compOrder.toString());
-        */
 
 
         return compOrders;
     }
 
-    @FXML
-    public void clickedOrderNr(){
-        int index = customerOrderInfoView.getSelectionModel().getSelectedIndex();
-        CustomerOrder customerOrder3 = customerOrderInfoView.getItems().get(index);
-        String txt = "Ordernr" + customerOrder3.getCustomerOrderNr();
-        System.out.println(txt);
-    }
 
     @FXML
     public void allTables(){
@@ -712,8 +690,10 @@ public class AdminController implements Initializable {
 
     @FXML
     public void deleteSelectedRow() {
+
+        int retrievedCompMapSize = retrievedCompMap.size();
+
         if(seatTab.isSelected()) {
-            int retrievedCompMapSize = retrievedCompMap.size();
 
             // The index of the sorted and filtered list
             int visibleIndex = seatView.getSelectionModel().getSelectedIndex();
@@ -734,7 +714,6 @@ public class AdminController implements Initializable {
         }
 
         if(spoilerTab.isSelected()) {
-            int retrievedCompMapSize = retrievedCompMap.size();
 
             // The index of the sorted and filtered list
             int visibleIndex = spoilerView.getSelectionModel().getSelectedIndex();
@@ -747,12 +726,14 @@ public class AdminController implements Initializable {
 
             //Remove selected component from HashMap containing all components
             retrievedCompMap.get("Spoiler").remove(sourceIndex);
-
-
-            // Write Components HashMap to file if changes has been made
-            if (retrievedCompMapSize != retrievedCompMap.size())
-                jobjHandler.writeComponent(retrievedCompMap);
         }
+
+
+
+
+        // Write Components HashMap to file if changes has been made
+        if (retrievedCompMapSize != retrievedCompMap.size())
+            jobjHandler.writeComponent(retrievedCompMap);
     }
 
 
@@ -877,11 +858,11 @@ public class AdminController implements Initializable {
     }
 
     @FXML
-    public void toContact(){
-        System.out.println("Til contact list ");
+    public void toCompOrder(){
+        System.out.println("TO COMP ORDER TABLE");
         try {
 
-            URL url = getClass().getResource("/org/ccomp/admin/orderCusInfo.fxml");
+            URL url = getClass().getResource("/org/ccomp/admin/compOrderInfo.fxml");
 
             FXMLLoader loader = new FXMLLoader(url);
             setRoot = adminPane.getScene();

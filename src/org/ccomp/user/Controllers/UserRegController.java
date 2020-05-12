@@ -145,7 +145,7 @@ public class UserRegController {
     private void saveCustomerOrder(CustomerOrder customerOrder) {
         ComponentCSVHandler csvHandler = new ComponentCSVHandler();
 
-        csvHandler.writeCustomer(customerOrder, "testCustomerOrders.csv");
+        csvHandler.writeCustomerOrder(customerOrder, "testCustomerOrders.csv");
     }
 
 

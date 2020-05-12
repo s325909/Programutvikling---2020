@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="adminPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.AdminController">
+<AnchorPane fx:id="adminPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.AdminController">
     <children>
         <TabPane fx:id="tabPane" layoutY="100.0" prefHeight="500.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
@@ -192,7 +192,7 @@
             <Font name="Segoe UI Semilight" size="18.0" />
          </font></Button>
       <TextField fx:id="search" layoutX="14.0" layoutY="61.0" onKeyPressed="#searchComp" promptText="Søk" />
-      <Button fx:id="toContactInfo" layoutX="563.0" layoutY="57.0" mnemonicParsing="false" onAction="#toContact" prefHeight="27.0" prefWidth="135.0" text="KundeKomp">
+      <Button fx:id="toContactInfo" layoutX="563.0" layoutY="57.0" mnemonicParsing="false" onAction="#toCompOrder" prefHeight="27.0" prefWidth="135.0" text="KundeKomp">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>

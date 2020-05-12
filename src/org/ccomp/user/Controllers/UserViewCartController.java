@@ -16,7 +16,6 @@ import org.ccomp.fileHandling.ComponentOBJHandler;
 import org.ccomp.model.CustomerOrder;
 import org.ccomp.model.component.*;
 import org.ccomp.model.component.engine.Engine;
-import org.ccomp.user.Customer;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -239,7 +238,7 @@ public class UserViewCartController {
             ComponentCSVHandler csvHandler = new ComponentCSVHandler();
 
             List<CustomerOrder> customerOrders = new ArrayList<>();
-            customerOrders = csvHandler.readCustomer(customerOrders, "testCustomerOrders.csv");
+            customerOrders = csvHandler.readCustomerOrder(customerOrders, "testCustomerOrders.csv");
             System.out.println("CUSTOMER LIST: " + customerOrders.size());
 
             /*

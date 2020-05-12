@@ -1,5 +1,6 @@
 package org.ccomp.fileHandling;
 
+import javafx.beans.property.*;
 import org.ccomp.model.CompOrder;
 import org.ccomp.model.CustomerOrder;
 import org.ccomp.model.component.CarComponent;
@@ -17,10 +18,69 @@ public class ComponentCSVHandler implements CSVFileHandler {
 
     @Override
     public List<CompOrder> readCompOrder(List<CompOrder> compOrderList, String filePath) {
+        File file = new File(filePath);
+
+        if (file.length() == 0) {
+            System.out.println("COMP ORDER EMPTY");
+            return new ArrayList<>();
+        }
+
+        try(BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
 
 
+            firstLine = true;
+            secondLine = true;
 
-        return null;
+            compOrderList = new ArrayList<>();
+
+            while ((line = br.readLine()) != null) {
+
+                if (firstLine) {
+                    System.out.println("FIRST LINE ; CONTINUE == " + firstLine);
+                    firstLine = false;
+                    continue;
+                }
+
+                if (secondLine) {
+                    System.out.println("SECOND LINE ; CONTINUE == " + secondLine);
+                    secondLine = false;
+                    continue;
+                }
+
+                String[] values = line.split(",");
+
+
+                System.out.println("VALUES: " + Arrays.toString(values));
+
+                //  Customer customer = new Customer(values[1], values[2], values[3], values[4], values[5]);
+
+                int orderNr = Integer.parseInt(values[0]);
+                String compType = values[1];
+                StringProperty compName = new SimpleStringProperty(values[2]);
+                DoubleProperty compPrice = new SimpleDoubleProperty(Double.valueOf(values[3]));
+                IntegerProperty compQuantity = new SimpleIntegerProperty(Integer.valueOf(values[4]));
+
+                CarComponent carComponent = new CarComponent(compType, compName, compPrice, compQuantity);
+
+                System.out.println("READ CAR COMPONENT: " + carComponent.toCSVFormat());
+
+
+                CompOrder compOrder = new CompOrder(orderNr, carComponent);
+
+                System.out.println("READ COMP ORDER: " + compOrder.toCSVFormat());
+
+                compOrderList.add(compOrder);
+            }
+
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+
+        return compOrderList;
     }
 
     @Override
@@ -29,7 +89,7 @@ public class ComponentCSVHandler implements CSVFileHandler {
     }
 
     @Override
-    public List<CustomerOrder> readCustomer(List<CustomerOrder> customerOrderList, String filePath) {
+    public List<CustomerOrder> readCustomerOrder(List<CustomerOrder> customerOrderList, String filePath) {
 
         File file = new File(filePath);
 
@@ -181,7 +241,7 @@ public class ComponentCSVHandler implements CSVFileHandler {
     }
 
     @Override
-    public void writeCustomer(CustomerOrder customerOrder, String filePath) {
+    public void writeCustomerOrder(CustomerOrder customerOrder, String filePath) {
         try {
 
             File file = new File(filePath);
@@ -271,25 +331,43 @@ public class ComponentCSVHandler implements CSVFileHandler {
     }
 
 
-    public String[] readLast() throws IOException {
-        FileReader file = new FileReader("testCompOrders.csv");  //address of the file
-        List<String> lines = new ArrayList<>();  //to store all lines
-        Scanner scanner = new Scanner(file);
-        while(scanner.hasNextLine()){  //checking for the presence of next Line
-            lines.add(scanner.nextLine());  //reading and storing all lines
+    public List<CompOrder> searchOrderRow(String filepath, String orderId) {
+        List<CompOrder> compOrders = new ArrayList<>();
+        try {
+            String splitBy = ",";
+            BufferedReader br = new BufferedReader(new FileReader(filepath));
+            String line;
+            while((line = br.readLine()) != null) {
+                String[] b = line.split(splitBy);
+                System.out.println(b[0]);
+
+
+                if (orderId.equals(b[0])) {
+                    System.out.println("ORDER ID FOUND");
+                    System.out.println(b[0] + ";" + b[1] + ";" + b[2] + ";" + b[3] + ";" + b[4]);
+                    int orderNr = Integer.parseInt(b[0]);
+                    String compType = b[1];
+                    StringProperty compName = new SimpleStringProperty(b[2]);
+                    DoubleProperty compPrice = new SimpleDoubleProperty(Double.valueOf(b[3]));
+                    IntegerProperty compQuantity = new SimpleIntegerProperty(Integer.valueOf(b[4]));
+
+                    CarComponent carComponent = new CarComponent(compType, compName, compPrice, compQuantity);
+                    compOrders.add(new CompOrder(orderNr, carComponent));
+
+                    System.out.println("FOUND COMP ORDER SIZE: " + compOrders.size());
+                }
+
+            }
+            br.close();
+        } catch (IOException e) {
+            System.out.println(e.toString());
         }
-        scanner.close();  //close the scanner
 
 
-        if (lines.size() == 0) lines.add("0");
 
-        String lastLine = lines.get(lines.size()-1);
-        System.out.println("LAST LINE: " + lastLine);
+        System.out.println("RETURN COMP ORDER SIZE: " + compOrders.size());
 
-        String[] lastRow = lastLine.split(",");
-        System.out.println("LAST ROW: " + Arrays.toString(lastRow));
-
-        return lastRow;
+        return compOrders;
     }
 
 }
