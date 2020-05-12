@@ -339,12 +339,12 @@ public class UserViewCartController {
 
     public void viewTheComponents() {
 
-        if (seatPane.isExpanded()) {
+
 
             customerSeatView.setItems(seatTable());
             customerSeatView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-        }
+
 
         if (spoilerPane.isExpanded()) {
             customerSpoilerView.setItems(spoilerTable());
@@ -366,27 +366,29 @@ public class UserViewCartController {
         int spoilerindex = customerSpoilerView.getSelectionModel().getSelectedIndex();
 
 
-        if (customerSeatView.getSelectionModel().isSelected(index)) {
-            Seat item = customerSeatView.getItems().get(index);
-            StringProperty compNameProperty = new SimpleStringProperty(item.getCompName());
-            StringProperty compColorProperty = new SimpleStringProperty(item.getColor());
-            StringProperty compMaterialProperty = new SimpleStringProperty(item.getColor());
-            DoubleProperty compPriceProperty = new SimpleDoubleProperty(item.getCompPrice());
-            IntegerProperty compQuantityProperty = new SimpleIntegerProperty(item.getCompQuantity());
-            carComponents = getComponentsCart();
-            componentsCart.add(new Seat(compNameProperty, compPriceProperty, compQuantityProperty, compColorProperty, compMaterialProperty));
-            countProducts();
-            // cartProduct.setText( "Navn" + compNameProperty  );
-        }
+            if (customerSeatView.getSelectionModel().isSelected(index) && seatPane.isExpanded()) {
+                
+                Seat item = customerSeatView.getItems().get(index);
+                StringProperty compNameProperty = new SimpleStringProperty(item.getCompName());
+                StringProperty compColorProperty = new SimpleStringProperty(item.getColor());
+                StringProperty compMaterialProperty = new SimpleStringProperty(item.getColor());
+                DoubleProperty compPriceProperty = new SimpleDoubleProperty(item.getCompPrice());
+                IntegerProperty compQuantityProperty = new SimpleIntegerProperty(item.getCompQuantity());
+                carComponents = getComponentsCart();
+                componentsCart.add(new Seat(compNameProperty, compPriceProperty, compQuantityProperty, compColorProperty, compMaterialProperty));
+                countProducts();
+                // cartProduct.setText( "Navn" + compNameProperty  );
+            }
 
-        if (customerSpoilerView.getSelectionModel().isSelected(spoilerindex)) {
-            Spoiler item = customerSpoilerView.getItems().get(spoilerindex);
-            StringProperty compNameProperty = new SimpleStringProperty(item.getCompName());
-            StringProperty compSpoilerSideProperty = new SimpleStringProperty(item.getSpoilerSide());
-            DoubleProperty compPriceProperty = new SimpleDoubleProperty(item.getCompPrice());
-            IntegerProperty compQuantityProperty = new SimpleIntegerProperty(item.getCompQuantity());
+        if (customerSpoilerView.getSelectionModel().isSelected(spoilerindex) && spoilerPane.isExpanded()) {
+
+            Spoiler spoileritem = customerSpoilerView.getItems().get(spoilerindex);
+            StringProperty spoilercompNameProperty = new SimpleStringProperty(spoileritem.getCompName());
+            StringProperty spoilercompSpoilerSideProperty = new SimpleStringProperty(spoileritem.getSpoilerSide());
+            DoubleProperty spoilercompPriceProperty = new SimpleDoubleProperty(spoileritem.getCompPrice());
+            IntegerProperty spoilercompQuantityProperty = new SimpleIntegerProperty(spoileritem.getCompQuantity());
             carComponents = getComponentsCart();
-            componentsCart.add(new Spoiler(compNameProperty, compPriceProperty, compQuantityProperty,compSpoilerSideProperty));
+            componentsCart.add(new Spoiler(spoilercompNameProperty, spoilercompPriceProperty, spoilercompQuantityProperty,spoilercompSpoilerSideProperty));
             countProducts();
 
         }
