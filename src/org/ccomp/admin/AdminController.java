@@ -35,6 +35,7 @@ import java.util.*;
 public class AdminController implements Initializable {
     Seat seat;
     Spoiler spoiler;
+    CustomerOrder customerOrder;
     int row;
     @FXML
     Button backBtn;
@@ -75,9 +76,10 @@ public class AdminController implements Initializable {
     @FXML
     TableColumn<CustomerOrder,Integer> customerInfoOderNr;
     @FXML
-    TableColumn<CustomerOrder,String>customerInfoOrderName,customerInfoOrderEmail,
-            customerInfoOrderZip,customerInfoOrderMobilNr,customerInfoOrderCity,
-            customerInfoOrderButton;
+    TableColumn<CustomerOrder,String>customerInfoOrderName,customerInfoOrderEmail;
+
+    @FXML
+    TableColumn<CustomerOrder,String> customerInfoOrderZip,customerInfoOrderMobilNr,customerInfoOrderCity;
 
     /*
     @FXML
@@ -158,6 +160,7 @@ public class AdminController implements Initializable {
    // private ComponentOBJHandler jobjHandler;
     private HashMap<String, List<CarComponent>> compMap, retrievedCompMap;
     private List<CarComponent> carComponents;
+    List<CustomerOrder> customerOrders1 = new ArrayList<>();
     private List<Customer> customerList;
     private Object TableColumn;
     private Scene setRoot;
@@ -423,8 +426,8 @@ public class AdminController implements Initializable {
             customerInfoOderNr.setCellValueFactory(new PropertyValueFactory<CustomerOrder,Integer>("customerOrderNr"));
             customerInfoOrderName.setCellValueFactory(new PropertyValueFactory<CustomerOrder,String>("customerName"));
             customerInfoOrderEmail.setCellValueFactory(new PropertyValueFactory<CustomerOrder,String>("customerMail"));
-            customerInfoOrderZip.setCellValueFactory(new PropertyValueFactory<CustomerOrder,String>("customerNumber"));
-            customerInfoOrderMobilNr.setCellValueFactory(new PropertyValueFactory<CustomerOrder,String>("customerZipCode"));
+            customerInfoOrderZip.setCellValueFactory(new PropertyValueFactory<CustomerOrder,String>("customerZipCode"));
+            customerInfoOrderMobilNr.setCellValueFactory(new PropertyValueFactory<CustomerOrder,String>("customerNumber"));
             customerInfoOrderCity.setCellValueFactory(new PropertyValueFactory<CustomerOrder,String>("customerCity"));
 
            // customerList.add(customer);
@@ -558,6 +561,7 @@ public class AdminController implements Initializable {
            // carCompView.setItems(carComTable());
            // System.out.println("Customer");
             customerOrderInfoView.setItems(OrderInfoCustomer());
+            editOrderCustomer();
 
         }
 
@@ -754,6 +758,83 @@ public class AdminController implements Initializable {
             ).setCompName(t.getNewValue()
             );
         });
+
+    }
+
+
+    public void editOrderCustomer(){
+
+        customerOrderInfoView.setEditable(true);
+        customerInfoOrderName.setCellFactory(new PropertyValueFactory("Navn"));
+        customerInfoOrderName.setCellFactory(TextFieldTableCell.forTableColumn());
+        customerInfoOrderName.setOnEditCommit((TableColumn.CellEditEvent<CustomerOrder, String> t) -> {
+            t.getTableView().getItems();
+            row = t.getTablePosition().getRow();
+            String value = t.getNewValue();
+            System.out.println(value);
+            (t.getTableView().getItems().get(
+                    t.getTablePosition().getRow())
+            ).setCustomerName(t.getNewValue()
+            );
+        });
+
+
+        customerInfoOrderEmail.setCellFactory(new PropertyValueFactory("E-postadresse"));
+        customerInfoOrderEmail.setCellFactory(TextFieldTableCell.forTableColumn());
+        customerInfoOrderEmail.setOnEditCommit((TableColumn.CellEditEvent<CustomerOrder, String> t) -> {
+            t.getTableView().getItems();
+            row = t.getTablePosition().getRow();
+            String value = t.getNewValue();
+            System.out.println(value);
+            (t.getTableView().getItems().get(
+                    t.getTablePosition().getRow())
+            ).setCustomerMail(t.getNewValue()
+            );
+        });
+
+
+        customerInfoOrderMobilNr.setCellFactory(new PropertyValueFactory("Mobilnummer"));
+        customerInfoOrderMobilNr.setCellFactory(TextFieldTableCell.forTableColumn());
+        customerInfoOrderMobilNr.setOnEditCommit((TableColumn.CellEditEvent<CustomerOrder, String> t) -> {
+            t.getTableView().getItems();
+            row = t.getTablePosition().getRow();
+            String value = t.getNewValue();
+            System.out.println(value);
+            (t.getTableView().getItems().get(
+                    t.getTablePosition().getRow())
+            ).setCustomerNumber(t.getNewValue()
+            );
+        });
+
+
+        customerInfoOrderCity.setCellFactory(new PropertyValueFactory("Poststed"));
+        customerInfoOrderCity.setCellFactory(TextFieldTableCell.forTableColumn());
+        customerInfoOrderCity.setOnEditCommit((TableColumn.CellEditEvent<CustomerOrder, String> t) -> {
+            t.getTableView().getItems();
+            row = t.getTablePosition().getRow();
+            String value = t.getNewValue();
+            System.out.println(value);
+            (t.getTableView().getItems().get(
+                    t.getTablePosition().getRow())
+            ).setCustomerCity(t.getNewValue()
+            );
+        });
+
+        customerInfoOrderZip.setCellFactory(new PropertyValueFactory("Postnummer"));
+        customerInfoOrderZip.setCellFactory(TextFieldTableCell.forTableColumn());
+        customerInfoOrderZip.setOnEditCommit((TableColumn.CellEditEvent<CustomerOrder, String> t) -> {
+            t.getTableView().getItems();
+            row = t.getTablePosition().getRow();
+            String value = t.getNewValue();
+            System.out.println(value);
+            (t.getTableView().getItems().get(
+                    t.getTablePosition().getRow())
+            ).setCustomerZipCode(t.getNewValue()
+            );
+        });
+
+
+
 
     }
 
