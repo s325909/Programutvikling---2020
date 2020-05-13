@@ -45,6 +45,6 @@
             <Font name="Segoe UI Semilight" size="20.0" />
          </font>
       </Label>
-      <Button layoutX="13.0" layoutY="547.0" mnemonicParsing="false" text="KANSELLER" />
+      <Button fx:id="cancel" layoutX="13.0" layoutY="547.0" mnemonicParsing="false" onAction="#cancelOrder" text="KANSELLER" />
    </children>
 </AnchorPane>
