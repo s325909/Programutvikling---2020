@@ -10,13 +10,13 @@
     <children>
         <TabPane fx:id="tabPane" layoutY="100.0" prefHeight="500.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
-                <Tab text="SE PRODUKTER">
+                <Tab fx:id="carComponentsTab" onSelectionChanged="#initAllTables" text="SE PRODUKTER">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <TabPane prefHeight="453.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
                            <tabs>
-                              <Tab fx:id="engineTab" onSelectionChanged="#allTables" text="Motor">
+                              <Tab fx:id="engineTab" onSelectionChanged="#initAllTables" text="Motor">
                                  <content>
 
                                  </content>
@@ -32,7 +32,7 @@
                                     </TableView>
                                  </content>
                               </Tab>
-                              <Tab fx:id="seatTab" onSelectionChanged="#allTables" text="Sete">
+                              <Tab fx:id="seatTab" onSelectionChanged="#initAllTables" text="Sete">
                                  <content>
                                     <TableView fx:id="seatView" prefHeight="200.0" prefWidth="200.0">
                                       <columns>
@@ -45,7 +45,7 @@
                                     </TableView>
                                  </content>
                               </Tab>
-                              <Tab fx:id="spoilerTab" onSelectionChanged="#allTables" text="Spoiler">
+                              <Tab fx:id="spoilerTab" onSelectionChanged="#initAllTables" text="Spoiler">
                                  <content>
                                     <TableView fx:id="spoilerView" prefHeight="200.0" prefWidth="200.0">
                                       <columns>
@@ -58,7 +58,7 @@
                                     </TableView>
                                  </content>
                               </Tab>
-                              <Tab fx:id="steeringWTab" onSelectionChanged="#allTables" text="Ratt">
+                              <Tab fx:id="steeringWheelTab" onSelectionChanged="#initAllTables" text="Ratt">
                                  <content>
                                     <TableView fx:id="sWheelView" prefHeight="200.0" prefWidth="200.0">
                                       <columns>
@@ -71,7 +71,7 @@
                                     </TableView>
                                  </content>
                               </Tab>
-                              <Tab fx:id="wheelRimTab" onSelectionChanged="#allTables" text="Felg">
+                              <Tab fx:id="wheelRimTab" onSelectionChanged="#initAllTables" text="Felg">
                                  <content>
                                     <TableView fx:id="wheelRimView" prefHeight="200.0" prefWidth="200.0">
                                       <columns>
@@ -90,84 +90,20 @@
                         </AnchorPane>
                     </content>
                 </Tab>
-                <Tab text="BESTILLINGER">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TabPane prefHeight="453.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
-                           <tabs>
-                              <Tab fx:id="orderEngineTab" onSelectionChanged="#allTables" text="Motor">
-                                 <content>
-                                     <TableView fx:id="customerOrderInfoView" layoutX="57.0" layoutY="71.0" prefHeight="374.0" prefWidth="915.0">
-                                         <columns>
-                                             <TableColumn fx:id="customerInfoOderNr" prefWidth="111.0" text="OrderNr" />
-                                             <TableColumn fx:id="customerInfoOrderName" prefWidth="136.0" text="Navn" />
-                                             <TableColumn fx:id="customerInfoOrderEmail" prefWidth="130.0" text="E-postadresse" />
-                                             <TableColumn fx:id="customerInfoOrderMobilNr" prefWidth="161.0" text="Mobilnummer" />
-                                             <TableColumn fx:id="customerInfoOrderZip" prefWidth="124.0" text="Postnummer" />
-                                             <TableColumn fx:id="customerInfoOrderCity" minWidth="0.0" prefWidth="130.0" text="Poststed" />
-                                         </columns>
-                                     </TableView>
-                                 </content>
+            <Tab fx:id="customerOrderTab" onSelectionChanged="#initAllTables" text="BESTILLINGER">
+               <content>
+                   <TableView fx:id="customerOrderInfoView" layoutX="57.0" layoutY="71.0" prefHeight="374.0" prefWidth="915.0">
+                       <columns>
+                           <TableColumn fx:id="customerInfoOderNr" prefWidth="111.0" text="OrderNr" />
+                           <TableColumn fx:id="customerInfoOrderName" prefWidth="136.0" text="Navn" />
+                           <TableColumn fx:id="customerInfoOrderEmail" prefWidth="130.0" text="E-postadresse" />
+                           <TableColumn fx:id="customerInfoOrderMobilNr" prefWidth="161.0" text="Mobilnummer" />
+                           <TableColumn fx:id="customerInfoOrderZip" prefWidth="124.0" text="Postnummer" />
+                           <TableColumn fx:id="customerInfoOrderCity" minWidth="0.0" prefWidth="130.0" text="Poststed" />
+                       </columns>
+                   </TableView>
+               </content>
                               </Tab>
-                              <Tab text="Sete">
-                                 <content>
-                                    <TableView fx:id="seatView1" prefHeight="200.0" prefWidth="200.0">
-                                       <columns>
-                                          <TableColumn fx:id="nameSeatColum1" prefWidth="150.0" text="Navn" />
-                                          <TableColumn fx:id="materiellColum1" prefWidth="150.0" text="Materiale" />
-                                          <TableColumn fx:id="colorSeatColum1" prefWidth="150.0" text="Farge" />
-                                          <TableColumn fx:id="seatPriceColum1" prefWidth="150.0" text="Pris" />
-                                          <TableColumn fx:id="quantitySeatColum1" prefWidth="150.0" text="Antall" />
-                                       </columns>
-                                    </TableView>
-                                 </content>
-                              </Tab>
-                              <Tab text="Spoiler">
-                                 <content>
-                                    <TableView fx:id="spoilerView1" prefHeight="200.0" prefWidth="200.0">
-                                       <columns>
-                                          <TableColumn fx:id="nameSpoilerColum1" prefWidth="146.0" text="Navn" />
-                                          <TableColumn fx:id="colorSpoilerColum1" prefWidth="146.0" text="Farge" />
-                                          <TableColumn fx:id="sideSpoilerColum1" prefWidth="146.0" text="Side" />
-                                          <TableColumn fx:id="priceSpoilerColum1" prefWidth="146.0" text="Pris" />
-                                          <TableColumn fx:id="quantitySpoilerColum1" prefWidth="146.0" text="Antall" />
-                                       </columns>
-                                    </TableView>
-                                 </content>
-                              </Tab>
-                              <Tab text="Ratt">
-                                 <content>
-                                    <TableView fx:id="sWheelView1" prefHeight="200.0" prefWidth="200.0">
-                                       <columns>
-                                          <TableColumn fx:id="nameSWheelColum1" prefWidth="150.0" text="Navn" />
-                                          <TableColumn fx:id="materiellSWeel1" prefWidth="150.0" text="Materiale" />
-                                          <TableColumn fx:id="colorSWheelColum1" prefWidth="150.0" text="Farge" />
-                                          <TableColumn fx:id="priceSWeelColum1" prefWidth="150.0" text="Pris" />
-                                          <TableColumn fx:id="quantitySWeelColum1" prefWidth="150.0" text="Antall" />
-                                       </columns>
-                                    </TableView>
-                                 </content>
-                              </Tab>
-                              <Tab text="Felg">
-                                 <content>
-                                    <TableView fx:id="wheelRimView1" prefHeight="200.0" prefWidth="200.0">
-                                       <columns>
-                                          <TableColumn fx:id="nameWheelRimColum1" prefWidth="150.0" text="Navn" />
-                                          <TableColumn fx:id="dimensionWheelRim1" prefWidth="150.0" text="Dimensjon" />
-                                          <TableColumn fx:id="colorWheelRim1" prefWidth="150.0" text="Farge" />
-                                          <TableColumn fx:id="priceWheelRim1" prefWidth="150.0" text="Pris" />
-                                          <TableColumn fx:id="quantityWheelRim1" prefWidth="150.0" text="Antall" />
-                                       </columns>
-                                    </TableView>
-                                 </content>
-                              </Tab>
-                           </tabs>
-                        </TabPane>
-                     </children>
-                        </AnchorPane>
-                    </content>
-                </Tab>
             </tabs>
             <effect>
                 <InnerShadow choke="1.0" color="#41a2a666" />

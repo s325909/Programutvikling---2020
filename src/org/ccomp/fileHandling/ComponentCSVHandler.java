@@ -110,6 +110,9 @@ public class ComponentCSVHandler implements CSVFileHandler {
             firstLine = true;
             secondLine = true;
 
+
+            customerOrderList = new ArrayList<>();
+
             while ((line = br.readLine()) != null) {
 
                 System.out.println("#0 ; FirstLine == " + firstLine + " ; " + "SecondLine == " + secondLine);
@@ -168,6 +171,8 @@ public class ComponentCSVHandler implements CSVFileHandler {
     @Override
     public void writeCompOrder(List<CompOrder> compOrderList, String filePath) {
         try {
+
+
 
             File file = new File(filePath);
 

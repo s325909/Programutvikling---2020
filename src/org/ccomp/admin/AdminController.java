@@ -1,14 +1,11 @@
 package org.ccomp.admin;
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.collections.transformation.TransformationList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -23,154 +20,145 @@ import org.ccomp.fileHandling.ComponentOBJHandler;
 import org.ccomp.model.CompOrder;
 import org.ccomp.model.CustomerOrder;
 import org.ccomp.model.component.*;
-import org.ccomp.user.Customer;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-public class AdminController implements Initializable {
-    Engine engine;
-    Seat seat;
-    Spoiler spoiler;
-    SteeringWheel steeringWheel;
-    WheelRim wheelRim;
-    CustomerOrder customerOrder;
-    int row;
-    @FXML
-    Button backBtn;
+public class AdminController {
 
     @FXML
-    Button addComp,backAdmin,eraseCompOrder;
+    private Button addComp, backAdmin, backBtn, eraseCompOrder;
 
     @FXML
-    TextField search,searchcompOrder;
+    private TextField search, searchCompOrder;
+
 
     @FXML
-    TabPane tabPane;
+    private AnchorPane adminPane, custermerInfoPane;
 
     @FXML
-    Tab engineTab,seatTab,spoilerTab,steeringWTab,wheelRimTab,orderEngineTab;
+    private Tab engineTab, seatTab, spoilerTab, steeringWheelTab, wheelRimTab, carComponentsTab, customerOrderTab;
 
     @FXML
-    AnchorPane adminPane,custermerInfoPane;
+    private TabPane tabPane;
 
     //OrderView
     @FXML
-    TableView<CompOrder> carCompView;
+    private TableView<CompOrder> carCompView;
     @FXML
-    TableColumn<CompOrder, String> orderTypeColum;
+    private TableColumn<CompOrder, String> orderTypeColum;
     @FXML
-    TableColumn<CompOrder,Integer> orderNrColum;
+    private TableColumn<CompOrder,Integer> orderNrColum;
 
     @FXML
-    TableColumn<CarComponent, String> orderNameColum;
+    private TableColumn<CarComponent, String> orderNameColum;
     @FXML
-    TableColumn<CarComponent,Double> orderPriceColum;
+    private TableColumn<CarComponent,Double> orderPriceColum;
     @FXML
-    TableColumn<CarComponent,Integer> orderQuntityColum;
+    private TableColumn<CarComponent,Integer> orderQuntityColum;
 
     //OrderCustomer
     @FXML
-    TableView<CustomerOrder> customerOrderInfoView;
+    private TableView<CustomerOrder> customerOrderInfoView;
     @FXML
-    TableColumn<CustomerOrder,Integer> customerInfoOderNr;
+    private TableColumn<CustomerOrder,Integer> customerInfoOderNr;
     @FXML
-    TableColumn<CustomerOrder,String>customerInfoOrderName,customerInfoOrderEmail;
+    private TableColumn<CustomerOrder,String> customerInfoOrderName, customerInfoOrderEmail;
 
     @FXML
-    TableColumn<CustomerOrder,String> customerInfoOrderZip,customerInfoOrderMobilNr,customerInfoOrderCity;
-
-    /*
-    @FXML
-    TableColumn<Customer,String>customerInfoOrderName,customerInfoOrderEmail,
-            customerInfoOrderZip,customerInfoOrderMobilNr,customerInfoOrderCity,
-            customerInfoOrderButton;
-
-     */
-
+    private TableColumn<CustomerOrder,String> customerInfoOrderZip, customerInfoOrderMobilNr, customerInfoOrderCity;
 
     //Seat
     @FXML
-    TableView<Seat> seatView;
+    private TableView<Seat> seatView;
     @FXML
-    TableColumn<Seat, String> nameSeatColum, materiellColum, colorSeatColum;
+    private TableColumn<Seat, String> nameSeatColum, materiellColum, colorSeatColum;
     @FXML
-    TableColumn<Seat, Double> seatPriceColum;
+    private TableColumn<Seat, Double> seatPriceColum;
     @FXML
-    TableColumn<Seat, Integer> quantitySeatColum;
+    private TableColumn<Seat, Integer> quantitySeatColum;
 
     //Spoiler
     @FXML
-    TableView<Spoiler> spoilerView;
+    private TableView<Spoiler> spoilerView;
     @FXML
-    TableColumn<Spoiler, String> nameSpoilerColum, colorSpoilerColum, sideSpoilerColum;
+    private TableColumn<Spoiler, String> nameSpoilerColum, colorSpoilerColum, sideSpoilerColum;
     @FXML
-    TableColumn<Spoiler, Double> priceSpoilerColum;
+    private TableColumn<Spoiler, Double> priceSpoilerColum;
     @FXML
-    TableColumn<Spoiler, Integer> quantitySpoilerColum;
+    private TableColumn<Spoiler, Integer> quantitySpoilerColum;
 
     //SteeringWheel
     @FXML
-    TableView<SteeringWheel> sWheelView;
+    private TableView<SteeringWheel> sWheelView;
     @FXML
-    TableColumn<SteeringWheel, String> nameSWheelColum, materiellSWeel, colorSWheelColum;
+    private TableColumn<SteeringWheel, String> nameSWheelColum, materiellSWeel, colorSWheelColum;
     @FXML
-    TableColumn<SteeringWheel, Double> priceSWeelColum;
+    private TableColumn<SteeringWheel, Double> priceSWeelColum;
     @FXML
-    TableColumn<SteeringWheel, Integer>  quantitySWeelColum;;
+    private TableColumn<SteeringWheel, Integer>  quantitySWeelColum;;
 
     //WheelRim
     @FXML
-    TableView<WheelRim> wheelRimView;
+    private TableView<WheelRim> wheelRimView;
     @FXML
-    TableColumn<WheelRim, String> nameWheelRimColum, dimensionWheelRim, colorWheelRim;
+    private TableColumn<WheelRim, String> nameWheelRimColum, dimensionWheelRim, colorWheelRim;
     @FXML
-    TableColumn<WheelRim, Double> priceWheelRim;
+    private TableColumn<WheelRim, Double> priceWheelRim;
     @FXML
-    TableColumn<WheelRim,Integer> quantityWheelRim;
+    private TableColumn<WheelRim,Integer> quantityWheelRim;
 
 
     //Engine
     @FXML
-    TableView<Engine> engineView;
+    private TableView<Engine> engineView;
     @FXML
-    TableColumn<Engine, String> engintypeColum, nameEngineColum;
+    private TableColumn<Engine, String> engintypeColum, nameEngineColum;
     @FXML
-    TableColumn<Engine, Double>priceEngineColum;
+    private TableColumn<Engine, Double>priceEngineColum;
     @FXML
-    TableColumn<Engine, Integer> horsepowerColum,quantityEngineColum;
+    private TableColumn<Engine, Integer> horsepowerColum,quantityEngineColum;
 
 
     private ComponentOBJHandler jobjHandler;
+    private ComponentCSVHandler csvHandler;
 
-   // private ComponentOBJHandler jobjHandler;
-    private HashMap<String, List<CarComponent>> compMap, retrievedCompMap;
+    private HashMap<String, List<CarComponent>> retrievedCompMap;
     private List<CarComponent> carComponents;
-    private List<Customer> customerList;
-    private Scene setRoot;
+    private List<CustomerOrder> customerOrderList;
+
     private ObservableList<Engine> engines;
     private ObservableList<Seat> seats;
     private ObservableList<Spoiler> spoilers;
     private ObservableList<SteeringWheel> steeringWheels;
     private ObservableList<WheelRim> wheelRims;
+    private ObservableList<CustomerOrder> customerOrders;
+    private ObservableList<CompOrder> compOrders;
+
     private SortedList<Seat> sortedData;
+    private SortedList<Engine> sorteEngineData;
     private SortedList<Spoiler> sortedSpoilerData;
     private SortedList<SteeringWheel> sortedSwheelData;
     private SortedList<WheelRim> sortedWheelRimData;
-    private SortedList<Engine> sorteEngineData;
-
     private SortedList<CustomerOrder> sortedCustomerOrderData;
-    private ObservableList<CustomerOrder> customerOrders;
-    private List<CustomerOrder> customerOrders1;
     private SortedList<CompOrder> sortedCompOrderList;
-    private ObservableList<CompOrder> compOrders;
 
+    //Car Components
+    private Engine engine;
+    private Seat seat;
+    private Spoiler spoiler;
+    private SteeringWheel steeringWheel;
+    private WheelRim wheelRim;
 
+    private CustomerOrder customerOrder;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    private int row;
+    private boolean initTabs, deleteComponent;
 
+    @FXML
+    public void initialize() {
+        System.out.println("@INITIALIZE");
 
         jobjHandler = new ComponentOBJHandler();
 
@@ -179,12 +167,90 @@ public class AdminController implements Initializable {
 
         System.out.println("INIT COMP MAP: " + retrievedCompMap );
 
+
+        csvHandler = new ComponentCSVHandler();
+        customerOrderList = csvHandler.readCustomerOrder(customerOrderList, "testCustomerOrders.csv");
+        System.out.println("INIT CUSTOMER ORDERS: " + customerOrderList.size());
+
+        initTabs = true;
+        initAllTables();
     }
 
-    public ObservableList<Engine> engineTable(){
 
-        Engine engine;
+
+
+
+    @FXML
+    public void initAllTables(){
+
+        System.out.println("ALL TABS ; INIT == " + initTabs);
+        //return if method is run before Initialize()
+        if (!initTabs) return;
+
+        if (carComponentsTab != null && carComponentsTab.isSelected()) {
+            System.out.println("PRODUCTS TAB");
+
+
+            if (engineTab != null && engineTab.isSelected()) {
+                System.out.println("ENGINE TAB");
+                engineView.setItems(engineTable());
+                engineView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+                editEngine();
+                searchComp();
+            }
+            if (seatTab != null && seatTab.isSelected()) {
+                seatView.setItems(seatTable());
+                seatView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+                editSeatTable();
+                System.out.println("SEAT TAB");
+                searchComp();
+            }
+            if (spoilerTab != null && spoilerTab.isSelected()) {
+                spoilerView.setItems(spoilerTable());
+                editSpoilerTable();
+                spoilerView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+                System.out.println("SPOILER TAB");
+                searchComp();
+            }
+            if (steeringWheelTab != null && steeringWheelTab.isSelected()) {
+                sWheelView.setItems(sWheelTable());
+                sWheelView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+                editSwheelTable();
+                searchComp();
+
+            }
+
+            if (wheelRimTab != null && wheelRimTab.isSelected()) {
+                wheelRimView.setItems(wheelRTable());
+                wheelRimView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+                editWheelRim();
+                searchComp();
+            }
+
+        } else if (customerOrderTab != null && customerOrderTab.isSelected()) {
+            System.out.println("CUSTOMER ORDERS TAB");
+
+
+            //Se bestillinger
+            if (customerOrderTab != null && customerOrderTab.isSelected()) {
+                //  carCompView.setItems(carComTable());
+                // System.out.println("Customer");
+                customerOrderInfoView.setItems(OrderInfoCustomer());
+                editOrderCustomer();
+                searchComp();
+
+            }
+
+        }
+    }
+
+
+
+
+
+    public ObservableList<Engine> engineTable(){
         engines = FXCollections.observableArrayList();
+
         carComponents = retrievedCompMap.get("Engine");
         if (carComponents == null) carComponents = new ArrayList<>();
 
@@ -208,8 +274,6 @@ public class AdminController implements Initializable {
 
     //Metoden henter objektene fra arrayliste.
     public ObservableList<Seat> seatTable() {
-
-        Seat seat;
         seats = FXCollections.observableArrayList();
 
         //Henter dem først ut her
@@ -231,12 +295,11 @@ public class AdminController implements Initializable {
     }
 
     public ObservableList<Spoiler> spoilerTable() {
-
-        Spoiler spoiler;
         spoilers = FXCollections.observableArrayList();
-        carComponents = retrievedCompMap.get("Spoiler");
 
+        carComponents = retrievedCompMap.get("Spoiler");
         if (carComponents == null) carComponents = new ArrayList<>();
+
         for (CarComponent carComponent : carComponents) {
             spoiler = (Spoiler) carComponent;
             nameSpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler, String>("compName"));
@@ -251,8 +314,6 @@ public class AdminController implements Initializable {
 
 
     public ObservableList<SteeringWheel> sWheelTable() {
-
-        SteeringWheel steeringWheel;
         steeringWheels = FXCollections.observableArrayList();
 
         carComponents = retrievedCompMap.get("SteeringWheel");
@@ -272,11 +333,10 @@ public class AdminController implements Initializable {
     }
 
     public ObservableList<WheelRim> wheelRTable() {
-
-        WheelRim wheelRim;
         wheelRims = FXCollections.observableArrayList();
-        if (carComponents == null) carComponents = new ArrayList<>();
+
         carComponents = retrievedCompMap.get("WheelRim");
+        if (carComponents == null) carComponents = new ArrayList<>();
 
 
         for (CarComponent carComponent : carComponents) {
@@ -294,41 +354,15 @@ public class AdminController implements Initializable {
 
     public ObservableList<CustomerOrder> OrderInfoCustomer(){
 
-        ComponentCSVHandler csvHandler = new ComponentCSVHandler();
 
-        customerOrders1 = new ArrayList<>();
-        customerOrders1 = csvHandler.readCustomerOrder(customerOrders1, "testCustomerOrders.csv");
-        System.out.println("CUSTOMER LIST: " + customerOrders1.size());
-
-        //Customer
-        String  customerName = "Jaso";
-        String customerEmail ="athisaiyan@hotmail.com";
-        String customerNumber = "90243728";
-        String customerZip = "1187";
-        String customerCity ="Oslo";
-        Customer customer = new Customer(customerName,customerEmail,customerNumber,customerZip,customerCity);
+     //   if (customerOrderList.size() == 0) return null;
 
         customerOrders = FXCollections.observableArrayList();
        // CustomerOrder customerOrder = new CustomerOrder(2,customer);
-        CustomerOrder customerOrder = new CustomerOrder(5, customerName, customerEmail, customerNumber, customerZip, customerCity);
-
-        List<CustomerOrder> customerOrderList = new ArrayList<>();
 
 
-        customerOrderList.add(customerOrder);
-        customerOrderList.add(customerOrder);
-        customerOrderList.add(customerOrder);
-        customerOrderList.add(customerOrder);
-        customerOrderList.add(customerOrder);
-
-        customerList = new ArrayList<>();
-
-
-
-
-
-        for (CustomerOrder customerOrder1 : customerOrders1) {
-           // customer = customerOrder1.getCustomer();
+        for (CustomerOrder customerOrder : customerOrderList) {
+           // customer = customerOrder.getCustomer();
             customerInfoOderNr.setCellValueFactory(new PropertyValueFactory<CustomerOrder,Integer>("customerOrderNr"));
             customerInfoOrderName.setCellValueFactory(new PropertyValueFactory<CustomerOrder,String>("customerName"));
             customerInfoOrderEmail.setCellValueFactory(new PropertyValueFactory<CustomerOrder,String>("customerMail"));
@@ -336,8 +370,7 @@ public class AdminController implements Initializable {
             customerInfoOrderMobilNr.setCellValueFactory(new PropertyValueFactory<CustomerOrder,String>("customerNumber"));
             customerInfoOrderCity.setCellValueFactory(new PropertyValueFactory<CustomerOrder,String>("customerCity"));
 
-           // customerList.add(customer);
-            customerOrders.add(customerOrder1);
+            customerOrders.add(customerOrder);
         }
 
         return customerOrders;
@@ -352,7 +385,9 @@ public class AdminController implements Initializable {
 
         compOrders = FXCollections.observableArrayList();
 
-        int index = customerOrderInfoView.getSelectionModel().getSelectedIndex();
+
+       // int index = customerOrderInfoView.getSelectionModel().getSelectedIndex();
+        int index = carCompView.getSelectionModel().getSelectedIndex();
         System.out.println("SELECTED CUSTOMER INDEX: " + index);
 
         boolean orderSelected = true;
@@ -363,14 +398,12 @@ public class AdminController implements Initializable {
 
 
         if (orderSelected) {
-            CustomerOrder selectedCustomerOrder = customerOrderInfoView.getItems().get(index);
-            orderId = String.valueOf(selectedCustomerOrder.getOrderId());
-            System.out.println("SELECTED CUSTOMER ORDER ID: " + orderId);
+            CompOrder selectedCompOrder = carCompView.getItems().get(index);
+            orderId = String.valueOf(selectedCompOrder.getOrderId());
+            System.out.println("SELECTED COMP ORDER ID: " + orderId);
         }
 
 
-
-        ComponentCSVHandler csvHandler = new ComponentCSVHandler();
         if (orderSelected) compOrderList = csvHandler.searchOrderRow("testCompOrders.csv", orderId);
         else {
             System.out.println("NO CUSTOMER ORDER SELECTED!!!");
@@ -403,58 +436,329 @@ public class AdminController implements Initializable {
 
 
     @FXML
-    public void allTables(){
+    public void deleteSelectedRow() {
 
-        //Se produkter sida
-        if (engineTab.isSelected()) {
-            engineView.setItems(engineTable());
-            engineView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-            editEngine();
-            searchComp();
-        }
-        if (seatTab.isSelected()){
-            seatView.setItems(seatTable());
-            seatView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-            editSeatTable();
-            System.out.println("SEAT TAB");
-            searchComp();
-        }
-        if (spoilerTab.isSelected()){
-            spoilerView.setItems(spoilerTable());
-            editSpoilerTable();
-            spoilerView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-            System.out.println("SPOILER SATB");
-            searchComp();
-        }
-        if (steeringWTab.isSelected()){
-            sWheelView.setItems(sWheelTable());
-            sWheelView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-            editSwheelTable();
-            searchComp();
+        if (carComponentsTab != null && carComponentsTab.isSelected()) {
+            System.out.println("PRODUCTS TAB");
+
+            deleteComponent = false;
+
+            //Engine
+            if (engineTab.isSelected()) {
+                int visibleIndex = engineView.getSelectionModel().getSelectedIndex();
+
+                //return if nothing selected
+                if (visibleIndex == -1) return;
+
+                // Source index of ObservableList
+                int sourceIndex = sorteEngineData.getSourceIndexFor(engines, visibleIndex);
+
+                // Remove from ObservableList using the index
+                engines.remove(sourceIndex);
+
+                //Remove selected component from HashMap containing all components
+                retrievedCompMap.get("Engine").remove(sourceIndex);
+
+
+                deleteComponent = true;
+            }
+
+            //Seat
+            if (seatTab.isSelected()) {
+                int visibleIndex = seatView.getSelectionModel().getSelectedIndex();
+
+                //return if nothing selected
+                if (visibleIndex == -1) return;
+
+                int sourceIndex = sortedData.getSourceIndexFor(seats, visibleIndex);
+                seats.remove(sourceIndex);
+                retrievedCompMap.get("Seat").remove(sourceIndex);
+                deleteComponent = true;
+            }
+
+            //Spoiler
+            if (spoilerTab.isSelected()) {
+                int visibleIndex = spoilerView.getSelectionModel().getSelectedIndex();
+
+                //return if nothing selected
+                if (visibleIndex == -1) return;
+
+                int sourceIndex = sortedSpoilerData.getSourceIndexFor(spoilers, visibleIndex);
+                spoilers.remove(sourceIndex);
+                retrievedCompMap.get("Spoiler").remove(sourceIndex);
+                deleteComponent = true;
+            }
+
+            //SteeringWheel
+            if (steeringWheelTab.isSelected()) {
+                int visibleIndex = sWheelView.getSelectionModel().getSelectedIndex();
+
+                //return if nothing selected
+                if (visibleIndex == -1) return;
+
+                int sourceIndex = sortedSwheelData.getSourceIndexFor(steeringWheels, visibleIndex);
+                steeringWheels.remove(sourceIndex);
+                retrievedCompMap.get("SteeringWheel").remove(sourceIndex);
+                deleteComponent = true;
+            }
+
+            //WheelRim
+            if (wheelRimTab.isSelected()) {
+                int visibleIndex = wheelRimView.getSelectionModel().getSelectedIndex();
+
+                //return if nothing selected
+                if (visibleIndex == -1) return;
+
+                int sourceIndex = sortedWheelRimData.getSourceIndexFor(wheelRims, visibleIndex);
+                wheelRims.remove(sourceIndex);
+                retrievedCompMap.get("WheelRim").remove(sourceIndex);
+                deleteComponent = true;
+            }
+
+
+            // Write Components HashMap to file if changes has been made
+            if (deleteComponent) jobjHandler.writeComponent(retrievedCompMap);
+
+        } else if (customerOrderTab != null && customerOrderTab.isSelected()) {
+            System.out.println("CUSTOMER ORDERS TAB");
+
+
+            if (customerOrderTab.isSelected()) {
+                int visibleIndex = customerOrderInfoView.getSelectionModel().getSelectedIndex();
+
+                //return if nothing selected
+                if (visibleIndex == -1) return;
+
+                int sourceIndex = sortedCustomerOrderData.getSourceIndexFor(customerOrders, visibleIndex);
+                customerOrders.remove(sourceIndex);
+                customerOrderList.remove(sourceIndex);
+
+               // csvHandler.writeCustomerOrder(customerOrderList, "testCustomerOrder.csv");
+
+           /* if (retrievedCompMapSize != retrievedCompMap.size())
+                jobjHandler.writeComponent(retrievedCompMap);
+
+                */
+            }
+
 
         }
 
-        if (wheelRimTab.isSelected()){
-            wheelRimView.setItems(wheelRTable());
-            wheelRimView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-            editWheelRim();
-            searchComp();
-        }
 
-         //Se bestillinger
-        if (orderEngineTab.isSelected()){
-           // carCompView.setItems(carComTable());
-           // System.out.println("Customer");
-            customerOrderInfoView.setItems(OrderInfoCustomer());
-            editOrderCustomer();
-            searchComp();
 
         }
 
-       // sWheelView.setItems(sWheelTable());
-        //wheelRimView.setItems(wheelRTable());
+
+    public void deleteCompOrder(){
+        CompOrder selectedRow = carCompView.getSelectionModel().getSelectedItem();
+
+        System.out.println("SELECTED COMP ORDER: " + selectedRow.toCSVFormat());
+
+        carCompView.getItems().remove(selectedRow);
+
+        compOrders = carComTable();
+
+        if (compOrders == null) System.out.println("COMP ORDERS NULL!!!");
+        else System.out.println("COMP ORDERS SIZE: " + compOrders.size());
+
+        compOrders.remove(selectedRow);
 
     }
+
+    public void searchCompOrders(){
+
+        ObservableList<CompOrder> compOrdersList =carComTable();
+        FilteredList<CompOrder> filteredList = new FilteredList(compOrdersList, b -> true);
+        search.textProperty().addListener(((observable, oldValue, newValue) -> {
+            filteredList.setPredicate( carcomp-> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFiler = newValue.toLowerCase();
+                if (carcomp.getCompName().toLowerCase().indexOf(lowerCaseFiler) != -1) {
+                    return true;
+                } else if (carcomp.getCompType().toLowerCase().indexOf(lowerCaseFiler) != -1) {
+                    return true;
+                } else if (String.valueOf(carcomp.getOrderId()).toLowerCase().indexOf(lowerCaseFiler) != -1)
+                    return true;
+                else return false;
+            });
+        }));
+
+        sortedCompOrderList = new SortedList<>(filteredList);
+        sortedCompOrderList.comparatorProperty().bind(carCompView.comparatorProperty());
+        carCompView.setItems(sortedCompOrderList);
+
+    }
+
+
+
+
+
+        public void  searchComp() {
+            //Engine
+            if (engineTab.isSelected()) {
+                ObservableList<Engine> engineList = engineTable();
+                FilteredList<Engine> filteredList = new FilteredList(engineList, b -> true);
+                //predicater når filter skifter
+                search.textProperty().addListener(((observable, oldValue, newValue) -> {
+
+                    filteredList.setPredicate(engine -> {
+
+                        //Hvis filter er tommt , vis alt
+                        if (newValue == null || newValue.isEmpty()) {
+                            return true;
+                        }
+                        String lowerCaseFiler = newValue.toLowerCase();
+                        if (engine.getCompName().toLowerCase().indexOf(lowerCaseFiler) != -1) {
+
+                            return true; //Filter sammenligner navn
+                        } else if (engine.getCompType().toLowerCase().indexOf(lowerCaseFiler) != -1) {
+                            return true; //Filter sammenligner farge
+                        } else if (String.valueOf(engine.getCompPrice()).toLowerCase().indexOf(lowerCaseFiler) != -1)
+                            return true;
+                        else return false; //hvis den ikke kan sammenlinges
+                    });
+                }));
+                //Setter filteredlist i en sortedlist, binder de sammen til tableviewvet og legger sorted og filterreing til tabellen,
+                sorteEngineData = new SortedList<>(filteredList);
+                sorteEngineData.comparatorProperty().bind(engineView.comparatorProperty());
+                engineView.setItems(sorteEngineData);
+            }
+
+
+
+            //Seat
+            if (seatTab.isSelected()) {
+                ObservableList<Seat> seatsList = seatTable();
+                FilteredList<Seat> filteredList = new FilteredList(seatsList, b -> true);
+                search.textProperty().addListener(((observable, oldValue, newValue) -> {
+                    filteredList.setPredicate(seat -> {
+                        if (newValue == null || newValue.isEmpty()) {
+                            return true;
+                        }
+                        String lowerCaseFiler = newValue.toLowerCase();
+                        if (seat.getCompName().toLowerCase().indexOf(lowerCaseFiler) != -1) {
+
+                            return true;
+                        } else if (seat.getSeatColor().toLowerCase().indexOf(lowerCaseFiler) != -1) {
+                            return true;
+                        } else if (String.valueOf(seat.getCompPrice()).toLowerCase().indexOf(lowerCaseFiler) != -1)
+                            return true;
+                        else return false;
+                    });
+                }));
+                sortedData = new SortedList<>(filteredList);
+                sortedData.comparatorProperty().bind(seatView.comparatorProperty());
+                seatView.setItems(sortedData);
+            }
+            //Spoiler
+            if (spoilerTab.isSelected()){
+                ObservableList<Spoiler> spoilerList = spoilerTable();
+                FilteredList<Spoiler> filteredList = new FilteredList(spoilerList, b -> true);
+                search.textProperty().addListener(((observable, oldValue, newValue) -> {
+                    filteredList.setPredicate(spoiler -> {
+                        if (newValue == null || newValue.isEmpty()) {
+                            return true;
+                        }
+                        String lowerCaseFiler = newValue.toLowerCase();
+                        if (spoiler.getCompName().toLowerCase().indexOf(lowerCaseFiler) != -1) {
+                            return true;
+                        } else if (spoiler.getSpoilerSide().toLowerCase().indexOf(lowerCaseFiler) != -1) {
+                            return true;
+                        } else if (String.valueOf(spoiler.getCompPrice()).toLowerCase().indexOf(lowerCaseFiler) != -1)
+                            return true;
+                        else return false;
+                    });
+                }));
+                sortedSpoilerData = new SortedList<>(filteredList);
+                sortedSpoilerData.comparatorProperty().bind(spoilerView.comparatorProperty());
+                spoilerView.setItems(sortedSpoilerData);
+            }
+
+            //SteeringWheel
+            if (steeringWheelTab.isSelected()){
+                ObservableList<SteeringWheel> steeringWheelList = sWheelTable();
+                FilteredList<SteeringWheel> filteredList = new FilteredList(steeringWheelList, b -> true);
+                //predicater når filter skifter
+                search.textProperty().addListener(((observable, oldValue, newValue) -> {
+
+                    filteredList.setPredicate(steeringWheel -> {
+                        if (newValue == null || newValue.isEmpty()) {
+                            return true;
+                        }
+                        String lowerCaseFiler = newValue.toLowerCase();
+                        if (steeringWheel.getCompName().toLowerCase().indexOf(lowerCaseFiler) != -1) {
+                            return true;
+                        } else if (steeringWheel.getSteeringWheelColor().toLowerCase().indexOf(lowerCaseFiler) != -1) {
+                            return true;
+                        } else if (String.valueOf(steeringWheel.getCompPrice()).toLowerCase().indexOf(lowerCaseFiler) != -1)
+                            return true;
+                        else return false;
+                    });
+                }));
+                sortedSwheelData = new SortedList<>(filteredList);
+                sortedSwheelData.comparatorProperty().bind(sWheelView.comparatorProperty());
+                sWheelView.setItems(sortedSwheelData);
+
+            }
+            //WheelRim
+            if (wheelRimTab.isSelected()){
+                ObservableList<WheelRim> wheelRimList = wheelRTable();
+                FilteredList<WheelRim> filteredList = new FilteredList(wheelRimList, b -> true);
+                search.textProperty().addListener(((observable, oldValue, newValue) -> {
+                    filteredList.setPredicate(wheelRim -> {
+                        if (newValue == null || newValue.isEmpty()) {
+                            return true;
+                        }
+                        String lowerCaseFiler = newValue.toLowerCase();
+                        if (wheelRim.getCompName().toLowerCase().indexOf(lowerCaseFiler) != -1) {
+                            return true;
+                        } else if (wheelRim.getWheelRimColor().toLowerCase().indexOf(lowerCaseFiler) != -1) {
+                            return true;
+                        } else if (String.valueOf(wheelRim.getCompPrice()).toLowerCase().indexOf(lowerCaseFiler) != -1)
+                            return true;
+                        else return false;
+                    });
+                }));
+                sortedWheelRimData = new SortedList<>(filteredList);
+                sortedWheelRimData.comparatorProperty().bind(wheelRimView.comparatorProperty());
+                wheelRimView.setItems(sortedWheelRimData);
+
+            }
+
+            if (customerOrderTab.isSelected()){
+                ObservableList<CustomerOrder> customerOrderList =OrderInfoCustomer();
+                FilteredList<CustomerOrder> filteredList = new FilteredList(customerOrderList, b -> true);
+                search.textProperty().addListener(((observable, oldValue, newValue) -> {
+                    filteredList.setPredicate( customerOrder-> {
+                        if (newValue == null || newValue.isEmpty()) {
+                            return true;
+                        }
+                        String lowerCaseFiler = newValue.toLowerCase();
+                        if (customerOrder.getCustomerName().toLowerCase().indexOf(lowerCaseFiler) != -1) {
+                            return true;
+                        } else if (customerOrder.getCustomerNumber().toLowerCase().indexOf(lowerCaseFiler) != -1) {
+                            return true;
+                        } else if (String.valueOf(customerOrder.getOrderId()).toLowerCase().indexOf(lowerCaseFiler) != -1)
+                            return true;
+                        else return false;
+                    });
+                }));
+
+                sortedCustomerOrderData = new SortedList<>(filteredList);
+                sortedCustomerOrderData.comparatorProperty().bind(customerOrderInfoView.comparatorProperty());
+                customerOrderInfoView.setItems(sortedCustomerOrderData);
+
+            }
+        }
+
+
+
+
+
+
+
 
     public void editEngine() {
         engineView.setEditable(true);
@@ -989,280 +1293,6 @@ public class AdminController implements Initializable {
 
 
 
-    @FXML
-    public void deleteSelectedRow() {
-
-        int retrievedCompMapSize = retrievedCompMap.size();
-        //Engine
-        if (engineTab.isSelected()){
-            int visibleIndex = engineView.getSelectionModel().getSelectedIndex();
-
-            // Source index of ObservableList
-            int sourceIndex = sorteEngineData.getSourceIndexFor(engines, visibleIndex);
-
-            // Remove from ObservableList using the index
-            engines.remove(sourceIndex);
-
-            //Remove selected component from HashMap containing all components
-            retrievedCompMap.get("Engine").remove(sourceIndex);
-
-            // Write Components HashMap to file if changes has been made
-            if (retrievedCompMapSize != retrievedCompMap.size())
-                jobjHandler.writeComponent(retrievedCompMap);
-        }
-
-        //Seat
-        if(seatTab.isSelected()) {
-            int visibleIndex = seatView.getSelectionModel().getSelectedIndex();
-            int sourceIndex = sortedData.getSourceIndexFor(seats, visibleIndex);
-            seats.remove(sourceIndex);
-            retrievedCompMap.get("Seat").remove(sourceIndex);
-            if (retrievedCompMapSize != retrievedCompMap.size())
-                jobjHandler.writeComponent(retrievedCompMap);
-        }
-        //Spoiler
-        if(spoilerTab.isSelected()) {
-            int visibleIndex = spoilerView.getSelectionModel().getSelectedIndex();
-            int sourceIndex = sortedSpoilerData.getSourceIndexFor(spoilers, visibleIndex);
-            spoilers.remove(sourceIndex);
-            retrievedCompMap.get("Spoiler").remove(sourceIndex);
-            if (retrievedCompMapSize != retrievedCompMap.size())
-                jobjHandler.writeComponent(retrievedCompMap);
-        }
-        //SteeringWheel
-        if (steeringWTab.isSelected()){
-            int visibleIndex = sWheelView.getSelectionModel().getSelectedIndex();
-            int sourceIndex = sortedSwheelData.getSourceIndexFor(steeringWheels, visibleIndex);
-            steeringWheels.remove(sourceIndex);
-            retrievedCompMap.get("SteeringWheel").remove(sourceIndex);
-            if (retrievedCompMapSize != retrievedCompMap.size())
-                jobjHandler.writeComponent(retrievedCompMap);
-        }
-        //WheelRim
-        if (wheelRimTab.isSelected()){
-            int visibleIndex = wheelRimView.getSelectionModel().getSelectedIndex();
-            int sourceIndex = sortedWheelRimData.getSourceIndexFor(wheelRims, visibleIndex);
-            wheelRims.remove(sourceIndex);
-            retrievedCompMap.get("WheelRim").remove(sourceIndex);
-            if (retrievedCompMapSize != retrievedCompMap.size())
-                jobjHandler.writeComponent(retrievedCompMap);
-        }
-
-        if (orderEngineTab.isSelected()){
-            int visibleIndex = customerOrderInfoView.getSelectionModel().getSelectedIndex();
-            int sourceIndex = sortedCustomerOrderData.getSourceIndexFor(customerOrders, visibleIndex);
-            customerOrders.remove(sourceIndex);
-            customerOrders1.remove(sourceIndex);
-
-           /* if (retrievedCompMapSize != retrievedCompMap.size())
-                jobjHandler.writeComponent(retrievedCompMap);
-
-                */
-        }
-
-
-
-        }
-
-
-
-
-
-
-        public void  searchComp() {
-            //Engine
-            if (engineTab.isSelected()) {
-                ObservableList<Engine> engineList = engineTable();
-                FilteredList<Engine> filteredList = new FilteredList(engineList, b -> true);
-                //predicater når filter skifter
-                search.textProperty().addListener(((observable, oldValue, newValue) -> {
-
-                    filteredList.setPredicate(engine -> {
-
-                        //Hvis filter er tommt , vis alt
-                        if (newValue == null || newValue.isEmpty()) {
-                            return true;
-                        }
-                        String lowerCaseFiler = newValue.toLowerCase();
-                        if (engine.getCompName().toLowerCase().indexOf(lowerCaseFiler) != -1) {
-
-                            return true; //Filter sammenligner navn
-                        } else if (engine.getCompType().toLowerCase().indexOf(lowerCaseFiler) != -1) {
-                            return true; //Filter sammenligner farge
-                        } else if (String.valueOf(engine.getCompPrice()).toLowerCase().indexOf(lowerCaseFiler) != -1)
-                            return true;
-                        else return false; //hvis den ikke kan sammenlinges
-                    });
-                }));
-                //Setter filteredlist i en sortedlist, binder de sammen til tableviewvet og legger sorted og filterreing til tabellen,
-                sorteEngineData = new SortedList<>(filteredList);
-                sorteEngineData.comparatorProperty().bind(engineView.comparatorProperty());
-                engineView.setItems(sorteEngineData);
-            }
-
-
-
-            //Seat
-            if (seatTab.isSelected()) {
-                ObservableList<Seat> seatsList = seatTable();
-                FilteredList<Seat> filteredList = new FilteredList(seatsList, b -> true);
-                search.textProperty().addListener(((observable, oldValue, newValue) -> {
-                    filteredList.setPredicate(seat -> {
-                        if (newValue == null || newValue.isEmpty()) {
-                            return true;
-                        }
-                        String lowerCaseFiler = newValue.toLowerCase();
-                        if (seat.getCompName().toLowerCase().indexOf(lowerCaseFiler) != -1) {
-
-                            return true;
-                        } else if (seat.getSeatColor().toLowerCase().indexOf(lowerCaseFiler) != -1) {
-                            return true;
-                        } else if (String.valueOf(seat.getCompPrice()).toLowerCase().indexOf(lowerCaseFiler) != -1)
-                            return true;
-                        else return false;
-                    });
-                }));
-                sortedData = new SortedList<>(filteredList);
-                sortedData.comparatorProperty().bind(seatView.comparatorProperty());
-                seatView.setItems(sortedData);
-            }
-            //Spoiler
-            if (spoilerTab.isSelected()){
-                ObservableList<Spoiler> spoilerList = spoilerTable();
-                FilteredList<Spoiler> filteredList = new FilteredList(spoilerList, b -> true);
-                search.textProperty().addListener(((observable, oldValue, newValue) -> {
-                    filteredList.setPredicate(spoiler -> {
-                        if (newValue == null || newValue.isEmpty()) {
-                            return true;
-                        }
-                        String lowerCaseFiler = newValue.toLowerCase();
-                        if (spoiler.getCompName().toLowerCase().indexOf(lowerCaseFiler) != -1) {
-                            return true;
-                        } else if (spoiler.getSpoilerSide().toLowerCase().indexOf(lowerCaseFiler) != -1) {
-                            return true;
-                        } else if (String.valueOf(spoiler.getCompPrice()).toLowerCase().indexOf(lowerCaseFiler) != -1)
-                            return true;
-                        else return false;
-                    });
-                }));
-                sortedSpoilerData = new SortedList<>(filteredList);
-                sortedSpoilerData.comparatorProperty().bind(spoilerView.comparatorProperty());
-                spoilerView.setItems(sortedSpoilerData);
-            }
-
-            //SteeringWheel
-            if (steeringWTab.isSelected()){
-                ObservableList<SteeringWheel> steeringWheelList = sWheelTable();
-                FilteredList<SteeringWheel> filteredList = new FilteredList(steeringWheelList, b -> true);
-                //predicater når filter skifter
-                search.textProperty().addListener(((observable, oldValue, newValue) -> {
-
-                    filteredList.setPredicate(steeringWheel -> {
-                        if (newValue == null || newValue.isEmpty()) {
-                            return true;
-                        }
-                        String lowerCaseFiler = newValue.toLowerCase();
-                        if (steeringWheel.getCompName().toLowerCase().indexOf(lowerCaseFiler) != -1) {
-                            return true;
-                        } else if (steeringWheel.getSteeringWheelColor().toLowerCase().indexOf(lowerCaseFiler) != -1) {
-                            return true;
-                        } else if (String.valueOf(steeringWheel.getCompPrice()).toLowerCase().indexOf(lowerCaseFiler) != -1)
-                            return true;
-                        else return false;
-                    });
-                }));
-                sortedSwheelData = new SortedList<>(filteredList);
-                sortedSwheelData.comparatorProperty().bind(sWheelView.comparatorProperty());
-                sWheelView.setItems(sortedSwheelData);
-
-            }
-            //WheelRim
-            if (wheelRimTab.isSelected()){
-                ObservableList<WheelRim> wheelRimList = wheelRTable();
-                FilteredList<WheelRim> filteredList = new FilteredList(wheelRimList, b -> true);
-                search.textProperty().addListener(((observable, oldValue, newValue) -> {
-                    filteredList.setPredicate(wheelRim -> {
-                        if (newValue == null || newValue.isEmpty()) {
-                            return true;
-                        }
-                        String lowerCaseFiler = newValue.toLowerCase();
-                        if (wheelRim.getCompName().toLowerCase().indexOf(lowerCaseFiler) != -1) {
-                            return true;
-                        } else if (wheelRim.getWheelRimColor().toLowerCase().indexOf(lowerCaseFiler) != -1) {
-                            return true;
-                        } else if (String.valueOf(wheelRim.getCompPrice()).toLowerCase().indexOf(lowerCaseFiler) != -1)
-                            return true;
-                        else return false;
-                    });
-                }));
-                sortedWheelRimData = new SortedList<>(filteredList);
-                sortedWheelRimData.comparatorProperty().bind(wheelRimView.comparatorProperty());
-                wheelRimView.setItems(sortedWheelRimData);
-
-            }
-
-            if (orderEngineTab.isSelected()){
-                ObservableList<CustomerOrder> customerOrderList =OrderInfoCustomer();
-                FilteredList<CustomerOrder> filteredList = new FilteredList(customerOrderList, b -> true);
-                search.textProperty().addListener(((observable, oldValue, newValue) -> {
-                    filteredList.setPredicate( customerOrder-> {
-                        if (newValue == null || newValue.isEmpty()) {
-                            return true;
-                        }
-                        String lowerCaseFiler = newValue.toLowerCase();
-                        if (customerOrder.getCustomerName().toLowerCase().indexOf(lowerCaseFiler) != -1) {
-                            return true;
-                        } else if (customerOrder.getCustomerNumber().toLowerCase().indexOf(lowerCaseFiler) != -1) {
-                            return true;
-                        } else if (String.valueOf(customerOrder.getOrderId()).toLowerCase().indexOf(lowerCaseFiler) != -1)
-                            return true;
-                        else return false;
-                    });
-                }));
-
-                sortedCustomerOrderData = new SortedList<>(filteredList);
-                sortedCustomerOrderData.comparatorProperty().bind(customerOrderInfoView.comparatorProperty());
-                customerOrderInfoView.setItems(sortedCustomerOrderData);
-
-            }
-        }
-
-
-     public void deleteCompOrder(){
-         CompOrder selectedRow = carCompView.getSelectionModel().getSelectedItem();
-         carCompView.getItems().remove(selectedRow);
-         compOrders.remove(selectedRow);
-
-     }
-
-     public void searchCompOrders(){
-
-         ObservableList<CompOrder> compOrdersList =carComTable();
-         FilteredList<CompOrder> filteredList = new FilteredList(compOrdersList, b -> true);
-         search.textProperty().addListener(((observable, oldValue, newValue) -> {
-             filteredList.setPredicate( carcomp-> {
-                 if (newValue == null || newValue.isEmpty()) {
-                     return true;
-                 }
-                 String lowerCaseFiler = newValue.toLowerCase();
-                 if (carcomp.getCompName().toLowerCase().indexOf(lowerCaseFiler) != -1) {
-                     return true;
-                 } else if (carcomp.getCompType().toLowerCase().indexOf(lowerCaseFiler) != -1) {
-                     return true;
-                 } else if (String.valueOf(carcomp.getOrderId()).toLowerCase().indexOf(lowerCaseFiler) != -1)
-                     return true;
-                 else return false;
-             });
-         }));
-
-         sortedCompOrderList = new SortedList<>(filteredList);
-         sortedCompOrderList.comparatorProperty().bind(carCompView.comparatorProperty());
-         carCompView.setItems(sortedCompOrderList);
-
-     }
-
-
-
 
 
 
@@ -1309,7 +1339,7 @@ public class AdminController implements Initializable {
             URL url = getClass().getResource("/org/ccomp/admin/compOrderInfo.fxml");
 
             FXMLLoader loader = new FXMLLoader(url);
-            setRoot = adminPane.getScene();
+            Scene setRoot = adminPane.getScene();
             setRoot.setRoot(loader.load());
 
 
