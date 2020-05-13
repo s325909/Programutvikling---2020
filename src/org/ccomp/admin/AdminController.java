@@ -41,10 +41,10 @@ public class AdminController implements Initializable {
     Button backBtn;
 
     @FXML
-    Button addComp,backAdmin;
+    Button addComp,backAdmin,eraseCompOrder;
 
     @FXML
-    TextField search;
+    TextField search,searchcompOrder;
 
     @FXML
     TabPane tabPane;
@@ -159,7 +159,12 @@ public class AdminController implements Initializable {
     private SortedList<SteeringWheel> sortedSwheelData;
     private SortedList<WheelRim> sortedWheelRimData;
     private SortedList<Engine> sorteEngineData;
+
+    private SortedList<CustomerOrder> sortedCustomerOrderData;
     private ObservableList<CustomerOrder> customerOrders;
+    private List<CustomerOrder> customerOrders1;
+    private SortedList<CompOrder> sortedCompOrderList;
+    private ObservableList<CompOrder> compOrders;
 
 
 
@@ -291,7 +296,7 @@ public class AdminController implements Initializable {
 
         ComponentCSVHandler csvHandler = new ComponentCSVHandler();
 
-        List<CustomerOrder> customerOrders1 = new ArrayList<>();
+        customerOrders1 = new ArrayList<>();
         customerOrders1 = csvHandler.readCustomerOrder(customerOrders1, "testCustomerOrders.csv");
         System.out.println("CUSTOMER LIST: " + customerOrders1.size());
 
@@ -345,7 +350,7 @@ public class AdminController implements Initializable {
 
     public  ObservableList<CompOrder> carComTable(){
 
-        ObservableList<CompOrder> compOrders = FXCollections.observableArrayList();
+        compOrders = FXCollections.observableArrayList();
 
         int index = customerOrderInfoView.getSelectionModel().getSelectedIndex();
         System.out.println("SELECTED CUSTOMER INDEX: " + index);
@@ -442,6 +447,7 @@ public class AdminController implements Initializable {
            // System.out.println("Customer");
             customerOrderInfoView.setItems(OrderInfoCustomer());
             editOrderCustomer();
+            searchComp();
 
         }
 
@@ -979,10 +985,6 @@ public class AdminController implements Initializable {
             ).setCustomerZipCode(t.getNewValue()
             );
         });
-
-
-
-
     }
 
 
@@ -1045,7 +1047,27 @@ public class AdminController implements Initializable {
             if (retrievedCompMapSize != retrievedCompMap.size())
                 jobjHandler.writeComponent(retrievedCompMap);
         }
+
+        if (orderEngineTab.isSelected()){
+            int visibleIndex = customerOrderInfoView.getSelectionModel().getSelectedIndex();
+            int sourceIndex = sortedCustomerOrderData.getSourceIndexFor(customerOrders, visibleIndex);
+            customerOrders.remove(sourceIndex);
+            customerOrders1.remove(sourceIndex);
+
+           /* if (retrievedCompMapSize != retrievedCompMap.size())
+                jobjHandler.writeComponent(retrievedCompMap);
+
+                */
         }
+
+
+
+        }
+
+
+
+
+
 
         public void  searchComp() {
             //Engine
@@ -1179,15 +1201,67 @@ public class AdminController implements Initializable {
 
             }
 
+            if (orderEngineTab.isSelected()){
+                ObservableList<CustomerOrder> customerOrderList =OrderInfoCustomer();
+                FilteredList<CustomerOrder> filteredList = new FilteredList(customerOrderList, b -> true);
+                search.textProperty().addListener(((observable, oldValue, newValue) -> {
+                    filteredList.setPredicate( customerOrder-> {
+                        if (newValue == null || newValue.isEmpty()) {
+                            return true;
+                        }
+                        String lowerCaseFiler = newValue.toLowerCase();
+                        if (customerOrder.getCustomerName().toLowerCase().indexOf(lowerCaseFiler) != -1) {
+                            return true;
+                        } else if (customerOrder.getCustomerNumber().toLowerCase().indexOf(lowerCaseFiler) != -1) {
+                            return true;
+                        } else if (String.valueOf(customerOrder.getOrderId()).toLowerCase().indexOf(lowerCaseFiler) != -1)
+                            return true;
+                        else return false;
+                    });
+                }));
 
+                sortedCustomerOrderData = new SortedList<>(filteredList);
+                sortedCustomerOrderData.comparatorProperty().bind(customerOrderInfoView.comparatorProperty());
+                customerOrderInfoView.setItems(sortedCustomerOrderData);
 
-
-
-
-
-
-
+            }
         }
+
+
+     public void deleteCompOrder(){
+         CompOrder selectedRow = carCompView.getSelectionModel().getSelectedItem();
+         carCompView.getItems().remove(selectedRow);
+         compOrders.remove(selectedRow);
+
+     }
+
+     public void searchCompOrders(){
+
+         ObservableList<CompOrder> compOrdersList =carComTable();
+         FilteredList<CompOrder> filteredList = new FilteredList(compOrdersList, b -> true);
+         search.textProperty().addListener(((observable, oldValue, newValue) -> {
+             filteredList.setPredicate( carcomp-> {
+                 if (newValue == null || newValue.isEmpty()) {
+                     return true;
+                 }
+                 String lowerCaseFiler = newValue.toLowerCase();
+                 if (carcomp.getCompName().toLowerCase().indexOf(lowerCaseFiler) != -1) {
+                     return true;
+                 } else if (carcomp.getCompType().toLowerCase().indexOf(lowerCaseFiler) != -1) {
+                     return true;
+                 } else if (String.valueOf(carcomp.getOrderId()).toLowerCase().indexOf(lowerCaseFiler) != -1)
+                     return true;
+                 else return false;
+             });
+         }));
+
+         sortedCompOrderList = new SortedList<>(filteredList);
+         sortedCompOrderList.comparatorProperty().bind(carCompView.comparatorProperty());
+         carCompView.setItems(sortedCompOrderList);
+
+     }
+
+
 
 
 
@@ -1247,6 +1321,7 @@ public class AdminController implements Initializable {
             orderQuntityColum =  (TableColumn<CarComponent,Integer>) loader.getNamespace().get("orderQuntityColum");
 
             carCompView.setItems(carComTable());
+
 
 
         } catch (IOException e) {
