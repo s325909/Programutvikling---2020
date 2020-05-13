@@ -10,13 +10,13 @@ public class Seat extends CarComponent {
 
     private static final String compType = "Seat";
 
-    private transient StringProperty color, material;
+    private transient StringProperty seatColor, seatMaterial;
 
     public Seat(String compName, double compPrice, int compQuantity,
                 String seatColor, String seatMaterial) {
         super(compType, compName, compPrice, compQuantity);
-        this.color = new SimpleStringProperty(seatColor);
-        this.material = new SimpleStringProperty(seatMaterial);
+        this.seatColor = new SimpleStringProperty(seatColor);
+        this.seatMaterial = new SimpleStringProperty(seatMaterial);
     }
 
 
@@ -42,50 +42,50 @@ public class Seat extends CarComponent {
     }
 
 
-    public String getColor() {
-        return color.get();
+    public String getSeatColor() {
+        return seatColor.get();
     }
 
-    public StringProperty colorProperty() {
-        return color;
+    public StringProperty seatColorProperty() {
+        return seatColor;
     }
 
-    public void setColor(String color) {
-        this.color.set(color);
+    public void setSeatColor(String seatColor) {
+        this.seatColor.set(seatColor);
     }
 
-    public String getMaterial() {
-        return material.get();
+    public String getSeatMaterial() {
+        return seatMaterial.get();
     }
 
-    public StringProperty materialProperty() {
-        return material;
+    public StringProperty seatMaterialProperty() {
+        return seatMaterial;
     }
 
-    public void setMaterial(String material) {
-        this.material = new SimpleStringProperty(material);
+    public void setSeatMaterial(String seatMaterial) {
+        this.seatMaterial = new SimpleStringProperty(seatMaterial);
     }
 
     @Override
     public String toString() {
         return "Seat{" + super.toString() +
-                ", color=" + color +
-                ", material=" + material +
+                ", color=" + seatColor +
+                ", material=" + seatMaterial +
                 '}';
     }
 
     @Override
     public void writeObjectHandler(ObjectOutputStream oos) throws IOException {
         super.writeObjectHandler(oos);
-        oos.writeUTF(getColor());
-        oos.writeUTF(getMaterial());
+        oos.writeUTF(getSeatColor());
+        oos.writeUTF(getSeatMaterial());
     }
 
     @Override
     public void readObjectHandler(ObjectInputStream ois) throws IOException, ClassNotFoundException {
         super.readObjectHandler(ois);
-        color = new SimpleStringProperty(ois.readUTF());
-        material = new SimpleStringProperty(ois.readUTF());
+        seatColor = new SimpleStringProperty(ois.readUTF());
+        seatMaterial = new SimpleStringProperty(ois.readUTF());
     }
 
 }

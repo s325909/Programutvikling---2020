@@ -48,6 +48,7 @@ public class CompController {
 
     private HashMap<String, List<CarComponent>> compMap;
     private List<CarComponent> carComponents;
+    private Engine engine;
    // private Engine engine;
     private Seat seat;
     private Spoiler spoiler;
@@ -106,26 +107,13 @@ public class CompController {
 
             System.out.println("ENGINE TYPE: " + getEngineType());
 
+            engine = (Engine) makeComponent(ENGINE_KEY, engine);
 
-           // gasolineEngine = (GasolineEngine) makeComponent(ENGINE_KEY, gasolineEngine);
-           // System.out.println(gasolineEngine.toString());
+            System.out.println("ENGINE: " + engine.toString());
 
-            //up casting parent reference to child reference based on componentType
-           // Engine engine = (Engine) makeComponent(ENGINE_KEY, engine);
-
-           // carComponents.add(engine);
-
-
-            if ("Bensin".equals(getEngineType())) {
-                carComponents.add(makeComponent(ENGINE_KEY, gasolineEngine));
-                System.out.println(getEngineType() + "ADDED");
-            } else if ("Elbil".equals(getEngineType())) {
-                carComponents.add(makeComponent(ENGINE_KEY, electricMotor));
-                System.out.println(getEngineType() + "ADDED");
-            } else if ("Hybrid".equals(getEngineType())) {
-                carComponents.add(makeComponent(ENGINE_KEY, hybridEngine));
-                System.out.println(getEngineType() + "ADDED");
-            }
+            System.out.println("CARCOMP SIZE: " + carComponents.size());
+            carComponents.add(engine);
+            System.out.println("CARCOMP SIZE: " + carComponents.size());
 
 
 
@@ -143,7 +131,7 @@ public class CompController {
             retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
 
 
-            System.out.println("ENGINE MAP SIZE: " + retrievedCompMap.get(SEAT_KEY).size());
+            System.out.println("ENGINE MAP SIZE: " + retrievedCompMap.get(ENGINE_KEY).size());
 
            // carComponents.add(new Engine())
 
@@ -265,28 +253,23 @@ public class CompController {
 
 
     private CarComponent makeComponent(String compKey, CarComponent component) {
-        String compName, compColor, compDimension, compMaterial, compSide;
+        String compType, compName, compColor, compDimension, compMaterial, compSide;
         double compPrice;
-        int compQuantity;
+        int compQuantity, compPower;
 
         switch (compKey) {
             case ENGINE_KEY:
                 System.out.println("MAKING" + compKey);
-             //  SimpleStringProperty compNameProperty = new SimpleStringProperty(engineName.getText());
-             //  SimpleDoubleProperty compPriceProperty = new SimpleDoubleProperty(Double.parseDouble(enginePrice.getText()));
-             //  SimpleIntegerProperty compQuantityProperty = new SimpleIntegerProperty(Integer.parseInt(engineQuantity.getText()));
 
-                // compTypeProperty = new SimpleStringProperty(spoilerSide.getText());
-               // compPowerProperty
-                //Todo: Determine WHICH ENGINE TYPE
-               // component = new Engine(compNameProperty, compPriceProperty, compQuantityProperty);
-
-
+                compType = getEngineType();
                 compName = engineName.getText();
                 compPrice = Double.parseDouble(enginePrice.getText());
                 compQuantity = Integer.parseInt(engineQuantity.getText());
+                compPower = Integer.parseInt(enginePower.getText());
 
+                component = new Engine(compType, compName, compPrice, compQuantity, compPower);
 
+                /*
                 switch (getEngineType()) {
                     case "Bensin":
                         System.out.println(getEngineType());
@@ -302,7 +285,11 @@ public class CompController {
                         break;
                     default:
                         System.out.println("NO SUCH ENGINE TYPE");
+
+
                 }
+
+                 */
 
 
                 break;

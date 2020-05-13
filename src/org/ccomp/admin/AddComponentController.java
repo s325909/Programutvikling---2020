@@ -35,6 +35,8 @@ public class AddComponentController {
     @FXML
     ToggleGroup carTypeGroup, componentTypeGroup;
 
+    private String selectedCarType;
+
     public void disableToggegroup(){
         carTypeGroup.getSelectedToggle();
     }
@@ -142,7 +144,9 @@ public class AddComponentController {
 
 
             RadioButton selectedRadioButton = (RadioButton) carTypeGroup.getSelectedToggle();
-            String selectedCarType = selectedRadioButton.getText();
+
+            if (selectedRadioButton != null)
+                selectedCarType = selectedRadioButton.getText();
 
             CompController componentsCart = loader.getController();
             componentsCart.setEngineType(selectedCarType);

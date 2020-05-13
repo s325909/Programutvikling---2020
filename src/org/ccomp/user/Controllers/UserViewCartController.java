@@ -372,13 +372,13 @@ public class UserViewCartController {
                 
                 Seat item = customerSeatView.getItems().get(index);
                 StringProperty compNameProperty = new SimpleStringProperty(item.getCompName());
-                StringProperty compColorProperty = new SimpleStringProperty(item.getColor());
-                StringProperty compMaterialProperty = new SimpleStringProperty(item.getColor());
+                StringProperty compColorProperty = new SimpleStringProperty(item.getSeatColor());
+                StringProperty compMaterialProperty = new SimpleStringProperty(item.getSeatColor());
                 DoubleProperty compPriceProperty = new SimpleDoubleProperty(item.getCompPrice());
                 IntegerProperty compQuantityProperty = new SimpleIntegerProperty(item.getCompQuantity());
                 carComponents = getComponentsCart();
                // Seat seat = new Seat(compNameProperty, compPriceProperty, compQuantityProperty, compColorProperty, compMaterialProperty);
-                Seat seat = new Seat(item.getCompName(), item.getCompPrice(), item.getCompQuantity(), item.getColor(), item.getColor());
+                Seat seat = new Seat(item.getCompName(), item.getCompPrice(), item.getCompQuantity(), item.getSeatColor(), item.getSeatColor());
                 seat.setCompQuantity(1);
                 componentsCart.add(seat);
                 countProducts();

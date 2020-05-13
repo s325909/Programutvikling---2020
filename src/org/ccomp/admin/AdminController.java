@@ -21,7 +21,6 @@ import org.ccomp.fileHandling.ComponentOBJHandler;
 import org.ccomp.model.CompOrder;
 import org.ccomp.model.CustomerOrder;
 import org.ccomp.model.component.*;
-import org.ccomp.model.component.engine.GasolineEngine;
 import org.ccomp.user.Customer;
 
 import java.io.IOException;
@@ -430,12 +429,12 @@ public class AdminController implements Initializable {
             System.out.println(value);
             carComponents = retrievedCompMap.get("Seat");
             seat = ((Seat) carComponents.get(row));
-            seat.setMaterial(value);
+            seat.setSeatMaterial(value);
             retrievedCompMap.get("Seat").set(row, seat);
-            System.out.println(seat.getMaterial());
+            System.out.println(seat.getSeatMaterial());
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
-            ).setMaterial(t.getNewValue()
+            ).setSeatMaterial(t.getNewValue()
             );
         });
 
@@ -452,7 +451,7 @@ public class AdminController implements Initializable {
             retrievedCompMap.get("Seat").set(row, seat);
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
-            ).setMaterial(t.getNewValue()
+            ).setSeatMaterial(t.getNewValue()
             );
         });
 
@@ -465,11 +464,11 @@ public class AdminController implements Initializable {
             System.out.println(value);
             carComponents = retrievedCompMap.get("Seat");
             seat = ((Seat) carComponents.get(row));
-            seat.setColor(value);
+            seat.setSeatColor(value);
             retrievedCompMap.get("Seat").set(row, seat);
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
-            ).setMaterial(t.getNewValue()
+            ).setSeatMaterial(t.getNewValue()
             );
         });
 
@@ -530,7 +529,7 @@ public class AdminController implements Initializable {
             spoiler = ((Spoiler) carComponents.get(row));
             spoiler.setCompName(value);
             retrievedCompMap.get("Spoiler").set(row, seat);
-            System.out.println(seat.getMaterial());
+            System.out.println(seat.getSeatMaterial());
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setCompName(t.getNewValue()
@@ -548,7 +547,7 @@ public class AdminController implements Initializable {
             spoiler = ((Spoiler) carComponents.get(row));
             spoiler.setCompName(value);
             retrievedCompMap.get("Spoiler").set(row, seat);
-            System.out.println(seat.getMaterial());
+            System.out.println(seat.getSeatMaterial());
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setCompName(t.getNewValue()
@@ -566,7 +565,7 @@ public class AdminController implements Initializable {
             spoiler = ((Spoiler) carComponents.get(row));
             spoiler.setCompName(value);
             retrievedCompMap.get("Spoiler").set(row, seat);
-            System.out.println(seat.getMaterial());
+            System.out.println(seat.getSeatMaterial());
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setCompName(t.getNewValue()
@@ -601,9 +600,9 @@ public class AdminController implements Initializable {
             System.out.println(value);
             carComponents = retrievedCompMap.get("Spoiler");
             spoiler = ((Spoiler) carComponents.get(row));
-            seat.setMaterial(value);
+            seat.setSeatMaterial(value);
             retrievedCompMap.get("Seat").set(row, seat);
-            System.out.println(seat.getMaterial());
+            System.out.println(seat.getSeatMaterial());
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setCompName(t.getNewValue()
@@ -775,7 +774,7 @@ public class AdminController implements Initializable {
                         if (seat.getCompName().toLowerCase().indexOf(lowerCaseFiler) != -1) {
                             System.out.println("Er lik");
                             return true; //Filter sammenligner navn
-                        } else if (seat.getColor().toLowerCase().indexOf(lowerCaseFiler) != -1) {
+                        } else if (seat.getSeatColor().toLowerCase().indexOf(lowerCaseFiler) != -1) {
                             return true; //Filter sammenligner farge
                         } else if (String.valueOf(seat.getCompPrice()).toLowerCase().indexOf(lowerCaseFiler) != -1)
                             return true;
