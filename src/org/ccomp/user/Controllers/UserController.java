@@ -5,14 +5,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static org.ccomp.user.Controllers.UserRegController.alert;
 
 public class UserController implements Initializable {
 
@@ -55,16 +54,27 @@ public class UserController implements Initializable {
 
     @FXML
     public void toViewProduct() {
-        try {
-            Stage stage = (Stage) sokProd.getScene().getWindow();
-            URL url = getClass().getResource("/org/ccomp/user/viewProduct.fxml");
-            FXMLLoader loader = new FXMLLoader(url);
-            Parent root = loader.load();
-            Scene scene = new Scene(root, 800, 600);
-            stage.setScene(scene);
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
+
+        ToggleGroup carType = new ToggleGroup();
+        gasoline.setToggleGroup(carType);
+        electric.setToggleGroup(carType);
+        hybrid.setToggleGroup(carType);
+
+        if (carType.getSelectedToggle() == null) {
+            alert("Vennligst velg hvilke biltype du eier for å søke komponent!");
+        }
+        else {
+            try {
+                Stage stage = (Stage) sokProd.getScene().getWindow();
+                URL url = getClass().getResource("/org/ccomp/user/viewProduct.fxml");
+                FXMLLoader loader = new FXMLLoader(url);
+                Parent root = loader.load();
+                Scene scene = new Scene(root, 800, 600);
+                stage.setScene(scene);
+                stage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }

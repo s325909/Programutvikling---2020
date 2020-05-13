@@ -78,6 +78,7 @@ public class UserRegController {
                 URL url = getClass().getResource("/org/ccomp/user/order.fxml");
 
 
+
                 FXMLLoader loader = new FXMLLoader(url);
                 scene = contentcustomer.getScene();
                 scene.setRoot(loader.load());
@@ -88,6 +89,7 @@ public class UserRegController {
                 orderType = (TableColumn<CarComponent, String>) loader.getNamespace().get("orderType");
                 orderPrice = (TableColumn<CarComponent, Double>) loader.getNamespace().get("orderPrice");
                 orderQuantity = (TableColumn<CarComponent, Integer>) loader.getNamespace().get("orderQuantity");
+
 
                 countOrder = (Label) loader.getNamespace().get("countOrder");
                 countOrder.setText(String.valueOf(carComponents.size()) + " produkter ");

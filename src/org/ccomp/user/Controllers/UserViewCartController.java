@@ -20,6 +20,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 
 public class UserViewCartController {
@@ -44,7 +45,7 @@ public class UserViewCartController {
     TableView<Object> tableView;*/
 
     @FXML
-    Button backBtnView, backBtnCart, addToCart, userReg, toTheChart, deleteRow;
+    Button backBtnView, backBtnCart, addToCart, userReg, toTheChart, deleteRow, yes, no;
 
     @FXML
     TitledPane seatPane, spoilerPane;
@@ -155,9 +156,14 @@ public class UserViewCartController {
 
         if (componentsCart == null) componentsCart = new ArrayList<>();
 
-        if (componentsCart.size() == 0) System.out.println("VELG PRODUKT");
+        if (componentsCart.size() == 0) {
+            //System.out.println("VELG PRODUKT");
+            alert("Din handlekurv er tom, velligst legg til vare før du går videre!");
+        }
 
-        //todo: fjernes etter testing
+        else {
+
+            //todo: fjernes etter testing
        /* StringProperty compNameProperty = new SimpleStringProperty("COMP NAME");
         DoubleProperty compPriceProperty = new SimpleDoubleProperty(230);
         IntegerProperty compQuantityProperty = new SimpleIntegerProperty(15);
@@ -165,43 +171,42 @@ public class UserViewCartController {
 
         componentsCart.add(new CarComponent("COMP TYPE", compNameProperty, compPriceProperty, compQuantityProperty));
         */
-        try {
-            URL url = getClass().getResource("/org/ccomp/user/userCart.fxml");
+            try {
+                URL url = getClass().getResource("/org/ccomp/user/userCart.fxml");
 
 
-            FXMLLoader loader = new FXMLLoader(url);
-            scene = contentProducts.getScene();
-            scene.setRoot(loader.load());
+                FXMLLoader loader = new FXMLLoader(url);
+                scene = contentProducts.getScene();
+                scene.setRoot(loader.load());
 
-            //sende inn kolonnene og viewet
-            cartTable = (TableView<CarComponent>) loader.getNamespace().get("cartTable");
-            compNameColumn = (TableColumn<CarComponent, String>) loader.getNamespace().get("compNameColumn");
-            compTypeColumn = (TableColumn<CarComponent, String>) loader.getNamespace().get("compTypeColumn");
-            compPriceColumn = (TableColumn<CarComponent, Double>) loader.getNamespace().get("compPriceColumn");
-            compQuantityColumn = (TableColumn<CarComponent, Integer>) loader.getNamespace().get("compQuantityColumn");
+                //sende inn kolonnene og viewet
+                cartTable = (TableView<CarComponent>) loader.getNamespace().get("cartTable");
+                compNameColumn = (TableColumn<CarComponent, String>) loader.getNamespace().get("compNameColumn");
+                compTypeColumn = (TableColumn<CarComponent, String>) loader.getNamespace().get("compTypeColumn");
+                compPriceColumn = (TableColumn<CarComponent, Double>) loader.getNamespace().get("compPriceColumn");
+                compQuantityColumn = (TableColumn<CarComponent, Integer>) loader.getNamespace().get("compQuantityColumn");
 
 
-            //legger inn i table
-            cartTable.setItems(cartTable());
+                //legger inn i table
+                cartTable.setItems(cartTable());
 
-            //sender inn totalsum
-            sumText = (Label) loader.getNamespace().get("sumText");
-           double sum = totalPrice();
-            sumText.setText(String.valueOf(sum));
+                //sender inn totalsum
+                sumText = (Label) loader.getNamespace().get("sumText");
+                double sum = totalPrice();
+                sumText.setText(String.valueOf(sum));
 
-           // cartProduct.setText(componentsCart.get(0).getCompName());
+                // cartProduct.setText(componentsCart.get(0).getCompName());
 
-            //orderdPrductCar(); kall på metode for å se carten
+                //orderdPrductCar(); kall på metode for å se carten
 
-            //  FXMLLoader loader = new FXMLLoader(url);
-            //  AnchorPane newCartScene = (AnchorPane) loader.load();
-            //  contentProducts.getChildren().setAll(newCartScene.getChildren());
-            // scene.setRoot(screenMap.get("userCart"));
-        } catch (Exception e) {
-            e.printStackTrace();
+                //  FXMLLoader loader = new FXMLLoader(url);
+                //  AnchorPane newCartScene = (AnchorPane) loader.load();
+                //  contentProducts.getChildren().setAll(newCartScene.getChildren());
+                // scene.setRoot(screenMap.get("userCart"));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-
-
     }
 
 
@@ -226,6 +231,12 @@ public class UserViewCartController {
 
     @FXML
     public void toOrder() {
+
+        if (cartTable.getItems().isEmpty()) {
+            alertContinue("Du har ingen varer i handlekurven, vil du fortsette å handle?");
+
+        }
+
         try {
             Stage stage = (Stage) userReg.getScene().getWindow();
             URL url = getClass().getResource("/org/ccomp/user/userReg.fxml");
@@ -501,5 +512,34 @@ public class UserViewCartController {
         }*/
 
         return sum;
+    }
+
+    public static void alert(String msg) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("CCOMP");
+        alert.setHeaderText("Feil!");
+        alert.setContentText(msg);
+        alert.showAndWait();
+
+    }
+
+    public static void alertContinue(String msg) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("CCOMP");
+        alert.setHeaderText("Feil!");
+        alert.setContentText(msg);
+
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if(!result.isPresent()) {
+            // alert is exited, no button has been pressed.
+        }
+        else if (result.get() == ButtonType.OK) {
+            //ok button is pressed
+        }
+        else if (result.get() == ButtonType.CANCEL) {
+
+        }// cancel button is pressed
     }
 }
