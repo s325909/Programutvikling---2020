@@ -4,11 +4,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.ccomp.fileHandling.ComponentCSVHandler;
 import org.ccomp.fileHandling.ComponentOBJHandler;
@@ -38,7 +40,7 @@ public class UserRegController {
     TableColumn<CarComponent, Integer> orderQuantity;
 
     @FXML
-    Label customerTxt;
+    Label customerTxt1, customerTxt2;
     List<CarComponent> carComponents;
 
     @FXML
@@ -75,17 +77,15 @@ public class UserRegController {
             if (!name.getText().isEmpty() || !mail.getText().isEmpty() || !phone.getText().isEmpty() || !zip.getText().isEmpty() || !city.getText().isEmpty()) {
                 alert(validationUser());
             }
-           // alert(validationUser());
 
         } else {
             try {
                 URL url = getClass().getResource("/org/ccomp/user/order.fxml");
-
-
-
                 FXMLLoader loader = new FXMLLoader(url);
                 scene = contentcustomer.getScene();
                 scene.setRoot(loader.load());
+
+
 
                 //sende inn kolonnene og viewet
                 ordedView = (TableView<CarComponent>) loader.getNamespace().get("ordedView");
@@ -94,43 +94,38 @@ public class UserRegController {
                 orderPrice = (TableColumn<CarComponent, Double>) loader.getNamespace().get("orderPrice");
                 orderQuantity = (TableColumn<CarComponent, Integer>) loader.getNamespace().get("orderQuantity");
 
-
                 countOrder = (Label) loader.getNamespace().get("countOrder");
-                countOrder.setText(String.valueOf(carComponents.size()) + " produkter ");
+                countOrder.setText((carComponents.size()) + " produkter ");
 
-                customerTxt = (Label) loader.getNamespace().get("customerTxt");
+                customerTxt1 = (Label) loader.getNamespace().get("customerTxt1");
+                customerTxt2 = (Label) loader.getNamespace().get("customerTxt2");
 
+                String txt1 = "Navn: \n" +
+                        "E-post: \n" +
+                        "Mobilnr: \n" +
+                        "Postnr: \n" +
+                        "By: ";
+                customerTxt1.setText(txt1);
 
-                String txt = "Navn:   " + getRegister().getFullName() + "\n" +
-                        "E-post:   " + getRegister().getEmailadress() + "\n" +
-                        "Mobilnr:   " + getRegister().getNumber() + "\n" +
-                        "Postnr:   " + getRegister().getZipcode() + "\n" +
-                        "By:   " + getRegister().getCity();
-
-                customerTxt.setText(txt);
+                String txt2 = getRegister().getFullName() + "\n" +
+                        getRegister().getEmailadress() + "\n" +
+                        getRegister().getNumber() + "\n" +
+                        getRegister().getZipcode() + "\n" +
+                        getRegister().getCity() + "\n";
+                customerTxt2.setText(txt2);
 
                 //legger inn i table
                 ordedView.setItems(orderTable());
-
-
 
                 orderNr = getNextOrderNr();
 
                 System.out.println("CUSTOMER ORDER NR: " + orderNr);
 
                // CustomerOrder customerOrder = new CustomerOrder(orderNr, name.getText(), mail.getText(), phone.getText(), zip.getText(), city.getText());
-
-
-
-
                 saveCompOrder(carComponents);
-
 
                 CustomerOrder customerOrder = new CustomerOrder(orderNr, getRegister());
                 saveCustomerOrder(customerOrder);
-
-
-
 
             } catch (Exception e) {
                 e.printStackTrace();
