@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="contentProducts" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.user.Controllers.UserViewCartController">
+<AnchorPane fx:id="contentProducts" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.user.Controllers.UserViewCartController">
     <children>
         <Button fx:id="addToCart" layoutX="693.0" layoutY="547.0" mnemonicParsing="false" onAction="#chooseProduct" text="LEGG TIL">
             <font>
@@ -25,16 +24,17 @@
         </ImageView>
         <Accordion layoutY="131.0" prefHeight="400.0" prefWidth="800.0">
             <panes>
-                <TitledPane animated="false" text="VELG PRODUKT - Motor">
+                <TitledPane fx:id="enginePane" animated="false" onMouseClicked="#viewTheComponents" text="VELG PRODUKT - Motor">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
                                 <TableView fx:id="customorEngineView" prefHeight="280.0" prefWidth="800.0">
                                     <columns>
-                                        <TableColumn prefWidth="200.0" text="Navn" />
-                                        <TableColumn prefWidth="200.0" text="Hestekrefter" />
-                                        <TableColumn prefWidth="200.0" text="Pris" />
-                                        <TableColumn prefWidth="200.0" text="Antall" />
+                                        <TableColumn fx:id="nameEngineColum" prefWidth="108.0" text="Navn" />
+                                        <TableColumn fx:id="horsepowerColum" prefWidth="202.0" text="Hestekrefter" />
+                                        <TableColumn fx:id="priceEngineColm" minWidth="4.0" prefWidth="101.0" text="Pris" />
+                                        <TableColumn fx:id="quantityEngineColum" minWidth="0.0" prefWidth="147.0" text="Antall" />
+                              <TableColumn fx:id="engineTypeColum" minWidth="0.0" prefWidth="239.0" text="BilType" />
                                     </columns>
                                 </TableView>
                             </children>
@@ -75,34 +75,34 @@
                         </AnchorPane>
                     </content>
                 </TitledPane>
-                <TitledPane animated="false" text="VELG PRODUKT - Ratt">
+                <TitledPane fx:id="sWheelPane" animated="false" onMouseClicked="#viewTheComponents" text="VELG PRODUKT - Ratt">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <TableView fx:id="CustomersWheelView" prefHeight="280.0" prefWidth="800.0">
+                                <TableView fx:id="customerSWheelView" prefHeight="280.0" prefWidth="800.0">
                                     <columns>
-                                        <TableColumn prefWidth="160.0" text="Navn" />
-                                        <TableColumn prefWidth="160.0" text="Materiale" />
-                                        <TableColumn prefWidth="160.0" text="Farge" />
-                                        <TableColumn prefWidth="160.0" text="Pris" />
-                                        <TableColumn prefWidth="160.0" text="Antall" />
+                                        <TableColumn fx:id="nameSWheelColum" prefWidth="160.0" text="Navn" />
+                                        <TableColumn fx:id="materiellSwheelColum" prefWidth="160.0" text="Materiale" />
+                                        <TableColumn fx:id="colorSwheelColum" prefWidth="160.0" text="Farge" />
+                                        <TableColumn fx:id="priceSwheelColum" prefWidth="160.0" text="Pris" />
+                                        <TableColumn fx:id="quantitySwheel" prefWidth="160.0" text="Antall" />
                                     </columns>
                                 </TableView>
                             </children>
                         </AnchorPane>
                     </content>
                 </TitledPane>
-                <TitledPane animated="false" text="VELG PRODUKT - Felg">
+                <TitledPane fx:id="wheelRimPane" animated="false" onMouseClicked="#viewTheComponents" text="VELG PRODUKT - Felg">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
                                 <TableView fx:id="customerWheelRimView" prefHeight="280.0" prefWidth="800.0">
                                     <columns>
-                                        <TableColumn prefWidth="160.0" text="Navn" />
-                                        <TableColumn prefWidth="160.0" text="Dimensjon" />
-                                        <TableColumn prefWidth="160.0" text="Farge" />
-                                        <TableColumn prefWidth="160.0" text="Pris" />
-                                        <TableColumn prefWidth="160.0" text="Antall" />
+                                        <TableColumn fx:id="nameWheelRim" prefWidth="160.0" text="Navn" />
+                                        <TableColumn fx:id="dimensionWheelRimColum" prefWidth="160.0" text="Dimensjon" />
+                                        <TableColumn fx:id="colorWheelRim" prefWidth="160.0" text="Farge" />
+                                        <TableColumn fx:id="priceWeelRim" prefWidth="160.0" text="Pris" />
+                                        <TableColumn fx:id="quantityWeelRim" prefWidth="160.0" text="Antall" />
                                     </columns>
                                 </TableView>
                             </children>
