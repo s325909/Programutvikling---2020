@@ -34,6 +34,7 @@ public class ComponentOBJHandler implements ObjectFileHandler {
 
     @Override
     public void writeComponent(HashMap<String, List<CarComponent>> compMap) {
+        System.out.println("SERIALIZING COMPONENTS...");
         try {
             // FileOutputStream fos = new FileOutputStream("components.obj");
             FileOutputStream fos = new FileOutputStream("testComponents.obj");
@@ -45,6 +46,7 @@ public class ComponentOBJHandler implements ObjectFileHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("COMPONENTS SAVED TO FILE");
     }
 
     @Override

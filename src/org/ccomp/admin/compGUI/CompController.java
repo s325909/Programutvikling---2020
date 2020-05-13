@@ -1,6 +1,6 @@
 package org.ccomp.admin.compGUI;
 
-import javafx.beans.property.*;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,9 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import org.ccomp.fileHandling.ComponentCSVHandler;
 import org.ccomp.fileHandling.ComponentOBJHandler;
-import org.ccomp.model.MapKey;
 import org.ccomp.model.Validation;
 import org.ccomp.model.component.*;
 import org.ccomp.model.component.engine.ElectricMotor;
@@ -26,7 +24,7 @@ public class CompController {
     private Button backToAdd;
 
     @FXML
-    private Button addEngine, addSeat, addSpoiler, addSteeringWheel, addWheelRim, ok;
+    private Button addComp, addEngine, addSeat, addSpoiler, addSteeringWheel, addWheelRim, ok;
 
     @FXML
     private Label label;
@@ -61,6 +59,10 @@ public class CompController {
 
     private ComponentOBJHandler jobjHandler;
 
+    private Thread thread;
+
+
+
 
     @FXML
     public void initialize() {
@@ -94,6 +96,7 @@ public class CompController {
 
         if (event.getSource() == addEngine) {
             System.out.println("\nADD ENGINE PRESSED\n");
+
 
             //Getting all saved Seat components from HashMap and assigning them to new List of CarComponent
             carComponents = compMap.get(ENGINE_KEY);
@@ -176,18 +179,91 @@ public class CompController {
         System.out.println("\nADDING COMPONENT..\n");
 
 
+        addComp = (Button) event.getSource();
+
+
+        thread = fileOperation();
+
+
+        try {
+            showThreadOperationAlert(0);
+            thread.start();
+        } catch (IllegalThreadStateException e) {
+            System.err.println("ILLEGAL THREAT STATE EXCEPTION: " + e.toString());
+        }
 
 
 
-        //todo: WRITE COMPONENT TO FILE INSIDE THREAD
-
-        //serialize compMap
-
-        //Write HashMap containing Lists of each Component type to file
-        jobjHandler.writeComponent(compMap);
+      //  addBtn.setDisable(false);
+      //  backToAdd.setDisable(false);
     }
 
 
+
+
+    // create a alert
+    Alert alert = new Alert(Alert.AlertType.NONE);
+
+
+    private void showThreadOperationAlert(int state) {
+        // set alert type
+        alert.setAlertType(Alert.AlertType.INFORMATION);
+
+        // set content text
+        if (state == 0) alert.setContentText("FILE OPERATION ON THREAD IN PROGRESS...");
+        else if (state == 1) alert.setContentText("FILE OPERATION ON THREAD FINISHED");
+
+
+        // show the dialog
+        alert.show();
+    }
+
+
+
+    private Thread fileOperation() {
+
+
+        thread = new Thread(new Runnable() {
+
+            private volatile boolean exit = false;
+
+            public void stopThreadOperation() {
+                exit = true;
+                addComp.setDisable(false);
+                backToAdd.setDisable(false);
+
+
+                if (alert.isShowing()) {
+                    Platform.runLater(() -> alert.close());
+                }
+
+
+                Platform.runLater(() -> showThreadOperationAlert(1));
+            }
+
+            @Override
+            public void run() {
+                while (!exit) {
+                    try {
+                        System.out.println("FILE OPERATION ON THREAD IN PROGRESS...");
+
+                        addComp.setDisable(true);
+                        backToAdd.setDisable(true);
+
+                        Thread.sleep(7000);
+
+                        jobjHandler.writeComponent(compMap);
+                    } catch (InterruptedException e) {
+                        System.err.println("Thread Failure: " + e.toString());
+                    } finally {
+                        stopThreadOperation();
+                    }
+                }
+            }
+        });
+
+        return thread;
+    }
 
     private CarComponent makeComponent(String compKey, CarComponent component) {
         String compType, compName, compColor, compDimension, compMaterial, compSide;
