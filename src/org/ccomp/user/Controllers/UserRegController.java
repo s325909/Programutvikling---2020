@@ -59,6 +59,8 @@ public class UserRegController {
 
     private int orderNr;
 
+    private boolean cancelOrder;
+
     UserViewCartController userViewCartController = new UserViewCartController();
 
 
@@ -136,17 +138,27 @@ public class UserRegController {
     @FXML
     public void cancelOrder() {
 
-       /* try {
-            Stage stage = (Stage) cancel.getScene().getWindow();
-            URL url = getClass().getResource("/org/ccomp/user/user.fxml");
-            FXMLLoader loader = new FXMLLoader(url);
-            Parent root = loader.load();
-            Scene scene = new Scene(root, 600, 500);
-            stage.setScene(scene);
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();*/
-        cancel();
+       // cancelOrder;
+
+
+        if (cancelOrder) {
+
+            try {
+                Stage stage = (Stage) cancel.getScene().getWindow();
+                URL url = getClass().getResource("/org/ccomp/user/user.fxml");
+                FXMLLoader loader = new FXMLLoader(url);
+                Parent root = loader.load();
+                Scene scene = new Scene(root, 600, 500);
+                stage.setScene(scene);
+                stage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+
+
+        if (!cancelOrder) cancel();
     }
 
 
@@ -268,7 +280,8 @@ public class UserRegController {
         Optional<ButtonType> result = alert.showAndWait();
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
-
+            cancelOrder = true;
+            cancelOrder();
         }
     }
 }

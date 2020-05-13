@@ -460,7 +460,6 @@ public class UserViewCartController {
 
     //Sletter rader i cartTabel
     public void deleteCartRow() {
-
         CarComponent selectedRow = cartTable.getSelectionModel().getSelectedItem();
         cartTable.getItems().remove(selectedRow);
         componentsCart.remove(selectedRow);
@@ -470,12 +469,11 @@ public class UserViewCartController {
     }
 
     public void deleteCartAll() {
-            /*cartTable.getItems().removeAll(componentsCart);
-            componentsCart.clear();*/
-            for (CarComponent carComponent : componentsCart) {
-                cartTable.getItems().removeAll(carComponent);
-                componentsCart.clear();
-        }
+        //Remove all components added to the componentsCart List from CartTable
+        cartTable.getItems().removeAll(componentsCart);
+
+        //Clear ComponentsCart List
+        componentsCart.clear();
     }
 
     public static List<CarComponent> getComponentsCart() {
