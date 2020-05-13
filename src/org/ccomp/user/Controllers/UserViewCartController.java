@@ -474,6 +474,7 @@ public class UserViewCartController {
             componentsCart.clear();*/
             for (CarComponent carComponent : componentsCart) {
                 cartTable.getItems().removeAll(carComponent);
+                componentsCart.clear();
         }
     }
 
