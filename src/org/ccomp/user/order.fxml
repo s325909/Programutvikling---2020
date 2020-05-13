@@ -12,7 +12,7 @@
             <Image url="@../../../resources/CCOMPW-small.png" />
          </image>
       </ImageView>
-      <TextArea fx:id="customerTxt" layoutX="3.0" layoutY="189.0" prefHeight="126.0" prefWidth="500.0" />
+      <Label fx:id="customerTxt" layoutX="3.0" layoutY="189.0" prefHeight="126.0" prefWidth="500.0" />
       <Text layoutX="31.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DU ER NÅ REGISTRERT MED DENNE INFORMASJONEN:" />
       <Text layoutX="146.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DETTE ER DIN BESTILLING:" />
       <Text layoutX="88.0" layoutY="579.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Du kan nå krysse ut. Ha en fin dag videre!" />

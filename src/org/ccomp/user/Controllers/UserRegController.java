@@ -38,7 +38,7 @@ public class UserRegController {
     TableColumn<CarComponent, Integer> orderQuantity;
 
     @FXML
-    TextArea customerTxt;
+    Label customerTxt;
     List<CarComponent> carComponents;
 
     @FXML
@@ -96,11 +96,14 @@ public class UserRegController {
                 countOrder = (Label) loader.getNamespace().get("countOrder");
                 countOrder.setText(String.valueOf(carComponents.size()) + " produkter ");
 
-                customerTxt = (TextArea) loader.getNamespace().get("customerTxt");
+                customerTxt = (Label) loader.getNamespace().get("customerTxt");
 
 
-                String txt = getRegister().toCSVFormat();
-
+                String txt = "Navn:   " + getRegister().getFullName() + "\n" +
+                        "E-post:   " + getRegister().getEmailadress() + "\n" +
+                        "Mobilnr:   " + getRegister().getNumber() + "\n" +
+                        "Postnr:   " + getRegister().getZipcode() + "\n" +
+                        "By:   " + getRegister().getCity();
 
                 customerTxt.setText(txt);
 
@@ -223,14 +226,11 @@ public class UserRegController {
 
     public Customer getRegister() {
         Customer customer = new Customer(name.getText(), mail.getText(), phone.getText(), zip.getText(), city.getText());
-        String txt = "Navn:   " + customer.getFullName() + "\n" +
+        /*String txt = "Navn:   " + customer.getFullName() + "\n" +
                 "E-post:   " + customer.getEmailadress() + "\n" +
                 "Mobilnr:   " + customer.getNumber() + "\n" +
                 "Postnr:   " + customer.getZipcode() + "\n" +
-                "By:   " + customer.getCity();
-
-
-
+                "By:   " + customer.getCity();*/
 
         return customer;
     }
