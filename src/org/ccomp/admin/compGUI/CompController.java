@@ -290,15 +290,15 @@ public class CompController {
                 switch (getEngineType()) {
                     case "Bensin":
                         System.out.println(getEngineType());
-                         component = new GasolineEngine(compName, compPrice, compQuantity);
+                        // component = new GasolineEngine(compName, compPrice, compQuantity);
                         break;
                     case "Elbil":
                         System.out.println(getEngineType());
-                        component = new ElectricMotor(compName, compPrice, compQuantity);
+                       // component = new ElectricMotor(compName, compPrice, compQuantity);
                         break;
                     case "Hybrid":
                         System.out.println(getEngineType());
-                        component = new HybridEngine(compName, compPrice, compQuantity);
+                       // component = new HybridEngine(compName, compPrice, compQuantity);
                         break;
                     default:
                         System.out.println("NO SUCH ENGINE TYPE");
