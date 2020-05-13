@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.NodeOrientation;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -16,6 +17,7 @@ import org.ccomp.fileHandling.ComponentOBJHandler;
 import org.ccomp.model.CustomerOrder;
 import org.ccomp.model.component.*;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,7 +47,7 @@ public class UserViewCartController {
     TableView<Object> tableView;*/
 
     @FXML
-    Button backBtnView, backBtnCart, addToCart, userReg, toTheChart, deleteRow, yes, no;
+    Button backBtnView, backBtnCart, addToCart, userReg, toTheChart, deleteRow, deleteAll;
 
     @FXML
     TitledPane seatPane, spoilerPane;
@@ -233,65 +235,62 @@ public class UserViewCartController {
     public void toOrder() {
 
         if (cartTable.getItems().isEmpty()) {
-            alertContinue("Du har ingen varer i handlekurven, vil du fortsette å handle?");
-
+            alert("Du har ingen varer i handlekurven!");
         }
 
-        try {
-            Stage stage = (Stage) userReg.getScene().getWindow();
-            URL url = getClass().getResource("/org/ccomp/user/userReg.fxml");
-            FXMLLoader loader = new FXMLLoader(url);
-            Parent root = loader.load();
+        else {
+            try {
+                Stage stage = (Stage) userReg.getScene().getWindow();
+                URL url = getClass().getResource("/org/ccomp/user/userReg.fxml");
+                FXMLLoader loader = new FXMLLoader(url);
+                Parent root = loader.load();
 
 
-            UserRegController userRegController = loader.getController();
-            userRegController.setCarComponents(componentsCart);
+                UserRegController userRegController = loader.getController();
+                userRegController.setCarComponents(componentsCart);
+
+
+                ComponentCSVHandler csvHandler = new ComponentCSVHandler();
+
+                List<CustomerOrder> customerOrders = new ArrayList<>();
+                customerOrders = csvHandler.readCustomerOrder(customerOrders, "testCustomerOrders.csv");
+                System.out.println("CUSTOMER LIST: " + customerOrders.size());
+
+                /*
+
+                ComponentCSVHandler csvHandler = new ComponentCSVHandler();
+
+                String[] lastRow = csvHandler.readLast();
+
+                System.out.println("RETREIVED LAST ROW: " + Arrays.toString(lastRow));
+
+                int orderNr = Integer.parseInt(lastRow[0]);
+                orderNr++;
+
+
+                List<CompOrder> compOrderList = new ArrayList<>();
+               // int orderNr = 1;
+                System.out.println("ORDER NR: " + orderNr);
+                for (CarComponent carComponent : componentsCart) {
+                    CompOrder compOrder = new CompOrder(orderNr, carComponent);
+                    System.out.println(compOrder.toCSVFormat());
+                    compOrderList.add(compOrder);
+                }
+
+              //  ComponentCSVHandler csvHandler = new ComponentCSVHandler();
+                csvHandler.writeCompOrder(compOrderList, "testCompOrders.csv");
 
 
 
-            ComponentCSVHandler csvHandler = new ComponentCSVHandler();
-
-            List<CustomerOrder> customerOrders = new ArrayList<>();
-            customerOrders = csvHandler.readCustomerOrder(customerOrders, "testCustomerOrders.csv");
-            System.out.println("CUSTOMER LIST: " + customerOrders.size());
-
-            /*
-
-            ComponentCSVHandler csvHandler = new ComponentCSVHandler();
-
-            String[] lastRow = csvHandler.readLast();
-
-            System.out.println("RETREIVED LAST ROW: " + Arrays.toString(lastRow));
-
-            int orderNr = Integer.parseInt(lastRow[0]);
-            orderNr++;
+                 */
 
 
-            List<CompOrder> compOrderList = new ArrayList<>();
-           // int orderNr = 1;
-            System.out.println("ORDER NR: " + orderNr);
-            for (CarComponent carComponent : componentsCart) {
-                CompOrder compOrder = new CompOrder(orderNr, carComponent);
-                System.out.println(compOrder.toCSVFormat());
-                compOrderList.add(compOrder);
+                Scene scene = new Scene(root, 800, 600);
+                stage.setScene(scene);
+                stage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-
-          //  ComponentCSVHandler csvHandler = new ComponentCSVHandler();
-            csvHandler.writeCompOrder(compOrderList, "testCompOrders.csv");
-
-
-
-             */
-
-
-
-
-
-            Scene scene = new Scene(root, 800, 600);
-            stage.setScene(scene);
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -461,23 +460,21 @@ public class UserViewCartController {
 
     //Sletter rader i cartTabel
     public void deleteCartRow() {
-            CarComponent selectedRow = cartTable.getSelectionModel().getSelectedItem();
-            cartTable.getItems().remove(selectedRow);
-            componentsCart.remove(selectedRow);
 
-            /*
+        CarComponent selectedRow = cartTable.getSelectionModel().getSelectedItem();
+        cartTable.getItems().remove(selectedRow);
+        componentsCart.remove(selectedRow);
+
+        double sum = totalPrice();
+        sumText.setText(String.valueOf(sum));
+    }
+
+    public void deleteCartAll() {
+            /*cartTable.getItems().removeAll(componentsCart);
+            componentsCart.clear();*/
             for (CarComponent carComponent : componentsCart) {
-                cartTable.getItems().remove(carComponent);
-
-            }
-
-            cartTable.getItems().removeAll(componentsCart);
-            componentsCart.clear();
-
-             */
-
-            double sum = totalPrice();
-            sumText.setText(String.valueOf(sum));
+                cartTable.getItems().removeAll(carComponent);
+        }
     }
 
     public static List<CarComponent> getComponentsCart() {
@@ -521,25 +518,5 @@ public class UserViewCartController {
         alert.setContentText(msg);
         alert.showAndWait();
 
-    }
-
-    public static void alertContinue(String msg) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("CCOMP");
-        alert.setHeaderText("Feil!");
-        alert.setContentText(msg);
-
-
-        Optional<ButtonType> result = alert.showAndWait();
-
-        if(!result.isPresent()) {
-            // alert is exited, no button has been pressed.
-        }
-        else if (result.get() == ButtonType.OK) {
-            //ok button is pressed
-        }
-        else if (result.get() == ButtonType.CANCEL) {
-
-        }// cancel button is pressed
     }
 }
