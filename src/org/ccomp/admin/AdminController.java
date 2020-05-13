@@ -125,7 +125,7 @@ public class AdminController implements Initializable {
     @FXML
     TableColumn<WheelRim,Integer> quantityWheelRim;
 
-    /*
+
     //Engine
     @FXML
     TableView<Engine> engineView;
@@ -135,7 +135,7 @@ public class AdminController implements Initializable {
     TableColumn<Engine, Double>priceEngineColum;
     @FXML
     TableColumn<Engine, Integer>quantityEngineColum;
-    */
+
 
     private ComponentOBJHandler jobjHandler;
 
