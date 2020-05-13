@@ -16,10 +16,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.ccomp.admin.compGUI.CompController;
+import org.ccomp.user.Controllers.UserRegController;
 
 import javax.swing.*;
 
-public class AddComponentController implements Initializable {
+public class AddComponentController {
 
     @FXML
     Button backAdmin, next;
@@ -32,11 +34,6 @@ public class AddComponentController implements Initializable {
 
     @FXML
     ToggleGroup carTypeGroup, componentTypeGroup;
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-    }
 
     public void disableToggegroup(){
         carTypeGroup.getSelectedToggle();
@@ -142,6 +139,15 @@ public class AddComponentController implements Initializable {
             URL url = getClass().getResource(resource);
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
+
+
+            RadioButton selectedRadioButton = (RadioButton) carTypeGroup.getSelectedToggle();
+            String selectedCarType = selectedRadioButton.getText();
+
+            CompController componentsCart = loader.getController();
+            componentsCart.setEngineType(selectedCarType);
+
+
             Scene scene = new Scene(root, 600, 500);
 //            scene.getStylesheets().add(getClass().getResource(styleSheet).toExternalForm());
             stage.setScene(scene);

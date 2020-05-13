@@ -10,18 +10,15 @@ public class WheelRim extends CarComponent{
 
     private static final String compType = "Wheel_Rim";
 
-    private transient StringProperty wheelRimColor, wheelRimMaterial;
-    private transient IntegerProperty wheelRimSize;
-    private String winterSeason;
-    private String summerSeason;
+    private transient StringProperty wheelRimColor, wheelRimDimension;
+    // private transient IntegerProperty wheelRimSize;
+    // private String summerSeason, winterSeason;
 
-    public WheelRim(StringProperty compName, DoubleProperty compPrice, IntegerProperty compQuantity,
-                    StringProperty wheelRimColor, StringProperty wheelRimMaterial) {
-                     //, IntegerProperty wheelRimSize) {
+    public WheelRim(String compName, double compPrice, int compQuantity,
+                    String wheelRimColor, String wheelRimDimension) {
         super(compType, compName, compPrice, compQuantity);
-        this.wheelRimColor = wheelRimColor;
-        this.wheelRimMaterial = wheelRimMaterial;
-      //  this.wheelRimSize = wheelRimSize;
+        this.wheelRimColor = new SimpleStringProperty(wheelRimColor);
+        this.wheelRimDimension = new SimpleStringProperty(wheelRimDimension);
     }
 
     // Callback method to be executed automatically by the jvm at the time of serialization
@@ -46,35 +43,23 @@ public class WheelRim extends CarComponent{
         this.wheelRimColor.set(wheelRimColor);
     }
 
-    public String getWheelRimMaterial() {
-        return wheelRimMaterial.get();
+    public String getWheelRimDimension() {
+        return wheelRimDimension.get();
     }
 
-    public StringProperty wheelRimMaterialProperty() {
-        return wheelRimMaterial;
+    public StringProperty wheelRimDimensionProperty() {
+        return wheelRimDimension;
     }
 
-    public void setWheelRimMaterial(String wheelRimMaterial) {
-        this.wheelRimMaterial.set(wheelRimMaterial);
-    }
-
-    public int getWheelRimSize() {
-        return wheelRimSize.get();
-    }
-
-    public IntegerProperty wheelRimSizeProperty() {
-        return wheelRimSize;
-    }
-
-    public void setWheelRimSize(int wheelRimSize) {
-        this.wheelRimSize.set(wheelRimSize);
+    public void setWheelRimDimension(String wheelRimDimension) {
+        this.wheelRimDimension.set(wheelRimDimension);
     }
 
     @Override
     public String toString() {
         return "WheelRim{" + super.toString() +
                 ", wheelRimColor=" + wheelRimColor +
-                ", wheelRimMaterial=" + wheelRimMaterial +
+                ", wheelRimDimension=" + wheelRimDimension +
               //  ", wheelRimSize=" + wheelRimSize +
                 '}';
     }
@@ -83,7 +68,7 @@ public class WheelRim extends CarComponent{
     public void writeObjectHandler(ObjectOutputStream oos) throws IOException {
         super.writeObjectHandler(oos);
         oos.writeUTF(getWheelRimColor());
-        oos.writeUTF(getWheelRimMaterial());
+        oos.writeUTF(getWheelRimDimension());
       //  oos.writeInt(getWheelRimSize());
     }
 
@@ -91,7 +76,7 @@ public class WheelRim extends CarComponent{
     public void readObjectHandler(ObjectInputStream ois) throws IOException, ClassNotFoundException {
         super.readObjectHandler(ois);
         wheelRimColor = new SimpleStringProperty(ois.readUTF());
-        wheelRimMaterial = new SimpleStringProperty(ois.readUTF());
+        wheelRimDimension = new SimpleStringProperty(ois.readUTF());
        // wheelRimSize = new SimpleIntegerProperty(ois.readInt());
     }
 }

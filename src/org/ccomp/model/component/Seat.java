@@ -12,12 +12,24 @@ public class Seat extends CarComponent {
 
     private transient StringProperty color, material;
 
+    public Seat(String compName, double compPrice, int compQuantity,
+                String seatColor, String seatMaterial) {
+        super(compType, compName, compPrice, compQuantity);
+        this.color = new SimpleStringProperty(seatColor);
+        this.material = new SimpleStringProperty(seatMaterial);
+    }
+
+
+
+
+    /*
     public Seat(StringProperty compName, DoubleProperty compPrice, IntegerProperty compQuantity,
                 StringProperty color, StringProperty material) {
         super(compType, compName, compPrice, compQuantity);
         this.material = material;
         this.color = color;
     }
+    */
 
     // Callback method to be executed automatically by the jvm at the time of serialization
     private void writeObject(ObjectOutputStream oos) throws IOException {

@@ -4,18 +4,18 @@ import org.ccomp.model.component.Seat;
 import org.ccomp.model.component.Spoiler;
 import org.ccomp.model.component.SteeringWheel;
 import org.ccomp.model.component.WheelRim;
-import org.ccomp.model.component.engine.Engine;
 
 import java.io.Serializable;
 
 public class MapKey implements Serializable {
 
-    private Engine keyEngine;
+   // private Engine keyEngine;
     private Seat keySeat;
     private Spoiler keySpoiler;
     private SteeringWheel keySteeringWheel;
     private WheelRim keyWheelRim;
 
+    /*
     public Engine getKeyEngine() {
         return keyEngine;
     }
@@ -23,6 +23,8 @@ public class MapKey implements Serializable {
     public void setKeyEngine(Engine keyEngine) {
         this.keyEngine = keyEngine;
     }
+
+     */
 
     public Seat getKeySeat() {
         return keySeat;

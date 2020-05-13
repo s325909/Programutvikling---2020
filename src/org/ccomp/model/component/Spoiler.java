@@ -13,12 +13,14 @@ public class Spoiler extends CarComponent {
 
     private static final String compType = "Spoiler";
 
-    private transient StringProperty spoilerSide, spoilerType; //sport, normal, etc.
+   // private transient StringProperty spoilerSide, spoilerType; //sport, normal, etc.
+    private transient StringProperty spoilerColor, spoilerSide;
 
-    public Spoiler(StringProperty compName, DoubleProperty compPrice, IntegerProperty compQuantity,
-                   StringProperty spoilerSide) {
+    public Spoiler(String compName, double compPrice, int compQuantity,
+                   String spoilerColor, String spoilerSide) {
         super(compType, compName, compPrice, compQuantity);
-        this.spoilerSide = spoilerSide;
+        this.spoilerColor = new SimpleStringProperty(spoilerColor);
+        this.spoilerSide = new SimpleStringProperty(spoilerSide);
     }
 
     // Callback method to be executed automatically by the jvm at the time of serialization
@@ -31,6 +33,18 @@ public class Spoiler extends CarComponent {
         readObjectHandler(ois);
     }
 
+
+    public String getSpoilerColor() {
+        return spoilerColor.get();
+    }
+
+    public StringProperty spoilerColorProperty() {
+        return spoilerColor;
+    }
+
+    public void setSpoilerColor(String spoilerColor) {
+        this.spoilerColor.set(spoilerColor);
+    }
 
     public String getSpoilerSide() {
         return spoilerSide.get();
@@ -47,19 +61,22 @@ public class Spoiler extends CarComponent {
     @Override
     public String toString() {
         return "Spoiler{" + super.toString() +
-                ", type=" + spoilerSide +
+                ", spoilerColor=" + spoilerColor +
+                ", spoilerSide=" + spoilerSide +
                 '}';
     }
 
     @Override
     public void writeObjectHandler(ObjectOutputStream oos) throws IOException {
         super.writeObjectHandler(oos);
+        oos.writeUTF(getSpoilerColor());
         oos.writeUTF(getSpoilerSide());
     }
 
     @Override
     public void readObjectHandler(ObjectInputStream ois) throws IOException, ClassNotFoundException {
         super.readObjectHandler(ois);
+        spoilerColor = new SimpleStringProperty(ois.readUTF());
         spoilerSide = new SimpleStringProperty(ois.readUTF());
     }
 }

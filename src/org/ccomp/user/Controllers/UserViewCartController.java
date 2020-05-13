@@ -13,10 +13,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.ccomp.fileHandling.ComponentCSVHandler;
 import org.ccomp.fileHandling.ComponentOBJHandler;
-import org.ccomp.model.Car;
 import org.ccomp.model.CustomerOrder;
 import org.ccomp.model.component.*;
-import org.ccomp.model.component.engine.Engine;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -63,8 +61,10 @@ public class UserViewCartController {
     @FXML
     TableView<WheelRim> customerWheelRimView;
 
+    /*
     @FXML
     TableView<Engine> customorEngineView;
+    */
 
     @FXML
     TableColumn<Seat, String> nameSeatColum, materiellColum, colorSeatColum;
@@ -377,7 +377,8 @@ public class UserViewCartController {
                 DoubleProperty compPriceProperty = new SimpleDoubleProperty(item.getCompPrice());
                 IntegerProperty compQuantityProperty = new SimpleIntegerProperty(item.getCompQuantity());
                 carComponents = getComponentsCart();
-                Seat seat = new Seat(compNameProperty, compPriceProperty, compQuantityProperty, compColorProperty, compMaterialProperty);
+               // Seat seat = new Seat(compNameProperty, compPriceProperty, compQuantityProperty, compColorProperty, compMaterialProperty);
+                Seat seat = new Seat(item.getCompName(), item.getCompPrice(), item.getCompQuantity(), item.getColor(), item.getColor());
                 seat.setCompQuantity(1);
                 componentsCart.add(seat);
                 countProducts();
@@ -419,7 +420,8 @@ public class UserViewCartController {
             DoubleProperty spoilercompPriceProperty = new SimpleDoubleProperty(spoileritem.getCompPrice());
             IntegerProperty spoilercompQuantityProperty = new SimpleIntegerProperty(spoileritem.getCompQuantity());
             carComponents = getComponentsCart();
-            componentsCart.add(new Spoiler(spoilercompNameProperty, spoilercompPriceProperty, spoilercompQuantityProperty,spoilercompSpoilerSideProperty));
+           // componentsCart.add(new Spoiler(spoilercompNameProperty, spoilercompPriceProperty, spoilercompQuantityProperty,spoilercompSpoilerSideProperty));
+           // componentsCart.add(new Spoiler(spoileritem.getCompName(), spoileritem.getCompPrice(), spoileritem.getCompQuantity(), spoileritem.getSpoilerSide()));
             countProducts();
 
         }

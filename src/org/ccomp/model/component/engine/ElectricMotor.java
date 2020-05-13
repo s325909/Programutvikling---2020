@@ -2,15 +2,40 @@ package org.ccomp.model.component.engine;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.StringProperty;
 import org.ccomp.model.component.CarComponent;
 
-public class ElectricMotor extends CarComponent implements Engine {
+public class ElectricMotor extends CarComponent {
 
     private static final String compType = "Electric_Motor";
 
+    private transient IntegerProperty engineHorsePower;
+
     String engineName;
     int horsePower, enginePrice;
+
+    public ElectricMotor(String compName, double compPrice, int compQuantity, int horsePower) {
+        super(compType, compName, compPrice, compQuantity);
+        this.engineHorsePower = new SimpleIntegerProperty(horsePower);
+    }
+
+    public int getEngineHorsePower() {
+        return engineHorsePower.get();
+    }
+
+    public IntegerProperty engineHorsePowerProperty() {
+        return engineHorsePower;
+    }
+
+    public void setEngineHorsePower(int engineHorsePower) {
+        this.engineHorsePower.set(engineHorsePower);
+    }
+
+
+
+    /*
+
 
     public ElectricMotor(StringProperty compName, DoubleProperty compPrice, IntegerProperty compQuantity,
                          String engineName, int horsePower, int enginePrice) {
@@ -20,12 +45,14 @@ public class ElectricMotor extends CarComponent implements Engine {
         this.enginePrice = enginePrice;
     }
 
-    @Override
+     */
+
+   // @Override
     public boolean isCombustion() {
         return false;
     }
 
-    @Override
+   // @Override
     public boolean isElectric() {
         return true;
     }
@@ -35,7 +62,7 @@ public class ElectricMotor extends CarComponent implements Engine {
         this.engineName = name;
     }
 
-    @Override
+   // @Override
     public void enginePower(int power) {
         this.horsePower = power;
     }

@@ -21,7 +21,7 @@ import org.ccomp.fileHandling.ComponentOBJHandler;
 import org.ccomp.model.CompOrder;
 import org.ccomp.model.CustomerOrder;
 import org.ccomp.model.component.*;
-import org.ccomp.model.component.engine.Engine;
+import org.ccomp.model.component.engine.GasolineEngine;
 import org.ccomp.user.Customer;
 
 import java.io.IOException;
@@ -126,6 +126,7 @@ public class AdminController implements Initializable {
     @FXML
     TableColumn<WheelRim,Integer> quantityWheelRim;
 
+    /*
     //Engine
     @FXML
     TableView<Engine> engineView;
@@ -135,6 +136,7 @@ public class AdminController implements Initializable {
     TableColumn<Engine, Double>priceEngineColum;
     @FXML
     TableColumn<Engine, Integer>quantityEngineColum;
+    */
 
     private ComponentOBJHandler jobjHandler;
 
@@ -356,6 +358,7 @@ public class AdminController implements Initializable {
         for (CompOrder compOrder : compOrders) {
             System.out.println(compOrder.toCSVFormat());
         }
+
 
         carComponents = new ArrayList<>();
        // if (customerOrderInfoView.getSelectionModel().isSelected(row))

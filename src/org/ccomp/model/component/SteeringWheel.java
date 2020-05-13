@@ -15,11 +15,11 @@ public class SteeringWheel extends CarComponent {
 
     private transient StringProperty steeringWheelColor, steeringWheelMaterial;
 
-    public SteeringWheel(StringProperty compName, DoubleProperty compPrice, IntegerProperty compQuantity,
-                         StringProperty steeringWheelColor, StringProperty steeringWheelMaterial) {
+    public SteeringWheel(String compName, double compPrice, int compQuantity,
+                         String steeringWheelColor, String steeringWheelMaterial) {
         super(compType, compName, compPrice, compQuantity);
-        this.steeringWheelColor = steeringWheelColor;
-        this.steeringWheelMaterial = steeringWheelMaterial;
+        this.steeringWheelColor = new SimpleStringProperty(steeringWheelColor);
+        this.steeringWheelMaterial = new SimpleStringProperty(steeringWheelMaterial);
     }
 
     // Callback method to be executed automatically by the jvm at the time of serialization

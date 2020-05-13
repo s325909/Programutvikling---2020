@@ -2,7 +2,6 @@ package org.ccomp.model.component;
 
 import javafx.beans.property.*;
 import org.ccomp.fileHandling.ObjectFileHandler;
-import org.ccomp.model.component.engine.Engine;
 
 import java.io.*;
 import java.util.HashMap;
@@ -19,12 +18,23 @@ public class CarComponent implements ObjectFileHandler {
 
    // private String compType;
 
+    public CarComponent(String compType, String compName, double compPrice, int compQuantity) {
+        this.compType = new SimpleStringProperty(compType);
+        this.compName = new SimpleStringProperty(compName);
+        this.compPrice = new SimpleDoubleProperty(compPrice);
+        this.compQuantity = new SimpleIntegerProperty(compQuantity);
+    }
+
+    /*
+
     public CarComponent(String compType, StringProperty compName, DoubleProperty compPrice, IntegerProperty compQuantity) {
         this.compType = new SimpleStringProperty(compType);
         this.compName = compName;
         this.compPrice = compPrice;
         this.compQuantity = compQuantity;
     }
+
+     */
 
     // Callback method to be executed automatically by the jvm at the time of serialization
     private void writeObject(ObjectOutputStream oos) throws IOException {
@@ -37,12 +47,14 @@ public class CarComponent implements ObjectFileHandler {
     }
 
 
+    /*
     private String determineEngineType(Engine engine) {
         if (engine.isCombustion()) return "bensin"; //compType = "bensin"
         else if (engine.isElectric()) return "elbil";
         else if (engine.isCombustion() && engine.isElectric()) return "hybrid";
         else return "ukjent";
     }
+    */
 
     public String getCompType() {
         return compType.get();

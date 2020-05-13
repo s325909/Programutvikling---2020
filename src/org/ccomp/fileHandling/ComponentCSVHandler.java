@@ -57,9 +57,14 @@ public class ComponentCSVHandler implements CSVFileHandler {
 
                 int orderNr = Integer.parseInt(values[0]);
                 String compType = values[1];
-                StringProperty compName = new SimpleStringProperty(values[2]);
-                DoubleProperty compPrice = new SimpleDoubleProperty(Double.valueOf(values[3]));
-                IntegerProperty compQuantity = new SimpleIntegerProperty(Integer.valueOf(values[4]));
+               // StringProperty compName = new SimpleStringProperty(values[2]);
+               // DoubleProperty compPrice = new SimpleDoubleProperty(Double.valueOf(values[3]));
+               // IntegerProperty compQuantity = new SimpleIntegerProperty(Integer.valueOf(values[4]));
+
+
+                String compName = values[2];
+                double compPrice = Double.parseDouble(values[3]);
+                int compQuantity = Integer.parseInt(values[4]);
 
                 CarComponent carComponent = new CarComponent(compType, compName, compPrice, compQuantity);
 
@@ -351,7 +356,9 @@ public class ComponentCSVHandler implements CSVFileHandler {
                     DoubleProperty compPrice = new SimpleDoubleProperty(Double.valueOf(b[3]));
                     IntegerProperty compQuantity = new SimpleIntegerProperty(Integer.valueOf(b[4]));
 
-                    CarComponent carComponent = new CarComponent(compType, compName, compPrice, compQuantity);
+                   // CarComponent carComponent = new CarComponent(compType, compName, compPrice, compQuantity);
+
+                    CarComponent carComponent = new CarComponent(b[1], b[2], Double.valueOf(b[3]), Integer.valueOf(b[4]));
                     compOrders.add(new CompOrder(orderNr, carComponent));
 
                     System.out.println("FOUND COMP ORDER SIZE: " + compOrders.size());
