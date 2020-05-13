@@ -4,10 +4,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import org.ccomp.fileHandling.ComponentCSVHandler;
 import org.ccomp.fileHandling.ComponentOBJHandler;
 import org.ccomp.model.CompOrder;
@@ -20,7 +22,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+import java.util.Optional;
 
 
 public class UserRegController {
@@ -44,7 +46,7 @@ public class UserRegController {
 
 
     @FXML
-    Button register;
+    Button register, cancel;
 
     @FXML
     AnchorPane contentcustomer, contentRecipt;
@@ -129,6 +131,22 @@ public class UserRegController {
                 e.printStackTrace();
             }
         }
+    }
+
+    @FXML
+    public void cancelOrder() {
+
+       /* try {
+            Stage stage = (Stage) cancel.getScene().getWindow();
+            URL url = getClass().getResource("/org/ccomp/user/user.fxml");
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+            Scene scene = new Scene(root, 600, 500);
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();*/
+        cancel();
     }
 
 
@@ -235,6 +253,22 @@ public class UserRegController {
     public void emptyFields() {
         if (name.getText().isEmpty() && mail.getText().isEmpty() && phone.getText().isEmpty() && zip.getText().isEmpty() && city.getText().isEmpty()) {
             alert("Fyll inn alle felt!");
+        }
+    }
+
+    public void cancel() {
+
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setContentText("Du er i ferd med å avbryte bestillingen din.");
+        alert.setHeaderText("Er du sikker på at du vil kansellere?");
+
+        ButtonType cancelButton = new ButtonType("Avbryt", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getDialogPane().getButtonTypes().add(cancelButton);
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+
         }
     }
 }
