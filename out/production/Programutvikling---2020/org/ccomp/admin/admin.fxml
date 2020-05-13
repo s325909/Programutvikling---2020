@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="adminPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.AdminController">
+<AnchorPane fx:id="adminPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.AdminController">
     <children>
         <TabPane fx:id="tabPane" layoutY="100.0" prefHeight="500.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
@@ -16,7 +16,7 @@
                      <children>
                         <TabPane prefHeight="453.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
                            <tabs>
-                              <Tab fx:id="engineTab" text="Motor">
+                              <Tab fx:id="engineTab" onSelectionChanged="#allTables" text="Motor">
                                  <content>
 
                                  </content>
@@ -58,7 +58,7 @@
                                     </TableView>
                                  </content>
                               </Tab>
-                              <Tab fx:id="steeringWTab" text="Ratt">
+                              <Tab fx:id="steeringWTab" onSelectionChanged="#allTables" text="Ratt">
                                  <content>
                                     <TableView fx:id="sWheelView" prefHeight="200.0" prefWidth="200.0">
                                       <columns>
@@ -71,7 +71,7 @@
                                     </TableView>
                                  </content>
                               </Tab>
-                              <Tab fx:id="wheelRimTab" text="Felg">
+                              <Tab fx:id="wheelRimTab" onSelectionChanged="#allTables" text="Felg">
                                  <content>
                                     <TableView fx:id="wheelRimView" prefHeight="200.0" prefWidth="200.0">
                                       <columns>
