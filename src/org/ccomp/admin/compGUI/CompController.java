@@ -92,9 +92,6 @@ public class CompController {
     public void addComponent(ActionEvent event) {
        // inputEmpty();
 
-        //todo: remove method to deserialize compMap
-        HashMap<String, List<CarComponent>> retrievedCompMap;
-
         if (event.getSource() == addEngine) {
             System.out.println("\nADD ENGINE PRESSED\n");
 
@@ -104,37 +101,11 @@ public class CompController {
             // Init CarComponents List if List is Null
             if (carComponents == null) carComponents = new ArrayList<>();
 
-
-            System.out.println("ENGINE TYPE: " + getEngineType());
-
             engine = (Engine) makeComponent(ENGINE_KEY, engine);
 
-            System.out.println("ENGINE: " + engine.toString());
-
-            System.out.println("CARCOMP SIZE: " + carComponents.size());
             carComponents.add(engine);
-            System.out.println("CARCOMP SIZE: " + carComponents.size());
-
-
-
-
 
             compMap.put(ENGINE_KEY, carComponents);
-
-
-            //serialize compMap
-            jobjHandler.writeComponent(compMap);
-
-
-            //deserialize compMap
-            retrievedCompMap = new HashMap<>();
-            retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
-
-
-            System.out.println("ENGINE MAP SIZE: " + retrievedCompMap.get(ENGINE_KEY).size());
-
-           // carComponents.add(new Engine())
-
         } else if (event.getSource() == addSeat) {
             System.out.println("\nADD SEAT PRESSED\n");
 
@@ -151,17 +122,6 @@ public class CompController {
 
             compMap.put(SEAT_KEY, carComponents);
 
-
-            //serialize compMap
-            jobjHandler.writeComponent(compMap);
-
-
-            //deserialize compMap
-            retrievedCompMap = new HashMap<>();
-            retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
-
-
-            System.out.println("(RETRIEVED) HASH MAP: " + retrievedCompMap);
           //  iterateHashMapList(retrievedCompMap);
         } else if (event.getSource() == addSpoiler) {
             System.out.println("\nADD SPOILER PRESSED\n");
@@ -181,15 +141,6 @@ public class CompController {
 
             compMap.put(SPOILER_KEY, carComponents);
 
-
-            // Serialize compMap
-            jobjHandler.writeComponent(compMap);
-
-            //deserialize compMap
-            retrievedCompMap = new HashMap<>();
-            retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
-
-            System.out.println("(RETRIEVED) HASH MAP: " + retrievedCompMap);
         } else if (event.getSource() == addSteeringWheel) {
             System.out.println("\nADD STEERING WHEEL PRESSED\n");
 
@@ -200,22 +151,11 @@ public class CompController {
             //up casting parent reference to child reference based on componentType
             steeringWheel = (SteeringWheel) makeComponent(STEERING_WHEEL_KEY, steeringWheel);
 
-            System.out.println("("+STEERING_WHEEL_KEY+") CarComponents size: " + carComponents.size());
+            //Add Component to List
             carComponents.add(steeringWheel);
-            System.out.println("("+STEERING_WHEEL_KEY+") CarComponents size: " + carComponents.size());
 
+            //Put List of Components inside HashMap use the ComponentType as KEY
             compMap.put(STEERING_WHEEL_KEY, carComponents);
-            System.out.println("("+STEERING_WHEEL_KEY+") HASH MAP: " + compMap);
-
-            //serialize compMap
-           // jobjHandler = new ComponentOBJHandler();
-            jobjHandler.writeComponent(compMap);
-
-            //deserialize compMap
-            retrievedCompMap = new HashMap<>();
-            retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
-
-            System.out.println("(RETRIEVED) HASH MAP: " + retrievedCompMap);
         } else if (event.getSource() == addWheelRim) {
             System.out.println("\nADD WHEEL RIM PRESSED\n");
 
@@ -228,26 +168,23 @@ public class CompController {
             //up casting parent reference to child reference based on componentType
             wheelRim = (WheelRim) makeComponent(WHEEL_RIM_KEY, wheelRim);
 
-            System.out.println("("+WHEEL_RIM_KEY+") CarComponents size: " + carComponents.size());
             carComponents.add(wheelRim);
-            System.out.println("("+WHEEL_RIM_KEY+") CarComponents size: " + carComponents.size());
 
             compMap.put(WHEEL_RIM_KEY, carComponents);
-            System.out.println("("+WHEEL_RIM_KEY+") HASH MAP: " + compMap);
-
-            //serialize compMap
-            jobjHandler.writeComponent(compMap);
-
-            //deserialize compMap
-            retrievedCompMap = new HashMap<>();
-            retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
-
-            System.out.println("(RETRIEVED) HASH MAP: " + retrievedCompMap);
         } else System.out.println("\nNO SUCH ADD BTN TO PRESS\n");
 
         System.out.println("\nADDING COMPONENT..\n");
 
 
+
+
+
+        //todo: WRITE COMPONENT TO FILE INSIDE THREAD
+
+        //serialize compMap
+
+        //Write HashMap containing Lists of each Component type to file
+        jobjHandler.writeComponent(compMap);
     }
 
 
@@ -259,7 +196,7 @@ public class CompController {
 
         switch (compKey) {
             case ENGINE_KEY:
-                System.out.println("MAKING" + compKey);
+                System.out.println("MAKING " + compKey);
 
                 compType = getEngineType();
                 compName = engineName.getText();
@@ -268,30 +205,6 @@ public class CompController {
                 compPower = Integer.parseInt(enginePower.getText());
 
                 component = new Engine(compType, compName, compPrice, compQuantity, compPower);
-
-                /*
-                switch (getEngineType()) {
-                    case "Bensin":
-                        System.out.println(getEngineType());
-                        // component = new GasolineEngine(compName, compPrice, compQuantity);
-                        break;
-                    case "Elbil":
-                        System.out.println(getEngineType());
-                       // component = new ElectricMotor(compName, compPrice, compQuantity);
-                        break;
-                    case "Hybrid":
-                        System.out.println(getEngineType());
-                       // component = new HybridEngine(compName, compPrice, compQuantity);
-                        break;
-                    default:
-                        System.out.println("NO SUCH ENGINE TYPE");
-
-
-                }
-
-                 */
-
-
                 break;
             case SEAT_KEY:
                 System.out.println("MAKING " + compKey);
@@ -301,7 +214,6 @@ public class CompController {
                 compQuantity = Integer.parseInt(seatQuantity.getText());
                 compColor = seatColor.getText();
                 compMaterial = seatMaterial.getText();
-
 
                 component = new Seat(compName, compPrice, compQuantity, compColor, compMaterial);
                 break;
