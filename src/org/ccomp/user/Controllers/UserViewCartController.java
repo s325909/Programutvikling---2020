@@ -460,87 +460,83 @@ public class UserViewCartController {
 
     @FXML
     public void chooseProduct() {
-        int engineindex = customorEngineView.getSelectionModel().getSelectedIndex();
-        int seatindex = customerSeatView.getSelectionModel().getSelectedIndex();
-        int spoilerindex = customerSpoilerView.getSelectionModel().getSelectedIndex();
-        int swheelindedx = customerSWheelView.getSelectionModel().getSelectedIndex();
-        int wheelRimindex = customerSWheelView.getSelectionModel().getSelectedIndex();
+                int engineindex = customorEngineView.getSelectionModel().getSelectedIndex();
+                int seatindex = customerSeatView.getSelectionModel().getSelectedIndex();
+                int spoilerindex = customerSpoilerView.getSelectionModel().getSelectedIndex();
+                int swheelindedx = customerSWheelView.getSelectionModel().getSelectedIndex();
+                int wheelRimindex = customerWheelRimView.getSelectionModel().getSelectedIndex();
 
 
-            if (customerSeatView.getSelectionModel().isSelected(seatindex) && seatPane.isExpanded()) {
-                
-                Seat item = customerSeatView.getItems().get(seatindex);
-                StringProperty compNameProperty = new SimpleStringProperty(item.getCompName());
-                StringProperty compColorProperty = new SimpleStringProperty(item.getSeatColor());
-                StringProperty compMaterialProperty = new SimpleStringProperty(item.getSeatColor());
-                DoubleProperty compPriceProperty = new SimpleDoubleProperty(item.getCompPrice());
-                IntegerProperty compQuantityProperty = new SimpleIntegerProperty(item.getCompQuantity());
-                carComponents = getComponentsCart();
-               // Seat seat = new Seat(compNameProperty, compPriceProperty, compQuantityProperty, compColorProperty, compMaterialProperty);
-                Seat seat = new Seat(item.getCompName(), item.getCompPrice(), item.getCompQuantity(), item.getSeatColor(), item.getSeatColor());
-                seat.setCompQuantity(1);
-                componentsCart.add(seat);
-                countProducts();
+                    //Finner den riktige valgte produktet i viewvet og legger den inn i handlerkurv ved å bruke index
+                    if (customerSeatView.getSelectionModel().isSelected(seatindex) && seatPane.isExpanded()) {
+                        Seat item = customerSeatView.getItems().get(seatindex);
+                        carComponents = getComponentsCart();
+                       // Seat seat = new Seat(compNameProperty, compPriceProperty, compQuantityProperty, compColorProperty, compMaterialProperty);
+                        Seat seat = new Seat(item.getCompName(), item.getCompPrice(), item.getCompQuantity(), item.getSeatColor(), item.getSeatColor());
+                        seat.setCompQuantity(1);
+                        componentsCart.add(seat);
+                        countProducts();
 
 
-                int count = 0;
-                for(CarComponent carComponent : componentsCart){
-                    if (carComponent.getCompType().equals("Seat")){
+                        int count = 0;
+                        for(CarComponent carComponent : componentsCart){
+                            if (carComponent.getCompType().equals("Seat")){
 
-                        Seat tempSeat = (Seat) carComponent;
+                                Seat tempSeat = (Seat) carComponent;
 
-                        tempSeat.setCompQuantity(1);
+                                tempSeat.setCompQuantity(1);
 
-                       if (tempSeat.equals(seat)){
+                               if (tempSeat.equals(seat)){
 
-                           componentsCart.get(count).setCompQuantity(carComponent.getCompQuantity() + 1);
-
-
-                       }
+                                   componentsCart.get(count).setCompQuantity(carComponent.getCompQuantity() + 1);
 
 
+                               }
+
+
+                            }
+                            count++;
+                        }
+
+
+                        // cartProduct.setText( "Navn" + compNameProperty  );
+                        countProducts();
                     }
-                    count++;
+
+
+                if (customerSpoilerView.getSelectionModel().isSelected(spoilerindex) && spoilerPane.isExpanded()) {
+                    Spoiler spoileritem = customerSpoilerView.getItems().get(spoilerindex);
+                    Spoiler spoiler = new Spoiler(spoileritem.getCompName(), spoileritem.getCompPrice(), spoileritem.getCompQuantity(),
+                                                  spoileritem.getSpoilerColor(),spoileritem.getSpoilerSide());
+                    carComponents = getComponentsCart();
+                    componentsCart.add(spoiler);
+                    countProducts();
                 }
 
-
-                // cartProduct.setText( "Navn" + compNameProperty  );
-                countProducts();
+                if (customerSWheelView.getSelectionModel().isSelected(swheelindedx) && sWheelPane.isExpanded()){
+                    SteeringWheel steeringWheelItem = customerSWheelView.getItems().get(swheelindedx);
+                    SteeringWheel steeringWheel = new SteeringWheel(steeringWheelItem.getCompName(),steeringWheelItem.getCompPrice(),steeringWheelItem.getCompQuantity(),
+                            steeringWheelItem.getSteeringWheelColor(),steeringWheelItem.getSteeringWheelMaterial());
+                    carComponents = getComponentsCart();
+                    componentsCart.add(steeringWheel);
+                    countProducts();
+                }
+                if (customorEngineView.getSelectionModel().isSelected(engineindex) && enginePane.isExpanded()){
+                    Engine engineItem = customorEngineView.getItems().get(engineindex);
+                    Engine engine = new Engine(engineItem.getCompType(),engineItem.getCompName(),engineItem.getCompPrice(),
+                                               engineItem.getCompQuantity(),engineItem.getEngineHorsePower());
+                    carComponents = getComponentsCart();
+                    componentsCart.add(engine);
+                    countProducts();
+                }
+                if (customerWheelRimView.getSelectionModel().isSelected(wheelRimindex) && wheelRimPane.isExpanded()){
+                    WheelRim wheelRimItem = customerWheelRimView.getItems().get(wheelRimindex);
+                    carComponents = getComponentsCart();
+                 WheelRim wheelRim = new WheelRim(wheelRimItem.getCompName(),wheelRimItem.getCompPrice(), wheelRimItem.getCompQuantity(),
+                                                wheelRimItem.getWheelRimColor(),wheelRimItem.getWheelRimDimension());
+                 componentsCart.add(wheelRim);
+                    countProducts();
             }
-
-
-        if (customerSpoilerView.getSelectionModel().isSelected(spoilerindex) && spoilerPane.isExpanded()) {
-
-            Spoiler spoileritem = customerSpoilerView.getItems().get(spoilerindex);
-            carComponents = getComponentsCart();
-            componentsCart.add(new Spoiler(spoileritem.getCompName(), spoileritem.getCompPrice(), spoileritem.getCompQuantity(),
-                                spoileritem.getSpoilerColor(),spoileritem.getSpoilerSide()));
-            countProducts();
-        }
-
-        if (customerSWheelView.getSelectionModel().isSelected(swheelindedx) && sWheelPane.isExpanded()){
-
-            SteeringWheel steeringWheelItem = customerSWheelView.getItems().get(swheelindedx);
-            carComponents = getComponentsCart();
-            componentsCart.add(new SteeringWheel(steeringWheelItem.getCompName(),steeringWheelItem.getCompPrice(),steeringWheelItem.getCompQuantity(),
-                                steeringWheelItem.getSteeringWheelColor(),steeringWheelItem.getSteeringWheelMaterial()));
-            countProducts();
-        }
-        if (customorEngineView.getSelectionModel().isSelected(engineindex) && enginePane.isExpanded()){
-            Engine engineItem = customorEngineView.getItems().get(engineindex);
-            carComponents = getComponentsCart();
-            componentsCart.add(new Engine(engineItem.getCompType(),engineItem.getCompName(),engineItem.getCompPrice(),engineItem.getCompQuantity(),engineItem.getEngineHorsePower()));
-            countProducts();
-        }
-
-        if (customerWheelRimView.getSelectionModel().isSelected(wheelRimindex) && wheelRimPane.isExpanded()){
-            WheelRim wheelRimItem = customerWheelRimView.getItems().get(wheelRimindex);
-            carComponents = getComponentsCart();
-            componentsCart.add(new WheelRim(wheelRimItem.getCompName(),wheelRimItem.getCompPrice(),wheelRimItem.getCompQuantity(),
-                    wheelRimItem.getWheelRimColor(),wheelRimItem.getWheelRimDimension()));
-            countProducts();
-
-        }
 
 
     }
