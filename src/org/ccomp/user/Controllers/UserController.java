@@ -27,11 +27,6 @@ public class UserController implements Initializable {
     @FXML
     ToggleGroup carTypeGroup;
 
-    @FXML
-    CheckBox engine,wheelrim,steeringwheel,seat,spoiler;
-
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

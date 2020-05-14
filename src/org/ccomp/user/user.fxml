@@ -16,31 +16,26 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.user.Controllers.UserController">
+<AnchorPane prefHeight="430.0" prefWidth="430.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.user.Controllers.UserController">
    <children>
-      <RadioButton fx:id="gasoline" layoutX="24.0" layoutY="260.0" mnemonicParsing="false" text="Bensin">
+      <RadioButton fx:id="gasoline" layoutX="85.0" layoutY="249.0" mnemonicParsing="false" text="Bensin">
          <toggleGroup>
             <ToggleGroup fx:id="carTypeGroup" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="electric" layoutX="24.0" layoutY="320.0" mnemonicParsing="false" text="Elbil" toggleGroup="$carTypeGroup" />
-      <RadioButton fx:id="hybrid" layoutX="24.0" layoutY="380.0" mnemonicParsing="false" text="Hybrid" toggleGroup="$carTypeGroup" />
-      <Label alignment="CENTER" contentDisplay="TOP" layoutX="326.0" layoutY="173.0" prefHeight="60.0" prefWidth="260.0" style="-fx-border-color: #41a2a6;" text="VELG KOMPONENT" textAlignment="RIGHT">
+      <RadioButton fx:id="electric" layoutX="290.0" layoutY="249.0" mnemonicParsing="false" text="Elbil" toggleGroup="$carTypeGroup" />
+      <RadioButton fx:id="hybrid" layoutX="186.0" layoutY="249.0" mnemonicParsing="false" text="Hybrid" toggleGroup="$carTypeGroup" />
+      <Label alignment="CENTER" contentDisplay="TOP" layoutX="85.0" layoutY="162.0" prefHeight="60.0" prefWidth="260.0" style="-fx-border-color: #41a2a6;" text="VELG BILTYPE" textAlignment="RIGHT">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="TOP" layoutX="14.0" layoutY="173.0" prefHeight="60.0" prefWidth="260.0" style="-fx-border-color: #41a2a6;" text="VELG BILTYPE" textAlignment="RIGHT">
-         <font>
-            <Font name="Segoe UI Semilight" size="18.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="94.0" fitWidth="200.0" layoutX="200.0" layoutY="14.0">
+      <ImageView fitHeight="94.0" fitWidth="200.0" layoutX="115.0" layoutY="34.0">
          <image>
             <Image url="@../../../resources/CCOMPW-small.png" />
          </image>
       </ImageView>
-      <Button fx:id="sokProd" layoutX="149.0" layoutY="447.0" mnemonicParsing="false" onAction="#toViewProduct" prefHeight="39.0" prefWidth="303.0" text="SØK ETTER PRODUKT">
+      <Button fx:id="sokProd" layoutX="64.0" layoutY="326.0" mnemonicParsing="false" onAction="#toViewProduct" prefHeight="39.0" prefWidth="303.0" text="SØK ETTER PRODUKT">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
@@ -52,15 +47,10 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="backBtn" layoutX="16.0" layoutY="14.0" mnemonicParsing="false" onAction="#backToMain" prefHeight="40.0" prefWidth="103.0" text="TILBAKE">
+      <Button fx:id="backBtn" layoutX="164.0" layoutY="376.0" mnemonicParsing="false" onAction="#backToMain" prefHeight="40.0" prefWidth="103.0" text="TILBAKE">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
       </Button>
-      <CheckBox fx:id="engine" layoutX="326.0" layoutY="260.0" mnemonicParsing="false" text="Motor" />
-      <CheckBox fx:id="wheelrim" layoutX="457.0" layoutY="320.0" mnemonicParsing="false" text="Felg" />
-      <CheckBox fx:id="steeringwheel" layoutX="457.0" layoutY="260.0" mnemonicParsing="false" text="Ratt" />
-      <CheckBox fx:id="seat" layoutX="326.0" layoutY="320.0" mnemonicParsing="false" text="Sete" />
-      <CheckBox fx:id="spoiler" layoutX="326.0" layoutY="380.0" mnemonicParsing="false" text="Spoiler" />
    </children>
 </AnchorPane>
