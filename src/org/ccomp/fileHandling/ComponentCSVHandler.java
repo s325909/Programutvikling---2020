@@ -53,7 +53,7 @@ public class ComponentCSVHandler implements CSVFileHandler {
                 String[] values = line.split(",");
 
 
-                System.out.println("VALUES: " + Arrays.toString(values));
+               // System.out.println("VALUES: " + Arrays.toString(values));
 
                 //  Customer customer = new Customer(values[1], values[2], values[3], values[4], values[5]);
 
@@ -65,12 +65,12 @@ public class ComponentCSVHandler implements CSVFileHandler {
 
                 CarComponent carComponent = new CarComponent(compType, compName, compPrice, compQuantity);
 
-                System.out.println("READ CAR COMPONENT: " + carComponent.toCSVFormat());
+               // System.out.println("READ CAR COMPONENT: " + carComponent.toCSVFormat());
 
 
                 CompOrder compOrder = new CompOrder(orderNr, carComponent);
 
-                System.out.println("READ COMP ORDER: " + compOrder.toCSVFormat());
+              //  System.out.println("READ COMP ORDER: " + compOrder.toCSVFormat());
 
                 compOrderList.add(compOrder);
             }
@@ -112,16 +112,11 @@ public class ComponentCSVHandler implements CSVFileHandler {
 
             while ((line = br.readLine()) != null) {
 
-                System.out.println("#0 ; FirstLine == " + firstLine + " ; " + "SecondLine == " + secondLine);
-
-
                 if (firstLine) {
                     System.out.println("FIRST LINE ; CONTINUE == " + firstLine);
                     firstLine = false;
                     continue;
                 }
-
-                System.out.println("#1 ; FirstLine == " + firstLine + " ; " + "SecondLine == " + secondLine);
 
                 if (secondLine) {
                     System.out.println("FIRST LINE ; CONTINUE == " + secondLine);
@@ -129,13 +124,10 @@ public class ComponentCSVHandler implements CSVFileHandler {
                     continue;
                 }
 
-                System.out.println("#2 ; FirstLine == " + firstLine + " ; " + "SecondLine == " + secondLine);
-
-
                 String[] values = line.split(",");
 
 
-                System.out.println("VALUES: " + Arrays.toString(values));
+               // System.out.println("VALUES: " + Arrays.toString(values));
 
               //  Customer customer = new Customer(values[1], values[2], values[3], values[4], values[5]);
 
@@ -250,8 +242,7 @@ public class ComponentCSVHandler implements CSVFileHandler {
                 System.out.println("FILE EMPTY ; FirstLine == " + firstLine + " ; ADD SEP");
                 pw.println("sep=,");
                 firstLine = false;
-            } else System.out.println("FILE NOT EMPTY ; SEP ADDED == " + firstLine);
-
+            }
 
 
             secondLine = true;
@@ -259,8 +250,7 @@ public class ComponentCSVHandler implements CSVFileHandler {
                 System.out.println("FILE EMPTY ; SecondLine == " + secondLine + " ; ADD HEADER");
                 pw.println("ORDRE NR,NAVN,EPOST,TLF NR,POST NR,POSTSTED");
                 secondLine = false;
-            } else System.out.println("FILE NOT EMPTY ; HEADER ADDED == " + secondLine);
-
+            }
 
             pw.println(customerOrder.toCSVFormat());
 
@@ -369,16 +359,14 @@ public class ComponentCSVHandler implements CSVFileHandler {
                 System.out.println("FILE EMPTY ; FirstLine == " + firstLine + " ; ADD SEP");
                 pw.println("sep=,");
                 firstLine = false;
-            } else System.out.println("FILE NOT EMPTY ; SEP ADDED == " + firstLine);
-
-
+            }
 
             secondLine = true;
             if (file.length() == 0 && secondLine) {
                 System.out.println("FILE EMPTY ; SecondLine == " + secondLine + " ; ADD HEADER");
                 pw.println("ORDRE NR,NAVN,EPOST,TLF NR,POST NR,POSTSTED");
                 secondLine = false;
-            } else System.out.println("FILE NOT EMPTY ; HEADER ADDED == " + secondLine);
+            }
 
 
 

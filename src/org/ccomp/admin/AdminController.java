@@ -159,6 +159,8 @@ public class AdminController {
     private int row;
     private boolean initTabs, deleteComponent;
 
+    private static int selectedOrderId;
+
     @FXML
     public void initialize() {
         System.out.println("@INITIALIZE");
@@ -382,32 +384,15 @@ public class AdminController {
 
 
     private String orderId;
+    private boolean orderSelected;
     private List<CompOrder> compOrderList;
 
     public  ObservableList<CompOrder> carComTable(){
 
         compOrders = FXCollections.observableArrayList();
 
-
-       // int index = customerOrderInfoView.getSelectionModel().getSelectedIndex();
-        int index = carCompView.getSelectionModel().getSelectedIndex();
-        System.out.println("SELECTED CUSTOMER INDEX: " + index);
-
-        boolean orderSelected = true;
-        if (index == -1) {
-            System.out.println("NO INDEX SELECTED!!!");
-            orderSelected = false;
-        }
-
-
-        if (orderSelected) {
-            CompOrder selectedCompOrder = carCompView.getItems().get(index);
-            orderId = String.valueOf(selectedCompOrder.getOrderId());
-            System.out.println("SELECTED COMP ORDER ID: " + orderId);
-        }
-
-
-        if (orderSelected) compOrderList = csvHandler.searchOrderRow("testCompOrders.csv", orderId);
+        orderId = String.valueOf(selectedOrderId);
+        if (selectedOrderId != -1) compOrderList = csvHandler.searchOrderRow("testCompOrders.csv", orderId);
         else {
             System.out.println("NO CUSTOMER ORDER SELECTED!!!");
             compOrderList = csvHandler.readCompOrder(compOrderList, "testCompOrders.csv");
@@ -1372,6 +1357,10 @@ public class AdminController {
     @FXML
     public void toCompOrder(){
         System.out.println("TO COMP ORDER TABLE");
+
+        selectedCustomerOrderId();
+        System.out.println("SELECTED CUSTOMER ID: " + selectedOrderId);
+
         try {
 
             URL url = getClass().getResource("/org/ccomp/admin/compOrderInfo.fxml");
@@ -1380,6 +1369,9 @@ public class AdminController {
             Scene setRoot = adminPane.getScene();
             setRoot.setRoot(loader.load());
 
+            System.out.println("SELECTED CUSTOMER ID: " + selectedOrderId);
+            if (selectedOrderId == -1) System.out.println("NONE SELECTED: " + selectedOrderId);
+            else System.out.println("SELECTED: " + selectedOrderId);
 
             carCompView =  (TableView<CompOrder>) loader.getNamespace().get("carCompView");
             orderTypeColum =  (TableColumn<CompOrder,String>) loader.getNamespace().get("orderTypeColum");
@@ -1397,6 +1389,25 @@ public class AdminController {
         }
 
 
+    }
+
+    private void selectedCustomerOrderId() {
+        int index = customerOrderInfoView.getSelectionModel().getSelectedIndex();
+       // int index = carCompView.getSelectionModel().getSelectedIndex();
+        System.out.println("SELECTED CUSTOMER INDEX: " + index);
+
+        boolean orderSelected = true;
+        if (index == -1) {
+            System.out.println("NO INDEX SELECTED!!!");
+            orderSelected = false;
+        }
+
+
+        if (orderSelected) {
+            CustomerOrder selectedCustomerOrder = customerOrderInfoView.getItems().get(index);
+            selectedOrderId = selectedCustomerOrder.getOrderId();
+            System.out.println("SELECTED COMP ORDER ID: " + selectedOrderId);
+        } else selectedOrderId = -1;
     }
 
     public void backToAdmin() {
