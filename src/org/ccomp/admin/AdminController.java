@@ -37,13 +37,10 @@ public class AdminController {
     private boolean delete;
 
     @FXML
-    private AnchorPane adminPane, custermerInfoPane;
+    private AnchorPane adminPane;
 
     @FXML
     private Tab engineTab, seatTab, spoilerTab, steeringWheelTab, wheelRimTab, carComponentsTab, customerOrderTab;
-
-    @FXML
-    private TabPane tabPane;
 
     //OrderView
     @FXML
@@ -158,7 +155,9 @@ public class AdminController {
 
     private int row;
     private boolean initTabs, deleteComponent;
-
+    
+    private String orderId;
+    private List<CompOrder> compOrderList;
     private static int selectedOrderId;
 
     @FXML
@@ -180,10 +179,6 @@ public class AdminController {
         initTabs = true;
         initAllTables();
     }
-
-
-
-
 
     @FXML
     public void initAllTables(){
@@ -250,9 +245,6 @@ public class AdminController {
     }
 
 
-
-
-
     public ObservableList<Engine> engineTable(){
         engines = FXCollections.observableArrayList();
 
@@ -271,11 +263,6 @@ public class AdminController {
 
         return engines;
     }
-
-
-
-
-
 
     //Metoden henter objektene fra arrayliste.
     public ObservableList<Seat> seatTable() {
@@ -317,7 +304,6 @@ public class AdminController {
         return spoilers;
     }
 
-
     public ObservableList<SteeringWheel> sWheelTable() {
         steeringWheels = FXCollections.observableArrayList();
 
@@ -358,13 +344,9 @@ public class AdminController {
     }
 
     public ObservableList<CustomerOrder> OrderInfoCustomer(){
-
-
      //   if (customerOrderList.size() == 0) return null;
 
         customerOrders = FXCollections.observableArrayList();
-       // CustomerOrder customerOrder = new CustomerOrder(2,customer);
-
 
         for (CustomerOrder customerOrder : customerOrderList) {
            // customer = customerOrder.getCustomer();
@@ -380,12 +362,6 @@ public class AdminController {
 
         return customerOrders;
     }
-
-
-
-    private String orderId;
-    private boolean orderSelected;
-    private List<CompOrder> compOrderList;
 
     public  ObservableList<CompOrder> carComTable(){
 
@@ -618,169 +594,163 @@ public class AdminController {
 
 
 
-        public void  searchComp() {
-            //Engine
-            if (engineTab.isSelected()) {
-                ObservableList<Engine> engineList = engineTable();
-                FilteredList<Engine> filteredList = new FilteredList(engineList, b -> true);
-                //predicater når filter skifter
-                search.textProperty().addListener(((observable, oldValue, newValue) -> {
+    public void  searchComp() {
+        //Engine
+        if (engineTab.isSelected()) {
+            ObservableList<Engine> engineList = engineTable();
+            FilteredList<Engine> filteredList = new FilteredList(engineList, b -> true);
+            //predicater når filter skifter
+            search.textProperty().addListener(((observable, oldValue, newValue) -> {
 
-                    filteredList.setPredicate(engine -> {
+                filteredList.setPredicate(engine -> {
 
-                        //Hvis filter er tommt , vis alt
-                        if (newValue == null || newValue.isEmpty()) {
-                            return true;
-                        }
-                        String lowerCaseFiler = newValue.toLowerCase();
-                        if (engine.getCompName().toLowerCase().indexOf(lowerCaseFiler) != -1) {
+                    //Hvis filter er tommt , vis alt
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }
+                    String lowerCaseFiler = newValue.toLowerCase();
+                    if (engine.getCompName().toLowerCase().indexOf(lowerCaseFiler) != -1) {
 
-                            return true; //Filter sammenligner navn
-                        } else if (engine.getCompType().toLowerCase().indexOf(lowerCaseFiler) != -1) {
-                            return true; //Filter sammenligner farge
-                        } else if (String.valueOf(engine.getCompPrice()).toLowerCase().indexOf(lowerCaseFiler) != -1)
-                            return true;
-                        else return false; //hvis den ikke kan sammenlinges
-                    });
-                }));
-                //Setter filteredlist i en sortedlist, binder de sammen til tableviewvet og legger sorted og filterreing til tabellen,
-                sorteEngineData = new SortedList<>(filteredList);
-                sorteEngineData.comparatorProperty().bind(engineView.comparatorProperty());
-                engineView.setItems(sorteEngineData);
-            }
-
-
-
-            //Seat
-            if (seatTab.isSelected()) {
-                ObservableList<Seat> seatsList = seatTable();
-                FilteredList<Seat> filteredList = new FilteredList(seatsList, b -> true);
-                search.textProperty().addListener(((observable, oldValue, newValue) -> {
-                    filteredList.setPredicate(seat -> {
-                        if (newValue == null || newValue.isEmpty()) {
-                            return true;
-                        }
-                        String lowerCaseFiler = newValue.toLowerCase();
-                        if (seat.getCompName().toLowerCase().indexOf(lowerCaseFiler) != -1) {
-
-                            return true;
-                        } else if (seat.getSeatColor().toLowerCase().indexOf(lowerCaseFiler) != -1) {
-                            return true;
-                        } else if (String.valueOf(seat.getCompPrice()).toLowerCase().indexOf(lowerCaseFiler) != -1)
-                            return true;
-                        else return false;
-                    });
-                }));
-                sortedData = new SortedList<>(filteredList);
-                sortedData.comparatorProperty().bind(seatView.comparatorProperty());
-                seatView.setItems(sortedData);
-            }
-            //Spoiler
-            if (spoilerTab.isSelected()){
-                ObservableList<Spoiler> spoilerList = spoilerTable();
-                FilteredList<Spoiler> filteredList = new FilteredList(spoilerList, b -> true);
-                search.textProperty().addListener(((observable, oldValue, newValue) -> {
-                    filteredList.setPredicate(spoiler -> {
-                        if (newValue == null || newValue.isEmpty()) {
-                            return true;
-                        }
-                        String lowerCaseFiler = newValue.toLowerCase();
-                        if (spoiler.getCompName().toLowerCase().indexOf(lowerCaseFiler) != -1) {
-                            return true;
-                        } else if (spoiler.getSpoilerSide().toLowerCase().indexOf(lowerCaseFiler) != -1) {
-                            return true;
-                        } else if (String.valueOf(spoiler.getCompPrice()).toLowerCase().indexOf(lowerCaseFiler) != -1)
-                            return true;
-                        else return false;
-                    });
-                }));
-                sortedSpoilerData = new SortedList<>(filteredList);
-                sortedSpoilerData.comparatorProperty().bind(spoilerView.comparatorProperty());
-                spoilerView.setItems(sortedSpoilerData);
-            }
-
-            //SteeringWheel
-            if (steeringWheelTab.isSelected()){
-                ObservableList<SteeringWheel> steeringWheelList = sWheelTable();
-                FilteredList<SteeringWheel> filteredList = new FilteredList(steeringWheelList, b -> true);
-                //predicater når filter skifter
-                search.textProperty().addListener(((observable, oldValue, newValue) -> {
-
-                    filteredList.setPredicate(steeringWheel -> {
-                        if (newValue == null || newValue.isEmpty()) {
-                            return true;
-                        }
-                        String lowerCaseFiler = newValue.toLowerCase();
-                        if (steeringWheel.getCompName().toLowerCase().indexOf(lowerCaseFiler) != -1) {
-                            return true;
-                        } else if (steeringWheel.getSteeringWheelColor().toLowerCase().indexOf(lowerCaseFiler) != -1) {
-                            return true;
-                        } else if (String.valueOf(steeringWheel.getCompPrice()).toLowerCase().indexOf(lowerCaseFiler) != -1)
-                            return true;
-                        else return false;
-                    });
-                }));
-                sortedSwheelData = new SortedList<>(filteredList);
-                sortedSwheelData.comparatorProperty().bind(sWheelView.comparatorProperty());
-                sWheelView.setItems(sortedSwheelData);
-
-            }
-            //WheelRim
-            if (wheelRimTab.isSelected()){
-                ObservableList<WheelRim> wheelRimList = wheelRTable();
-                FilteredList<WheelRim> filteredList = new FilteredList(wheelRimList, b -> true);
-                search.textProperty().addListener(((observable, oldValue, newValue) -> {
-                    filteredList.setPredicate(wheelRim -> {
-                        if (newValue == null || newValue.isEmpty()) {
-                            return true;
-                        }
-                        String lowerCaseFiler = newValue.toLowerCase();
-                        if (wheelRim.getCompName().toLowerCase().indexOf(lowerCaseFiler) != -1) {
-                            return true;
-                        } else if (wheelRim.getWheelRimColor().toLowerCase().indexOf(lowerCaseFiler) != -1) {
-                            return true;
-                        } else if (String.valueOf(wheelRim.getCompPrice()).toLowerCase().indexOf(lowerCaseFiler) != -1)
-                            return true;
-                        else return false;
-                    });
-                }));
-                sortedWheelRimData = new SortedList<>(filteredList);
-                sortedWheelRimData.comparatorProperty().bind(wheelRimView.comparatorProperty());
-                wheelRimView.setItems(sortedWheelRimData);
-
-            }
-
-            if (customerOrderTab.isSelected()){
-                ObservableList<CustomerOrder> customerOrderList =OrderInfoCustomer();
-                FilteredList<CustomerOrder> filteredList = new FilteredList(customerOrderList, b -> true);
-                search.textProperty().addListener(((observable, oldValue, newValue) -> {
-                    filteredList.setPredicate( customerOrder-> {
-                        if (newValue == null || newValue.isEmpty()) {
-                            return true;
-                        }
-                        String lowerCaseFiler = newValue.toLowerCase();
-                        if (customerOrder.getCustomerName().toLowerCase().indexOf(lowerCaseFiler) != -1) {
-                            return true;
-                        } else if (customerOrder.getCustomerNumber().toLowerCase().indexOf(lowerCaseFiler) != -1) {
-                            return true;
-                        } else if (String.valueOf(customerOrder.getOrderId()).toLowerCase().indexOf(lowerCaseFiler) != -1)
-                            return true;
-                        else return false;
-                    });
-                }));
-
-                sortedCustomerOrderData = new SortedList<>(filteredList);
-                sortedCustomerOrderData.comparatorProperty().bind(customerOrderInfoView.comparatorProperty());
-                customerOrderInfoView.setItems(sortedCustomerOrderData);
-
-            }
+                        return true; //Filter sammenligner navn
+                    } else if (engine.getCompType().toLowerCase().indexOf(lowerCaseFiler) != -1) {
+                        return true; //Filter sammenligner farge
+                    } else if (String.valueOf(engine.getCompPrice()).toLowerCase().indexOf(lowerCaseFiler) != -1)
+                        return true;
+                    else return false; //hvis den ikke kan sammenlinges
+                });
+            }));
+            //Setter filteredlist i en sortedlist, binder de sammen til tableviewvet og legger sorted og filterreing til tabellen,
+            sorteEngineData = new SortedList<>(filteredList);
+            sorteEngineData.comparatorProperty().bind(engineView.comparatorProperty());
+            engineView.setItems(sorteEngineData);
         }
 
 
 
+        //Seat
+        if (seatTab.isSelected()) {
+            ObservableList<Seat> seatsList = seatTable();
+            FilteredList<Seat> filteredList = new FilteredList(seatsList, b -> true);
+            search.textProperty().addListener(((observable, oldValue, newValue) -> {
+                filteredList.setPredicate(seat -> {
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }
+                    String lowerCaseFiler = newValue.toLowerCase();
+                    if (seat.getCompName().toLowerCase().indexOf(lowerCaseFiler) != -1) {
 
+                        return true;
+                    } else if (seat.getSeatColor().toLowerCase().indexOf(lowerCaseFiler) != -1) {
+                        return true;
+                    } else if (String.valueOf(seat.getCompPrice()).toLowerCase().indexOf(lowerCaseFiler) != -1)
+                        return true;
+                    else return false;
+                });
+            }));
+            sortedData = new SortedList<>(filteredList);
+            sortedData.comparatorProperty().bind(seatView.comparatorProperty());
+            seatView.setItems(sortedData);
+        }
+        //Spoiler
+        if (spoilerTab.isSelected()){
+            ObservableList<Spoiler> spoilerList = spoilerTable();
+            FilteredList<Spoiler> filteredList = new FilteredList(spoilerList, b -> true);
+            search.textProperty().addListener(((observable, oldValue, newValue) -> {
+                filteredList.setPredicate(spoiler -> {
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }
+                    String lowerCaseFiler = newValue.toLowerCase();
+                    if (spoiler.getCompName().toLowerCase().indexOf(lowerCaseFiler) != -1) {
+                        return true;
+                    } else if (spoiler.getSpoilerSide().toLowerCase().indexOf(lowerCaseFiler) != -1) {
+                        return true;
+                    } else if (String.valueOf(spoiler.getCompPrice()).toLowerCase().indexOf(lowerCaseFiler) != -1)
+                        return true;
+                    else return false;
+                });
+            }));
+            sortedSpoilerData = new SortedList<>(filteredList);
+            sortedSpoilerData.comparatorProperty().bind(spoilerView.comparatorProperty());
+            spoilerView.setItems(sortedSpoilerData);
+        }
 
+        //SteeringWheel
+        if (steeringWheelTab.isSelected()){
+            ObservableList<SteeringWheel> steeringWheelList = sWheelTable();
+            FilteredList<SteeringWheel> filteredList = new FilteredList(steeringWheelList, b -> true);
+            //predicater når filter skifter
+            search.textProperty().addListener(((observable, oldValue, newValue) -> {
 
+                filteredList.setPredicate(steeringWheel -> {
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }
+                    String lowerCaseFiler = newValue.toLowerCase();
+                    if (steeringWheel.getCompName().toLowerCase().indexOf(lowerCaseFiler) != -1) {
+                        return true;
+                    } else if (steeringWheel.getSteeringWheelColor().toLowerCase().indexOf(lowerCaseFiler) != -1) {
+                        return true;
+                    } else if (String.valueOf(steeringWheel.getCompPrice()).toLowerCase().indexOf(lowerCaseFiler) != -1)
+                        return true;
+                    else return false;
+                });
+            }));
+            sortedSwheelData = new SortedList<>(filteredList);
+            sortedSwheelData.comparatorProperty().bind(sWheelView.comparatorProperty());
+            sWheelView.setItems(sortedSwheelData);
+
+        }
+        //WheelRim
+        if (wheelRimTab.isSelected()){
+            ObservableList<WheelRim> wheelRimList = wheelRTable();
+            FilteredList<WheelRim> filteredList = new FilteredList(wheelRimList, b -> true);
+            search.textProperty().addListener(((observable, oldValue, newValue) -> {
+                filteredList.setPredicate(wheelRim -> {
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }
+                    String lowerCaseFiler = newValue.toLowerCase();
+                    if (wheelRim.getCompName().toLowerCase().indexOf(lowerCaseFiler) != -1) {
+                        return true;
+                    } else if (wheelRim.getWheelRimColor().toLowerCase().indexOf(lowerCaseFiler) != -1) {
+                        return true;
+                    } else if (String.valueOf(wheelRim.getCompPrice()).toLowerCase().indexOf(lowerCaseFiler) != -1)
+                        return true;
+                    else return false;
+                });
+            }));
+            sortedWheelRimData = new SortedList<>(filteredList);
+            sortedWheelRimData.comparatorProperty().bind(wheelRimView.comparatorProperty());
+            wheelRimView.setItems(sortedWheelRimData);
+
+        }
+
+        if (customerOrderTab.isSelected()){
+            ObservableList<CustomerOrder> customerOrderList =OrderInfoCustomer();
+            FilteredList<CustomerOrder> filteredList = new FilteredList(customerOrderList, b -> true);
+            search.textProperty().addListener(((observable, oldValue, newValue) -> {
+                filteredList.setPredicate( customerOrder-> {
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }
+                    String lowerCaseFiler = newValue.toLowerCase();
+                    if (customerOrder.getCustomerName().toLowerCase().indexOf(lowerCaseFiler) != -1) {
+                        return true;
+                    } else if (customerOrder.getCustomerNumber().toLowerCase().indexOf(lowerCaseFiler) != -1) {
+                        return true;
+                    } else if (String.valueOf(customerOrder.getOrderId()).toLowerCase().indexOf(lowerCaseFiler) != -1)
+                        return true;
+                    else return false;
+                });
+            }));
+
+            sortedCustomerOrderData = new SortedList<>(filteredList);
+            sortedCustomerOrderData.comparatorProperty().bind(customerOrderInfoView.comparatorProperty());
+            customerOrderInfoView.setItems(sortedCustomerOrderData);
+
+        }
+    }
 
 
     public void editEngine() {
