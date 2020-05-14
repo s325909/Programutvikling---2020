@@ -30,11 +30,11 @@
                             <children>
                                 <TableView fx:id="customorEngineView" prefHeight="280.0" prefWidth="800.0">
                                     <columns>
-                                        <TableColumn fx:id="nameEngineColum" prefWidth="108.0" text="Navn" />
+                              <TableColumn fx:id="engineTypeColum" minWidth="0.0" prefWidth="183.0" text="BilType" />
+                                        <TableColumn fx:id="nameEngineColum" prefWidth="164.0" text="Navn" />
                                         <TableColumn fx:id="horsepowerColum" prefWidth="202.0" text="Hestekrefter" />
                                         <TableColumn fx:id="priceEngineColm" minWidth="4.0" prefWidth="101.0" text="Pris" />
                                         <TableColumn fx:id="quantityEngineColum" minWidth="0.0" prefWidth="147.0" text="Antall" />
-                              <TableColumn fx:id="engineTypeColum" minWidth="0.0" prefWidth="239.0" text="BilType" />
                                     </columns>
                                 </TableView>
                             </children>

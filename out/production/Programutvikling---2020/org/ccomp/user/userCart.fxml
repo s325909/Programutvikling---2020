@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="contentCart" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.user.Controllers.UserViewCartController">
+<AnchorPane fx:id="contentCart" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.user.Controllers.UserViewCartController">
    <children>
       <ImageView fitHeight="117.0" fitWidth="252.0" layoutX="284.0" layoutY="14.0">
          <image>
@@ -34,8 +33,8 @@
       <Label fx:id="viewCart" layoutX="12.0" layoutY="238.0" prefHeight="216.0" prefWidth="777.0" />
       <TableView fx:id="cartTable" layoutY="213.0" prefHeight="200.0" prefWidth="800.0">
         <columns>
-          <TableColumn fx:id="compNameColumn" prefWidth="200.0" text="NAVN" />
             <TableColumn fx:id="compTypeColumn" prefWidth="200.0" text="TYPE" />
+          <TableColumn fx:id="compNameColumn" prefWidth="200.0" text="NAVN" />
             <TableColumn fx:id="compPriceColumn" prefWidth="200.0" text="PRIS" />
             <TableColumn fx:id="compQuantityColumn" prefWidth="200.0" text="ANTALL" />
         </columns>
