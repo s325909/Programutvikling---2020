@@ -24,6 +24,18 @@
          <effect>
             <DropShadow color="#00000099" />
          </effect></TextField>
+      <TextField fx:id="enginePower" layoutX="272.0" layoutY="190.0">
+         <effect>
+            <DropShadow color="#00000099" />
+         </effect></TextField>
+      <TextField fx:id="enginePrice" layoutX="272.0" layoutY="260.0">
+         <effect>
+            <DropShadow color="#00000099" />
+         </effect></TextField>
+      <TextField fx:id="engineQuantity" layoutX="272.0" layoutY="328.0" prefHeight="31.0" prefWidth="187.0">
+         <effect>
+            <DropShadow color="#00000099" />
+         </effect></TextField>
       <Button fx:id="addEngine" layoutX="493.0" layoutY="447.0" mnemonicParsing="false" onAction="#addComponent" text="LEGG TIL">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
@@ -32,14 +44,6 @@
             <InnerShadow color="#0000004d" />
          </effect>
       </Button>
-      <TextField fx:id="enginePrice" layoutX="272.0" layoutY="260.0">
-         <effect>
-            <DropShadow color="#00000099" />
-         </effect></TextField>
-      <TextField fx:id="enginePower" layoutX="272.0" layoutY="190.0">
-         <effect>
-            <DropShadow color="#00000099" />
-         </effect></TextField>
       <Button fx:id="backToAdd" layoutX="14.0" layoutY="447.0" mnemonicParsing="false" onAction="#backToAddComp" text="TILBAKE">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
@@ -54,9 +58,5 @@
          </image>
       </ImageView>
       <Label layoutX="150.0" layoutY="333.0" text="ANTALL" />
-      <TextField fx:id="engineQuantity" layoutX="272.0" layoutY="328.0" prefHeight="31.0" prefWidth="187.0">
-         <effect>
-            <DropShadow color="#00000099" />
-         </effect></TextField>
    </children>
 </AnchorPane>

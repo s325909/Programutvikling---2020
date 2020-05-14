@@ -30,27 +30,6 @@
             <Font name="Segoe UI Semilight" size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="phone" layoutX="204.0" layoutY="346.0" prefHeight="39.0" prefWidth="240.0">
-         <effect>
-            <DropShadow />
-         </effect></TextField>
-      <TextField fx:id="mail" layoutX="204.0" layoutY="281.0" prefHeight="39.0" prefWidth="240.0">
-         <effect>
-            <DropShadow />
-         </effect></TextField>
-      <TextField fx:id="name" layoutX="204.0" layoutY="219.0" prefHeight="39.0" prefWidth="240.0">
-         <effect>
-            <DropShadow />
-         </effect></TextField>
-      <Button fx:id="register" layoutX="393.0" layoutY="547.0" mnemonicParsing="false" onAction="#toRecipt" text="REGISTRER" />
-      <TextField fx:id="zip" layoutX="204.0" layoutY="408.0" prefHeight="39.0" prefWidth="240.0">
-         <effect>
-            <DropShadow />
-         </effect></TextField>
-      <TextField fx:id="city" layoutX="204.0" layoutY="467.0" prefHeight="39.0" prefWidth="240.0">
-         <effect>
-            <DropShadow />
-         </effect></TextField>
       <Label layoutX="71.0" layoutY="413.0" text="Postnummer:">
          <font>
             <Font name="Segoe UI Semilight" size="20.0" />
@@ -61,6 +40,27 @@
             <Font name="Segoe UI Semilight" size="20.0" />
          </font>
       </Label>
+      <TextField fx:id="name" layoutX="204.0" layoutY="219.0" prefHeight="39.0" prefWidth="240.0">
+         <effect>
+            <DropShadow />
+         </effect></TextField>
+      <TextField fx:id="mail" layoutX="204.0" layoutY="281.0" prefHeight="39.0" prefWidth="240.0">
+         <effect>
+            <DropShadow />
+         </effect></TextField>
+      <TextField fx:id="phone" layoutX="204.0" layoutY="346.0" prefHeight="39.0" prefWidth="240.0">
+         <effect>
+            <DropShadow />
+         </effect></TextField>
+      <TextField fx:id="zip" layoutX="204.0" layoutY="408.0" prefHeight="39.0" prefWidth="240.0">
+         <effect>
+            <DropShadow />
+         </effect></TextField>
+      <TextField fx:id="city" layoutX="204.0" layoutY="467.0" prefHeight="39.0" prefWidth="240.0">
+         <effect>
+            <DropShadow />
+         </effect></TextField>
+      <Button fx:id="register" layoutX="393.0" layoutY="547.0" mnemonicParsing="false" onAction="#toRecipt" text="REGISTRER" />
       <Button fx:id="cancel" layoutX="13.0" layoutY="547.0" mnemonicParsing="false" onAction="#cancelOrder" text="KANSELLER" />
    </children>
 </AnchorPane>
