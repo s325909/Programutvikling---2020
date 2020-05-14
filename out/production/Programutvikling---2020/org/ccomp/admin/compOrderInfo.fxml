@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="custermerInfoPane" prefHeight="515.0" prefWidth="1066.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.AdminController">
+<AnchorPane fx:id="custermerInfoPane" prefHeight="515.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.AdminController">
    <children>
-       <TableView fx:id="carCompView" layoutX="45.0" layoutY="176.0" prefHeight="200.0" prefWidth="689.0">
+       <TableView fx:id="carCompView" layoutY="176.0" prefHeight="340.0" prefWidth="800.0">
            <columns>
                <TableColumn fx:id="orderNrColum" prefWidth="138.0" text="OrderNR" />
                <TableColumn fx:id="orderTypeColum" prefWidth="138.0" text="Type" />
@@ -13,9 +17,32 @@
                <TableColumn fx:id="orderPriceColum" prefWidth="138.0" text="Pris" />
                <TableColumn fx:id="orderQuntityColum" prefWidth="138.0" text="Antall" />
            </columns>
+         <effect>
+            <InnerShadow choke="0.7" color="#42a2a6" />
+         </effect>
        </TableView>
-      <Button fx:id="backAdmin" layoutX="114.0" layoutY="100.0" mnemonicParsing="false" onAction="#backToAdmin" text="Tilbake" />
-      <Button fx:id="eraseCompOrder" layoutX="516.0" layoutY="114.0" mnemonicParsing="false" onAction="#deleteCompOrder" text="Slett" />
-      <TextField fx:id="searchCompOrder" layoutX="247.0" layoutY="114.0" onKeyPressed="#searchCompOrders" promptText="Søk" />
+      <Button fx:id="backAdmin" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backToAdmin" text="TILBAKE">
+         <font>
+            <Font name="Segoe UI Semilight" size="18.0" />
+         </font>
+         <effect>
+            <InnerShadow color="#0000004d" />
+         </effect></Button>
+      <Button fx:id="eraseCompOrder" layoutX="716.0" layoutY="130.0" mnemonicParsing="false" onAction="#deleteRowOrders" text="SLETT">
+         <font>
+            <Font name="Segoe UI Semilight" size="18.0" />
+         </font>
+         <effect>
+            <InnerShadow color="#0000004d" />
+         </effect></Button>
+      <TextField fx:id="searchCompOrder" layoutX="307.0" layoutY="134.0" onKeyPressed="#searchCompOrders" promptText="Søk">
+         <effect>
+            <DropShadow />
+         </effect></TextField>
+      <ImageView fitHeight="114.0" fitWidth="262.0" layoutX="270.0" layoutY="14.0">
+         <image>
+            <Image url="@../../../resources/CCOMPW-small.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
