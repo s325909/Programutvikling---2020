@@ -151,6 +151,7 @@ public class AdminController {
     private SteeringWheel steeringWheel;
     private WheelRim wheelRim;
 
+    private CompOrder compOrder;
     private CustomerOrder customerOrder;
 
     private int row;
@@ -539,15 +540,21 @@ public class AdminController {
                 customerOrderList.remove(sourceIndex);
 
 
+                //Remove selected Customer Order from file
                 csvHandler.removeCustomerOrder("testCustomerOrders.csv", customerOrder);
 
 
-               // csvHandler.writeCustomerOrder(customerOrderList, "testCustomerOrder.csv");
 
-           /* if (retrievedCompMapSize != retrievedCompMap.size())
-                jobjHandler.writeComponent(retrievedCompMap);
+                compOrderList = csvHandler.readCompOrder(compOrderList, "testCompOrders.csv");
+                System.out.println("COMP ORDER LIST SIZE: " + compOrderList.size());
 
-                */
+                //Remove CompOrders whith same OrderNr from file
+                for (CompOrder compOrder : compOrderList) {
+                    if (compOrder.getOrderId() == customerOrder.getOrderId()) {
+                        System.out.println("REMOVE COMP ORDER: " + compOrder.toCSVFormat());
+                        csvHandler.removeCompOrder("testCompOrders.csv", compOrder);
+                    }
+                }
             }
 
 
@@ -570,7 +577,12 @@ public class AdminController {
         if (compOrders == null) System.out.println("COMP ORDERS NULL!!!");
         else System.out.println("COMP ORDERS SIZE: " + compOrders.size());
 
+
+        csvHandler.removeCompOrder("testCompOrders.csv", selectedRow);
+
+
         compOrders.remove(selectedRow);
+        compOrderList.remove(selectedRow);
 
     }
 

@@ -347,7 +347,7 @@ public class ComponentCSVHandler implements CSVFileHandler {
     }
 
 
-    List<CustomerOrder> customerOrders;
+    private List<CustomerOrder> customerOrders;
 
     public void removeCustomerOrder(String filepath, CustomerOrder customerOrder) {
         String tempFile = "temp.csv";
@@ -413,83 +413,74 @@ public class ComponentCSVHandler implements CSVFileHandler {
     }
 
 
-    /*
 
-    public void removeCustomerOrder3(String filepath, CustomerOrder customerOrder){
+    private List<CompOrder> compOrders;
 
+    public void removeCompOrder(String filepath, CompOrder compOrder) {
         String tempFile = "temp.csv";
         File oldFile = new File(filepath);
         File newFile = new File(tempFile);
-        String name = ""; String phoneNr = ""; String email = "";
-        String companyName = ""; String webPage = ""; String comments = "";
-        //String print = name + ";" + phoneNr + ";" + email + ";" + companyName + ";" + webPage + ";" + comments + ";";
 
         String line;
 
         try {
 
+            File file = new File(tempFile);
+
             FileWriter fw = new FileWriter(tempFile, true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
-            scanner = new Scanner(new File(filepath));
-            scanner.useDelimiter("[;\n]");
-
-            while (scanner.hasNext()) {
 
 
-                String[] values = line.split(",");
-
-
-                System.out.println("VALUES: " + Arrays.toString(values));
-
-                //  Customer customer = new Customer(values[1], values[2], values[3], values[4], values[5]);
-
-                int orderNr = Integer.parseInt(values[0]);
-                String customerName = values[1];
-                String customerMail = values[2];
-                String customerNumber = values[3];
-                String customerZipCode = values[4];
-                String customerCity = values[5];
-
-                CustomerOrder customerOrder = new CustomerOrder(orderNr, customerName, customerMail, customerNumber,
-                        customerZipCode, customerCity);
-
-                customerOrderList.add(customerOrder);
-
-
-                name = scanner.next();
-                phoneNr = scanner.next();
-                email = scanner.next();
-                companyName = scanner.next();
-                webPage = scanner.next();
-                comments = scanner.next();
-
-                if (!phoneNr.equals(removeNr) && !companyName.equals(removeName)) {
-                    System.out.println("name: " + name + " ; phoneNr: " + phoneNr + " ; email: " + email + " ; comp: " + companyName + " ; web: " + webPage + " ; comments: " + comments);
-
-
-                    pw.print(name + ";" + phoneNr + ";" + email + ";" + companyName + ";" + webPage + ";" + comments + "\n");
-                    //pw.println(name + ";" + phoneNr + ";" + email + ";" + companyName + ";" + webPage + ";" + comments);
-
-                    System.out.println("pw!");
-                }
-
+            firstLine = true;
+            if (file.length() == 0 && firstLine) {
+                System.out.println("FILE EMPTY ; FirstLine == " + firstLine + " ; ADD SEP");
+                pw.println("sep=,");
+                firstLine = false;
             }
-            scanner.close();
+
+
+            secondLine = true;
+            if (file.length() == 0 && secondLine) {
+                System.out.println("FILE EMPTY ; SecondLine == " + secondLine + " ; ADD HEADER");
+                pw.println("ORDRE NR,TYPE,NAVN,PRIS,ANTALL");
+                secondLine = false;
+            }
+
+
+
+
+
+            compOrders = readCompOrder(compOrders, filepath);
+
+            System.out.println("READ COMP ORDERS SIZE: " + compOrders.size());
+
+
+
+            for (CompOrder compOrder1 : compOrders) {
+                if (compOrder1.toCSVFormat().equals(compOrder.toCSVFormat())) {
+                    System.out.println("IGNORING COMP ORDER: " + compOrder.toCSVFormat());
+                } else pw.println(compOrder1.toCSVFormat());
+            }
+
+
             pw.flush();
             pw.close();
+
             System.out.println(oldFile + " has been deleted!");
             oldFile.delete();
-            File contactperson = new File(filepath);
-            newFile.renameTo(contactperson);
+            File compOrderCSV = new File(filepath);
+            newFile.renameTo(compOrderCSV);
             System.out.println("temp file has been renamed to " + newFile);
+
+            System.out.println("FILE SAVED");
+
         } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println(e);
+            System.out.println("FILE NOT SAVED: " + e.toString());
         }
+
     }
 
-     */
 
 
 
