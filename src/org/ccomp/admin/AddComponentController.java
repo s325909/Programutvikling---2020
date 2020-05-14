@@ -65,42 +65,22 @@ public class AddComponentController {
         }
 
         else if (seat.isSelected()) {
-            if (carTypeGroup.getSelectedToggle() == null) {
                 loadWindow(next, "/org/ccomp/admin/compGUI/kSeat.fxml", "@../../../resources/style.ccs");
-            }
-            else {
-                JOptionPane.showMessageDialog(null, "Du kan ikke velge biltype for dette komponentet!");
-            }
         }
 
         else if (spoiler.isSelected()) {
-            if (carTypeGroup.getSelectedToggle() == null) {
-                loadWindow(next, "/org/ccomp/admin/compGUI/kSpoiler.fxml", "@../../../resources/style.ccs");
-            }
-            else {
-                JOptionPane.showMessageDialog(null, "Du kan ikke velge biltype for dette komponentet!");
-            }
+            loadWindow(next, "/org/ccomp/admin/compGUI/kSpoiler.fxml", "@../../../resources/style.ccs");
         }
 
+
         else if (steeringwheel.isSelected()) {
-            if (carTypeGroup.getSelectedToggle() == null) {
-                loadWindow(next, "/org/ccomp/admin/compGUI/kSteeringwheel.fxml", "@../../../resources/style.ccs");
-            }
-            else {
-                JOptionPane.showMessageDialog(null, "Du kan ikke velge biltype for dette komponentet!");
-            }
+            loadWindow(next, "/org/ccomp/admin/compGUI/kSteeringwheel.fxml", "@../../../resources/style.ccs");
         }
 
         else if (wheelrim.isSelected()) {
-            if (carTypeGroup.getSelectedToggle() == null) {
-                loadWindow(next, "/org/ccomp/admin/compGUI/kWheelRim.fxml", "@../../../resources/style.ccs");
-            }
-            else {
-                JOptionPane.showMessageDialog(null, "Du kan ikke velge biltype for dette komponentet!");
-            }
+            loadWindow(next, "/org/ccomp/admin/compGUI/kWheelRim.fxml", "@../../../resources/style.ccs");
 
         }
-
         else {
             if (componentTypeGroup.getSelectedToggle() == null) {
                 JOptionPane.showMessageDialog(null, "Du må velge et komponent for å kunne legge til! \n" +
