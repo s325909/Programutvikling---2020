@@ -561,33 +561,50 @@ public class AdminController {
 
 
     public void deleteCompOrder(){
-        CompOrder selectedRow = carCompView.getSelectionModel().getSelectedItem();
-
-        System.out.println("SELECTED COMP ORDER: " + selectedRow.toCSVFormat());
-
-        carCompView.getItems().remove(selectedRow);
-
-        compOrders = carComTable();
-
-        if (compOrders == null) System.out.println("COMP ORDERS NULL!!!");
-        else System.out.println("COMP ORDERS SIZE: " + compOrders.size());
 
 
-        csvHandler.removeCompOrder("testCompOrders.csv", selectedRow);
+        int visibleIndex = carCompView.getSelectionModel().getSelectedIndex();
+
+        //return if nothing selected
+        if (visibleIndex == -1) return;
 
 
-        compOrders.remove(selectedRow);
-        compOrderList.remove(selectedRow);
+
+        if (compOrders == null) compOrders = carComTable();
+
+
+        int sourceIndex;
+
+        if (sortedCompOrderList != null) {
+            sourceIndex = sortedCompOrderList.getSourceIndexFor(compOrders, visibleIndex);
+            compOrder = compOrderList.get(sourceIndex);
+        } else {
+            compOrder = carCompView.getSelectionModel().getSelectedItem();
+            carCompView.getItems().remove(compOrder);
+        }
+
+
+        System.out.println("DELETE SELECTED COMP ORDER: " + compOrder.toCSVFormat());
+
+
+        csvHandler.removeCompOrder("testCompOrders.csv", compOrder);
+
+
+        compOrders.remove(compOrder);
+        compOrderList.remove(compOrder);
 
 
         //todo: Delete CustomerOrder if all CompOrders with same OrderNr is deleted
-
     }
 
     public void searchCompOrders(){
 
-        ObservableList<CompOrder> compOrdersList =carComTable();
-        FilteredList<CompOrder> filteredList = new FilteredList(compOrdersList, b -> true);
+        if (compOrders == null) compOrders = carComTable();
+
+       // ObservableList<CompOrder> compOrdersList = compOrders;
+
+
+        FilteredList<CompOrder> filteredList = new FilteredList(compOrders, b -> true);
         searchCompOrder.textProperty().addListener(((observable, oldValue, newValue) -> {
             filteredList.setPredicate( carcomp-> {
                 if (newValue == null || newValue.isEmpty()) {
