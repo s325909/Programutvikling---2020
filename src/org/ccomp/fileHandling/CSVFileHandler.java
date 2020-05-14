@@ -9,16 +9,12 @@ import java.util.List;
 
 public interface CSVFileHandler {
 
-    List<CompOrder> readCompOrder(List<CompOrder> compOrderList, String filePath);
+    List<CompOrder> readCompOrder(List<CompOrder> compOrderList);
 
-    List<CarComponent> readComponent(List<CarComponent> compList, String filePath);
-
-    List<CustomerOrder> readCustomerOrder(List<CustomerOrder> customerOrderList, String filePath);
+    List<CustomerOrder> readCustomerOrder(List<CustomerOrder> customerOrderList);
 
 
-    void writeCompOrder(List<CompOrder> compOrderList, String filePath);
+    void writeCompOrder(List<CompOrder> compOrderList);
 
-    void writeComponent(List<CarComponent> compList, String filePath);
-
-    void writeCustomerOrder(CustomerOrder customerOrder, String filePath);
+    void writeCustomerOrder(CustomerOrder customerOrder);
 }

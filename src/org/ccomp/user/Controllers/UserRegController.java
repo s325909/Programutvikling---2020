@@ -192,14 +192,14 @@ public class UserRegController {
 
         ComponentCSVHandler csvHandler = new ComponentCSVHandler();
 
-        csvHandler.writeCompOrder(compOrderList, "testCompOrders.csv");
+        csvHandler.writeCompOrder(compOrderList);
     }
 
 
     private void saveCustomerOrder(CustomerOrder customerOrder) {
         ComponentCSVHandler csvHandler = new ComponentCSVHandler();
 
-        csvHandler.writeCustomerOrder(customerOrder, "testCustomerOrders.csv");
+        csvHandler.writeCustomerOrder(customerOrder);
     }
 
 
@@ -210,9 +210,9 @@ public class UserRegController {
 
         String[] lastRow = csvHandler.readLastRow();
 
-        if (lastRow[0] == null) {
+        if (lastRow == null) {
             System.out.println("LAST ROW IS NULL!");
-            lastRow[0] = "0";
+            lastRow = new String[]{"0"};
         }
 
         System.out.println("RETREIVED LAST ROW: " + Arrays.toString(lastRow));

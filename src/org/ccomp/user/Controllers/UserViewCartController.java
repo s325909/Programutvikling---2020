@@ -256,45 +256,8 @@ public class UserViewCartController {
                 FXMLLoader loader = new FXMLLoader(url);
                 Parent root = loader.load();
 
-
                 UserRegController userRegController = loader.getController();
                 userRegController.setCarComponents(componentsCart);
-
-
-                ComponentCSVHandler csvHandler = new ComponentCSVHandler();
-
-                List<CustomerOrder> customerOrders = new ArrayList<>();
-                customerOrders = csvHandler.readCustomerOrder(customerOrders, "testCustomerOrders.csv");
-                System.out.println("CUSTOMER LIST: " + customerOrders.size());
-
-                /*
-
-                ComponentCSVHandler csvHandler = new ComponentCSVHandler();
-
-                String[] lastRow = csvHandler.readLast();
-
-                System.out.println("RETREIVED LAST ROW: " + Arrays.toString(lastRow));
-
-                int orderNr = Integer.parseInt(lastRow[0]);
-                orderNr++;
-
-
-                List<CompOrder> compOrderList = new ArrayList<>();
-               // int orderNr = 1;
-                System.out.println("ORDER NR: " + orderNr);
-                for (CarComponent carComponent : componentsCart) {
-                    CompOrder compOrder = new CompOrder(orderNr, carComponent);
-                    System.out.println(compOrder.toCSVFormat());
-                    compOrderList.add(compOrder);
-                }
-
-              //  ComponentCSVHandler csvHandler = new ComponentCSVHandler();
-                csvHandler.writeCompOrder(compOrderList, "testCompOrders.csv");
-
-
-
-                 */
-
 
                 Scene scene = new Scene(root, 500, 600);
                 stage.setScene(scene);
@@ -305,21 +268,13 @@ public class UserViewCartController {
         }
     }
 
-
-
     public ObservableList<Engine> engineTable() {
         Engine engine;
         ObservableList<Engine> engines = FXCollections.observableArrayList();
 
-
-
-                //Henter dem først ut her
-      /*  if (carComponents == null) {
-            carComponents = retrievedCompMap.get("Seat");
-        }*/
-
-
         carComponents = retrievedCompMap.get("Engine");
+        if (carComponents == null) carComponents = new ArrayList<>();
+
         //Presenter objektene i tableview ved sette inn riktige verdier til riktig tablecolonne
         for (CarComponent carComponent : carComponents) {
             if (carComponent.getCompType().equals(getSelectedcartype())) {
@@ -342,11 +297,8 @@ public class UserViewCartController {
         Seat seat;
         ObservableList<Seat> seats = FXCollections.observableArrayList();
 
-        //Henter dem først ut her
-      /*  if (carComponents == null) {
-            carComponents = retrievedCompMap.get("Seat");
-        }*/
         carComponents = retrievedCompMap.get("Seat");
+        if (carComponents == null) carComponents = new ArrayList<>();
 
 
         //Presenter objektene i tableview ved sette inn riktige verdier til riktig tablecolonne
@@ -367,11 +319,9 @@ public class UserViewCartController {
     public ObservableList<Spoiler> spoilerTable() {
         Spoiler spoiler;
         ObservableList<Spoiler> spoilers = FXCollections.observableArrayList();
-/*
-        if (carComponents == null) {
-            carComponents = retrievedCompMap.get("Spoiler");
-        }*/
+
         carComponents = retrievedCompMap.get("Spoiler");
+        if (carComponents == null) carComponents = new ArrayList<>();
 
         for (CarComponent carComponent : carComponents) {
             spoiler = (Spoiler) carComponent;
@@ -394,6 +344,7 @@ public class UserViewCartController {
             carComponents = retrievedCompMap.get("Spoiler");
         }*/
         carComponents = retrievedCompMap.get("SteeringWheel");
+        if (carComponents == null) carComponents = new ArrayList<>();
 
         for (CarComponent carComponent : carComponents) {
             steeringWheel = (SteeringWheel) carComponent;
@@ -411,11 +362,9 @@ public class UserViewCartController {
     public ObservableList<WheelRim> wheelRimTable(){
         WheelRim wheelRim;
         ObservableList<WheelRim> wheelRims = FXCollections.observableArrayList();
-/*
-        if (carComponents == null) {
-            carComponents = retrievedCompMap.get("Spoiler");
-        }*/
+
         carComponents = retrievedCompMap.get("WheelRim");
+        if (carComponents == null) carComponents = new ArrayList<>();
 
         for (CarComponent carComponent : carComponents) {
             wheelRim = (WheelRim) carComponent;

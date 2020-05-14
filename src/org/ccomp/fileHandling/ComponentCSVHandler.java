@@ -14,13 +14,16 @@ import java.util.Scanner;
 
 public class ComponentCSVHandler implements CSVFileHandler {
 
+    private final String COMPONENT_ORDERS_PATH = "ComponentOrders.csv";
+    private final String CUSTOMER_ORDERS_PATH = "CustomerOrders.csv";
+
     private boolean firstLine, secondLine;
 
     private Scanner scanner;
 
     @Override
-    public List<CompOrder> readCompOrder(List<CompOrder> compOrderList, String filePath) {
-        File file = new File(filePath);
+    public List<CompOrder> readCompOrder(List<CompOrder> compOrderList) {
+        File file = new File(COMPONENT_ORDERS_PATH);
 
         if (file.length() == 0) {
             System.out.println("COMP ORDER EMPTY");
@@ -86,14 +89,9 @@ public class ComponentCSVHandler implements CSVFileHandler {
     }
 
     @Override
-    public List<CarComponent> readComponent(List<CarComponent> compList, String filePath) {
-        return null;
-    }
+    public List<CustomerOrder> readCustomerOrder(List<CustomerOrder> customerOrderList) {
 
-    @Override
-    public List<CustomerOrder> readCustomerOrder(List<CustomerOrder> customerOrderList, String filePath) {
-
-        File file = new File(filePath);
+        File file = new File(CUSTOMER_ORDERS_PATH);
 
         if (file.length() == 0) {
             System.out.println("CUSTOMER ORDER EMPTY");
@@ -158,11 +156,11 @@ public class ComponentCSVHandler implements CSVFileHandler {
     }
 
     @Override
-    public void writeCompOrder(List<CompOrder> compOrderList, String filePath) {
+    public void writeCompOrder(List<CompOrder> compOrderList) {
         try {
-            File file = new File(filePath);
+            File file = new File(COMPONENT_ORDERS_PATH);
 
-            FileWriter fw = new FileWriter(filePath, true);
+            FileWriter fw = new FileWriter(COMPONENT_ORDERS_PATH, true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
 
@@ -199,41 +197,12 @@ public class ComponentCSVHandler implements CSVFileHandler {
     }
 
     @Override
-    public void writeComponent(List<CarComponent> compList, String filePath) {
-        try {
-            FileWriter fw = new FileWriter(filePath, true);
-            BufferedWriter bw = new BufferedWriter(fw);
-            PrintWriter pw = new PrintWriter(bw);
-
-            pw.println("TYPE, NAME, PRICE, QUANTITY");
-
-
-
-
-            for (CarComponent carComponent : compList) {
-                pw.println(carComponent.toCSVFormat());
-            }
-
-
-          //  pw.println();
-
-            pw.flush();
-            pw.close();
-
-            System.out.println("FILE SAVED");
-
-        } catch (Exception e) {
-            System.out.println("FILE NOT SAVED: " + e.toString());
-        }
-    }
-
-    @Override
-    public void writeCustomerOrder(CustomerOrder customerOrder, String filePath) {
+    public void writeCustomerOrder(CustomerOrder customerOrder) {
         try {
 
-            File file = new File(filePath);
+            File file = new File(CUSTOMER_ORDERS_PATH);
 
-            FileWriter fw = new FileWriter(filePath, true);
+            FileWriter fw = new FileWriter(CUSTOMER_ORDERS_PATH, true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
 
@@ -268,16 +237,25 @@ public class ComponentCSVHandler implements CSVFileHandler {
 
 
     public String[] readLastRow() {
+
         try {
-            FileReader file = new FileReader("testCompOrders.csv");  //address of the file
-            List<String> lines = new ArrayList<>();  //to store all lines
-            scanner = new Scanner(file);
-            while(scanner.hasNextLine()){  //checking for the presence of next Line
-                lines.add(scanner.nextLine());  //reading and storing all lines
+
+            File compOrderFile = new File(COMPONENT_ORDERS_PATH);
+            if (compOrderFile.length() == 0) {
+                System.out.println("COMP ORDER EMPTY");
+                return null;
             }
-            scanner.close();  //close the scanner
 
 
+            FileReader file = new FileReader(COMPONENT_ORDERS_PATH);
+            List<String> lines = new ArrayList<>();
+            scanner = new Scanner(file);
+            while(scanner.hasNextLine()){
+                lines.add(scanner.nextLine());
+            }
+            scanner.close();
+
+            //If file is empty add 0 to be the last row
             if (lines.size() == 0) lines.add("0");
 
             String lastLine = lines.get(lines.size()-1);
@@ -295,11 +273,11 @@ public class ComponentCSVHandler implements CSVFileHandler {
     }
 
 
-    public List<CompOrder> searchOrderRow(String filepath, String orderId) {
+    public List<CompOrder> searchOrderRow(String orderId) {
         List<CompOrder> compOrders = new ArrayList<>();
         try {
             String splitBy = ",";
-            BufferedReader br = new BufferedReader(new FileReader(filepath));
+            BufferedReader br = new BufferedReader(new FileReader(COMPONENT_ORDERS_PATH));
             String line;
             while((line = br.readLine()) != null) {
                 String[] b = line.split(splitBy);
@@ -339,9 +317,9 @@ public class ComponentCSVHandler implements CSVFileHandler {
 
     private List<CustomerOrder> customerOrders;
 
-    public void removeCustomerOrder(String filepath, CustomerOrder customerOrder) {
+    public void removeCustomerOrder(CustomerOrder customerOrder) {
         String tempFile = "temp.csv";
-        File oldFile = new File(filepath);
+        File oldFile = new File(CUSTOMER_ORDERS_PATH);
         File newFile = new File(tempFile);
 
         String line;
@@ -370,7 +348,7 @@ public class ComponentCSVHandler implements CSVFileHandler {
 
 
 
-            customerOrders = readCustomerOrder(customerOrders, filepath);
+            customerOrders = readCustomerOrder(customerOrders);
 
             System.out.println("READ CUSTOMER OREDERS SIZE: " + customerOrders.size());
 
@@ -388,7 +366,7 @@ public class ComponentCSVHandler implements CSVFileHandler {
 
             System.out.println(oldFile + " has been deleted!");
             oldFile.delete();
-            File customerOrderCSV = new File(filepath);
+            File customerOrderCSV = new File(CUSTOMER_ORDERS_PATH);
             newFile.renameTo(customerOrderCSV);
             System.out.println("temp file has been renamed to " + newFile);
 
@@ -404,9 +382,9 @@ public class ComponentCSVHandler implements CSVFileHandler {
 
     private List<CompOrder> compOrders;
 
-    public void removeCompOrder(String filepath, CompOrder compOrder) {
+    public void removeCompOrder(CompOrder compOrder) {
         String tempFile = "temp.csv";
-        File oldFile = new File(filepath);
+        File oldFile = new File(COMPONENT_ORDERS_PATH);
         File newFile = new File(tempFile);
 
         String line;
@@ -439,7 +417,7 @@ public class ComponentCSVHandler implements CSVFileHandler {
 
 
 
-            compOrders = readCompOrder(compOrders, filepath);
+            compOrders = readCompOrder(compOrders);
 
             System.out.println("READ COMP ORDERS SIZE: " + compOrders.size());
 
@@ -457,7 +435,7 @@ public class ComponentCSVHandler implements CSVFileHandler {
 
             System.out.println(oldFile + " has been deleted!");
             oldFile.delete();
-            File compOrderCSV = new File(filepath);
+            File compOrderCSV = new File(COMPONENT_ORDERS_PATH);
             newFile.renameTo(compOrderCSV);
             System.out.println("temp file has been renamed to " + newFile);
 

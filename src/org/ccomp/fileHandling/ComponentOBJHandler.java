@@ -11,21 +11,29 @@ public class ComponentOBJHandler implements ObjectFileHandler {
     public HashMap<String, List<CarComponent>> readComponent(HashMap<String, List<CarComponent>> compMap) {
         System.out.println("DE-SERIALIZING COMPONENT");
 
-        try {
-            //todo: handle if file not found / exists
-           // FileInputStream fis = new FileInputStream("components.obj");
-            FileInputStream fis = new FileInputStream("testComponents.obj");
-            ObjectInputStream ois = new ObjectInputStream(fis);
+        compMap = new HashMap<>();
 
-            compMap = (HashMap<String, List<CarComponent>>) ois.readObject();
+        File file = new File("Components.obj");
 
-            fis.close();
+        if (file.isFile() && file.exists()) {
 
-            System.out.println("COMP MAP: " + compMap);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            try {
+                //todo: handle if file not found / exists
+                // FileInputStream fis = new FileInputStream("components.obj");
+                FileInputStream fis = new FileInputStream("Components.obj");
+                ObjectInputStream ois = new ObjectInputStream(fis);
+
+                compMap = (HashMap<String, List<CarComponent>>) ois.readObject();
+
+                fis.close();
+
+                System.out.println("COMP MAP: " + compMap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+
         }
 
 
@@ -37,7 +45,7 @@ public class ComponentOBJHandler implements ObjectFileHandler {
         System.out.println("SERIALIZING COMPONENTS...");
         try {
             // FileOutputStream fos = new FileOutputStream("components.obj");
-            FileOutputStream fos = new FileOutputStream("testComponents.obj");
+            FileOutputStream fos = new FileOutputStream("Components.obj");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(compMap);
             oos.flush();

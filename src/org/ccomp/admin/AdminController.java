@@ -155,7 +155,7 @@ public class AdminController {
 
     private int row;
     private boolean initTabs, deleteComponent;
-    
+
     private String orderId;
     private List<CompOrder> compOrderList;
     private static int selectedOrderId;
@@ -173,7 +173,7 @@ public class AdminController {
 
 
         csvHandler = new ComponentCSVHandler();
-        customerOrderList = csvHandler.readCustomerOrder(customerOrderList, "testCustomerOrders.csv");
+        customerOrderList = csvHandler.readCustomerOrder(customerOrderList);
         System.out.println("INIT CUSTOMER ORDERS: " + customerOrderList.size());
 
         initTabs = true;
@@ -368,10 +368,10 @@ public class AdminController {
         compOrders = FXCollections.observableArrayList();
 
         orderId = String.valueOf(selectedOrderId);
-        if (selectedOrderId != -1) compOrderList = csvHandler.searchOrderRow("testCompOrders.csv", orderId);
+        if (selectedOrderId != -1) compOrderList = csvHandler.searchOrderRow(orderId);
         else {
             System.out.println("NO CUSTOMER ORDER SELECTED!!!");
-            compOrderList = csvHandler.readCompOrder(compOrderList, "testCompOrders.csv");
+            compOrderList = csvHandler.readCompOrder(compOrderList);
         }
 
 
@@ -504,18 +504,18 @@ public class AdminController {
 
 
                 //Remove selected Customer Order from file
-                csvHandler.removeCustomerOrder("testCustomerOrders.csv", customerOrder);
+                csvHandler.removeCustomerOrder(customerOrder);
 
 
 
-                compOrderList = csvHandler.readCompOrder(compOrderList, "testCompOrders.csv");
+                compOrderList = csvHandler.readCompOrder(compOrderList);
                 System.out.println("COMP ORDER LIST SIZE: " + compOrderList.size());
 
                 //Remove CompOrders whith same OrderNr from file
                 for (CompOrder compOrder : compOrderList) {
                     if (compOrder.getOrderId() == customerOrder.getOrderId()) {
                         System.out.println("REMOVE COMP ORDER: " + compOrder.toCSVFormat());
-                        csvHandler.removeCompOrder("testCompOrders.csv", compOrder);
+                        csvHandler.removeCompOrder(compOrder);
                     }
                 }
             }
@@ -550,7 +550,7 @@ public class AdminController {
         System.out.println("DELETE SELECTED COMP ORDER: " + compOrder.toCSVFormat());
 
 
-        csvHandler.removeCompOrder("testCompOrders.csv", compOrder);
+        csvHandler.removeCompOrder(compOrder);
 
 
         compOrders.remove(compOrder);
