@@ -1,6 +1,5 @@
 package org.ccomp.user.Controllers;
 
-import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,19 +26,6 @@ import java.util.Optional;
 
 
 public class UserViewCartController {
-
-    private ComponentOBJHandler jobjHandler;
-
-    //  private OLDComponentOBJHandlerOLD jobjHandler;
-    private HashMap<String, List<CarComponent>> compMap, retrievedCompMap;
-    private List<CarComponent> carComponents;
-    private String selectedcartype;
-
-
-    CarComponent carComponent;
-
-    UserController userController = new UserController();
-
 
     @FXML
     AnchorPane contentProducts, contentCart;
@@ -121,6 +107,16 @@ public class UserViewCartController {
     TableColumn<CarComponent, Integer> compQuantityColumn;
 
 
+    private ComponentOBJHandler jobjHandler;
+
+    //  private OLDComponentOBJHandlerOLD jobjHandler;
+    private HashMap<String, List<CarComponent>> compMap, retrievedCompMap;
+    private List<CarComponent> carComponents;
+    private String selectedcartype;
+
+
+    CarComponent carComponent;
+
     private Scene scene;
     static List<CarComponent> componentsCart = new ArrayList<>();
 
@@ -145,7 +141,7 @@ public class UserViewCartController {
         componentsCart = getComponentsCart();
         System.out.println("(INIT) COMP CART: " + componentsCart.size());
 
-        System.out.println("TESTING");
+        if (numberofProduct != null) countProducts();
     }
 
     @FXML
@@ -234,6 +230,7 @@ public class UserViewCartController {
 
 
         componentsCart = getComponentsCart();
+
 
         try {
             URL url = getClass().getResource("/org/ccomp/user/viewProduct.fxml");
@@ -471,7 +468,7 @@ public class UserViewCartController {
 
     public void countProducts() {
 
-        numberofProduct.setText("Antall lagt til: " + String.valueOf(componentsCart.size()));
+        numberofProduct.setText("Antall lagt til: " + componentsCart.size());
 
     }
 
