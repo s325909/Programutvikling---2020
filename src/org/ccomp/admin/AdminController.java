@@ -588,7 +588,7 @@ public class AdminController {
 
         ObservableList<CompOrder> compOrdersList =carComTable();
         FilteredList<CompOrder> filteredList = new FilteredList(compOrdersList, b -> true);
-        search.textProperty().addListener(((observable, oldValue, newValue) -> {
+        searchCompOrder.textProperty().addListener(((observable, oldValue, newValue) -> {
             filteredList.setPredicate( carcomp-> {
                 if (newValue == null || newValue.isEmpty()) {
                     return true;

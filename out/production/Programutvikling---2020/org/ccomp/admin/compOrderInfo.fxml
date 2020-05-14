@@ -16,6 +16,6 @@
        </TableView>
       <Button fx:id="backAdmin" layoutX="114.0" layoutY="100.0" mnemonicParsing="false" onAction="#backToAdmin" text="Tilbake" />
       <Button fx:id="eraseCompOrder" layoutX="516.0" layoutY="114.0" mnemonicParsing="false" onAction="#deleteCompOrder" text="Slett" />
-      <TextField fx:id="searchCompOrder" layoutX="247.0" layoutY="114.0" onKeyReleased="#searchCompOrders" promptText="Søk" />
+      <TextField fx:id="searchCompOrder" layoutX="247.0" layoutY="114.0" onKeyPressed="#searchCompOrders" promptText="Søk" />
    </children>
 </AnchorPane>
