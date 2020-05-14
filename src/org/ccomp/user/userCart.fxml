@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="contentCart" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.user.Controllers.UserViewCartController">
+<AnchorPane fx:id="contentCart" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.user.Controllers.UserViewCartController">
    <children>
       <ImageView fitHeight="117.0" fitWidth="252.0" layoutX="284.0" layoutY="14.0">
          <image>
@@ -13,13 +14,13 @@
          </image>
       </ImageView>
       <Label layoutX="355.0" layoutY="131.0" text="VALGTE PRODUKTER" />
-      <Label layoutX="555.0" layoutY="477.0" prefHeight="31.0" prefWidth="61.0" text="TOTAL" />
+      <Label layoutX="555.0" layoutY="494.0" prefHeight="31.0" prefWidth="61.0" text="TOTAL" />
       <Button fx:id="userReg" layoutX="703.0" layoutY="547.0" mnemonicParsing="false" onAction="#toOrder" text="BESTILL">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
       </Button>
-      <Label layoutX="555.0" layoutY="444.0" text="Mva 25%" />
+      <Label layoutX="555.0" layoutY="418.0" text="Mva 25%" />
       <Button fx:id="backBtnCart" layoutX="14.0" layoutY="547.0" mnemonicParsing="false" onAction="#backToViewProd" text="TILBAKE">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
@@ -30,7 +31,7 @@
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
       </Button>
-      <Label fx:id="viewCart" layoutX="12.0" layoutY="238.0" prefHeight="216.0" prefWidth="777.0" />
+      <Label fx:id="viewCart" layoutX="12.0" layoutY="238.0" prefHeight="180.0" prefWidth="777.0" />
       <TableView fx:id="cartTable" layoutY="213.0" prefHeight="200.0" prefWidth="800.0">
         <columns>
             <TableColumn fx:id="compTypeColumn" prefWidth="200.0" text="TYPE" />
@@ -39,11 +40,13 @@
             <TableColumn fx:id="compQuantityColumn" prefWidth="200.0" text="ANTALL" />
         </columns>
       </TableView>
-      <Label fx:id="sumText" layoutX="630.0" layoutY="477.0" prefHeight="31.0" prefWidth="147.0" />
-      <Button fx:id="deleteAll" layoutX="673.0" layoutY="152.0" mnemonicParsing="false" onAction="#deleteCartAll" text="FJERN ALT">
+      <Label fx:id="sumText" layoutX="630.0" layoutY="494.0" prefHeight="31.0" prefWidth="147.0" />
+      <Button fx:id="deleteAll" layoutX="673.0" layoutY="152.0" mnemonicParsing="false" onAction="#deleteAllAlert" text="FJERN ALT">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
       </Button>
+      <Label layoutX="555.0" layoutY="454.0" prefHeight="31.0" prefWidth="95.0" text="TOTAL ANT." />
+      <Label fx:id="sumAntall" layoutX="653.0" layoutY="454.0" prefHeight="31.0" prefWidth="147.0" />
    </children>
 </AnchorPane>

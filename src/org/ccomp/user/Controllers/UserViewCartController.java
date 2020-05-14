@@ -8,6 +8,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.ccomp.fileHandling.ComponentCSVHandler;
@@ -19,6 +21,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 
 public class UserViewCartController {
@@ -27,16 +30,11 @@ public class UserViewCartController {
     AnchorPane contentProducts, contentCart;
 
     @FXML
-    Label viewCart, numberofProduct, sumText;
-
-    /*@FXML
-    TableColumn<Object, String> value, value2, value3, value4, value5;
-
-    @FXML
-    TableView<Object> tableView;*/
+    Label viewCart, numberofProduct, sumText, sumAntall;
 
     @FXML
     Button backBtnView, backBtnCart, addToCart, userReg, toTheChart, deleteRow, deleteAll;
+
     @FXML
     TitledPane seatPane, spoilerPane,enginePane,sWheelPane,wheelRimPane;
 
@@ -527,7 +525,15 @@ public class UserViewCartController {
 
             System.out.println("SELECTED WHEEL RIM: " + selectedCarComponent.toCSVFormat());
         } else {
-            alert("INGEN PRODUKTER VALGT!");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("Kunne ikke legge til i handlekurv!");
+            alert.setContentText("Du har ikke valgt produkt, vennligst velg komponent for å legge til!");
+            Image image = new Image("https://www.pinclipart.com/picdir/middle/201-2018325_img-empty-shopping-cart-gif-clipart.png");
+            ImageView imageView = new ImageView(image);
+            imageView.setFitHeight(60);
+            imageView.setFitWidth(90);
+            alert.setGraphic(imageView);
+            alert.showAndWait();
             System.out.println("NO PRODUCT SELECTED...");
         }
 
@@ -566,7 +572,9 @@ public class UserViewCartController {
 
                     if (selectedCarComponent.getCompQuantity() >= quantity) componentsCart.get(count).setCompQuantity(quantity);
                     else {
-                        alert("MAX ANTALL ER VALGT");
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setHeaderText("Det er ikke flere produkter av komponentet tilgjengelig.");
+                        alert.showAndWait();
                         System.out.println("MAX ANTALL: " + quantity + " > " + selectedCarComponent.getCompQuantity());
                     }
 
@@ -619,12 +627,29 @@ public class UserViewCartController {
         sumText.setText(String.valueOf(sum));
     }
 
+    public void deleteAllAlert(){
+
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setHeaderText("Du er i ferd med å tømme handlekurven!");
+        alert.setContentText("Er du sikker på at du vil fortsette?");
+
+
+        ButtonType cancelButton = new ButtonType("Avbryt", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getDialogPane().getButtonTypes().add(cancelButton);
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            deleteCartAll();
+        }
+    }
+
     public void deleteCartAll() {
         //Remove all components added to the componentsCart List from CartTable
-        cartTable.getItems().removeAll(componentsCart);
+           cartTable.getItems().removeAll(componentsCart);
+           //Clear ComponentsCart List
+           componentsCart.clear();
 
-        //Clear ComponentsCart List
-        componentsCart.clear();
     }
 
     public static List<CarComponent> getComponentsCart() {
