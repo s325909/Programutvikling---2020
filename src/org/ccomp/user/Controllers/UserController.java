@@ -73,10 +73,7 @@ public class UserController implements Initializable {
 
                 System.out.println("SELECTED RADIO BTN: " + selectedRadioButton.getText());
 
-                if (selectedRadioButton != null)
-                    selectedCarType = selectedRadioButton.getText();
-
-
+                selectedCarType = selectedRadioButton.getText();
 
                 UserViewCartController userViewCartController = loader.getController();
                 userViewCartController.setSelectedcartype(selectedCarType);

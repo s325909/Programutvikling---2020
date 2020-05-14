@@ -12,9 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import org.ccomp.fileHandling.ComponentCSVHandler;
 import org.ccomp.fileHandling.ComponentOBJHandler;
-import org.ccomp.model.CustomerOrder;
 import org.ccomp.model.component.*;
 
 import java.net.URL;
@@ -106,7 +104,7 @@ public class UserViewCartController {
     //  private OLDComponentOBJHandlerOLD jobjHandler;
     private HashMap<String, List<CarComponent>> compMap, retrievedCompMap;
     private List<CarComponent> carComponents;
-    private String selectedcartype;
+    private static String selectedCarType;
 
 
     CarComponent carComponent;
@@ -124,7 +122,6 @@ public class UserViewCartController {
     @FXML
     public void initialize() {
         jobjHandler = new ComponentOBJHandler();
-        // jobjHandler = new OLDComponentOBJHandlerOLD();
         retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
 
         //  customerSeatView.setItems(seatTable());
@@ -165,7 +162,6 @@ public class UserViewCartController {
 
         System.out.println("TO USER CART");
 
-
         if (componentsCart == null) componentsCart = new ArrayList<>();
 
         if (componentsCart.size() == 0) {
@@ -175,14 +171,6 @@ public class UserViewCartController {
 
         else {
 
-            //todo: fjernes etter testing
-       /* StringProperty compNameProperty = new SimpleStringProperty("COMP NAME");
-        DoubleProperty compPriceProperty = new SimpleDoubleProperty(230);
-        IntegerProperty compQuantityProperty = new SimpleIntegerProperty(15);
-
-
-        componentsCart.add(new CarComponent("COMP TYPE", compNameProperty, compPriceProperty, compQuantityProperty));
-        */
             try {
                 URL url = getClass().getResource("/org/ccomp/user/userCart.fxml");
 
@@ -667,11 +655,11 @@ public class UserViewCartController {
     }
 
     public String getSelectedcartype() {
-        return selectedcartype;
+        return selectedCarType;
     }
 
     public void setSelectedcartype(String selectedcartype) {
-        this.selectedcartype = selectedcartype;
+        this.selectedCarType = selectedcartype;
     }
 
 }
