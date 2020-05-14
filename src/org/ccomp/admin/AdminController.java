@@ -556,13 +556,8 @@ public class AdminController {
                     }
                 }
             }
-
-
         }
-
-
-
-        }
+    }
 
 
     public void deleteCompOrder(){
@@ -583,6 +578,9 @@ public class AdminController {
 
         compOrders.remove(selectedRow);
         compOrderList.remove(selectedRow);
+
+
+        //todo: Delete CustomerOrder if all CompOrders with same OrderNr is deleted
 
     }
 
