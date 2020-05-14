@@ -50,7 +50,7 @@ public class Validation {
     public static String validateQuantity (String input) {
         String lable = "";
 
-        String regex = "[0-9]\\d{1,5}";
+        String regex = "[0-9]{1,10}";
 
         if (!input.matches(regex)) {
             lable = ("Feil format i antall komponenter!\n");
@@ -61,7 +61,7 @@ public class Validation {
     public static String validatePrice (String input) {
         String lable = "";
 
-        String regex = "[0-9]\\d{3,5}";
+        String regex = "[0-9]\\d{3,7}";
 
         if (!input.matches(regex)) {
             lable = ("Pris er skrevet inn i feil format!\n");
