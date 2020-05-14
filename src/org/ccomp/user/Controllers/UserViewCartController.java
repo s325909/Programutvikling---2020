@@ -27,12 +27,6 @@ import java.util.Optional;
 
 public class UserViewCartController {
 
-    private ComponentOBJHandler jobjHandler;
-
-    //  private OLDComponentOBJHandlerOLD jobjHandler;
-    private HashMap<String, List<CarComponent>> compMap, retrievedCompMap;
-    private List<CarComponent> carComponents;
-
     @FXML
     AnchorPane contentProducts, contentCart;
 
@@ -113,6 +107,16 @@ public class UserViewCartController {
     TableColumn<CarComponent, Integer> compQuantityColumn;
 
 
+    private ComponentOBJHandler jobjHandler;
+
+    //  private OLDComponentOBJHandlerOLD jobjHandler;
+    private HashMap<String, List<CarComponent>> compMap, retrievedCompMap;
+    private List<CarComponent> carComponents;
+    private String selectedcartype;
+
+
+    CarComponent carComponent;
+
     private Scene scene;
     static List<CarComponent> componentsCart = new ArrayList<>();
 
@@ -137,7 +141,7 @@ public class UserViewCartController {
         componentsCart = getComponentsCart();
         System.out.println("(INIT) COMP CART: " + componentsCart.size());
 
-        System.out.println("TESTING");
+        if (numberofProduct != null) countProducts();
     }
 
     @FXML
@@ -227,6 +231,7 @@ public class UserViewCartController {
 
         componentsCart = getComponentsCart();
 
+
         try {
             URL url = getClass().getResource("/org/ccomp/user/viewProduct.fxml");
             scene = contentCart.getScene();
@@ -306,21 +311,30 @@ public class UserViewCartController {
         Engine engine;
         ObservableList<Engine> engines = FXCollections.observableArrayList();
 
-        //Henter dem først ut her
+
+
+                //Henter dem først ut her
       /*  if (carComponents == null) {
             carComponents = retrievedCompMap.get("Seat");
         }*/
+
+
         carComponents = retrievedCompMap.get("Engine");
         //Presenter objektene i tableview ved sette inn riktige verdier til riktig tablecolonne
-
         for (CarComponent carComponent : carComponents) {
-            engine = (Engine) carComponent;
-            engineTypeColum.setCellValueFactory(new PropertyValueFactory<Engine, String>("compType"));
-            nameEngineColum.setCellValueFactory(new PropertyValueFactory<Engine, String>("compName"));
-            horsepowerColum.setCellValueFactory(new PropertyValueFactory<Engine, Integer>("engineHorsePower"));
-            priceEngineColm.setCellValueFactory(new PropertyValueFactory<Engine, Double>("compPrice"));
-            quantityEngineColum.setCellValueFactory(new PropertyValueFactory<Engine,Integer>("compQuantity"));
-            engines.add(engine);
+
+
+            System.out.println(carComponent.getCompType() + " == " + getSelectedcartype());
+            if (carComponent.getCompType().equals(getSelectedcartype()))
+            {
+                engine = (Engine) carComponent;
+                engineTypeColum.setCellValueFactory(new PropertyValueFactory<Engine, String>("compType"));
+                nameEngineColum.setCellValueFactory(new PropertyValueFactory<Engine, String>("compName"));
+                horsepowerColum.setCellValueFactory(new PropertyValueFactory<Engine, Integer>("engineHorsePower"));
+                priceEngineColm.setCellValueFactory(new PropertyValueFactory<Engine, Double>("compPrice"));
+                quantityEngineColum.setCellValueFactory(new PropertyValueFactory<Engine, Integer>("compQuantity"));
+                engines.add(engine);
+            }
         }
         return engines;
     }
@@ -454,7 +468,7 @@ public class UserViewCartController {
 
     public void countProducts() {
 
-        numberofProduct.setText("Antall lagt til: " + String.valueOf(componentsCart.size()));
+        numberofProduct.setText("Antall lagt til: " + componentsCart.size());
 
     }
 
@@ -622,4 +636,13 @@ public class UserViewCartController {
         alert.showAndWait();
 
     }
+
+    public String getSelectedcartype() {
+        return selectedcartype;
+    }
+
+    public void setSelectedcartype(String selectedcartype) {
+        this.selectedcartype = selectedcartype;
+    }
+
 }

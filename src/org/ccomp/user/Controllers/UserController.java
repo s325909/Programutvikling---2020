@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.ccomp.admin.compGUI.CompController;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,7 +16,7 @@ import static org.ccomp.user.Controllers.UserRegController.alert;
 
 public class UserController implements Initializable {
 
-
+    String selectedCarType;
 
     @FXML
     Button backBtn, sokProd;
@@ -28,6 +29,8 @@ public class UserController implements Initializable {
 
     @FXML
     CheckBox engine,wheelrim,steeringwheel,seat,spoiler;
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -63,12 +66,27 @@ public class UserController implements Initializable {
         if (carType.getSelectedToggle() == null) {
             alert("Vennligst velg hvilke biltype du eier for å søke komponent!");
         }
+
         else {
             try {
                 Stage stage = (Stage) sokProd.getScene().getWindow();
                 URL url = getClass().getResource("/org/ccomp/user/viewProduct.fxml");
                 FXMLLoader loader = new FXMLLoader(url);
                 Parent root = loader.load();
+
+                RadioButton selectedRadioButton = (RadioButton) carType.getSelectedToggle();
+
+                System.out.println("SELECTED RADIO BTN: " + selectedRadioButton.getText());
+
+                if (selectedRadioButton != null)
+                    selectedCarType = selectedRadioButton.getText();
+
+
+
+                UserViewCartController userViewCartController = loader.getController();
+                userViewCartController.setSelectedcartype(selectedCarType);
+
+
                 Scene scene = new Scene(root, 800, 600);
                 stage.setScene(scene);
                 stage.show();
