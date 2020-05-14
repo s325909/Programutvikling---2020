@@ -16,6 +16,8 @@ public class ComponentCSVHandler implements CSVFileHandler {
 
     private boolean firstLine, secondLine;
 
+    private Scanner scanner;
+
     @Override
     public List<CompOrder> readCompOrder(List<CompOrder> compOrderList, String filePath) {
         File file = new File(filePath);
@@ -57,11 +59,6 @@ public class ComponentCSVHandler implements CSVFileHandler {
 
                 int orderNr = Integer.parseInt(values[0]);
                 String compType = values[1];
-               // StringProperty compName = new SimpleStringProperty(values[2]);
-               // DoubleProperty compPrice = new SimpleDoubleProperty(Double.valueOf(values[3]));
-               // IntegerProperty compQuantity = new SimpleIntegerProperty(Integer.valueOf(values[4]));
-
-
                 String compName = values[2];
                 double compPrice = Double.parseDouble(values[3]);
                 int compQuantity = Integer.parseInt(values[4]);
@@ -171,9 +168,6 @@ public class ComponentCSVHandler implements CSVFileHandler {
     @Override
     public void writeCompOrder(List<CompOrder> compOrderList, String filePath) {
         try {
-
-
-
             File file = new File(filePath);
 
             FileWriter fw = new FileWriter(filePath, true);
@@ -185,7 +179,7 @@ public class ComponentCSVHandler implements CSVFileHandler {
                 System.out.println("FILE EMPTY ; FirstLine == " + firstLine + " ; ADD SEP");
                 pw.println("sep=,");
                 firstLine = false;
-            } else System.out.println("FILE NOT EMPTY ; SEP ADDED == " + firstLine);
+            }
 
 
             secondLine = true;
@@ -193,14 +187,7 @@ public class ComponentCSVHandler implements CSVFileHandler {
                 System.out.println("FILE EMPTY ; SecondLine == " + secondLine + " ; ADD HEADER");
                 pw.println("ORDRE NR,TYPE,NAVN,PRIS,ANTALL");
                 secondLine = false;
-            } else System.out.println("FILE NOT EMPTY ; HEADER ADDED == " + secondLine);
-
-
-
-           // if (fw.)
-
-           // pw.println("TYPE, NAME, PRICE, QUANTITY");
-
+            }
 
 
 
@@ -208,8 +195,6 @@ public class ComponentCSVHandler implements CSVFileHandler {
                 pw.println(compOrder.toCSVFormat());
             }
 
-
-            //  pw.println();
 
             pw.flush();
             pw.close();
@@ -269,13 +254,6 @@ public class ComponentCSVHandler implements CSVFileHandler {
 
 
 
-            /*
-            this.emailadress = emailadress;
-        this.number = number;
-        this.zipcode = zipcode;
-        this.city = city;
-             */
-
             secondLine = true;
             if (file.length() == 0 && secondLine) {
                 System.out.println("FILE EMPTY ; SecondLine == " + secondLine + " ; ADD HEADER");
@@ -284,22 +262,8 @@ public class ComponentCSVHandler implements CSVFileHandler {
             } else System.out.println("FILE NOT EMPTY ; HEADER ADDED == " + secondLine);
 
 
-
-            // if (fw.)
-
-            // pw.println("TYPE, NAME, PRICE, QUANTITY");
-
-
-
-            /*
-            for (CompOrder compOrder : compOrderList) {
-                pw.println(compOrder.toCSVFormat());
-            }
-            */
-
             pw.println(customerOrder.toCSVFormat());
 
-            //  pw.println();
 
             pw.flush();
             pw.close();
@@ -317,7 +281,7 @@ public class ComponentCSVHandler implements CSVFileHandler {
         try {
             FileReader file = new FileReader("testCompOrders.csv");  //address of the file
             List<String> lines = new ArrayList<>();  //to store all lines
-            Scanner scanner = new Scanner(file);
+            scanner = new Scanner(file);
             while(scanner.hasNextLine()){  //checking for the presence of next Line
                 lines.add(scanner.nextLine());  //reading and storing all lines
             }
@@ -381,5 +345,152 @@ public class ComponentCSVHandler implements CSVFileHandler {
 
         return compOrders;
     }
+
+
+    List<CustomerOrder> customerOrders;
+
+    public void removeCustomerOrder(String filepath, CustomerOrder customerOrder) {
+        String tempFile = "temp.csv";
+        File oldFile = new File(filepath);
+        File newFile = new File(tempFile);
+
+        String line;
+
+        try {
+
+            File file = new File(tempFile);
+
+            FileWriter fw = new FileWriter(tempFile, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+
+            firstLine = true;
+            if (file.length() == 0 && firstLine) {
+                System.out.println("FILE EMPTY ; FirstLine == " + firstLine + " ; ADD SEP");
+                pw.println("sep=,");
+                firstLine = false;
+            } else System.out.println("FILE NOT EMPTY ; SEP ADDED == " + firstLine);
+
+
+
+            secondLine = true;
+            if (file.length() == 0 && secondLine) {
+                System.out.println("FILE EMPTY ; SecondLine == " + secondLine + " ; ADD HEADER");
+                pw.println("ORDRE NR,NAVN,EPOST,TLF NR,POST NR,POSTSTED");
+                secondLine = false;
+            } else System.out.println("FILE NOT EMPTY ; HEADER ADDED == " + secondLine);
+
+
+
+            customerOrders = readCustomerOrder(customerOrders, filepath);
+
+            System.out.println("READ CUSTOMER OREDERS SIZE: " + customerOrders.size());
+
+
+            for (CustomerOrder customerOrder1 : customerOrders) {
+                if (customerOrder1.toCSVFormat().equals(customerOrder.toCSVFormat())) {
+                    System.out.println("IGNORING CUSTOMER ORDER: " + customerOrder1.toCSVFormat());
+                } else pw.println(customerOrder1.toCSVFormat());
+            }
+
+
+
+            pw.flush();
+            pw.close();
+
+            System.out.println(oldFile + " has been deleted!");
+            oldFile.delete();
+            File customerOrderCSV = new File(filepath);
+            newFile.renameTo(customerOrderCSV);
+            System.out.println("temp file has been renamed to " + newFile);
+
+            System.out.println("FILE SAVED");
+
+        } catch (Exception e) {
+            System.out.println("FILE NOT SAVED: " + e.toString());
+        }
+
+    }
+
+
+    /*
+
+    public void removeCustomerOrder3(String filepath, CustomerOrder customerOrder){
+
+        String tempFile = "temp.csv";
+        File oldFile = new File(filepath);
+        File newFile = new File(tempFile);
+        String name = ""; String phoneNr = ""; String email = "";
+        String companyName = ""; String webPage = ""; String comments = "";
+        //String print = name + ";" + phoneNr + ";" + email + ";" + companyName + ";" + webPage + ";" + comments + ";";
+
+        String line;
+
+        try {
+
+            FileWriter fw = new FileWriter(tempFile, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            scanner = new Scanner(new File(filepath));
+            scanner.useDelimiter("[;\n]");
+
+            while (scanner.hasNext()) {
+
+
+                String[] values = line.split(",");
+
+
+                System.out.println("VALUES: " + Arrays.toString(values));
+
+                //  Customer customer = new Customer(values[1], values[2], values[3], values[4], values[5]);
+
+                int orderNr = Integer.parseInt(values[0]);
+                String customerName = values[1];
+                String customerMail = values[2];
+                String customerNumber = values[3];
+                String customerZipCode = values[4];
+                String customerCity = values[5];
+
+                CustomerOrder customerOrder = new CustomerOrder(orderNr, customerName, customerMail, customerNumber,
+                        customerZipCode, customerCity);
+
+                customerOrderList.add(customerOrder);
+
+
+                name = scanner.next();
+                phoneNr = scanner.next();
+                email = scanner.next();
+                companyName = scanner.next();
+                webPage = scanner.next();
+                comments = scanner.next();
+
+                if (!phoneNr.equals(removeNr) && !companyName.equals(removeName)) {
+                    System.out.println("name: " + name + " ; phoneNr: " + phoneNr + " ; email: " + email + " ; comp: " + companyName + " ; web: " + webPage + " ; comments: " + comments);
+
+
+                    pw.print(name + ";" + phoneNr + ";" + email + ";" + companyName + ";" + webPage + ";" + comments + "\n");
+                    //pw.println(name + ";" + phoneNr + ";" + email + ";" + companyName + ";" + webPage + ";" + comments);
+
+                    System.out.println("pw!");
+                }
+
+            }
+            scanner.close();
+            pw.flush();
+            pw.close();
+            System.out.println(oldFile + " has been deleted!");
+            oldFile.delete();
+            File contactperson = new File(filepath);
+            newFile.renameTo(contactperson);
+            System.out.println("temp file has been renamed to " + newFile);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e);
+        }
+    }
+
+     */
+
+
 
 }

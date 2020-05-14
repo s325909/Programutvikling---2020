@@ -530,8 +530,17 @@ public class AdminController {
                 if (visibleIndex == -1) return;
 
                 int sourceIndex = sortedCustomerOrderData.getSourceIndexFor(customerOrders, visibleIndex);
+
+
+                customerOrder = customerOrderList.get(sourceIndex);
+                System.out.println("DELETE CUSTOMER ORDER: " + customerOrder.toCSVFormat());
+
                 customerOrders.remove(sourceIndex);
                 customerOrderList.remove(sourceIndex);
+
+
+                csvHandler.removeCustomerOrder("testCustomerOrders.csv", customerOrder);
+
 
                // csvHandler.writeCustomerOrder(customerOrderList, "testCustomerOrder.csv");
 

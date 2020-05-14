@@ -33,12 +33,26 @@ public class CustomerOrder {
         this.customerNumber = new SimpleStringProperty(number);
         this.customerZipCode = new SimpleStringProperty(zipcode);
         this.customerCity = new SimpleStringProperty(city);
+
+        this.customer = new Customer(fullName, emailadress, number, zipcode, city);
     }
 
     public String toCSVFormat() {
         return orderId + "," + customer.toCSVFormat();
     }
 
+
+    @Override
+    public String toString() {
+        return "CustomerOrder{" +
+                "customerOrderNr=" + customerOrderNr +
+                ", customerName=" + customerName +
+                ", customerMail=" + customerMail +
+                ", customerNumber=" + customerNumber +
+                ", customerZipCode=" + customerZipCode +
+                ", customerCity=" + customerCity +
+                '}';
+    }
 
     public int getCustomerOrderNr() {
         return customerOrderNr.get();
