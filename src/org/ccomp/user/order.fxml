@@ -6,27 +6,33 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="contentRecipt" prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.user.Controllers.UserRegController">
+<AnchorPane fx:id="contentRecipt" prefHeight="600.0" prefWidth="500.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.user.Controllers.UserRegController">
    <children>
       <ImageView fitHeight="126.0" fitWidth="261.0" layoutX="120.0" layoutY="14.0">
          <image>
             <Image url="@../../../resources/CCOMPW-small.png" />
          </image>
       </ImageView>
-      <Text layoutX="33.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DU ER NÅ REGISTRERT MED DENNE INFORMASJONEN:" />
-      <Text layoutX="59.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DETTE ER DIN BESTILLING:" />
+      <Text layoutX="51.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DU ER NÅ REGISTRERT MED DENNE INFORMASJONEN:" />
+      <Text layoutX="99.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dette er din bestilling:" />
       <Text layoutX="112.0" layoutY="577.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Du kan nå krysse ut. Ha en fin dag videre!" />
-      <Text layoutX="33.0" layoutY="521.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Takk for din ordre, du vil bli konaktet på SMS for henting av dine produkter." textAlignment="CENTER" wrappingWidth="439.892578125" />
-      <TableView fx:id="ordedView" layoutX="6.0" layoutY="358.0" prefHeight="135.0" prefWidth="487.0">
+      <Text layoutX="33.0" layoutY="521.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Takk for din ordre, du vil bli kontaktet på SMS for henting av dine produkter." textAlignment="CENTER" wrappingWidth="439.892578125" />
+      <TableView fx:id="ordedView" layoutX="-1.0" layoutY="359.0" prefHeight="135.0" prefWidth="500.0">
         <columns>
-          <TableColumn fx:id="orderType" prefWidth="149.0" text="TYPE" />
-          <TableColumn fx:id="orderName" prefWidth="92.0" text="NAVN" />
-            <TableColumn fx:id="orderPrice" prefWidth="86.0" text="PRIS" />
-            <TableColumn fx:id="orderQuantity" prefWidth="140.0" text="ANTALL" />
+          <TableColumn fx:id="orderType" prefWidth="135.0" text="TYPE" />
+          <TableColumn fx:id="orderName" prefWidth="135.0" text="NAVN" />
+            <TableColumn fx:id="orderPrice" prefWidth="135.0" text="PRIS" />
+            <TableColumn fx:id="orderQuantity" prefWidth="95.0" text="ANTALL" />
         </columns>
       </TableView>
       <Label fx:id="countOrder" layoutX="253.0" layoutY="329.0" prefHeight="17.0" prefWidth="163.0" text="Totalt kjøpt produkter" />
-      <Label fx:id="customerTxt1" layoutX="33.0" layoutY="180.0" prefHeight="120.0" prefWidth="100.0" />
-      <Label fx:id="customerTxt2" layoutX="112.0" layoutY="180.0" prefHeight="120.0" prefWidth="200.0" />
+      <Label fx:id="customerTxt1" layoutX="99.0" layoutY="180.0" prefHeight="135.0" prefWidth="100.0" style="-fx-border-color: #42a2a6; -fx-border-width: 3;">
+         <font>
+            <Font name="Lucida Bright" size="18.0" />
+         </font></Label>
+      <Label fx:id="customerTxt2" layoutX="206.0" layoutY="180.0" prefHeight="135.0" prefWidth="200.0" style="-fx-border-color: #42a2a6; -fx-border-width: 3;">
+         <font>
+            <Font name="Lucida Bright" size="18.0" />
+         </font></Label>
    </children>
 </AnchorPane>

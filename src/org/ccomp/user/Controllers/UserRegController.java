@@ -146,7 +146,7 @@ public class UserRegController {
                 URL url = getClass().getResource("/org/ccomp/user/user.fxml");
                 FXMLLoader loader = new FXMLLoader(url);
                 Parent root = loader.load();
-                Scene scene = new Scene(root, 600, 500);
+                Scene scene = new Scene(root, 430, 430);
                 stage.setScene(scene);
                 stage.show();
             } catch (Exception e) {

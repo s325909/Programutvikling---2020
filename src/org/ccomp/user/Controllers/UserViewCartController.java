@@ -296,7 +296,7 @@ public class UserViewCartController {
                  */
 
 
-                Scene scene = new Scene(root, 800, 600);
+                Scene scene = new Scene(root, 500, 600);
                 stage.setScene(scene);
                 stage.show();
             } catch (Exception e) {
