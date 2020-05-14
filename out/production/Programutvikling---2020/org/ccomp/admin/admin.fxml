@@ -130,7 +130,7 @@
             <InnerShadow color="#0000004d" />
          </effect>
       </Button>
-      <Button layoutX="120.0" layoutY="15.0" mnemonicParsing="false" onAction="#deleteSelectedRow" text="SLETT">
+      <Button layoutX="120.0" layoutY="15.0" mnemonicParsing="false" onAction="#deleteRowAdmin" text="SLETT">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>

@@ -33,6 +33,8 @@ public class AdminController {
     @FXML
     private TextField search, searchCompOrder;
 
+    @FXML
+    private boolean delete;
 
     @FXML
     private AnchorPane adminPane, custermerInfoPane;
@@ -1410,7 +1412,56 @@ public class AdminController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    public void deleteRowAdmin() {
+
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setHeaderText("Du er i ferd med å slette!");
+        alert.setContentText("Er du sikker på at du vil fortsette?");
+
+        if (customerOrderTab != null && customerOrderTab.isSelected()) {
+
+            if (customerOrderTab.isSelected()) {
+                int visibleIndex = customerOrderInfoView.getSelectionModel().getSelectedIndex();
+                //return if nothing selected
+                if (visibleIndex == -1)
+                    return;
+
+                int sourceIndex = sortedCustomerOrderData.getSourceIndexFor(customerOrders, visibleIndex);
+                customerOrder = customerOrderList.get(sourceIndex);
+
+                alert.setHeaderText("Du er i ferd med å slette hele bestillingen med alle komponenter tilhørende dette ordrenummer: " + customerOrder.getOrderId());
+            }
+        }
+
+        ButtonType cancelButton = new ButtonType("Avbryt", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getDialogPane().getButtonTypes().add(cancelButton);
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            delete = true;
+            deleteSelectedRow();
+        }
+    }
+
+    public void deleteRowOrders(){
+
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setHeaderText("Du er i ferd med å slette!");
+        alert.setContentText("Er du sikker på at du vil fortsette?");
+
+
+        ButtonType cancelButton = new ButtonType("Avbryt", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getDialogPane().getButtonTypes().add(cancelButton);
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            delete = true;
+            deleteCompOrder();
+        }
     }
 
 }
