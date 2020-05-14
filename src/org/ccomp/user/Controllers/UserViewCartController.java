@@ -526,7 +526,10 @@ public class UserViewCartController {
             selectedCarComponent = createSelectedComp(wheelRimItem);
 
             System.out.println("SELECTED WHEEL RIM: " + selectedCarComponent.toCSVFormat());
-        } else System.out.println("NO PRODUCT SELECTED..."); //TODO: SHOW ALERT
+        } else {
+            alert("INGEN PRODUKTER VALGT!");
+            System.out.println("NO PRODUCT SELECTED...");
+        }
 
 
         addSelectedComponentToCart(selectedCarComponent);
@@ -562,9 +565,10 @@ public class UserViewCartController {
                     System.out.println("SELECTED QUANTITY: " + selectedCarComponent.getCompQuantity());
 
                     if (selectedCarComponent.getCompQuantity() >= quantity) componentsCart.get(count).setCompQuantity(quantity);
-                    else System.out.println("MAX ANTALL: " + quantity + " > " + selectedCarComponent.getCompQuantity());
-                    //todo: SHOW MAX QUANTITY ALERT
-
+                    else {
+                        alert("MAX ANTALL ER VALGT");
+                        System.out.println("MAX ANTALL: " + quantity + " > " + selectedCarComponent.getCompQuantity());
+                    }
 
 
                     System.out.println("COMPONENT FOUND IN CART: " + carComponent.toCSVFormat() + " ; " + addedComp);
