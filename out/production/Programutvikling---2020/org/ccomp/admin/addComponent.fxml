@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import java.lang.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
@@ -40,11 +41,17 @@
       <Button fx:id="backAdmin" layoutX="18.0" layoutY="447.0" mnemonicParsing="false" onAction="#backToAdmin" text="TILBAKE">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
-         </font></Button>
+         </font>
+         <effect>
+            <InnerShadow color="#0000004d" />
+         </effect></Button>
       <Button fx:id="next" layoutX="512.0" layoutY="447.0" mnemonicParsing="false" onAction="#goNext" text="NESTE">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
+         <effect>
+            <InnerShadow color="#0000004d" />
+         </effect>
       </Button>
    </children>
 </AnchorPane>

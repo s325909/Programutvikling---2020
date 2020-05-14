@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -28,32 +29,51 @@
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="steeringWheelName" layoutX="282.0" layoutY="120.0" />
-      <TextField fx:id="steeringWheelColor" layoutX="282.0" layoutY="170.0" />
-      <TextField fx:id="steeringWheelMaterial" layoutX="282.0" layoutY="221.0" />
-      <TextField fx:id="steeringWheelPrice" layoutX="282.0" layoutY="272.0" />
+      <TextField fx:id="steeringWheelName" layoutX="282.0" layoutY="120.0">
+         <effect>
+            <DropShadow color="#00000099" />
+         </effect></TextField>
+      <TextField fx:id="steeringWheelColor" layoutX="282.0" layoutY="170.0">
+         <effect>
+            <DropShadow color="#00000099" />
+         </effect></TextField>
+      <TextField fx:id="steeringWheelMaterial" layoutX="282.0" layoutY="221.0">
+         <effect>
+            <DropShadow color="#00000099" />
+         </effect></TextField>
+      <TextField fx:id="steeringWheelPrice" layoutX="282.0" layoutY="272.0">
+         <effect>
+            <DropShadow color="#00000099" />
+         </effect></TextField>
       <Button fx:id="addSteeringWheel" layoutX="493.0" layoutY="447.0" mnemonicParsing="false" onAction="#addComponent" text="LEGG TIL">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
+         <effect>
+            <InnerShadow color="#0000004d" />
+         </effect>
       </Button>
       <Button fx:id="backToAdd" layoutX="14.0" layoutY="447.0" mnemonicParsing="false" onAction="#backToAddComp" text="TILBAKE">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
+         <effect>
+            <InnerShadow color="#0000004d" />
+         </effect>
       </Button>
-      <Button layoutX="457.0" layoutY="321.0" mnemonicParsing="false" text="OK" />
       <ImageView fitHeight="94.0" fitWidth="200.0" layoutX="200.0" layoutY="14.0">
          <image>
             <Image url="@../../../../resources/CCOMPW-small.png" />
          </image>
       </ImageView>
-      <TextArea layoutX="188.0" layoutY="392.0" prefHeight="94.0" prefWidth="224.0" />
       <Label layoutX="151.0" layoutY="327.0" text="ANTALL">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="steeringWheelQuantity" layoutX="282.0" layoutY="321.0" prefHeight="39.0" prefWidth="150.0" />
+      <TextField fx:id="steeringWheelQuantity" layoutX="282.0" layoutY="325.0" prefHeight="31.0" prefWidth="187.0">
+         <effect>
+            <DropShadow color="#00000099" />
+         </effect></TextField>
    </children>
 </AnchorPane>

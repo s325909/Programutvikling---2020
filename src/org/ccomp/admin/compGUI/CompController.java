@@ -27,9 +27,6 @@ public class CompController {
     private Button addComp, addEngine, addSeat, addSpoiler, addSteeringWheel, addWheelRim, ok;
 
     @FXML
-    private Label label;
-
-    @FXML
     private TextField engineName, enginePrice, enginePower, engineQuantity,
             seatName, seatPrice, seatColor, seatMaterial, seatQuantity,
             spoilerName, spoilerPrice, spoilerColor, spoilerSide, spoilerQuantity,
@@ -84,11 +81,23 @@ public class CompController {
        // mapKey = new MapKey();
     }
 
-    @FXML
+    /*@FXML
     public void checkValidation() {
-            label.setText(validationSeat());
-            inputEmpty();
-    }
+        labelEngine.setText(validationEngine());
+        inputEmpty();
+
+        labelSeat.setText(validationSeat());
+        inputEmpty();
+
+        labelSpoiler.setText(validationSpoiler());
+        inputEmpty();
+
+        labelSteering.setText(validationSteering());
+        inputEmpty();
+
+        labelRim.setText(validationRim());
+        inputEmpty();
+    }*/
 
     @FXML
     public void addComponent(ActionEvent event) {
@@ -97,6 +106,14 @@ public class CompController {
         if (event.getSource() == addEngine) {
             System.out.println("\nADD ENGINE PRESSED\n");
 
+            emptyFieldsEngine();
+
+            if (!validationEngine().isEmpty()) {
+                if (!engineName.getText().isEmpty() || !enginePower.getText().isEmpty() || !enginePrice.getText().isEmpty() || !engineQuantity.getText().isEmpty()) {
+                    alert(validationEngine());
+                    return;
+                }
+            }
 
             //Getting all saved Seat components from HashMap and assigning them to new List of CarComponent
             carComponents = compMap.get(ENGINE_KEY);
@@ -109,8 +126,20 @@ public class CompController {
             carComponents.add(engine);
 
             compMap.put(ENGINE_KEY, carComponents);
+
         } else if (event.getSource() == addSeat) {
             System.out.println("\nADD SEAT PRESSED\n");
+
+            emptyFieldsSeat();
+
+            if (!validationSeat().isEmpty()) {
+                if (!seatName.getText().isEmpty() || !seatColor.getText().isEmpty()
+                        || !seatMaterial.getText().isEmpty() || !seatPrice.getText().isEmpty()
+                        || !seatQuantity.getText().isEmpty()) {
+                    alert(validationSeat());
+                    return;
+                }
+            }
 
             //Getting all saved Seat components from HashMap and assigning them to new List of CarComponent
             carComponents = compMap.get(SEAT_KEY);
@@ -128,6 +157,16 @@ public class CompController {
           //  iterateHashMapList(retrievedCompMap);
         } else if (event.getSource() == addSpoiler) {
             System.out.println("\nADD SPOILER PRESSED\n");
+
+            emptyFieldsSpoiler();
+
+            if (!validationSpoiler().isEmpty()) {
+                if (!spoilerName.getText().isEmpty() || !spoilerColor.getText().isEmpty()
+                        || !spoilerSide.getText().isEmpty() || !spoilerPrice.getText().isEmpty()
+                        || !spoilerQuantity.getText().isEmpty()) {
+                    alert(validationSpoiler());
+                }
+            }
 
             //Getting all saved Spoiler components from HashMap and assigning them to new List of CarComponent
             carComponents = compMap.get(SPOILER_KEY);
@@ -147,6 +186,16 @@ public class CompController {
         } else if (event.getSource() == addSteeringWheel) {
             System.out.println("\nADD STEERING WHEEL PRESSED\n");
 
+            emptyFieldsSteering();
+
+            if (!validationSteering().isEmpty()) {
+                if (!steeringWheelName.getText().isEmpty() || !steeringWheelColor.getText().isEmpty()
+                        || !steeringWheelMaterial.getText().isEmpty() || !steeringWheelPrice.getText().isEmpty()
+                        || !steeringWheelQuantity.getText().isEmpty()) {
+                    alert(validationSteering());
+                }
+            }
+
             //Getting all saved SteeringWheel components from HashMap and assigning them to new List of CarComponent
             carComponents = compMap.get(STEERING_WHEEL_KEY);
             if (carComponents == null) carComponents = new ArrayList<>();
@@ -161,6 +210,15 @@ public class CompController {
             compMap.put(STEERING_WHEEL_KEY, carComponents);
         } else if (event.getSource() == addWheelRim) {
             System.out.println("\nADD WHEEL RIM PRESSED\n");
+
+            emptyFieldsRim();
+
+            if (!validationRim().isEmpty()) {
+                if (!wheelRimName.getText().isEmpty() || !wheelRimColor.getText().isEmpty()
+                        || !wheelRimDimension.getText().isEmpty() || !wheelRimPrice.getText().isEmpty() || !wheelRimQuantity.getText().isEmpty()) {
+                    alert(validationRim());
+                }
+            }
 
             //Getting all saved Spoiler components from HashMap and assigning them to new List of CarComponent
             carComponents = compMap.get(WHEEL_RIM_KEY);
@@ -382,34 +440,78 @@ public class CompController {
         return Validation.valAdminSeat( seatName.getId(),
                 seatMaterial.getText(), seatColor.getText(), seatPrice.getText(), seatQuantity.getText());
     }
+    public void emptyFieldsSeat() {
+        if (seatName.getText().isEmpty() && seatColor.getText().isEmpty() && seatMaterial.getText().isEmpty()
+                && seatPrice.getText().isEmpty() && seatQuantity.getText().isEmpty()) {
+            alert("Fyll inn alle felt!");
+        }
+    }
 
     public String validationSpoiler() {
         return Validation.valAdminSpiler(spoilerName.getText(), spoilerColor.getText(),
                 spoilerSide.getText(), spoilerPrice.getText(), spoilerQuantity.getText());
+    }
+    public void emptyFieldsSpoiler() {
+        if (spoilerName.getText().isEmpty() && spoilerColor.getText().isEmpty() && spoilerSide.getText().isEmpty()
+                && spoilerPrice.getText().isEmpty() && spoilerQuantity.getText().isEmpty()) {
+            alert("Fyll inn alle felt!");
+        }
     }
 
     public String validationSteering() {
         return Validation.valAdminSteering(steeringWheelName.getText(), steeringWheelColor.getText(),
                 steeringWheelMaterial.getText(), steeringWheelPrice.getText(), steeringWheelQuantity.getText());
     }
+    public void emptyFieldsSteering() {
+        if (steeringWheelName.getText().isEmpty() && steeringWheelColor.getText().isEmpty() && steeringWheelMaterial.getText().isEmpty()
+                && steeringWheelPrice.getText().isEmpty() && steeringWheelQuantity.getText().isEmpty()) {
+            alert("Fyll inn alle felt!");
+        }
+    }
 
     public String validationEngine() {
         return Validation.valAdminEngine(engineName.getText(), enginePower.getText(), enginePrice.getText(), engineQuantity.getText());
+    }
+    public void emptyFieldsEngine() {
+        if (engineName.getText().isEmpty() && enginePower.getText().isEmpty() && enginePrice.getText().isEmpty()
+                && engineQuantity.getText().isEmpty()) {
+            alert("Fyll inn alle felt!");
+        }
     }
 
     public String validationRim() {
         return Validation.valAdminRim(wheelRimName.getText(), wheelRimDimension.getText(), wheelRimColor.getText(), wheelRimPrice.getText(),
                 wheelRimQuantity.getText());
     }
+    public void emptyFieldsRim() {
+        if (wheelRimName.getText().isEmpty() && wheelRimColor.getText().isEmpty() && wheelRimDimension.getText().isEmpty()
+                && wheelRimPrice.getText().isEmpty() && wheelRimQuantity.getText().isEmpty()) {
+            alert("Fyll inn alle felt!");
+        }
+    }
 
-    //denne funker
+   /* //denne funker
     public void inputEmpty() {
         if (validationSeat().isEmpty()) {
             alert("Du må fylle ut alle felt!");
-
         }
 
-    }
+        if(validationSpoiler().isEmpty()) {
+            alert("Du må fylle ut alle felt");
+        }
+
+        if(validationSteering().isEmpty()) {
+            alert("Du må fylle ut alle felt");
+        }
+
+        if(validationRim().isEmpty()) {
+            alert("Du må fylle ut alle felt");
+        }
+
+        if(validationEngine().isEmpty()) {
+            alert("Du må fylle ut alle felt");
+        }
+    }*/
 
 
     public String getEngineType() {

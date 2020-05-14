@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="adminPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.AdminController">
+<AnchorPane fx:id="adminPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.AdminController">
     <children>
-        <TabPane fx:id="tabPane" layoutY="100.0" prefHeight="500.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
+        <TabPane fx:id="tabPane" layoutY="100.0" prefHeight="510.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab fx:id="carComponentsTab" onSelectionChanged="#initAllTables" text="SE PRODUKTER">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="465.0" prefWidth="800.0">
                      <children>
                         <TabPane prefHeight="453.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
                            <tabs>
@@ -21,7 +22,7 @@
 
                                  </content>
                                  <content>
-                                    <TableView fx:id="engineView" prefHeight="200.0" prefWidth="200.0">
+                                    <TableView fx:id="engineView" prefHeight="435.0" prefWidth="800.0">
                                       <columns>
                                         <TableColumn fx:id="engintypeColum" prefWidth="160.0" text="Biltype" />
                                         <TableColumn fx:id="nameEngineColum" prefWidth="163.0" text="Navn" />
@@ -106,7 +107,7 @@
                               </Tab>
             </tabs>
             <effect>
-                <InnerShadow choke="1.0" color="#41a2a666" />
+                <InnerShadow choke="1.0" color="#42a2a6" />
             </effect>
         </TabPane>
         <ImageView fitHeight="100.0" fitWidth="223.0" layoutX="289.0">
@@ -114,24 +115,39 @@
                 <Image url="@../../../resources/CCOMPW-small.png" />
             </image>
         </ImageView>
-        <Button fx:id="backBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backToMain" prefHeight="40.0" prefWidth="106.0" text="TILBAKE">
+        <Button fx:id="backBtn" layoutX="14.0" layoutY="15.0" mnemonicParsing="false" onAction="#backToMain" prefHeight="39.0" prefWidth="106.0" text="TILBAKE">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
-         </font></Button>
+         </font>
+         <effect>
+            <InnerShadow color="#0000004d" />
+         </effect></Button>
       <Button fx:id="addComp" layoutX="680.0" layoutY="15.0" mnemonicParsing="false" onAction="#toAddComponent" prefHeight="39.0" prefWidth="106.0" text="LEGG TIL">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
+         <effect>
+            <InnerShadow color="#0000004d" />
+         </effect>
       </Button>
-      <Button layoutX="582.0" layoutY="15.0" mnemonicParsing="false" onAction="#deleteSelectedRow" text="SLETT">
-         <font>
-            <Font name="Segoe UI Semilight" size="18.0" />
-         </font></Button>
-      <TextField fx:id="search" layoutX="14.0" layoutY="61.0" onKeyPressed="#searchComp" promptText="Søk" />
-      <Button fx:id="toContactInfo" layoutX="563.0" layoutY="57.0" mnemonicParsing="false" onAction="#toCompOrder" prefHeight="27.0" prefWidth="135.0" text="KundeKomp">
+      <Button layoutX="120.0" layoutY="15.0" mnemonicParsing="false" onAction="#deleteSelectedRow" text="SLETT">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
+         <effect>
+            <InnerShadow color="#0000004d" />
+         </effect></Button>
+      <TextField fx:id="search" layoutX="14.0" layoutY="61.0" onKeyPressed="#searchComp" prefHeight="31.0" prefWidth="177.0" promptText="Søk">
+         <effect>
+            <DropShadow color="#00000080" />
+         </effect></TextField>
+      <Button fx:id="toContactInfo" layoutX="545.0" layoutY="15.0" mnemonicParsing="false" onAction="#toCompOrder" prefHeight="27.0" prefWidth="135.0" text="BESTILLINGER">
+         <font>
+            <Font name="Segoe UI Semilight" size="18.0" />
+         </font>
+         <effect>
+            <InnerShadow color="#0000004d" />
+         </effect>
       </Button>
     </children>
 </AnchorPane>
