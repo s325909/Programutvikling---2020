@@ -1,5 +1,6 @@
 package org.ccomp.user.Controllers;
 
+import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,6 +33,13 @@ public class UserViewCartController {
     //  private OLDComponentOBJHandlerOLD jobjHandler;
     private HashMap<String, List<CarComponent>> compMap, retrievedCompMap;
     private List<CarComponent> carComponents;
+    private String selectedcartype;
+
+
+    CarComponent carComponent;
+
+    UserController userController = new UserController();
+
 
     @FXML
     AnchorPane contentProducts, contentCart;
@@ -306,21 +314,30 @@ public class UserViewCartController {
         Engine engine;
         ObservableList<Engine> engines = FXCollections.observableArrayList();
 
-        //Henter dem først ut her
+
+
+                //Henter dem først ut her
       /*  if (carComponents == null) {
             carComponents = retrievedCompMap.get("Seat");
         }*/
+
+
         carComponents = retrievedCompMap.get("Engine");
         //Presenter objektene i tableview ved sette inn riktige verdier til riktig tablecolonne
-
         for (CarComponent carComponent : carComponents) {
-            engine = (Engine) carComponent;
-            engineTypeColum.setCellValueFactory(new PropertyValueFactory<Engine, String>("compType"));
-            nameEngineColum.setCellValueFactory(new PropertyValueFactory<Engine, String>("compName"));
-            horsepowerColum.setCellValueFactory(new PropertyValueFactory<Engine, Integer>("engineHorsePower"));
-            priceEngineColm.setCellValueFactory(new PropertyValueFactory<Engine, Double>("compPrice"));
-            quantityEngineColum.setCellValueFactory(new PropertyValueFactory<Engine,Integer>("compQuantity"));
-            engines.add(engine);
+
+
+            System.out.println(carComponent.getCompType() + " == " + getSelectedcartype());
+            if (carComponent.getCompType().equals(getSelectedcartype()))
+            {
+                engine = (Engine) carComponent;
+                engineTypeColum.setCellValueFactory(new PropertyValueFactory<Engine, String>("compType"));
+                nameEngineColum.setCellValueFactory(new PropertyValueFactory<Engine, String>("compName"));
+                horsepowerColum.setCellValueFactory(new PropertyValueFactory<Engine, Integer>("engineHorsePower"));
+                priceEngineColm.setCellValueFactory(new PropertyValueFactory<Engine, Double>("compPrice"));
+                quantityEngineColum.setCellValueFactory(new PropertyValueFactory<Engine, Integer>("compQuantity"));
+                engines.add(engine);
+            }
         }
         return engines;
     }
@@ -622,4 +639,13 @@ public class UserViewCartController {
         alert.showAndWait();
 
     }
+
+    public String getSelectedcartype() {
+        return selectedcartype;
+    }
+
+    public void setSelectedcartype(String selectedcartype) {
+        this.selectedcartype = selectedcartype;
+    }
+
 }
