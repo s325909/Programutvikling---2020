@@ -203,6 +203,12 @@ public class UserViewCartController {
                 cartTable.setItems(cartTable());
 
                 //sender inn totalsum
+                sumAntall = (Label) loader.getNamespace().get("sumAntall");
+                int antall = totalQuantity();
+                sumAntall.setText(String.valueOf(antall));
+
+
+                //sender inn totalsum
                 sumText = (Label) loader.getNamespace().get("sumText");
                 double sum = totalPrice();
                 sumText.setText(String.valueOf(sum));
@@ -572,8 +578,7 @@ public class UserViewCartController {
         cartTable.getItems().remove(selectedRow);
         componentsCart.remove(selectedRow);
 
-        double sum = totalPrice();
-        sumText.setText(String.valueOf(sum));
+        updateTotal();
     }
 
     public void deleteAllAlert(){
@@ -599,6 +604,16 @@ public class UserViewCartController {
            //Clear ComponentsCart List
            componentsCart.clear();
 
+           updateTotal();
+    }
+
+
+    private void updateTotal() {
+        int antall = totalQuantity();
+        sumAntall.setText(String.valueOf(antall));
+
+        double sum = totalPrice();
+        sumText.setText(String.valueOf(sum));
     }
 
     public static List<CarComponent> getComponentsCart() {
@@ -610,17 +625,25 @@ public class UserViewCartController {
 
     }
 
+
+    private int totalQuantity(){
+
+        int total = 0;
+
+        for (CarComponent carComponent : componentsCart) {
+            System.out.println(total + " += " + (carComponent.getCompQuantity()));
+            total += carComponent.getCompQuantity();
+        }
+
+        System.out.println("TOTAL QUANTITY: " + total);
+
+        return total;
+    }
+
+
     //metode for å regne ut totalsummen av
 
     public double totalPrice(){
-
-        /*ist<Double>  columnData = new ArrayList<>();
-
-        for (CarComponent carcomponet : cartTable.getItems()) {
-            columnData.add(compPriceColumn.getCellObservableValue(carcomponet).getValue());
-        }
-
-        sumText.setText(String.valueOf(columnData.get(0)));*/
 
         double sum = 0;
 
@@ -630,10 +653,6 @@ public class UserViewCartController {
         }
 
         System.out.println("TOTAL PRICE: " + sum);
-
-      /*  for (int i = 0; i < cartTable.getItems().size(); i++) {
-            sum = sum + Integer.parseInt(cartTable.getValueAt(i, 2).toString());
-        }*/
 
         return sum;
     }
