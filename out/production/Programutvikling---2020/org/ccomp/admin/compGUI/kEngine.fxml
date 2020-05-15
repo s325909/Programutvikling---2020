@@ -20,19 +20,19 @@
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="engineName" layoutX="272.0" layoutY="120.0">
+      <TextField fx:id="engineName" layoutX="272.0" layoutY="120.0" promptText="Toyota verso">
          <effect>
             <DropShadow color="#00000099" />
          </effect></TextField>
-      <TextField fx:id="enginePower" layoutX="272.0" layoutY="190.0">
+      <TextField fx:id="enginePower" layoutX="272.0" layoutY="190.0" promptText="160">
          <effect>
             <DropShadow color="#00000099" />
          </effect></TextField>
-      <TextField fx:id="enginePrice" layoutX="272.0" layoutY="260.0">
+      <TextField fx:id="enginePrice" layoutX="272.0" layoutY="260.0" promptText="12500">
          <effect>
             <DropShadow color="#00000099" />
          </effect></TextField>
-      <TextField fx:id="engineQuantity" layoutX="272.0" layoutY="328.0" prefHeight="31.0" prefWidth="187.0">
+      <TextField fx:id="engineQuantity" layoutX="272.0" layoutY="328.0" prefHeight="31.0" prefWidth="187.0" promptText="MIN 10">
          <effect>
             <DropShadow color="#00000099" />
          </effect></TextField>

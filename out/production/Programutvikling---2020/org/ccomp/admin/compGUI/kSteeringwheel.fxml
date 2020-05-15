@@ -29,23 +29,23 @@
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="steeringWheelName" layoutX="282.0" layoutY="120.0">
+      <TextField fx:id="steeringWheelName" layoutX="282.0" layoutY="120.0" promptText="Toyota Coralla">
          <effect>
             <DropShadow color="#00000099" />
          </effect></TextField>
-      <TextField fx:id="steeringWheelColor" layoutX="282.0" layoutY="170.0">
+      <TextField fx:id="steeringWheelColor" layoutX="282.0" layoutY="170.0" promptText="Svart">
          <effect>
             <DropShadow color="#00000099" />
          </effect></TextField>
-      <TextField fx:id="steeringWheelMaterial" layoutX="282.0" layoutY="221.0">
+      <TextField fx:id="steeringWheelMaterial" layoutX="282.0" layoutY="221.0" promptText="Skinn">
          <effect>
             <DropShadow color="#00000099" />
          </effect></TextField>
-      <TextField fx:id="steeringWheelPrice" layoutX="282.0" layoutY="272.0">
+      <TextField fx:id="steeringWheelPrice" layoutX="282.0" layoutY="272.0" promptText="2000">
          <effect>
             <DropShadow color="#00000099" />
          </effect></TextField>
-      <TextField fx:id="steeringWheelQuantity" layoutX="282.0" layoutY="325.0" prefHeight="31.0" prefWidth="187.0">
+      <TextField fx:id="steeringWheelQuantity" layoutX="282.0" layoutY="325.0" prefHeight="31.0" prefWidth="187.0" promptText="MIN 10">
          <effect>
             <DropShadow color="#00000099" />
          </effect></TextField>

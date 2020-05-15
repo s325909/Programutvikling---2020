@@ -111,7 +111,7 @@ public class Validation {
     public static String validateDimension(String input) {
         String lable = "";
 
-        String regex = "^[a-zA-Z0-9]+$";
+        String regex = "[a-zA-Z0-9]+$";
 
         if (!input.matches(regex)) {
             lable = ("Dimensjonen på felg er skrevet inn i feil format! \n");
