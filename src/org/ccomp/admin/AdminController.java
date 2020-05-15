@@ -244,10 +244,10 @@ public class AdminController {
 
     public ObservableList<Engine> engineTable(){
         engines = FXCollections.observableArrayList();
-
+        //Getting the component Engine
         carComponents = retrievedCompMap.get("Engine");
         if (carComponents == null) carComponents = new ArrayList<>();
-
+        //Presenting engines in a tableview with right values to right tablecloums.
         for (CarComponent carComponent : carComponents) {
             engine = (Engine) carComponent;
             engintypeColum.setCellValueFactory(new PropertyValueFactory<Engine, String>("compType"));
@@ -261,16 +261,13 @@ public class AdminController {
         return engines;
     }
 
-    //Metoden henter objektene fra arrayliste.
+
     public ObservableList<Seat> seatTable() {
         seats = FXCollections.observableArrayList();
-
-        //Henter dem først ut her
+        //Getting the component Seat
         carComponents = retrievedCompMap.get("Seat");
        if (carComponents == null) carComponents = new ArrayList<>();
-
-        //Presenter objektene i tableview ved sette inn riktige verdier til riktig tablecolonne
-
+        //Presenting seats in a tableview with right values to right tablecloums.
         for (CarComponent carComponent : carComponents) {
             seat = (Seat) carComponent;
             nameSeatColum.setCellValueFactory(new PropertyValueFactory<Seat, String>("compName"));
@@ -285,10 +282,10 @@ public class AdminController {
 
     public ObservableList<Spoiler> spoilerTable() {
         spoilers = FXCollections.observableArrayList();
-
+        //Getting the component Spoiler
         carComponents = retrievedCompMap.get("Spoiler");
         if (carComponents == null) carComponents = new ArrayList<>();
-
+        //Presenting seats in a tableview with right values to right tablecloums.
         for (CarComponent carComponent : carComponents) {
             spoiler = (Spoiler) carComponent;
             nameSpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler, String>("compName"));
@@ -303,10 +300,10 @@ public class AdminController {
 
     public ObservableList<SteeringWheel> sWheelTable() {
         steeringWheels = FXCollections.observableArrayList();
-
+        //Getting the component steeringwheel
         carComponents = retrievedCompMap.get("SteeringWheel");
         if (carComponents == null) carComponents = new ArrayList<>();
-
+        //Presenting steeeringwheels in a tableview with right values to right tablecloums.
         for (CarComponent carComponent : carComponents) {
             steeringWheel = (SteeringWheel) carComponent;
             nameSWheelColum.setCellValueFactory(new PropertyValueFactory<SteeringWheel, String>("compName"));
@@ -322,11 +319,10 @@ public class AdminController {
 
     public ObservableList<WheelRim> wheelRTable() {
         wheelRims = FXCollections.observableArrayList();
-
+        //Getting the component wheelrim
         carComponents = retrievedCompMap.get("WheelRim");
         if (carComponents == null) carComponents = new ArrayList<>();
-
-
+        //Presenting wheelrims in a tableview with right values to right tablecloums.
         for (CarComponent carComponent : carComponents) {
             wheelRim = (WheelRim) carComponent;
             nameWheelRimColum.setCellValueFactory(new PropertyValueFactory<WheelRim, String>("compName"));
@@ -342,9 +338,8 @@ public class AdminController {
 
     public ObservableList<CustomerOrder> OrderInfoCustomer(){
      //   if (customerOrderList.size() == 0) return null;
-
         customerOrders = FXCollections.observableArrayList();
-
+        //Presenting the customer registrated info in a tablview with right values to the right tableclum
         for (CustomerOrder customerOrder : customerOrderList) {
            // customer = customerOrder.getCustomer();
             customerInfoOderNr.setCellValueFactory(new PropertyValueFactory<CustomerOrder,Integer>("customerOrderNr"));
@@ -353,7 +348,6 @@ public class AdminController {
             customerInfoOrderZip.setCellValueFactory(new PropertyValueFactory<CustomerOrder,String>("customerZipCode"));
             customerInfoOrderMobilNr.setCellValueFactory(new PropertyValueFactory<CustomerOrder,String>("customerNumber"));
             customerInfoOrderCity.setCellValueFactory(new PropertyValueFactory<CustomerOrder,String>("customerCity"));
-
             customerOrders.add(customerOrder);
         }
 
@@ -592,27 +586,27 @@ public class AdminController {
         if (engineTab.isSelected()) {
             ObservableList<Engine> engineList = engineTable();
             FilteredList<Engine> filteredList = new FilteredList(engineList, b -> true);
-            //predicater når filter skifter
+            //predicater when filter shifts
             search.textProperty().addListener(((observable, oldValue, newValue) -> {
 
                 filteredList.setPredicate(engine -> {
 
-                    //Hvis filter er tommt , vis alt
+                    //If filter is empty , show the already existing table
                     if (newValue == null || newValue.isEmpty()) {
                         return true;
                     }
                     String lowerCaseFiler = newValue.toLowerCase();
                     if (engine.getCompName().toLowerCase().indexOf(lowerCaseFiler) != -1) {
 
-                        return true; //Filter sammenligner navn
+                        return true; //Filter comparing  name
                     } else if (engine.getCompType().toLowerCase().indexOf(lowerCaseFiler) != -1) {
-                        return true; //Filter sammenligner farge
+                        return true; //Filter comparing color
                     } else if (String.valueOf(engine.getCompPrice()).toLowerCase().indexOf(lowerCaseFiler) != -1)
                         return true;
-                    else return false; //hvis den ikke kan sammenlinges
+                    else return false; //if it can not compare
                 });
             }));
-            //Setter filteredlist i en sortedlist, binder de sammen til tableviewvet og legger sorted og filterreing til tabellen,
+            //Setting the filteredlistin to an sortedlist and binds them togheter to the tablview and putting sorted & filtering to the table
             sorteEngineData = new SortedList<>(filteredList);
             sorteEngineData.comparatorProperty().bind(engineView.comparatorProperty());
             engineView.setItems(sorteEngineData);
@@ -749,7 +743,7 @@ public class AdminController {
 
         if (carComponents.size() == 0) return;
         engine = (Engine) carComponents.get(row);
-
+        //When editing a tablecolum it will set and get the value when editing in the right colum
         engintypeColum.setCellFactory(TextFieldTableCell.forTableColumn());
         engintypeColum.setOnEditCommit((TableColumn.CellEditEvent<Engine, String> t) -> {
             t.getTableView().getItems();
