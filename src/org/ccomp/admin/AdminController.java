@@ -31,13 +31,10 @@ import static org.ccomp.admin.compGUI.CompController.alert;
 public class AdminController {
 
     @FXML
-    private Button addComp, backAdmin, backBtn, eraseCompOrder;
+    private Button addComp, backAdmin, backBtn;
 
     @FXML
     private TextField search, searchCompOrder;
-
-    @FXML
-    private boolean delete;
 
     @FXML
     private AnchorPane adminPane;
@@ -111,7 +108,6 @@ public class AdminController {
     @FXML
     private TableColumn<WheelRim,Integer> quantityWheelRim;
 
-
     //Engine
     @FXML
     private TableView<Engine> engineView;
@@ -121,7 +117,6 @@ public class AdminController {
     private TableColumn<Engine, Double>priceEngineColum;
     @FXML
     private TableColumn<Engine, Integer> horsepowerColum,quantityEngineColum;
-
 
     private ComponentOBJHandler jobjHandler;
     private ComponentCSVHandler csvHandler;
@@ -169,14 +164,13 @@ public class AdminController {
     public void initialize() {
         jobjHandler = new ComponentOBJHandler();
 
+        //Initialize HashMap with List of Car Components from Serialized objects file
         retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
 
-        System.out.println("INIT COMP MAP: " + retrievedCompMap );
-
-
         csvHandler = new ComponentCSVHandler();
+
+        //Initialize List of CustomerOrders from CSV file
         customerOrderList = csvHandler.readCustomerOrder(customerOrderList);
-        System.out.println("INIT CUSTOMER ORDERS: " + customerOrderList.size());
 
         initTabs = true;
         initAllTables();
@@ -185,16 +179,12 @@ public class AdminController {
     @FXML
     public void initAllTables(){
 
-        System.out.println("ALL TABS ; INIT == " + initTabs);
         //return if method is run before Initialize()
         if (!initTabs) return;
 
         if (carComponentsTab != null && carComponentsTab.isSelected()) {
-            System.out.println("PRODUCTS TAB");
-
 
             if (engineTab != null && engineTab.isSelected()) {
-                System.out.println("ENGINE TAB");
                 engineView.setItems(engineTable());
                 engineView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
                 editEngine();
@@ -204,14 +194,12 @@ public class AdminController {
                 seatView.setItems(seatTable());
                 seatView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
                 editSeatTable();
-                System.out.println("SEAT TAB");
                 searchComp();
             }
             if (spoilerTab != null && spoilerTab.isSelected()) {
                 spoilerView.setItems(spoilerTable());
                 editSpoilerTable();
                 spoilerView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-                System.out.println("SPOILER TAB");
                 searchComp();
             }
             if (steeringWheelTab != null && steeringWheelTab.isSelected()) {
@@ -219,7 +207,6 @@ public class AdminController {
                 sWheelView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
                 editSwheelTable();
                 searchComp();
-
             }
 
             if (wheelRimTab != null && wheelRimTab.isSelected()) {
@@ -230,9 +217,6 @@ public class AdminController {
             }
 
         } else if (customerOrderTab != null && customerOrderTab.isSelected()) {
-            System.out.println("CUSTOMER ORDERS TAB");
-
-
             //Se bestillinger
             if (customerOrderTab != null && customerOrderTab.isSelected()) {
                 //  carCompView.setItems(carComTable());
@@ -240,12 +224,9 @@ public class AdminController {
                 customerOrderInfoView.setItems(OrderInfoCustomer());
                 editOrderCustomer();
                 searchComp();
-
             }
-
         }
     }
-
 
     private ObservableList<Engine> engineTable(){
         engines = FXCollections.observableArrayList();
@@ -375,7 +356,6 @@ public class AdminController {
             System.out.println(compOrder.toCSVFormat());
         }
 
-
         carComponents = new ArrayList<>();
        // if (customerOrderInfoView.getSelectionModel().isSelected(row))
         for (CompOrder compOrder : compOrderList) {
@@ -390,16 +370,12 @@ public class AdminController {
             compOrders.add(compOrder);
         }
 
-
         return compOrders;
     }
-
-
 
     private void deleteSelectedRow() {
 
         if (carComponentsTab != null && carComponentsTab.isSelected()) {
-            System.out.println("PRODUCTS TAB");
 
             deleteComponent = false;
 
@@ -418,7 +394,6 @@ public class AdminController {
 
                 //Remove selected component from HashMap containing all components
                 retrievedCompMap.get("Engine").remove(sourceIndex);
-
 
                 deleteComponent = true;
             }
@@ -509,7 +484,6 @@ public class AdminController {
         }
     }
 
-
     private void deleteCompOrder(){
         int visibleIndex = carCompView.getSelectionModel().getSelectedIndex();
 
@@ -534,6 +508,7 @@ public class AdminController {
         compOrderList.remove(compOrder);
         //todo: Delete CustomerOrder if all CompOrders with same OrderNr is deleted
     }
+
     @FXML
     public void searchCompOrders(){
 
@@ -561,6 +536,7 @@ public class AdminController {
         carCompView.setItems(sortedCompOrderList);
 
     }
+
     @FXML
     public void  searchComp() {
         //Engine
@@ -1238,7 +1214,6 @@ public class AdminController {
 
     @FXML
     public void toCompOrder(){
-        System.out.println("TO COMP ORDER TABLE");
 
         selectedCustomerOrderId();
         System.out.println("SELECTED CUSTOMER ID: " + selectedOrderId);
@@ -1264,13 +1239,9 @@ public class AdminController {
 
             carCompView.setItems(carComTable());
 
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
     private void selectedCustomerOrderId() {
@@ -1284,13 +1255,13 @@ public class AdminController {
             orderSelected = false;
         }
 
-
         if (orderSelected) {
             CustomerOrder selectedCustomerOrder = customerOrderInfoView.getItems().get(index);
             selectedOrderId = selectedCustomerOrder.getOrderId();
             System.out.println("SELECTED COMP ORDER ID: " + selectedOrderId);
         } else selectedOrderId = -1;
     }
+
     @FXML
     public void backToAdmin() {
 
@@ -1306,6 +1277,7 @@ public class AdminController {
             e.printStackTrace();
         }
     }
+
     @FXML
     public void deleteRowAdmin() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -1329,10 +1301,10 @@ public class AdminController {
         Optional<ButtonType> result = alert.showAndWait();
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            delete = true;
             deleteSelectedRow();
         }
     }
+    
     @FXML
     public void deleteRowOrders(){
         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -1342,7 +1314,6 @@ public class AdminController {
         alert.getDialogPane().getButtonTypes().add(cancelButton);
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            delete = true;
             deleteCompOrder();
         }
     }

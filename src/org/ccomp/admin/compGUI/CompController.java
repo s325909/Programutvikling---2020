@@ -11,9 +11,6 @@ import javafx.stage.Stage;
 import org.ccomp.fileHandling.ComponentOBJHandler;
 import org.ccomp.model.Validation;
 import org.ccomp.model.component.*;
-import org.ccomp.model.component.engine.ElectricMotor;
-import org.ccomp.model.component.engine.GasolineEngine;
-import org.ccomp.model.component.engine.HybridEngine;
 
 import java.net.URL;
 import java.util.*;
