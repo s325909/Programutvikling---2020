@@ -29,23 +29,23 @@
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="wheelRimName" layoutX="282.0" layoutY="127.0">
+      <TextField fx:id="wheelRimName" layoutX="282.0" layoutY="127.0" promptText="Toyota alu">
          <effect>
             <DropShadow color="#00000099" />
          </effect></TextField>
-      <TextField fx:id="wheelRimColor" layoutX="283.0" layoutY="177.0">
+      <TextField fx:id="wheelRimColor" layoutX="283.0" layoutY="177.0" promptText="Sølv">
          <effect>
             <DropShadow color="#00000099" />
          </effect></TextField>
-      <TextField fx:id="wheelRimDimension" layoutX="282.0" layoutY="228.0">
+      <TextField fx:id="wheelRimDimension" layoutX="282.0" layoutY="228.0" promptText="10x14">
          <effect>
             <DropShadow color="#00000099" />
          </effect></TextField>
-      <TextField fx:id="wheelRimPrice" layoutX="282.0" layoutY="279.0">
+      <TextField fx:id="wheelRimPrice" layoutX="282.0" layoutY="279.0" promptText="2000">
          <effect>
             <DropShadow color="#00000099" />
          </effect></TextField>
-      <TextField fx:id="wheelRimQuantity" layoutX="282.0" layoutY="330.0" prefHeight="31.0" prefWidth="187.0">
+      <TextField fx:id="wheelRimQuantity" layoutX="282.0" layoutY="330.0" prefHeight="31.0" prefWidth="187.0" promptText="MIN 10">
          <effect>
             <DropShadow color="#00000099" />
          </effect></TextField>
