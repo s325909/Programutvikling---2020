@@ -19,5 +19,5 @@ public interface ObjectFileHandler extends Serializable {
     void writeObjectHandler(ObjectOutputStream oos) throws IOException;
 
     void readObjectHandler(ObjectInputStream ois) throws IOException, ClassNotFoundException;
-    
+
 }
