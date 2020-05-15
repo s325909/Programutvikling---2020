@@ -27,9 +27,6 @@ public class AddComponentController {
     Button backAdmin, next;
 
     @FXML
-    Label out;
-
-    @FXML
     RadioButton gasoline, electric, hybrid, engine, seat, spoiler, steeringwheel, wheelrim;
 
     @FXML
@@ -64,33 +61,21 @@ public class AddComponentController {
                 JOptionPane.showMessageDialog(null, "Du må velge biltype for komponentet motor!");
             } else
                 loadWindow(next, "/org/ccomp/admin/compGUI/kEngine.fxml", "@../../../resources/style.ccs");
-        }
-
-        else if (seat.isSelected()) {
-                loadWindow(next, "/org/ccomp/admin/compGUI/kSeat.fxml", "@../../../resources/style.ccs");
-        }
-
-        else if (spoiler.isSelected()) {
+        } else if (seat.isSelected()) {
+            loadWindow(next, "/org/ccomp/admin/compGUI/kSeat.fxml", "@../../../resources/style.ccs");
+        } else if (spoiler.isSelected()) {
             loadWindow(next, "/org/ccomp/admin/compGUI/kSpoiler.fxml", "@../../../resources/style.ccs");
-        }
-
-
-        else if (steeringwheel.isSelected()) {
+        } else if (steeringwheel.isSelected()) {
             loadWindow(next, "/org/ccomp/admin/compGUI/kSteeringwheel.fxml", "@../../../resources/style.ccs");
-        }
-
-        else if (wheelrim.isSelected()) {
+        } else if (wheelrim.isSelected()) {
             loadWindow(next, "/org/ccomp/admin/compGUI/kWheelRim.fxml", "@../../../resources/style.ccs");
-
-        }
-        else {
+        } else {
             //If no component is selected, message:
             if (componentTypeGroup.getSelectedToggle() == null) {
                 JOptionPane.showMessageDialog(null, "Du må velge et komponent for å kunne legge til! \n");
             }
         }
     }
-
 
     @FXML
     public void backToAdmin() {
@@ -124,7 +109,6 @@ public class AddComponentController {
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
 
-
             RadioButton selectedRadioButton = (RadioButton) carTypeGroup.getSelectedToggle();
 
             if (selectedRadioButton != null)
@@ -132,7 +116,6 @@ public class AddComponentController {
 
             CompController componentsCart = loader.getController();
             componentsCart.setEngineType(selectedCarType);
-
 
             Scene scene = new Scene(root, 600, 500);
             stage.setScene(scene);

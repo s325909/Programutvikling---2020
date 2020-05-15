@@ -347,7 +347,7 @@ public class CompController {
         }
         return component;
     }
-    
+
     private void iterateHashMapList(HashMap<String, List<CarComponent>> compMap) {
         //Iterate over HashMap of ArrayList to get each component and its values
         for (String key : compMap.keySet()) {
