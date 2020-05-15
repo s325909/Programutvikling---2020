@@ -166,9 +166,9 @@ public class UserRegController {
         //  carComponents = retrievedCompMap.get("CarComp");
 
         for (CarComponent carComponent : getCarComponents()) {
-
+            
             orderType.setCellValueFactory(new PropertyValueFactory<CarComponent, String>("compType"));
-            orderName.setCellValueFactory(new PropertyValueFactory<CarComponent, String>("compType"));
+            orderName.setCellValueFactory(new PropertyValueFactory<CarComponent, String>("compName"));
             orderPrice.setCellValueFactory(new PropertyValueFactory<CarComponent, Double>("compPrice"));
             orderQuantity.setCellValueFactory(new PropertyValueFactory<CarComponent, Integer>("compQuantity"));
             carComps.add(carComponent);
