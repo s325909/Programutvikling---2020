@@ -9,13 +9,16 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.compGUI.CompController">
    <children>
-      <Label layoutX="158.0" layoutY="126.0" text="NAVN">
+      <Label layoutX="158.0" layoutY="122.0" text="NAVN">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="165.0" layoutY="266.0" text="PRIS" />
-      <Label layoutX="124.0" layoutY="196.0" text="HESTEKREFTER">
+      <Label layoutX="165.0" layoutY="262.0" text="PRIS">
+         <font>
+            <Font name="Segoe UI Semilight" size="18.0" />
+         </font></Label>
+      <Label layoutX="125.0" layoutY="192.0" text="HESTEKREFTER">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
@@ -32,7 +35,7 @@
          <effect>
             <DropShadow color="#00000099" />
          </effect></TextField>
-      <TextField fx:id="engineQuantity" layoutX="272.0" layoutY="328.0" prefHeight="31.0" prefWidth="187.0" promptText="MIN 10">
+      <TextField fx:id="engineQuantity" layoutX="272.0" layoutY="328.0" promptText="MIN 10">
          <effect>
             <DropShadow color="#00000099" />
          </effect></TextField>
@@ -57,6 +60,9 @@
             <Image url="@../../../../resources/CCOMPW-small.png" />
          </image>
       </ImageView>
-      <Label layoutX="150.0" layoutY="333.0" text="ANTALL" />
+      <Label layoutX="151.0" layoutY="330.0" text="ANTALL">
+         <font>
+            <Font name="Segoe UI Semilight" size="18.0" />
+         </font></Label>
    </children>
 </AnchorPane>
