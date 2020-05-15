@@ -480,17 +480,13 @@ public class AdminController {
             if (deleteComponent) jobjHandler.writeComponent(retrievedCompMap);
 
         } else if (customerOrderTab != null && customerOrderTab.isSelected()) {
-            System.out.println("CUSTOMER ORDERS TAB");
-
 
             if (customerOrderTab.isSelected()) {
                 int visibleIndex = customerOrderInfoView.getSelectionModel().getSelectedIndex();
-
                 //return if nothing selected
+
                 if (visibleIndex == -1) return;
-
                 int sourceIndex = sortedCustomerOrderData.getSourceIndexFor(customerOrders, visibleIndex);
-
 
                 customerOrder = customerOrderList.get(sourceIndex);
                 System.out.println("DELETE CUSTOMER ORDER: " + customerOrder.toCSVFormat());
@@ -498,12 +494,9 @@ public class AdminController {
                 customerOrders.remove(sourceIndex);
                 customerOrderList.remove(sourceIndex);
 
-
                 //Remove selected Customer Order from file
                 csvHandler.removeCustomerOrder(customerOrder);
-
                 compOrderList = csvHandler.readCompOrder(compOrderList);
-                System.out.println("COMP ORDER LIST SIZE: " + compOrderList.size());
 
                 //Remove CompOrders whith same OrderNr from file
                 for (CompOrder compOrder : compOrderList) {
@@ -518,18 +511,12 @@ public class AdminController {
 
 
     private void deleteCompOrder(){
-
-
         int visibleIndex = carCompView.getSelectionModel().getSelectedIndex();
 
         //return if nothing selected
         if (visibleIndex == -1) return;
 
-
-
         if (compOrders == null) compOrders = carComTable();
-
-
         int sourceIndex;
 
         if (sortedCompOrderList != null) {
@@ -542,15 +529,9 @@ public class AdminController {
 
 
         System.out.println("DELETE SELECTED COMP ORDER: " + compOrder.toCSVFormat());
-
-
         csvHandler.removeCompOrder(compOrder);
-
-
         compOrders.remove(compOrder);
         compOrderList.remove(compOrder);
-
-
         //todo: Delete CustomerOrder if all CompOrders with same OrderNr is deleted
     }
     @FXML
@@ -558,7 +539,6 @@ public class AdminController {
 
         if (compOrders == null) compOrders = carComTable();
 
-       // ObservableList<CompOrder> compOrdersList = compOrders;
         FilteredList<CompOrder> filteredList = new FilteredList(compOrders, b -> true);
         searchCompOrder.textProperty().addListener(((observable, oldValue, newValue) -> {
             filteredList.setPredicate( carcomp-> {
@@ -612,8 +592,6 @@ public class AdminController {
             sorteEngineData.comparatorProperty().bind(engineView.comparatorProperty());
             engineView.setItems(sorteEngineData);
         }
-
-
 
         //Seat
         if (seatTab.isSelected()) {
@@ -689,6 +667,7 @@ public class AdminController {
             sWheelView.setItems(sortedSwheelData);
 
         }
+
         //WheelRim
         if (wheelRimTab.isSelected()){
             ObservableList<WheelRim> wheelRimList = wheelRTable();
@@ -741,7 +720,6 @@ public class AdminController {
 
     private void editEngine() {
         engineView.setEditable(true);
-
         if (carComponents.size() == 0) return;
         engine = (Engine) carComponents.get(row);
         //When editing a tablecolum it will set and get the value when editing in the right colum
@@ -759,8 +737,6 @@ public class AdminController {
                     t.getTablePosition().getRow())
             ).setCompType(t.getNewValue());
         });
-
-
         nameEngineColum.setCellFactory(TextFieldTableCell.forTableColumn());
         nameEngineColum.setOnEditCommit((TableColumn.CellEditEvent<Engine, String> t) -> {
             t.getTableView().getItems();
@@ -775,18 +751,12 @@ public class AdminController {
                     t.getTablePosition().getRow())
             ).setCompName(t.getNewValue());
         });
-
-
         horsepowerColum.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         horsepowerColum.setOnEditCommit((TableColumn.CellEditEvent<Engine, Integer> t) -> {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
-             Integer value = t.getNewValue();
-            //Integer value = t.getNewValue();
             String newValue = String.valueOf(t.getNewValue()).trim();
-            int value = validateIntegerColumn(newValue, 0);
-
-
+           int value = validateIntegerColumn(newValue, 0);
             carComponents = retrievedCompMap.get("Engine");
             engine = ((Engine) carComponents.get(row));
             engine.setEngineHorsePower(value);
@@ -797,7 +767,6 @@ public class AdminController {
             ).setEngineHorsePower(value
             );
         });
-
         priceEngineColum.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
         priceEngineColum.setOnEditCommit((TableColumn.CellEditEvent<Engine, Double> t) -> {
             t.getTableView().getItems();
@@ -813,7 +782,6 @@ public class AdminController {
             ).setCompPrice(t.getNewValue()
             );
         });
-
         quantityEngineColum.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         quantityEngineColum.setOnEditCommit((TableColumn.CellEditEvent<Engine, Integer> t) -> {
             t.getTableView().getItems();
@@ -836,11 +804,8 @@ public class AdminController {
 
     private void editSeatTable() {
         seatView.setEditable(true);
-
         if (carComponents.size() == 0) return;
-
         seat = (Seat) carComponents.get(row);
-
         nameSeatColum.setCellFactory(TextFieldTableCell.forTableColumn());
         nameSeatColum.setOnEditCommit((TableColumn.CellEditEvent<Seat, String> t) -> {
             t.getTableView().getItems();
@@ -856,7 +821,6 @@ public class AdminController {
             ).setCompName(t.getNewValue()
             );
         });
-
         materiellColum.setCellFactory(TextFieldTableCell.forTableColumn());
         materiellColum.setOnEditCommit((TableColumn.CellEditEvent<Seat, String> t) -> {
             t.getTableView().getItems();
@@ -872,7 +836,6 @@ public class AdminController {
             ).setSeatMaterial(t.getNewValue()
             );
         });
-
         colorSeatColum.setCellFactory(TextFieldTableCell.forTableColumn());
         colorSeatColum.setOnEditCommit((TableColumn.CellEditEvent<Seat, String> t) -> {
             t.getTableView().getItems();
@@ -888,14 +851,11 @@ public class AdminController {
             ).setSeatColor(t.getNewValue()
             );
         });
-
         seatPriceColum.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
         seatPriceColum.setOnEditCommit((TableColumn.CellEditEvent<Seat, Double> t) -> {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
-
             String doubleValue = String.valueOf(t.getNewValue()).trim();
-
             Double value;
             try {
                 value = Double.parseDouble(doubleValue);
@@ -920,7 +880,6 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             Integer value = t.getNewValue();
-
             carComponents = retrievedCompMap.get("Seat");
             seat = ((Seat) carComponents.get(row));
             seat.setCompQuantity(value);
@@ -936,15 +895,12 @@ public class AdminController {
     private void editSpoilerTable() {
         spoilerView.setEditable(true);
         if (carComponents.size() == 0) return;
-
         spoiler = (Spoiler) carComponents.get(row);
-
         nameSpoilerColum.setCellFactory(TextFieldTableCell.forTableColumn());
         nameSpoilerColum.setOnEditCommit((TableColumn.CellEditEvent<Spoiler, String> t) -> {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             String value = t.getNewValue().replaceAll("[-+.^:,]","");
-
             carComponents = retrievedCompMap.get("Spoiler");
             spoiler = ((Spoiler) carComponents.get(row));
             spoiler.setCompName(value);
@@ -955,13 +911,11 @@ public class AdminController {
             ).setCompName(t.getNewValue()
             );
         });
-
         colorSpoilerColum.setCellFactory(TextFieldTableCell.forTableColumn());
         colorSpoilerColum.setOnEditCommit((TableColumn.CellEditEvent<Spoiler, String> t) -> {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             String value = t.getNewValue().replaceAll("[-+.^:,]","");
-            System.out.println(value);
             carComponents = retrievedCompMap.get("Spoiler");
             spoiler = ((Spoiler) carComponents.get(row));
             spoiler.setSpoilerColor(value);
@@ -972,13 +926,11 @@ public class AdminController {
             ).setSpoilerColor(t.getNewValue()
             );
         });
-
         sideSpoilerColum.setCellFactory(TextFieldTableCell.forTableColumn());
         sideSpoilerColum.setOnEditCommit((TableColumn.CellEditEvent<Spoiler, String> t) -> {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             String value = t.getNewValue().replaceAll("[-+.^:,]","");
-
             carComponents = retrievedCompMap.get("Spoiler");
             spoiler = ((Spoiler) carComponents.get(row));
             spoiler.setSpoilerSide(value);
@@ -989,13 +941,11 @@ public class AdminController {
             ).setSpoilerSide(t.getNewValue()
             );
         });
-
         priceSpoilerColum.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
         priceSpoilerColum.setOnEditCommit((TableColumn.CellEditEvent<Spoiler, Double> t) -> {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             Double value = t.getNewValue();
-
             carComponents = retrievedCompMap.get("Spoiler");
             spoiler = ((Spoiler) carComponents.get(row));
             spoiler.setCompPrice(value);
@@ -1006,13 +956,11 @@ public class AdminController {
             ).setCompPrice(t.getNewValue()
             );
         });
-
         quantitySpoilerColum.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         quantitySpoilerColum.setOnEditCommit((TableColumn.CellEditEvent<Spoiler, Integer> t) -> {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             Integer value = t.getNewValue();
-
             carComponents = retrievedCompMap.get("Spoiler");
             spoiler = ((Spoiler) carComponents.get(row));
             spoiler.setCompQuantity(value);
@@ -1028,15 +976,12 @@ public class AdminController {
     private void editSwheelTable(){
         sWheelView.setEditable(true);
         if (carComponents.size() == 0) return;
-
         steeringWheel = (SteeringWheel) carComponents.get(row);
-
         nameSWheelColum.setCellFactory(TextFieldTableCell.forTableColumn());
         nameSWheelColum.setOnEditCommit((TableColumn.CellEditEvent<SteeringWheel, String> t) -> {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             String value = t.getNewValue().replaceAll("[-+.^:,]","");
-
             carComponents = retrievedCompMap.get("SteeringWheel");
             steeringWheel = ((SteeringWheel) carComponents.get(row));
             steeringWheel.setCompName(value);
@@ -1047,13 +992,11 @@ public class AdminController {
             ).setCompName(t.getNewValue()
             );
         });
-
         materiellSWeel.setCellFactory(TextFieldTableCell.forTableColumn());
         materiellSWeel.setOnEditCommit((TableColumn.CellEditEvent<SteeringWheel, String> t) -> {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             String value = t.getNewValue().replaceAll("[-+.^:,]","");
-
             carComponents = retrievedCompMap.get("SteeringWheel");
             steeringWheel = ((SteeringWheel) carComponents.get(row));
             steeringWheel.setSteeringWheelMaterial(value);
@@ -1064,13 +1007,11 @@ public class AdminController {
             ).setSteeringWheelMaterial(t.getNewValue()
             );
         });
-
         colorSWheelColum.setCellFactory(TextFieldTableCell.forTableColumn());
         colorSWheelColum.setOnEditCommit((TableColumn.CellEditEvent<SteeringWheel, String> t) -> {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             String value = t.getNewValue().replaceAll("[-+.^:,]","");
-
             carComponents = retrievedCompMap.get("SteeringWheel");
             steeringWheel = ((SteeringWheel) carComponents.get(row));
             steeringWheel.setSteeringWheelColor(value);
@@ -1087,7 +1028,6 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             Double value = t.getNewValue();
-
             carComponents = retrievedCompMap.get("SteeringWheel");
             steeringWheel = ((SteeringWheel) carComponents.get(row));
             steeringWheel.setCompPrice(value);
@@ -1104,7 +1044,6 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             Integer value = t.getNewValue();
-
             carComponents = retrievedCompMap.get("SteeringWheel");
             steeringWheel = ((SteeringWheel) carComponents.get(row));
             steeringWheel.setCompQuantity(value);
@@ -1118,17 +1057,16 @@ public class AdminController {
     }
 
     private void editWheelRim(){
+
         wheelRimView.setEditable(true);
         if (carComponents.size() == 0) return;
 
         wheelRim = (WheelRim) carComponents.get(row);
-
         nameWheelRimColum.setCellFactory(TextFieldTableCell.forTableColumn());
         nameWheelRimColum.setOnEditCommit((TableColumn.CellEditEvent<WheelRim, String> t) -> {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             String value = t.getNewValue().replaceAll("[-+.^:,]","");
-
             carComponents = retrievedCompMap.get("WheelRim");
             wheelRim = ((WheelRim) carComponents.get(row));
             wheelRim.setCompName(value);
@@ -1145,7 +1083,6 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             String value = t.getNewValue().replaceAll("[-+.^:,]","");
-
             carComponents = retrievedCompMap.get("WheelRim");
             wheelRim = ((WheelRim) carComponents.get(row));
             wheelRim.setWheelRimDimension(value);
@@ -1162,7 +1099,6 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             String value = t.getNewValue().replaceAll("[-+.^:,]","");
-
             carComponents = retrievedCompMap.get("WheelRim");
             wheelRim = ((WheelRim) carComponents.get(row));
             wheelRim.setWheelRimColor(value);
@@ -1179,7 +1115,6 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             Double value = t.getNewValue();
-
             carComponents = retrievedCompMap.get("WheelRim");
             wheelRim = ((WheelRim) carComponents.get(row));
             wheelRim.setCompPrice(value);
@@ -1195,7 +1130,6 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             Integer value = t.getNewValue();
-
             carComponents = retrievedCompMap.get("WheelRim");
             wheelRim = ((WheelRim) carComponents.get(row));
             wheelRim.setCompQuantity(value);
@@ -1209,15 +1143,12 @@ public class AdminController {
     }
 
     private void editOrderCustomer(){
-
         customerOrderInfoView.setEditable(true);
-
         customerInfoOrderName.setCellFactory(TextFieldTableCell.forTableColumn());
         customerInfoOrderName.setOnEditCommit((TableColumn.CellEditEvent<CustomerOrder, String> t) -> {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             String value = t.getNewValue();
-
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setCustomerName(t.getNewValue()
@@ -1229,7 +1160,6 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             String value = t.getNewValue();
-
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setCustomerMail(t.getNewValue()
@@ -1241,19 +1171,17 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             String value = t.getNewValue();
-
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setCustomerNumber(t.getNewValue()
             );
         });
-
+        
         customerInfoOrderCity.setCellFactory(TextFieldTableCell.forTableColumn());
         customerInfoOrderCity.setOnEditCommit((TableColumn.CellEditEvent<CustomerOrder, String> t) -> {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             String value = t.getNewValue();
-
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setCustomerCity(t.getNewValue()
@@ -1265,7 +1193,6 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             String value = t.getNewValue();
-
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setCustomerZipCode(t.getNewValue()
@@ -1381,22 +1308,17 @@ public class AdminController {
     }
     @FXML
     public void deleteRowAdmin() {
-
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setHeaderText("Du er i ferd med å slette!");
         alert.setContentText("Er du sikker på at du vil fortsette?");
-
         if (customerOrderTab != null && customerOrderTab.isSelected()) {
-
             if (customerOrderTab.isSelected()) {
                 int visibleIndex = customerOrderInfoView.getSelectionModel().getSelectedIndex();
                 //return if nothing selected
                 if (visibleIndex == -1)
                     return;
-
                 int sourceIndex = sortedCustomerOrderData.getSourceIndexFor(customerOrders, visibleIndex);
                 customerOrder = customerOrderList.get(sourceIndex);
-
                 alert.setHeaderText("Du er i ferd med å slette hele bestillingen med alle komponenter tilhørende dette ordrenummer: " + customerOrder.getOrderId());
             }
         }
@@ -1413,23 +1335,17 @@ public class AdminController {
     }
     @FXML
     public void deleteRowOrders(){
-
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setHeaderText("Du er i ferd med å slette!");
         alert.setContentText("Er du sikker på at du vil fortsette?");
-
-
         ButtonType cancelButton = new ButtonType("Avbryt", ButtonBar.ButtonData.CANCEL_CLOSE);
         alert.getDialogPane().getButtonTypes().add(cancelButton);
-
         Optional<ButtonType> result = alert.showAndWait();
-
         if (result.isPresent() && result.get() == ButtonType.OK) {
             delete = true;
             deleteCompOrder();
         }
     }
-
 
     private int validateIntegerColumn(String value, int def) {
         try {
@@ -1440,13 +1356,12 @@ public class AdminController {
         }
     }
 
-
-
     //Returns the method from validation with varibles from texfield in compcontroller.
     public String validationSeat(Seat seat) {
         return Validation.valAdminSeat(seat.getCompName(),
                 seat.getSeatMaterial(), seat.getSeatColor(), String.valueOf(seat.getCompPrice()), String.valueOf(seat.getCompQuantity()));
     }
+
     //Method for checking if texfield are empty, return an alert if fields are empty.
     public void emptyFieldsSeat(Seat seat) {
         if (seat.getCompName().isEmpty() && seat.getSeatColor().isEmpty() && seat.getSeatMaterial().isEmpty()
@@ -1455,53 +1370,5 @@ public class AdminController {
             emptyFields = true;
         }
     }
-
-   /* public String validationSpoiler() {
-        return Validation.valAdminSpiler(spoilerName.getText(), spoilerColor.getText(),
-                spoilerSide.getText(), spoilerPrice.getText(), spoilerQuantity.getText());
-    }
-    public void emptyFieldsSpoiler() {
-        if (spoilerName.getText().isEmpty() && spoilerColor.getText().isEmpty() && spoilerSide.getText().isEmpty()
-                && spoilerPrice.getText().isEmpty() && spoilerQuantity.getText().isEmpty()) {
-            alert("Fyll inn alle felt!");
-            emptyFields = true;
-        }
-    }
-
-    public String validationSteering() {
-        return Validation.valAdminSteering(steeringWheelName.getText(), steeringWheelColor.getText(),
-                steeringWheelMaterial.getText(), steeringWheelPrice.getText(), steeringWheelQuantity.getText());
-    }
-    public void emptyFieldsSteering() {
-        if (steeringWheelName.getText().isEmpty() && steeringWheelColor.getText().isEmpty() && steeringWheelMaterial.getText().isEmpty()
-                && steeringWheelPrice.getText().isEmpty() && steeringWheelQuantity.getText().isEmpty()) {
-            alert("Fyll inn alle felt!");
-            emptyFields = true;
-        }
-    }
-
-    public String validationEngine() {
-        return Validation.valAdminEngine(engineName.getText(), enginePower.getText(), enginePrice.getText(), engineQuantity.getText());
-    }
-    public void emptyFieldsEngine() {
-        if (engineName.getText().isEmpty() && enginePower.getText().isEmpty() && enginePrice.getText().isEmpty()
-                && engineQuantity.getText().isEmpty()) {
-            alert("Fyll inn alle felt!");
-            emptyFields = true;
-        }
-    }
-
-    public String validationRim() {
-        return Validation.valAdminRim(wheelRimName.getText(), wheelRimColor.getText(), wheelRimDimension.getText(),  wheelRimPrice.getText(),
-                wheelRimQuantity.getText());
-    }
-    public void emptyFieldsRim() {
-        if (wheelRimName.getText().isEmpty() && wheelRimColor.getText().isEmpty() && wheelRimDimension.getText().isEmpty()
-                && wheelRimPrice.getText().isEmpty() && wheelRimQuantity.getText().isEmpty()) {
-            alert("Fyll inn alle felt!");
-            emptyFields = true;
-        }
-    }*/
-
 }
 
