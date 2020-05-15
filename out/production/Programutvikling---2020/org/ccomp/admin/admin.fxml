@@ -22,7 +22,7 @@
 
                                  </content>
                                  <content>
-                                    <TableView fx:id="engineView" prefHeight="435.0" prefWidth="800.0">
+                                    <TableView fx:id="engineView" prefHeight="414.0" prefWidth="786.0">
                                       <columns>
                                         <TableColumn fx:id="engintypeColum" prefWidth="160.0" text="Biltype" />
                                         <TableColumn fx:id="nameEngineColum" prefWidth="163.0" text="Navn" />
