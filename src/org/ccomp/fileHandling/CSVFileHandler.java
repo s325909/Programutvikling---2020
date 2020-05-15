@@ -11,7 +11,6 @@ public interface CSVFileHandler {
 
     List<CustomerOrder> readCustomerOrder(List<CustomerOrder> customerOrderList);
 
-
     void writeCompOrder(List<CompOrder> compOrderList);
 
     void writeCustomerOrder(CustomerOrder customerOrder);

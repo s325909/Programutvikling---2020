@@ -69,7 +69,6 @@ public class ComponentCSVHandler implements CSVFileHandler {
 
                // System.out.println("READ CAR COMPONENT: " + carComponent.toCSVFormat());
 
-
                 CompOrder compOrder = new CompOrder(orderNr, carComponent);
 
               //  System.out.println("READ COMP ORDER: " + compOrder.toCSVFormat());
@@ -100,10 +99,8 @@ public class ComponentCSVHandler implements CSVFileHandler {
         try(BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
 
-
             firstLine = true;
             secondLine = true;
-
 
             customerOrderList = new ArrayList<>();
 
@@ -137,7 +134,6 @@ public class ComponentCSVHandler implements CSVFileHandler {
 
                 CustomerOrder customerOrder = new CustomerOrder(orderNr, customerName, customerMail,customerNumber,
                                                                 customerZipCode, customerCity);
-
                 customerOrderList.add(customerOrder);
             }
 
@@ -146,12 +142,8 @@ public class ComponentCSVHandler implements CSVFileHandler {
         {
             e.printStackTrace();
         }
-       // return datalist;
-
 
         return customerOrderList;
-
-       // return null;
     }
 
     @Override
@@ -178,20 +170,17 @@ public class ComponentCSVHandler implements CSVFileHandler {
                 secondLine = false;
             }
 
-
-
             for (CompOrder compOrder : compOrderList) {
                 pw.println(compOrder.toCSVFormat());
             }
 
-
             pw.flush();
             pw.close();
 
-            System.out.println("FILE SAVED");
+            System.out.println(COMPONENT_ORDERS_PATH + " FILE SAVED");
 
         } catch (Exception e) {
-            System.out.println("FILE NOT SAVED: " + e.toString());
+            System.out.println(COMPONENT_ORDERS_PATH + " FILE NOT SAVED: " + e.toString());
         }
     }
 
@@ -212,7 +201,6 @@ public class ComponentCSVHandler implements CSVFileHandler {
                 firstLine = false;
             }
 
-
             secondLine = true;
             if (file.length() == 0 && secondLine) {
                 System.out.println("FILE EMPTY ; SecondLine == " + secondLine + " ; ADD HEADER");
@@ -222,18 +210,15 @@ public class ComponentCSVHandler implements CSVFileHandler {
 
             pw.println(customerOrder.toCSVFormat());
 
-
             pw.flush();
             pw.close();
 
-            System.out.println("FILE SAVED");
+            System.out.println(CUSTOMER_ORDERS_PATH + " FILE SAVED");
 
         } catch (Exception e) {
-            System.out.println("FILE NOT SAVED: " + e.toString());
+            System.out.println(CUSTOMER_ORDERS_PATH + " FILE NOT SAVED: " + e.toString());
         }
     }
-
-
 
     public String[] readLastRow() {
 
@@ -244,7 +229,6 @@ public class ComponentCSVHandler implements CSVFileHandler {
                 System.out.println("COMP ORDER EMPTY");
                 return null;
             }
-
 
             FileReader file = new FileReader(COMPONENT_ORDERS_PATH);
             List<String> lines = new ArrayList<>();
@@ -282,7 +266,6 @@ public class ComponentCSVHandler implements CSVFileHandler {
                 String[] b = line.split(splitBy);
                 System.out.println(b[0]);
 
-
                 if (orderId.equals(b[0])) {
                     System.out.println("ORDER ID FOUND");
                     System.out.println(b[0] + ";" + b[1] + ";" + b[2] + ";" + b[3] + ";" + b[4]);
@@ -306,8 +289,6 @@ public class ComponentCSVHandler implements CSVFileHandler {
             System.out.println(e.toString());
         }
 
-
-
         System.out.println("RETURN COMP ORDER SIZE: " + compOrders.size());
 
         return compOrders;
@@ -320,8 +301,6 @@ public class ComponentCSVHandler implements CSVFileHandler {
         String tempFile = "temp.csv";
         File oldFile = new File(CUSTOMER_ORDERS_PATH);
         File newFile = new File(tempFile);
-
-        String line;
 
         try {
 
@@ -345,20 +324,13 @@ public class ComponentCSVHandler implements CSVFileHandler {
                 secondLine = false;
             }
 
-
-
             customerOrders = readCustomerOrder(customerOrders);
-
-            System.out.println("READ CUSTOMER OREDERS SIZE: " + customerOrders.size());
-
 
             for (CustomerOrder customerOrder1 : customerOrders) {
                 if (customerOrder1.toCSVFormat().equals(customerOrder.toCSVFormat())) {
                     System.out.println("IGNORING CUSTOMER ORDER: " + customerOrder1.toCSVFormat());
                 } else pw.println(customerOrder1.toCSVFormat());
             }
-
-
 
             pw.flush();
             pw.close();
@@ -369,14 +341,13 @@ public class ComponentCSVHandler implements CSVFileHandler {
             newFile.renameTo(customerOrderCSV);
             System.out.println("temp file has been renamed to " + newFile);
 
-            System.out.println("FILE SAVED");
+            System.out.println(CUSTOMER_ORDERS_PATH + " FILE SAVED");
 
         } catch (Exception e) {
-            System.out.println("FILE NOT SAVED: " + e.toString());
+            System.out.println(CUSTOMER_ORDERS_PATH + " FILE NOT SAVED: " + e.toString());
         }
 
     }
-
 
 
     private List<CompOrder> compOrders;
@@ -385,8 +356,6 @@ public class ComponentCSVHandler implements CSVFileHandler {
         String tempFile = "temp.csv";
         File oldFile = new File(COMPONENT_ORDERS_PATH);
         File newFile = new File(tempFile);
-
-        String line;
 
         try {
 
@@ -412,15 +381,7 @@ public class ComponentCSVHandler implements CSVFileHandler {
                 secondLine = false;
             }
 
-
-
-
-
             compOrders = readCompOrder(compOrders);
-
-            System.out.println("READ COMP ORDERS SIZE: " + compOrders.size());
-
-
 
             for (CompOrder compOrder1 : compOrders) {
                 if (compOrder1.toCSVFormat().equals(compOrder.toCSVFormat())) {
@@ -438,15 +399,10 @@ public class ComponentCSVHandler implements CSVFileHandler {
             newFile.renameTo(compOrderCSV);
             System.out.println("temp file has been renamed to " + newFile);
 
-            System.out.println("FILE SAVED");
-
+            System.out.println(COMPONENT_ORDERS_PATH + " FILE SAVED");
         } catch (Exception e) {
-            System.out.println("FILE NOT SAVED: " + e.toString());
+            System.out.println(COMPONENT_ORDERS_PATH + " FILE NOT SAVED: " + e.toString());
         }
-
     }
-
-
-
 
 }
