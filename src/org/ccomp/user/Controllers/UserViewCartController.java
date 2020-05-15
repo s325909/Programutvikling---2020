@@ -26,10 +26,10 @@ public class UserViewCartController {
     AnchorPane contentProducts, contentCart;
 
     @FXML
-    Label viewCart, numberofProduct, sumText, sumAntall;
+    Button backBtnView, backBtnCart, addToCart, userReg, toTheChart, deleteRow, deleteAll;
 
     @FXML
-    Button backBtnView, backBtnCart, addToCart, userReg, toTheChart, deleteRow, deleteAll;
+    Label viewCart, numberofProduct, sumText, sumAntall;
 
     @FXML
     TitledPane seatPane, spoilerPane,enginePane,sWheelPane,wheelRimPane;
@@ -94,13 +94,13 @@ public class UserViewCartController {
     @FXML
     TableColumn<CarComponent, Integer> compQuantityColumn;
 
-    private Scene scene;
-    private boolean addedComp;
-    private CarComponent selectedCarComponent;
-    private static List<CarComponent> componentsCart = new ArrayList<>();
     private ComponentOBJHandler jobjHandler;
+    private CarComponent selectedCarComponent;
     private HashMap<String, List<CarComponent>> retrievedCompMap;
     private List<CarComponent> carComponents;
+    private Scene scene;
+    private boolean addedComp;
+    private static List<CarComponent> componentsCart = new ArrayList<>();
     private static String selectedCarType;
 
     @FXML
@@ -169,8 +169,6 @@ public class UserViewCartController {
             }
         }
     }
-
-
 
     @FXML
     public void backToViewProd() {
