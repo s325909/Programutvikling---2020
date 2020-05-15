@@ -34,7 +34,7 @@ public class Validation {
     public static String validateName(String input) {
         String lable = "";
 
-        String regex = "[a-zæøåA-ZÆØÅ]*";
+        String regex = "[a-zæøåA-ZÆØÅ ]*";
 
         if (!input.matches(regex)) {
             lable = ("Navnet er skrevet inn i feil format! \n");
@@ -67,7 +67,6 @@ public class Validation {
     public static String validatePower (String input) {
         String lable = "";
 
-        //String regex = "[0-9]{3}";
         String regex = "^[0-9]*${3}";
 
         if (!input.matches(regex)) {
@@ -79,7 +78,7 @@ public class Validation {
     public static String validateColor(String input) {
         String lable = "";
 
-        String regex = "[a-zæøåA-ZÆØÅ]{3,10}";
+        String regex = "[a-zæøåA-ZÆØÅ ]{3,10}";
 
         if (!input.matches(regex)) {
            lable  = ("Farge er skrevet inn i feil format! \n");
@@ -90,7 +89,7 @@ public class Validation {
     public static String validateMaterial(String input) {
         String lable = "";
 
-        String regex = "[a-zæøåA-ZÆØÅ]{1,10}";
+        String regex = "[a-zæøåA-ZÆØÅ ]{1,10}";
 
         if (!input.matches(regex)) {
             lable = ("Materiale er skrevet inn i feil format! \n");
@@ -157,7 +156,7 @@ public class Validation {
     public static String validateCity(String input) {
         String lable = "";
 
-        String regex = "[a-zæøåA-ZÆØÅ]{2,25}";
+        String regex = "[a-zæøåA-ZÆØÅ ]{2,25}";
 
         if (!input.matches(regex)) {
             lable = ("Poststed er skrevet inn i feil format! \n");

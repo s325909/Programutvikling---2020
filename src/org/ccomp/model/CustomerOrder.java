@@ -4,10 +4,6 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import org.ccomp.model.component.CarComponent;
-import org.ccomp.user.Customer;
-
-import java.util.List;
 
 public class CustomerOrder {
 

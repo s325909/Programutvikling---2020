@@ -17,7 +17,7 @@
       <Text layoutX="99.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dette er din bestilling:" />
       <Text layoutX="112.0" layoutY="577.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Du kan nå krysse ut. Ha en fin dag videre!" />
       <Text layoutX="33.0" layoutY="521.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Takk for din ordre, du vil bli kontaktet på SMS for henting av dine produkter." textAlignment="CENTER" wrappingWidth="439.892578125" />
-      <TableView fx:id="ordedView" layoutX="-1.0" layoutY="359.0" prefHeight="135.0" prefWidth="500.0">
+      <TableView fx:id="ordedView" layoutX="5.0" layoutY="358.0" prefHeight="135.0" prefWidth="491.0">
         <columns>
           <TableColumn fx:id="orderType" prefWidth="135.0" text="TYPE" />
           <TableColumn fx:id="orderName" prefWidth="135.0" text="NAVN" />
@@ -26,11 +26,11 @@
         </columns>
       </TableView>
       <Label fx:id="countOrder" layoutX="253.0" layoutY="329.0" prefHeight="17.0" prefWidth="163.0" text="Totalt kjøpt produkter" />
-      <Label fx:id="customerTxt1" layoutX="99.0" layoutY="180.0" prefHeight="135.0" prefWidth="100.0" style="-fx-border-color: #42a2a6; -fx-border-width: 3;">
+      <Label fx:id="customerTxt1" layoutX="5.0" layoutY="180.0" prefHeight="135.0" prefWidth="146.0" style="-fx-border-color: #42a2a6; -fx-border-width: 3;">
          <font>
             <Font name="Lucida Bright" size="18.0" />
          </font></Label>
-      <Label fx:id="customerTxt2" layoutX="206.0" layoutY="180.0" prefHeight="135.0" prefWidth="200.0" style="-fx-border-color: #42a2a6; -fx-border-width: 3;">
+      <Label fx:id="customerTxt2" layoutX="152.0" layoutY="180.0" prefHeight="135.0" prefWidth="343.0" style="-fx-border-color: #42a2a6; -fx-border-width: 3;">
          <font>
             <Font name="Lucida Bright" size="18.0" />
          </font></Label>

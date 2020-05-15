@@ -40,23 +40,23 @@
             <Font name="Segoe UI Semilight" size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="name" layoutX="204.0" layoutY="219.0" prefHeight="39.0" prefWidth="240.0">
+      <TextField fx:id="name" layoutX="204.0" layoutY="219.0" prefHeight="39.0" prefWidth="240.0" promptText="Ola Nordmann">
          <effect>
             <DropShadow />
          </effect></TextField>
-      <TextField fx:id="mail" layoutX="204.0" layoutY="281.0" prefHeight="39.0" prefWidth="240.0">
+      <TextField fx:id="mail" layoutX="204.0" layoutY="281.0" prefHeight="39.0" prefWidth="240.0" promptText="ola_nordmann@hotmail.com">
          <effect>
             <DropShadow />
          </effect></TextField>
-      <TextField fx:id="phone" layoutX="204.0" layoutY="346.0" prefHeight="39.0" prefWidth="240.0">
+      <TextField fx:id="phone" layoutX="204.0" layoutY="346.0" prefHeight="39.0" prefWidth="240.0" promptText="12345678">
          <effect>
             <DropShadow />
          </effect></TextField>
-      <TextField fx:id="zip" layoutX="204.0" layoutY="408.0" prefHeight="39.0" prefWidth="240.0">
+      <TextField fx:id="zip" layoutX="204.0" layoutY="408.0" prefHeight="39.0" prefWidth="240.0" promptText="0123">
          <effect>
             <DropShadow />
          </effect></TextField>
-      <TextField fx:id="city" layoutX="204.0" layoutY="467.0" prefHeight="39.0" prefWidth="240.0">
+      <TextField fx:id="city" layoutX="204.0" layoutY="467.0" prefHeight="39.0" prefWidth="240.0" promptText="Oslo">
          <effect>
             <DropShadow />
          </effect></TextField>

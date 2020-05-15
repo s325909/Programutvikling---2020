@@ -4,7 +4,6 @@ import javafx.beans.property.*;
 import org.ccomp.model.CompOrder;
 import org.ccomp.model.CustomerOrder;
 import org.ccomp.model.component.CarComponent;
-import org.ccomp.user.Customer;
 
 import java.io.*;
 import java.util.ArrayList;

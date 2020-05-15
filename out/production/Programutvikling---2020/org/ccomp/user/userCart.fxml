@@ -40,13 +40,13 @@
             <TableColumn fx:id="compQuantityColumn" prefWidth="200.0" text="ANTALL" />
         </columns>
       </TableView>
-      <Label fx:id="sumText" layoutX="666.0" layoutY="494.0" prefHeight="31.0" prefWidth="121.0" />
+      <Label fx:id="sumText" layoutX="650.0" layoutY="494.0" prefHeight="31.0" prefWidth="121.0" />
       <Button fx:id="deleteAll" layoutX="673.0" layoutY="152.0" mnemonicParsing="false" onAction="#deleteAllAlert" text="FJERN ALT">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
       </Button>
       <Label layoutX="555.0" layoutY="454.0" prefHeight="31.0" prefWidth="95.0" text="TOTAL ANT." />
-      <Label fx:id="sumAntall" layoutX="653.0" layoutY="454.0" prefHeight="31.0" prefWidth="147.0" />
+      <Label fx:id="sumAntall" layoutX="650.0" layoutY="454.0" prefHeight="31.0" prefWidth="121.0" />
    </children>
 </AnchorPane>

@@ -2,7 +2,6 @@ package org.ccomp.model;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import org.ccomp.user.Customer;
 
 public class CustomerOrderOld {
 

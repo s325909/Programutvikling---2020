@@ -2,21 +2,15 @@ package org.ccomp.user.Controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import org.ccomp.admin.compGUI.CompController;
-
 import java.net.URL;
-import java.util.ResourceBundle;
 
 import static org.ccomp.user.Controllers.UserRegController.alert;
 
-public class UserController implements Initializable {
-
-    String selectedCarType;
+public class UserController {
 
     @FXML
     Button backBtn, sokProd;
@@ -27,10 +21,7 @@ public class UserController implements Initializable {
     @FXML
     ToggleGroup carTypeGroup;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-    }
+    private String selectedCarType;
 
     /**
      * Method that opens main.fxml when the Back Button is clicked
@@ -70,14 +61,10 @@ public class UserController implements Initializable {
                 Parent root = loader.load();
 
                 RadioButton selectedRadioButton = (RadioButton) carType.getSelectedToggle();
-
-                System.out.println("SELECTED RADIO BTN: " + selectedRadioButton.getText());
-
                 selectedCarType = selectedRadioButton.getText();
 
                 UserViewCartController userViewCartController = loader.getController();
                 userViewCartController.setSelectedcartype(selectedCarType);
-
 
                 Scene scene = new Scene(root, 800, 600);
                 stage.setScene(scene);

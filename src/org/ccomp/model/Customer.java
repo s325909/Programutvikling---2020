@@ -1,4 +1,4 @@
-package org.ccomp.user;
+package org.ccomp.model;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;

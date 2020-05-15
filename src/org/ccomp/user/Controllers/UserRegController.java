@@ -15,13 +15,12 @@ import org.ccomp.model.CompOrder;
 import org.ccomp.model.CustomerOrder;
 import org.ccomp.model.Validation;
 import org.ccomp.model.component.CarComponent;
-import org.ccomp.user.Customer;
+import org.ccomp.model.Customer;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
 
 public class UserRegController {
     @FXML
@@ -49,8 +48,6 @@ public class UserRegController {
     private int orderNr;
     private boolean cancelOrder;
     private List<CarComponent> carComponents;
-
-
 
     @FXML
     public void toRecipt() {

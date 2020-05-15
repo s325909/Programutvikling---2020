@@ -14,13 +14,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.ccomp.fileHandling.ComponentOBJHandler;
 import org.ccomp.model.component.*;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
-
 
 public class UserViewCartController {
 
@@ -45,7 +43,6 @@ public class UserViewCartController {
     TableColumn<Engine,Integer>horsepowerColum,quantityEngineColum;
     @FXML
     TableColumn<Engine,Double>priceEngineColm;
-
 
     //Seat
     @FXML
@@ -87,7 +84,6 @@ public class UserViewCartController {
     @FXML
     TableColumn<WheelRim,Integer>quantityWeelRim;
 
-
     //Cartpage
     @FXML
     TableView<CarComponent> cartTable;
@@ -98,45 +94,20 @@ public class UserViewCartController {
     @FXML
     TableColumn<CarComponent, Integer> compQuantityColumn;
 
-
+    private Scene scene;
+    private boolean addedComp;
+    private CarComponent selectedCarComponent;
+    private static List<CarComponent> componentsCart = new ArrayList<>();
     private ComponentOBJHandler jobjHandler;
-
-    //  private OLDComponentOBJHandlerOLD jobjHandler;
-    private HashMap<String, List<CarComponent>> compMap, retrievedCompMap;
+    private HashMap<String, List<CarComponent>> retrievedCompMap;
     private List<CarComponent> carComponents;
     private static String selectedCarType;
-
-
-    CarComponent carComponent;
-
-    private Scene scene;
-
-    private boolean addedComp;
-
-    private CarComponent selectedCarComponent;
-
-    static List<CarComponent> componentsCart = new ArrayList<>();
-
-
 
     @FXML
     public void initialize() {
         jobjHandler = new ComponentOBJHandler();
         retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
-
-        //  customerSeatView.setItems(seatTable());
-        //  customerSpoilerView.setItems(spoilerTable());
-
-       /*tableView.setEditable(true);
-        engineTableCol(value, value2, value3, value4);
-        seatTableCol(value, value2, value3, value4, value5);
-        spoilerTableCol(value, value2, value3, value4, value5);
-        steeringTableCol(value, value2, value3, value4, value5);
-        rimTableCol(value, value2, value3, value4, value5);*/
-
-
         componentsCart = getComponentsCart();
-        System.out.println("(INIT) COMP CART: " + componentsCart.size());
 
         if (numberofProduct != null) countProducts();
     }
@@ -156,59 +127,43 @@ public class UserViewCartController {
         }
     }
 
-
     @FXML
     public void toUserCart() {
-
-        System.out.println("TO USER CART");
 
         if (componentsCart == null) componentsCart = new ArrayList<>();
 
         if (componentsCart.size() == 0) {
-            //System.out.println("VELG PRODUKT");
             alert("Din handlekurv er tom, velligst legg til vare før du går videre!");
         }
 
         else {
-
             try {
                 URL url = getClass().getResource("/org/ccomp/user/userCart.fxml");
-
 
                 FXMLLoader loader = new FXMLLoader(url);
                 scene = contentProducts.getScene();
                 scene.setRoot(loader.load());
 
-                //sende inn kolonnene og viewet
+                //Cast columns to tableview
                 cartTable = (TableView<CarComponent>) loader.getNamespace().get("cartTable");
                 compTypeColumn = (TableColumn<CarComponent, String>) loader.getNamespace().get("compTypeColumn");
                 compNameColumn = (TableColumn<CarComponent, String>) loader.getNamespace().get("compNameColumn");
                 compPriceColumn = (TableColumn<CarComponent, Double>) loader.getNamespace().get("compPriceColumn");
                 compQuantityColumn = (TableColumn<CarComponent, Integer>) loader.getNamespace().get("compQuantityColumn");
 
-
-                //legger inn i table
+                //adds to table
                 cartTable.setItems(cartTable());
 
-                //sender inn totalsum
+                //pass total quantity
                 sumAntall = (Label) loader.getNamespace().get("sumAntall");
                 int antall = totalQuantity();
-                sumAntall.setText(String.valueOf(antall));
+                sumAntall.setText(String.valueOf(antall)+ " Stk");
 
-
-                //sender inn totalsum
+                //pass total sum
                 sumText = (Label) loader.getNamespace().get("sumText");
                 double sum = totalPrice();
-                sumText.setText(String.valueOf(sum));
+                sumText.setText(String.valueOf(sum) + " NOK");
 
-                // cartProduct.setText(componentsCart.get(0).getCompName());
-
-                //orderdPrductCar(); kall på metode for å se carten
-
-                //  FXMLLoader loader = new FXMLLoader(url);
-                //  AnchorPane newCartScene = (AnchorPane) loader.load();
-                //  contentProducts.getChildren().setAll(newCartScene.getChildren());
-                // scene.setRoot(screenMap.get("userCart"));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -220,11 +175,7 @@ public class UserViewCartController {
     @FXML
     public void backToViewProd() {
 
-        System.out.println("TO VIEW PRODUCTS");
-
-
         componentsCart = getComponentsCart();
-
 
         try {
             URL url = getClass().getResource("/org/ccomp/user/viewProduct.fxml");
@@ -233,13 +184,13 @@ public class UserViewCartController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     @FXML
     public void toOrder() {
 
         if (cartTable.getItems().isEmpty()) {
+
             alert("Du har ingen varer i handlekurven!");
         }
 
@@ -262,14 +213,14 @@ public class UserViewCartController {
         }
     }
 
-    public ObservableList<Engine> engineTable() {
+    private ObservableList<Engine> engineTable() {
         Engine engine;
         ObservableList<Engine> engines = FXCollections.observableArrayList();
 
         carComponents = retrievedCompMap.get("Engine");
         if (carComponents == null) carComponents = new ArrayList<>();
 
-        //Presenter objektene i tableview ved sette inn riktige verdier til riktig tablecolonne
+        //Represent objects in tableview, by setting correct values in the right columns
         for (CarComponent carComponent : carComponents) {
             if (carComponent.getCompType().equals(getSelectedcartype())) {
                 engine = (Engine) carComponent;
@@ -284,19 +235,14 @@ public class UserViewCartController {
         return engines;
     }
 
-
-
-
-    public ObservableList<Seat> seatTable() {
+    private ObservableList<Seat> seatTable() {
         Seat seat;
         ObservableList<Seat> seats = FXCollections.observableArrayList();
 
         carComponents = retrievedCompMap.get("Seat");
         if (carComponents == null) carComponents = new ArrayList<>();
 
-
-        //Presenter objektene i tableview ved sette inn riktige verdier til riktig tablecolonne
-
+        //Represent objects in tableview, by setting correct values in the right columns
         for (CarComponent carComponent : carComponents) {
             seat = (Seat) carComponent;
             nameSeatColum.setCellValueFactory(new PropertyValueFactory<Seat, String>("compName"));
@@ -309,14 +255,14 @@ public class UserViewCartController {
         return seats;
     }
 
-
-    public ObservableList<Spoiler> spoilerTable() {
+    private ObservableList<Spoiler> spoilerTable() {
         Spoiler spoiler;
         ObservableList<Spoiler> spoilers = FXCollections.observableArrayList();
 
         carComponents = retrievedCompMap.get("Spoiler");
         if (carComponents == null) carComponents = new ArrayList<>();
 
+        //Represent objects in tableview, by setting correct values in the right columns
         for (CarComponent carComponent : carComponents) {
             spoiler = (Spoiler) carComponent;
             nameSpoilerColum.setCellValueFactory(new PropertyValueFactory<Spoiler, String>("compName"));
@@ -330,16 +276,14 @@ public class UserViewCartController {
 
     }
 
-    public ObservableList<SteeringWheel> sWheelTable(){
+    private ObservableList<SteeringWheel> sWheelTable(){
         SteeringWheel steeringWheel;
         ObservableList<SteeringWheel> steeringWheels = FXCollections.observableArrayList();
-/*
-        if (carComponents == null) {
-            carComponents = retrievedCompMap.get("Spoiler");
-        }*/
+
         carComponents = retrievedCompMap.get("SteeringWheel");
         if (carComponents == null) carComponents = new ArrayList<>();
 
+        //Represent objects in tableview, by setting correct values in the right columns
         for (CarComponent carComponent : carComponents) {
             steeringWheel = (SteeringWheel) carComponent;
             nameSWheelColum.setCellValueFactory(new PropertyValueFactory<SteeringWheel, String>("compName"));
@@ -353,13 +297,14 @@ public class UserViewCartController {
     }
 
 
-    public ObservableList<WheelRim> wheelRimTable(){
+    private ObservableList<WheelRim> wheelRimTable(){
         WheelRim wheelRim;
         ObservableList<WheelRim> wheelRims = FXCollections.observableArrayList();
 
         carComponents = retrievedCompMap.get("WheelRim");
         if (carComponents == null) carComponents = new ArrayList<>();
 
+        //Represent objects in tableview, by setting correct values in the right columns
         for (CarComponent carComponent : carComponents) {
             wheelRim = (WheelRim) carComponent;
             nameWheelRim.setCellValueFactory(new PropertyValueFactory<WheelRim, String>("compName"));
@@ -371,9 +316,6 @@ public class UserViewCartController {
         }
         return wheelRims;
     }
-
-
-
 
     public void viewTheComponents() {
 
@@ -399,25 +341,15 @@ public class UserViewCartController {
             customerWheelRimView.setItems(wheelRimTable());
 
         }
-
-
-
-
     }
 
-    public void countProducts() {
+    private void countProducts() {
 
         int products = 0;
 
         for (CarComponent carComponent : componentsCart) {
-            System.out.println(products + " += " + carComponent.getCompQuantity());
             products += carComponent.getCompQuantity();
         }
-
-        System.out.println("PRODUCTS: " + products);
-
-       // numberofProduct.setText("Antall lagt til: " + componentsCart.size());
-
         numberofProduct.setText("Antall lagt til: " + products);
     }
 
@@ -429,44 +361,32 @@ public class UserViewCartController {
         int swheelindedx = customerSWheelView.getSelectionModel().getSelectedIndex();
         int wheelRimindex = customerWheelRimView.getSelectionModel().getSelectedIndex();
 
-
         addedComp = false;
 
         selectedCarComponent = null;
 
         //Finner den riktige valgte produktet i viewvet og legger den inn i handlerkurv ved å bruke index
         if (customorEngineView.getSelectionModel().isSelected(engineindex) && enginePane.isExpanded()){
-
             Engine engineItem = customorEngineView.getItems().get(engineindex);
-
             selectedCarComponent = createSelectedComp(engineItem);
 
-            System.out.println("SELECTED ENGINE: " + selectedCarComponent.toCSVFormat());
-        } else if (customerSeatView.getSelectionModel().isSelected(seatindex) && seatPane.isExpanded()) {
-
+        }
+        else if (customerSeatView.getSelectionModel().isSelected(seatindex) && seatPane.isExpanded()) {
             Seat seatItem = customerSeatView.getItems().get(seatindex);
-
             selectedCarComponent = createSelectedComp(seatItem);
 
-            System.out.println("SELECTED SEAT: " + selectedCarComponent.toCSVFormat());
         } else if (customerSpoilerView.getSelectionModel().isSelected(spoilerindex) && spoilerPane.isExpanded()) {
             Spoiler spoilerItem = customerSpoilerView.getItems().get(spoilerindex);
-
             selectedCarComponent = createSelectedComp(spoilerItem);
 
-            System.out.println("SELECTED SPOILER: " + selectedCarComponent.toCSVFormat());
         } else if (customerSWheelView.getSelectionModel().isSelected(swheelindedx) && sWheelPane.isExpanded()){
             SteeringWheel steeringWheelItem = customerSWheelView.getItems().get(swheelindedx);
-
             selectedCarComponent = createSelectedComp(steeringWheelItem);
 
-            System.out.println("SELECTED STEERING WHEEL: " + selectedCarComponent.toCSVFormat());
         } else if (customerWheelRimView.getSelectionModel().isSelected(wheelRimindex) && wheelRimPane.isExpanded()){
             WheelRim wheelRimItem = customerWheelRimView.getItems().get(wheelRimindex);
-
             selectedCarComponent = createSelectedComp(wheelRimItem);
 
-            System.out.println("SELECTED WHEEL RIM: " + selectedCarComponent.toCSVFormat());
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText("Kunne ikke legge til i handlekurv!");
@@ -479,14 +399,11 @@ public class UserViewCartController {
             alert.showAndWait();
             System.out.println("NO PRODUCT SELECTED...");
         }
-
-
         addSelectedComponentToCart(selectedCarComponent);
     }
 
     private void addSelectedComponentToCart(CarComponent selectedCarComponent) {
         if (selectedCarComponent != null) {
-            System.out.println("PRODUCT CHOSEN: " + selectedCarComponent.toCSVFormat());
 
             increaseQuantity(selectedCarComponent);
 
@@ -494,7 +411,6 @@ public class UserViewCartController {
                 System.out.println("ADDING COMPONENT TO CART: " + selectedCarComponent.toCSVFormat());
                 componentsCart.add(selectedCarComponent);
             } else System.out.println("CART QUANTITY INCREASED");
-
             countProducts();
 
         } else System.out.println("PRODUCT NOT CHOSEN");
@@ -503,7 +419,6 @@ public class UserViewCartController {
     private void increaseQuantity(CarComponent selectedCarComponent) {
         int count = 0;
         for(CarComponent carComponent : componentsCart){
-            System.out.println("COUNT: " + count + " / " + componentsCart.size());
             if (carComponent.getCompType().equals(selectedCarComponent.getCompType())){
 
                 if (carComponent.getCompName().equals(selectedCarComponent.getCompName())
@@ -511,27 +426,18 @@ public class UserViewCartController {
 
                     int quantity = carComponent.getCompQuantity() + 1;
 
-                    System.out.println("SELECTED QUANTITY: " + selectedCarComponent.getCompQuantity());
-
                     if (selectedCarComponent.getCompQuantity() >= quantity) componentsCart.get(count).setCompQuantity(quantity);
                     else {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setHeaderText("Det er ikke flere produkter av komponentet tilgjengelig.");
                         alert.showAndWait();
-                        System.out.println("MAX ANTALL: " + quantity + " > " + selectedCarComponent.getCompQuantity());
                     }
-
-
-                    System.out.println("COMPONENT FOUND IN CART: " + carComponent.toCSVFormat() + " ; " + addedComp);
-
                     addedComp = true;
                     break;
                 }
-
             }
             count++;
         }
-
         if (!addedComp) selectedCarComponent.setCompQuantity(1);
     }
 
@@ -540,12 +446,9 @@ public class UserViewCartController {
         return new CarComponent(comp.getCompType(), comp.getCompName(), comp.getCompPrice(), comp.getCompQuantity());
     }
 
-
-    //for å hente ut i tableview fra viewSiden til cartsiden
-    public ObservableList<CarComponent> cartTable() {
+    //populate tableview from viewProduct to userCart
+    private ObservableList<CarComponent> cartTable() {
         ObservableList<CarComponent> carComps = FXCollections.observableArrayList();
-        //  carComponents = retrievedCompMap.get("CarComp");
-
 
         for (CarComponent carComponent : componentsCart) {
             compTypeColumn.setCellValueFactory(new PropertyValueFactory<CarComponent, String>("compType"));
@@ -553,14 +456,13 @@ public class UserViewCartController {
             compPriceColumn.setCellValueFactory(new PropertyValueFactory<CarComponent, Double>("compPrice"));
             compQuantityColumn.setCellValueFactory(new PropertyValueFactory<CarComponent, Integer>("compQuantity"));
             carComps.add(carComponent);
-
         }
         return carComps;
     }
 
 
 
-    //Sletter rader i cartTabel
+    //Delete rows in cartTable
     public void deleteCartRow() {
         CarComponent selectedRow = cartTable.getSelectionModel().getSelectedItem();
         cartTable.getItems().remove(selectedRow);
@@ -569,6 +471,7 @@ public class UserViewCartController {
         updateTotal();
     }
 
+    //Delete the whole cart alert!
     public void deleteAllAlert(){
 
         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -586,69 +489,50 @@ public class UserViewCartController {
         }
     }
 
-    public void deleteCartAll() {
+    private void deleteCartAll() {
         //Remove all components added to the componentsCart List from CartTable
-           cartTable.getItems().removeAll(componentsCart);
-           //Clear ComponentsCart List
-           componentsCart.clear();
+       cartTable.getItems().removeAll(componentsCart);
 
-           updateTotal();
+       //Clear ComponentsCart List
+       componentsCart.clear();
+       updateTotal();
     }
 
 
     private void updateTotal() {
         int antall = totalQuantity();
-        sumAntall.setText(String.valueOf(antall));
+        sumAntall.setText(String.valueOf(antall) + " Stk");
 
         double sum = totalPrice();
-        sumText.setText(String.valueOf(sum));
+        sumText.setText(String.valueOf(sum) + " NOK");
     }
-
-    public static List<CarComponent> getComponentsCart() {
-        return componentsCart;
-    }
-
-    public static void setComponentsCart(List<CarComponent> componentsCart) {
-        UserViewCartController.componentsCart = componentsCart;
-
-    }
-
 
     private int totalQuantity(){
 
         int total = 0;
 
         for (CarComponent carComponent : componentsCart) {
-            System.out.println(total + " += " + (carComponent.getCompQuantity()));
             total += carComponent.getCompQuantity();
         }
-
-        System.out.println("TOTAL QUANTITY: " + total);
-
         return total;
     }
 
 
-    //metode for å regne ut totalsummen av
-
-    public double totalPrice(){
+    //Method to sum total price of products in cart
+    private double totalPrice(){
 
         double sum = 0;
 
         for (CarComponent carComponent : componentsCart) {
-            System.out.println(sum + " += " + (carComponent.getCompPrice() * carComponent.getCompQuantity()));
             sum += (carComponent.getCompPrice() * carComponent.getCompQuantity()) ;
         }
-
-        System.out.println("TOTAL PRICE: " + sum);
-
         return sum;
     }
 
-    public static void alert(String msg) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+    private static void alert(String msg) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("CCOMP");
-        alert.setHeaderText("Feil!");
+        alert.setHeaderText("OOPS!");
         alert.setContentText(msg);
         alert.showAndWait();
 
@@ -662,4 +546,12 @@ public class UserViewCartController {
         this.selectedCarType = selectedcartype;
     }
 
+    public static List<CarComponent> getComponentsCart() {
+        return componentsCart;
+    }
+
+    public static void setComponentsCart(List<CarComponent> componentsCart) {
+        UserViewCartController.componentsCart = componentsCart;
+
+    }
 }
