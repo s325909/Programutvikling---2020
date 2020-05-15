@@ -1,10 +1,5 @@
 package org.ccomp.model;
 
-
-import javafx.scene.control.Alert;
-
-import javax.swing.*;
-
 public class Validation {
     public static String valAdminEngine(String enginename, String engineprice, String enginequantity, String enginepower) {
 
@@ -50,7 +45,7 @@ public class Validation {
     public static String validateQuantity (String input) {
         String lable = "";
 
-        String regex = "[0-9]{1,10}";
+        String regex = "[1-9][0-9]{1,10}";
 
         if (!input.matches(regex)) {
             lable = ("Feil format i antall komponenter!\n");
@@ -61,7 +56,7 @@ public class Validation {
     public static String validatePrice (String input) {
         String lable = "";
 
-        String regex = "[0-9]\\d{3,7}";
+        String regex = "^([1-9][0-9])\\d{1,5}?([.]\\d{1,2})?";
 
         if (!input.matches(regex)) {
             lable = ("Pris er skrevet inn i feil format!\n");
@@ -72,7 +67,7 @@ public class Validation {
     public static String validatePower (String input) {
         String lable = "";
 
-        String regex = "[0-9]\\d{3}";
+        String regex = "[1-9][0-9]{3}";
 
         if (!input.matches(regex)) {
             lable = ("Antall hestekrefter er skrevet inn i feil format!\n");
@@ -105,7 +100,7 @@ public class Validation {
     public static String validateSide(String input) {
         String lable = "";
 
-        String regex = "(Høyre | høyre | Venstre | venstre)";
+        String regex = "[a-zæøåA-ZÆØÅ]*";
 
         if (!input.matches(regex)) {
             lable = ("Side på spoiler er skrevet inn i feil format! \n");
@@ -116,7 +111,8 @@ public class Validation {
     public static String validateDimension(String input) {
         String lable = "";
 
-        String regex = "[0-9]{2}| x | [0-9]{2}";
+        //String regex = "[0-9]{2}[x][0-9]{2}";
+        String regex = "[1-9][0-9]{3}";
 
         if (!input.matches(regex)) {
             lable = ("Dimensjonen på felg er skrevet inn i feil format! \n");

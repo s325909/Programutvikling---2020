@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.compGUI.CompController">
+<AnchorPane prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.admin.compGUI.CompController">
    <children>
       <Label layoutX="158.0" layoutY="126.0" text="NAVN">
          <font>
@@ -45,6 +45,10 @@
          <effect>
             <DropShadow color="#00000099" />
          </effect></TextField>
+      <TextField fx:id="wheelRimQuantity" layoutX="282.0" layoutY="330.0" prefHeight="31.0" prefWidth="187.0">
+         <effect>
+            <DropShadow color="#00000099" />
+         </effect></TextField>
       <Button fx:id="addWheelRim" layoutX="493.0" layoutY="447.0" mnemonicParsing="false" onAction="#addComponent" text="LEGG TIL">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
@@ -71,9 +75,5 @@
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="wheelRimQuantity" layoutX="282.0" layoutY="330.0" prefHeight="31.0" prefWidth="187.0">
-         <effect>
-            <DropShadow color="#00000099" />
-         </effect></TextField>
    </children>
 </AnchorPane>

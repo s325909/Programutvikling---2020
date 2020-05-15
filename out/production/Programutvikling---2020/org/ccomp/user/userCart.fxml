@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="contentCart" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.user.Controllers.UserViewCartController">
+<AnchorPane fx:id="contentCart" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ccomp.user.Controllers.UserViewCartController">
    <children>
       <ImageView fitHeight="117.0" fitWidth="252.0" layoutX="284.0" layoutY="14.0">
          <image>
@@ -40,7 +40,7 @@
             <TableColumn fx:id="compQuantityColumn" prefWidth="200.0" text="ANTALL" />
         </columns>
       </TableView>
-      <Label fx:id="sumText" layoutX="630.0" layoutY="494.0" prefHeight="31.0" prefWidth="147.0" />
+      <Label fx:id="sumText" layoutX="666.0" layoutY="494.0" prefHeight="31.0" prefWidth="121.0" />
       <Button fx:id="deleteAll" layoutX="673.0" layoutY="152.0" mnemonicParsing="false" onAction="#deleteAllAlert" text="FJERN ALT">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />

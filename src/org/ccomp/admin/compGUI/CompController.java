@@ -58,12 +58,13 @@ public class CompController {
 
     private Thread thread;
 
+    private boolean emptyFields;
+
 
 
 
     @FXML
     public void initialize() {
-
 
         jobjHandler = new ComponentOBJHandler();
 
@@ -74,42 +75,25 @@ public class CompController {
         if (compMap == null) compMap = new HashMap<>();
 
         System.out.println("INITIALIZED COMP MAP SIZE: " + compMap.size());
-
-        //spinner quantity for quantities of all types of components
-        //System.out.println(spinnerQuantity.getValue());
-
-       // mapKey = new MapKey();
     }
-
-    /*@FXML
-    public void checkValidation() {
-        labelEngine.setText(validationEngine());
-        inputEmpty();
-
-        labelSeat.setText(validationSeat());
-        inputEmpty();
-
-        labelSpoiler.setText(validationSpoiler());
-        inputEmpty();
-
-        labelSteering.setText(validationSteering());
-        inputEmpty();
-
-        labelRim.setText(validationRim());
-        inputEmpty();
-    }*/
 
     @FXML
     public void addComponent(ActionEvent event) {
-       // inputEmpty();
+        //Booelan emptyfields set to false, only changed to true if there are empty fields, used in emptyfields methods
+        emptyFields = false;
 
         if (event.getSource() == addEngine) {
             System.out.println("\nADD ENGINE PRESSED\n");
 
+            //When add button in enginestage is pressed, check if there if emptyfield (call on method)
             emptyFieldsEngine();
+            //If emptyfields false, exit the method
+            if (emptyFields) return;
 
+            //Then checks if there is any validation in validaitonEngine method, if there is: alert with String from method in Validation class
             if (!validationEngine().isEmpty()) {
-                if (!engineName.getText().isEmpty() || !enginePower.getText().isEmpty() || !enginePrice.getText().isEmpty() || !engineQuantity.getText().isEmpty()) {
+                if (!engineName.getText().isEmpty() || !enginePower.getText().isEmpty()
+                        || !enginePrice.getText().isEmpty() || !engineQuantity.getText().isEmpty()) {
                     alert(validationEngine());
                     return;
                 }
@@ -131,6 +115,7 @@ public class CompController {
             System.out.println("\nADD SEAT PRESSED\n");
 
             emptyFieldsSeat();
+            if (emptyFields) return;
 
             if (!validationSeat().isEmpty()) {
                 if (!seatName.getText().isEmpty() || !seatColor.getText().isEmpty()
@@ -159,12 +144,14 @@ public class CompController {
             System.out.println("\nADD SPOILER PRESSED\n");
 
             emptyFieldsSpoiler();
+            if (emptyFields) return;
 
             if (!validationSpoiler().isEmpty()) {
                 if (!spoilerName.getText().isEmpty() || !spoilerColor.getText().isEmpty()
                         || !spoilerSide.getText().isEmpty() || !spoilerPrice.getText().isEmpty()
                         || !spoilerQuantity.getText().isEmpty()) {
                     alert(validationSpoiler());
+                    return;
                 }
             }
 
@@ -187,12 +174,14 @@ public class CompController {
             System.out.println("\nADD STEERING WHEEL PRESSED\n");
 
             emptyFieldsSteering();
+            if (emptyFields) return;
 
             if (!validationSteering().isEmpty()) {
                 if (!steeringWheelName.getText().isEmpty() || !steeringWheelColor.getText().isEmpty()
                         || !steeringWheelMaterial.getText().isEmpty() || !steeringWheelPrice.getText().isEmpty()
                         || !steeringWheelQuantity.getText().isEmpty()) {
                     alert(validationSteering());
+                    return;
                 }
             }
 
@@ -212,11 +201,13 @@ public class CompController {
             System.out.println("\nADD WHEEL RIM PRESSED\n");
 
             emptyFieldsRim();
+            if (emptyFields) return;
 
             if (!validationRim().isEmpty()) {
                 if (!wheelRimName.getText().isEmpty() || !wheelRimColor.getText().isEmpty()
                         || !wheelRimDimension.getText().isEmpty() || !wheelRimPrice.getText().isEmpty() || !wheelRimQuantity.getText().isEmpty()) {
                     alert(validationRim());
+                    return;
                 }
             }
 
@@ -232,13 +223,13 @@ public class CompController {
             carComponents.add(wheelRim);
 
             compMap.put(WHEEL_RIM_KEY, carComponents);
-        } else System.out.println("\nNO SUCH ADD BTN TO PRESS\n");
+        }
+
+        else System.out.println("\nNO SUCH ADD BTN TO PRESS\n");
 
         System.out.println("\nADDING COMPONENT..\n");
 
-
         addComp = (Button) event.getSource();
-
 
         thread = fileOperation();
 
@@ -249,19 +240,9 @@ public class CompController {
         } catch (IllegalThreadStateException e) {
             System.err.println("ILLEGAL THREAT STATE EXCEPTION: " + e.toString());
         }
-
-
-
-      //  addBtn.setDisable(false);
-      //  backToAdd.setDisable(false);
     }
 
-
-
-
-    // create a alert
     Alert alert = new Alert(Alert.AlertType.NONE);
-
 
     private void showThreadOperationAlert(int state) {
         // set alert type
@@ -404,28 +385,7 @@ public class CompController {
 
     }
 
-
-
-
-
-    //validation
-    //hvis ikke tekstfields er fylt ut, feilmelding.
-
-
-   /* public void inputValidation () {
-
-        String str = engineName.getText();
-
-        if (str.equals("")) {  //User have not entered anything.
-            JOptionPane.showMessageDialog(null, "Vennligst fyll ut alle felt!");
-            engineName.requestFocusInWindow();
-        }
-
-        else {
-
-
-*/
-   //denne funker
+   //Alert method that returns any string message
     public static void alert(String msg) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("CCOMP");
@@ -435,15 +395,17 @@ public class CompController {
 
     }
 
-    //denne funker
+    //Returns the method from validation with varibles from texfield in compcontroller.
     public String validationSeat() {
         return Validation.valAdminSeat( seatName.getId(),
                 seatMaterial.getText(), seatColor.getText(), seatPrice.getText(), seatQuantity.getText());
     }
+    //Method for checking if texfield are empty, return an alert if fields are empty.
     public void emptyFieldsSeat() {
         if (seatName.getText().isEmpty() && seatColor.getText().isEmpty() && seatMaterial.getText().isEmpty()
                 && seatPrice.getText().isEmpty() && seatQuantity.getText().isEmpty()) {
             alert("Fyll inn alle felt!");
+            emptyFields = true;
         }
     }
 
@@ -455,6 +417,7 @@ public class CompController {
         if (spoilerName.getText().isEmpty() && spoilerColor.getText().isEmpty() && spoilerSide.getText().isEmpty()
                 && spoilerPrice.getText().isEmpty() && spoilerQuantity.getText().isEmpty()) {
             alert("Fyll inn alle felt!");
+            emptyFields = true;
         }
     }
 
@@ -466,6 +429,7 @@ public class CompController {
         if (steeringWheelName.getText().isEmpty() && steeringWheelColor.getText().isEmpty() && steeringWheelMaterial.getText().isEmpty()
                 && steeringWheelPrice.getText().isEmpty() && steeringWheelQuantity.getText().isEmpty()) {
             alert("Fyll inn alle felt!");
+            emptyFields = true;
         }
     }
 
@@ -476,42 +440,21 @@ public class CompController {
         if (engineName.getText().isEmpty() && enginePower.getText().isEmpty() && enginePrice.getText().isEmpty()
                 && engineQuantity.getText().isEmpty()) {
             alert("Fyll inn alle felt!");
+            emptyFields = true;
         }
     }
 
     public String validationRim() {
-        return Validation.valAdminRim(wheelRimName.getText(), wheelRimDimension.getText(), wheelRimColor.getText(), wheelRimPrice.getText(),
+        return Validation.valAdminRim(wheelRimName.getText(), wheelRimColor.getText(), wheelRimDimension.getText(),  wheelRimPrice.getText(),
                 wheelRimQuantity.getText());
     }
     public void emptyFieldsRim() {
         if (wheelRimName.getText().isEmpty() && wheelRimColor.getText().isEmpty() && wheelRimDimension.getText().isEmpty()
                 && wheelRimPrice.getText().isEmpty() && wheelRimQuantity.getText().isEmpty()) {
             alert("Fyll inn alle felt!");
+            emptyFields = true;
         }
     }
-
-   /* //denne funker
-    public void inputEmpty() {
-        if (validationSeat().isEmpty()) {
-            alert("Du må fylle ut alle felt!");
-        }
-
-        if(validationSpoiler().isEmpty()) {
-            alert("Du må fylle ut alle felt");
-        }
-
-        if(validationSteering().isEmpty()) {
-            alert("Du må fylle ut alle felt");
-        }
-
-        if(validationRim().isEmpty()) {
-            alert("Du må fylle ut alle felt");
-        }
-
-        if(validationEngine().isEmpty()) {
-            alert("Du må fylle ut alle felt");
-        }
-    }*/
 
 
     public String getEngineType() {

@@ -44,6 +44,7 @@ public class AddComponentController {
     @FXML
     public void goNext() {
 
+        //Adds each button to a togglegroup
         componentTypeGroup = new ToggleGroup();
         engine.setToggleGroup(componentTypeGroup);
         seat.setToggleGroup(componentTypeGroup);
@@ -58,6 +59,7 @@ public class AddComponentController {
 
 
         if (engine.isSelected()) {
+            //If engine is selected and cartypegroup is not selected: Message
             if (carTypeGroup.getSelectedToggle() == null) {
                 JOptionPane.showMessageDialog(null, "Du må velge biltype for komponentet motor!");
             } else
@@ -82,9 +84,9 @@ public class AddComponentController {
 
         }
         else {
+            //If no component is selected, message:
             if (componentTypeGroup.getSelectedToggle() == null) {
-                JOptionPane.showMessageDialog(null, "Du må velge et komponent for å kunne legge til! \n" +
-                        "Du kan ikke velge biltype for andre komponenter enn motor.");
+                JOptionPane.showMessageDialog(null, "Du må velge et komponent for å kunne legge til! \n");
             }
         }
     }
@@ -133,7 +135,6 @@ public class AddComponentController {
 
 
             Scene scene = new Scene(root, 600, 500);
-//            scene.getStylesheets().add(getClass().getResource(styleSheet).toExternalForm());
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {
