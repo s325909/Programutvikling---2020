@@ -11,16 +11,13 @@ import java.util.List;
 
 public interface ObjectFileHandler extends Serializable {
 
-
     HashMap<String, List<CarComponent>> readComponent(HashMap<String, List<CarComponent>> compMap);
 
     void writeComponent(HashMap<String, List<CarComponent>> compMap);
 
 
-
     void writeObjectHandler(ObjectOutputStream oos) throws IOException;
 
     void readObjectHandler(ObjectInputStream ois) throws IOException, ClassNotFoundException;
-
-
+    
 }

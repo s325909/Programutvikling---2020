@@ -1304,7 +1304,7 @@ public class AdminController {
             deleteSelectedRow();
         }
     }
-    
+
     @FXML
     public void deleteRowOrders(){
         Alert alert = new Alert(Alert.AlertType.WARNING);
