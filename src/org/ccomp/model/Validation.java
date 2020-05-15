@@ -1,14 +1,14 @@
 package org.ccomp.model;
 
 public class Validation {
-    public static String valAdminEngine(String enginename, String engineprice, String enginequantity, String enginepower) {
+    public static String valAdminEngine(String enginename, String enginepower, String engineprice, String enginequantity) {
 
-        return validateName(enginename) + validateQuantity(enginequantity) + validatePrice(engineprice) + validatePower(enginepower);
+        return validateName(enginename) + validatePower(enginepower) + validatePrice(engineprice) + validateQuantity(enginequantity);
     }
 
     public static String valAdminSeat (String seatname, String seatmaterial, String seatcolor, String seatprice, String seatquantity) {
 
-        return validateName(seatname) + validateMaterial(seatmaterial) + validateColor(seatcolor) + validatePrice(seatprice) + validateQuantity(seatquantity);
+        return validateName(seatname) + validateColor(seatcolor) + validateMaterial(seatmaterial)  + validatePrice(seatprice) + validateQuantity(seatquantity);
     }
 
     public static String valAdminSpiler (String spoilername, String spoilercolor, String spoilerside, String spoilerprice, String spoilerquantity) {
@@ -16,9 +16,9 @@ public class Validation {
         return validateName(spoilername) + validateColor(spoilercolor) + validateSide(spoilerside) + validatePrice(spoilerprice) + validateQuantity(spoilerquantity);
     }
 
-    public static String valAdminSteering (String steeringname, String steeringmaterial, String steeringcolor, String steeringprice, String steeringquantity) {
+    public static String valAdminSteering (String steeringname, String steeringcolor, String steeringmaterial, String steeringprice, String steeringquantity) {
 
-        return validateName(steeringname) + validateMaterial(steeringmaterial) + validateColor(steeringcolor) + validatePrice(steeringprice) + validateQuantity(steeringquantity);
+        return validateName(steeringname)  + validateColor(steeringcolor) + validateMaterial(steeringmaterial) + validatePrice(steeringprice) + validateQuantity(steeringquantity);
     }
 
     public static String valAdminRim (String rimname, String rimcolor, String rimdimension, String rimprice, String rimquantity) {
