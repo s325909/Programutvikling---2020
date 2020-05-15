@@ -15,7 +15,7 @@ import org.ccomp.model.CompOrder;
 import org.ccomp.model.CustomerOrder;
 import org.ccomp.model.Validation;
 import org.ccomp.model.component.CarComponent;
-import org.ccomp.model.Customer;
+import org.ccomp.user.Customer;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;

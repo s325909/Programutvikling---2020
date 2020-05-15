@@ -1,4 +1,4 @@
-package org.ccomp.model;
+package org.ccomp.user;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
