@@ -41,40 +41,29 @@ public class CompController {
 
     private String engineType;
 
+
+    private ComponentOBJHandler jobjHandler;
     private HashMap<String, List<CarComponent>> compMap;
     private List<CarComponent> carComponents;
     private Engine engine;
-   // private Engine engine;
     private Seat seat;
     private Spoiler spoiler;
     private SteeringWheel steeringWheel;
     private WheelRim wheelRim;
 
-    private GasolineEngine gasolineEngine;
-    private ElectricMotor electricMotor;
-    private HybridEngine hybridEngine;
-
-    private ComponentOBJHandler jobjHandler;
-
     private Thread thread;
 
     private boolean emptyFields;
-
-
-
 
     @FXML
     public void initialize() {
 
         jobjHandler = new ComponentOBJHandler();
 
-        //todo: Handle if file is empty
-        // java.io.FileNotFoundException: testComponents.obj (Systemet finner ikke angitt fil)
+        //Initialize HashMap with List of Car Components from file
         compMap = jobjHandler.readComponent(compMap);
 
         if (compMap == null) compMap = new HashMap<>();
-
-        System.out.println("INITIALIZED COMP MAP SIZE: " + compMap.size());
     }
 
     @FXML
@@ -83,9 +72,7 @@ public class CompController {
         emptyFields = false;
 
         if (event.getSource() == addEngine) {
-            System.out.println("\nADD ENGINE PRESSED\n");
-
-            //When add button in enginestage is pressed, check if there if emptyfield (call on method)
+            //When add button in engineStage is pressed, check if there if emptyfield (call on method)
             emptyFieldsEngine();
             //If emptyfields false, exit the method
             if (emptyFields) return;
@@ -112,8 +99,7 @@ public class CompController {
             compMap.put(ENGINE_KEY, carComponents);
 
         } else if (event.getSource() == addSeat) {
-            System.out.println("\nADD SEAT PRESSED\n");
-
+            //When add button in seatStage is pressed, check if there if emptyfield (call on method)
             emptyFieldsSeat();
             if (emptyFields) return;
 
@@ -141,8 +127,7 @@ public class CompController {
 
           //  iterateHashMapList(retrievedCompMap);
         } else if (event.getSource() == addSpoiler) {
-            System.out.println("\nADD SPOILER PRESSED\n");
-
+            //When add button in spoilerStage is pressed, check if there if emptyfield (call on method)
             emptyFieldsSpoiler();
             if (emptyFields) return;
 
@@ -171,8 +156,7 @@ public class CompController {
             compMap.put(SPOILER_KEY, carComponents);
 
         } else if (event.getSource() == addSteeringWheel) {
-            System.out.println("\nADD STEERING WHEEL PRESSED\n");
-
+            //When add button in spoilerStage is pressed, check if there if emptyfield (call on method)
             emptyFieldsSteering();
             if (emptyFields) return;
 
@@ -198,8 +182,7 @@ public class CompController {
             //Put List of Components inside HashMap use the ComponentType as KEY
             compMap.put(STEERING_WHEEL_KEY, carComponents);
         } else if (event.getSource() == addWheelRim) {
-            System.out.println("\nADD WHEEL RIM PRESSED\n");
-
+            //When add button in wheelRimStage is pressed, check if there if emptyfield (call on method)
             emptyFieldsRim();
             if (emptyFields) return;
 
@@ -223,16 +206,14 @@ public class CompController {
             carComponents.add(wheelRim);
 
             compMap.put(WHEEL_RIM_KEY, carComponents);
-        }
 
-        else System.out.println("\nNO SUCH ADD BTN TO PRESS\n");
+        } else System.out.println("\nNO SUCH ADD BTN TO PRESS\n");
 
-        System.out.println("\nADDING COMPONENT..\n");
-
+        //cast addComp Btn to the pressed Button
         addComp = (Button) event.getSource();
 
+        //Run thread in which the file operation to save components to file will happen
         thread = fileOperation();
-
 
         try {
             showThreadOperationAlert(0);
@@ -252,15 +233,11 @@ public class CompController {
         if (state == 0) alert.setContentText("FILE OPERATION ON THREAD IN PROGRESS...");
         else if (state == 1) alert.setContentText("FILE OPERATION ON THREAD FINISHED");
 
-
         // show the dialog
         alert.show();
     }
 
-
-
     private Thread fileOperation() {
-
 
         thread = new Thread(new Runnable() {
 
@@ -335,7 +312,6 @@ public class CompController {
             case SPOILER_KEY:
                 System.out.println("MAKING " + compKey);
 
-
                 compName = spoilerName.getText();
                 compPrice = Double.parseDouble(spoilerPrice.getText());
                 compQuantity = Integer.parseInt(spoilerQuantity.getText());
@@ -371,9 +347,7 @@ public class CompController {
         }
         return component;
     }
-
-
-
+    
     private void iterateHashMapList(HashMap<String, List<CarComponent>> compMap) {
         //Iterate over HashMap of ArrayList to get each component and its values
         for (String key : compMap.keySet()) {
