@@ -67,7 +67,7 @@ public class Validation {
     public static String validatePower (String input) {
         String lable = "";
 
-        String regex = "[1-9][0-9]{3}";
+        String regex = "^[1-9][0-9]{3}";
 
         if (!input.matches(regex)) {
             lable = ("Antall hestekrefter er skrevet inn i feil format!\n");
@@ -111,8 +111,7 @@ public class Validation {
     public static String validateDimension(String input) {
         String lable = "";
 
-        //String regex = "[0-9]{2}[x][0-9]{2}";
-        String regex = "[1-9][0-9]{3}";
+        String regex = "^[a-zA-Z0-9]+$";
 
         if (!input.matches(regex)) {
             lable = ("Dimensjonen på felg er skrevet inn i feil format! \n");
