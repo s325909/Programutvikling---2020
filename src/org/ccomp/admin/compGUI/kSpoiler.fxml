@@ -45,7 +45,7 @@
          <effect>
             <DropShadow color="#00000099" />
          </effect></TextField>
-      <TextField fx:id="spoilerQuantity" layoutX="282.0" layoutY="327.0" prefHeight="31.0" prefWidth="187.0" promptText="MIN 10">
+      <TextField fx:id="spoilerQuantity" layoutX="282.0" layoutY="327.0" promptText="MIN 10">
          <effect>
             <DropShadow color="#00000099" />
          </effect></TextField>
