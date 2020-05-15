@@ -753,12 +753,13 @@ public class AdminController {
         engintypeColum.setOnEditCommit((TableColumn.CellEditEvent<Engine, String> t) -> {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
-            String value = t.getNewValue();
+            String value = t.getNewValue().replaceAll("[-+.^:,]","");
             System.out.println(value);
             carComponents = retrievedCompMap.get("Engine");
             engine = ((Engine) carComponents.get(row));
             engine.setCompType(value);
             retrievedCompMap.get("Engine").set(row, engine);
+            jobjHandler.writeComponent(retrievedCompMap);
             System.out.println(engine.getCompType());
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
@@ -770,12 +771,13 @@ public class AdminController {
         nameEngineColum.setOnEditCommit((TableColumn.CellEditEvent<Engine, String> t) -> {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
-            String value = t.getNewValue();
+            String value = t.getNewValue().replaceAll("[-+.^:,]","");
             System.out.println(value);
             carComponents = retrievedCompMap.get("Engine");
             engine = ((Engine) carComponents.get(row));
             engine.setCompName(value);
             retrievedCompMap.get("Engine").set(row, engine);
+            jobjHandler.writeComponent(retrievedCompMap);
             System.out.println(engine.getCompType());
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
@@ -793,6 +795,7 @@ public class AdminController {
             engine = ((Engine) carComponents.get(row));
             engine.setEngineHorsePower(value);
             retrievedCompMap.get("Engine").set(row, engine);
+            jobjHandler.writeComponent(retrievedCompMap);
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setEngineHorsePower(t.getNewValue()
@@ -809,6 +812,7 @@ public class AdminController {
             engine = ((Engine) carComponents.get(row));
             engine.setCompPrice(value);
             retrievedCompMap.get("Engine").set(row, engine);
+            jobjHandler.writeComponent(retrievedCompMap);
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setCompPrice(t.getNewValue()
@@ -825,6 +829,7 @@ public class AdminController {
             engine = ((Engine) carComponents.get(row));
             engine.setCompQuantity(value);
             retrievedCompMap.get("Engine").set(row, engine);
+            jobjHandler.writeComponent(retrievedCompMap);
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setCompQuantity(t.getNewValue()
@@ -832,7 +837,7 @@ public class AdminController {
         });
 
         //todo: validation before writing to file!!!
-        jobjHandler.writeComponent(retrievedCompMap);
+       // jobjHandler.writeComponent(retrievedCompMap);
     }
 
     public void editSeatTable() {
@@ -842,16 +847,34 @@ public class AdminController {
 
         seat = (Seat) carComponents.get(row);
 
+        nameSeatColum.setCellFactory(TextFieldTableCell.forTableColumn());
+        nameSeatColum.setOnEditCommit((TableColumn.CellEditEvent<Seat, String> t) -> {
+            t.getTableView().getItems();
+            row = t.getTablePosition().getRow();
+            String value = t.getNewValue().replaceAll("[-+.^:,]","");
+            System.out.println(value);
+            carComponents = retrievedCompMap.get("Seat");
+            seat = ((Seat) carComponents.get(row));
+            seat.setCompName(value);
+            retrievedCompMap.get("Seat").set(row, seat);
+            jobjHandler.writeComponent(retrievedCompMap);
+            (t.getTableView().getItems().get(
+                    t.getTablePosition().getRow())
+            ).setCompName(t.getNewValue()
+            );
+        });
+
         materiellColum.setCellFactory(TextFieldTableCell.forTableColumn());
         materiellColum.setOnEditCommit((TableColumn.CellEditEvent<Seat, String> t) -> {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
-            String value = t.getNewValue();
+            String value = t.getNewValue().replaceAll("[-+.^:,]","");
             System.out.println(value);
             carComponents = retrievedCompMap.get("Seat");
             seat = ((Seat) carComponents.get(row));
             seat.setSeatMaterial(value);
             retrievedCompMap.get("Seat").set(row, seat);
+            jobjHandler.writeComponent(retrievedCompMap);
             System.out.println(seat.getSeatMaterial());
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
@@ -859,32 +882,17 @@ public class AdminController {
             );
         });
 
-        nameSeatColum.setCellFactory(TextFieldTableCell.forTableColumn());
-        nameSeatColum.setOnEditCommit((TableColumn.CellEditEvent<Seat, String> t) -> {
-            t.getTableView().getItems();
-            row = t.getTablePosition().getRow();
-            String value = t.getNewValue();
-            System.out.println(value);
-            carComponents = retrievedCompMap.get("Seat");
-            seat = ((Seat) carComponents.get(row));
-            seat.setCompName(value);
-            retrievedCompMap.get("Seat").set(row, seat);
-            (t.getTableView().getItems().get(
-                    t.getTablePosition().getRow())
-            ).setCompName(t.getNewValue()
-            );
-        });
-
         colorSeatColum.setCellFactory(TextFieldTableCell.forTableColumn());
         colorSeatColum.setOnEditCommit((TableColumn.CellEditEvent<Seat, String> t) -> {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
-            String value = t.getNewValue();
+            String value = t.getNewValue().replaceAll("[-+.^:,]","");
             System.out.println(value);
             carComponents = retrievedCompMap.get("Seat");
             seat = ((Seat) carComponents.get(row));
             seat.setSeatColor(value);
             retrievedCompMap.get("Seat").set(row, seat);
+            jobjHandler.writeComponent(retrievedCompMap);
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setSeatColor(t.getNewValue()
@@ -895,12 +903,21 @@ public class AdminController {
         seatPriceColum.setOnEditCommit((TableColumn.CellEditEvent<Seat, Double> t) -> {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
-            Double value = t.getNewValue();
+
+            String doubleValue = String.valueOf(t.getNewValue()).trim();
+
+            Double value;
+            try {
+                value = Double.parseDouble(doubleValue);
+            } catch (NumberFormatException e) {
+                value = Double.parseDouble("0");
+            }
             System.out.println(value);
             carComponents = retrievedCompMap.get("Seat");
             seat = ((Seat) carComponents.get(row));
             seat.setCompPrice(value);
             retrievedCompMap.get("Seat").set(row, seat);
+            jobjHandler.writeComponent(retrievedCompMap);
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setCompPrice(t.getNewValue()
@@ -918,25 +935,13 @@ public class AdminController {
             seat = ((Seat) carComponents.get(row));
             seat.setCompQuantity(value);
             retrievedCompMap.get("Seat").set(row, seat);
+            jobjHandler.writeComponent(retrievedCompMap);
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setCompQuantity(t.getNewValue()
             );
         });
-
-        /*if (!validationSeat((Seat) retrievedCompMap.get("Seat").get(row)).isEmpty()) {
-            if (!nameSeatColum.getText().isEmpty() || !colorSeatColum.getText().isEmpty()
-                    || !materiellColum.getText().isEmpty() || !seatPriceColum.getText().isEmpty()
-                    || !quantitySeatColum.getText().isEmpty()) {
-                alert(validationSeat((Seat) retrievedCompMap.get("Seat").get(row)));
-                return;
-            }*/
-
-        jobjHandler.writeComponent(retrievedCompMap);
-
     }
-
-
 
     public void editSpoilerTable() {
         spoilerView.setEditable(true);
@@ -948,12 +953,13 @@ public class AdminController {
         nameSpoilerColum.setOnEditCommit((TableColumn.CellEditEvent<Spoiler, String> t) -> {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
-            String value = t.getNewValue();
+            String value = t.getNewValue().replaceAll("[-+.^:,]","");
             System.out.println(value);
             carComponents = retrievedCompMap.get("Spoiler");
             spoiler = ((Spoiler) carComponents.get(row));
             spoiler.setCompName(value);
             retrievedCompMap.get("Spoiler").set(row, spoiler);
+            jobjHandler.writeComponent(retrievedCompMap);
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setCompName(t.getNewValue()
@@ -964,12 +970,13 @@ public class AdminController {
         colorSpoilerColum.setOnEditCommit((TableColumn.CellEditEvent<Spoiler, String> t) -> {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
-            String value = t.getNewValue();
+            String value = t.getNewValue().replaceAll("[-+.^:,]","");
             System.out.println(value);
             carComponents = retrievedCompMap.get("Spoiler");
             spoiler = ((Spoiler) carComponents.get(row));
             spoiler.setSpoilerColor(value);
             retrievedCompMap.get("Spoiler").set(row, spoiler);
+            jobjHandler.writeComponent(retrievedCompMap);
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setSpoilerColor(t.getNewValue()
@@ -980,12 +987,13 @@ public class AdminController {
         sideSpoilerColum.setOnEditCommit((TableColumn.CellEditEvent<Spoiler, String> t) -> {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
-            String value = t.getNewValue();
+            String value = t.getNewValue().replaceAll("[-+.^:,]","");
             System.out.println(value);
             carComponents = retrievedCompMap.get("Spoiler");
             spoiler = ((Spoiler) carComponents.get(row));
             spoiler.setSpoilerSide(value);
             retrievedCompMap.get("Spoiler").set(row, spoiler);
+            jobjHandler.writeComponent(retrievedCompMap);
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setSpoilerSide(t.getNewValue()
@@ -1002,6 +1010,7 @@ public class AdminController {
             spoiler = ((Spoiler) carComponents.get(row));
             spoiler.setCompPrice(value);
             retrievedCompMap.get("Spoiler").set(row, spoiler);
+            jobjHandler.writeComponent(retrievedCompMap);
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setCompPrice(t.getNewValue()
@@ -1018,13 +1027,12 @@ public class AdminController {
             spoiler = ((Spoiler) carComponents.get(row));
             spoiler.setCompQuantity(value);
             retrievedCompMap.get("Spoiler").set(row, spoiler);
+            jobjHandler.writeComponent(retrievedCompMap);
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setCompQuantity(t.getNewValue()
             );
         });
-
-        jobjHandler.writeComponent(retrievedCompMap);
     }
 
     public void editSwheelTable(){
@@ -1037,12 +1045,13 @@ public class AdminController {
         nameSWheelColum.setOnEditCommit((TableColumn.CellEditEvent<SteeringWheel, String> t) -> {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
-            String value = t.getNewValue();
+            String value = t.getNewValue().replaceAll("[-+.^:,]","");
             System.out.println(value);
             carComponents = retrievedCompMap.get("SteeringWheel");
             steeringWheel = ((SteeringWheel) carComponents.get(row));
             steeringWheel.setCompName(value);
             retrievedCompMap.get("SteeringWheel").set(row, steeringWheel);
+            jobjHandler.writeComponent(retrievedCompMap);
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setCompName(t.getNewValue()
@@ -1053,12 +1062,13 @@ public class AdminController {
         materiellSWeel.setOnEditCommit((TableColumn.CellEditEvent<SteeringWheel, String> t) -> {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
-            String value = t.getNewValue();
+            String value = t.getNewValue().replaceAll("[-+.^:,]","");
             System.out.println(value);
             carComponents = retrievedCompMap.get("SteeringWheel");
             steeringWheel = ((SteeringWheel) carComponents.get(row));
             steeringWheel.setSteeringWheelMaterial(value);
             retrievedCompMap.get("SteeringWheel").set(row, steeringWheel);
+            jobjHandler.writeComponent(retrievedCompMap);
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setSteeringWheelMaterial(t.getNewValue()
@@ -1069,12 +1079,13 @@ public class AdminController {
         colorSWheelColum.setOnEditCommit((TableColumn.CellEditEvent<SteeringWheel, String> t) -> {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
-            String value = t.getNewValue();
+            String value = t.getNewValue().replaceAll("[-+.^:,]","");
             System.out.println(value);
             carComponents = retrievedCompMap.get("SteeringWheel");
             steeringWheel = ((SteeringWheel) carComponents.get(row));
             steeringWheel.setSteeringWheelColor(value);
             retrievedCompMap.get("SteeringWheel").set(row, steeringWheel);
+            jobjHandler.writeComponent(retrievedCompMap);
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setSteeringWheelColor(t.getNewValue()
@@ -1091,11 +1102,13 @@ public class AdminController {
             steeringWheel = ((SteeringWheel) carComponents.get(row));
             steeringWheel.setCompPrice(value);
             retrievedCompMap.get("SteeringWheel").set(row, steeringWheel);
+            jobjHandler.writeComponent(retrievedCompMap);
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setCompPrice(t.getNewValue()
             );
         });
+
         quantitySWeelColum.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         quantitySWeelColum.setOnEditCommit((TableColumn.CellEditEvent<SteeringWheel, Integer> t) -> {
             t.getTableView().getItems();
@@ -1106,13 +1119,12 @@ public class AdminController {
             steeringWheel = ((SteeringWheel) carComponents.get(row));
             steeringWheel.setCompQuantity(value);
             retrievedCompMap.get("SteeringWheel").set(row, steeringWheel);
+            jobjHandler.writeComponent(retrievedCompMap);
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setCompQuantity(t.getNewValue()
             );
         });
-
-        jobjHandler.writeComponent(retrievedCompMap);
     }
 
     public void editWheelRim(){
@@ -1125,12 +1137,13 @@ public class AdminController {
         nameWheelRimColum.setOnEditCommit((TableColumn.CellEditEvent<WheelRim, String> t) -> {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
-            String value = t.getNewValue();
+            String value = t.getNewValue().replaceAll("[-+.^:,]","");
             System.out.println(value);
             carComponents = retrievedCompMap.get("WheelRim");
             wheelRim = ((WheelRim) carComponents.get(row));
             wheelRim.setCompName(value);
             retrievedCompMap.get("WheelRim").set(row, wheelRim);
+            jobjHandler.writeComponent(retrievedCompMap);
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setCompName(t.getNewValue()
@@ -1141,12 +1154,13 @@ public class AdminController {
         dimensionWheelRim.setOnEditCommit((TableColumn.CellEditEvent<WheelRim, String> t) -> {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
-            String value = t.getNewValue();
+            String value = t.getNewValue().replaceAll("[-+.^:,]","");
             System.out.println(value);
             carComponents = retrievedCompMap.get("WheelRim");
             wheelRim = ((WheelRim) carComponents.get(row));
             wheelRim.setWheelRimDimension(value);
             retrievedCompMap.get("WheelRim").set(row, wheelRim);
+            jobjHandler.writeComponent(retrievedCompMap);
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setWheelRimDimension(t.getNewValue()
@@ -1157,12 +1171,13 @@ public class AdminController {
         colorWheelRim.setOnEditCommit((TableColumn.CellEditEvent<WheelRim, String> t) -> {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
-            String value = t.getNewValue();
+            String value = t.getNewValue().replaceAll("[-+.^:,]","");
             System.out.println(value);
             carComponents = retrievedCompMap.get("WheelRim");
             wheelRim = ((WheelRim) carComponents.get(row));
             wheelRim.setWheelRimColor(value);
             retrievedCompMap.get("WheelRim").set(row, wheelRim);
+            jobjHandler.writeComponent(retrievedCompMap);
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setWheelRimColor(t.getNewValue()
@@ -1195,13 +1210,12 @@ public class AdminController {
             wheelRim = ((WheelRim) carComponents.get(row));
             wheelRim.setCompQuantity(value);
             retrievedCompMap.get("WheelRim").set(row, wheelRim);
+            jobjHandler.writeComponent(retrievedCompMap);
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setCompQuantity(t.getNewValue()
             );
         });
-
-        jobjHandler.writeComponent(retrievedCompMap);
     }
 
     public void editOrderCustomer(){
