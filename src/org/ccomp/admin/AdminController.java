@@ -502,8 +502,6 @@ public class AdminController {
                 //Remove selected Customer Order from file
                 csvHandler.removeCustomerOrder(customerOrder);
 
-
-
                 compOrderList = csvHandler.readCompOrder(compOrderList);
                 System.out.println("COMP ORDER LIST SIZE: " + compOrderList.size());
 
@@ -783,7 +781,12 @@ public class AdminController {
         horsepowerColum.setOnEditCommit((TableColumn.CellEditEvent<Engine, Integer> t) -> {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
-            Integer value = t.getNewValue();
+             Integer value = t.getNewValue();
+            //Integer value = t.getNewValue();
+            String newValue = String.valueOf(t.getNewValue()).trim();
+            int value = validateIntegerColumn(newValue, 0);
+
+
             carComponents = retrievedCompMap.get("Engine");
             engine = ((Engine) carComponents.get(row));
             engine.setEngineHorsePower(value);
@@ -791,7 +794,7 @@ public class AdminController {
             jobjHandler.writeComponent(retrievedCompMap);
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
-            ).setEngineHorsePower(t.getNewValue()
+            ).setEngineHorsePower(value
             );
         });
 
@@ -1426,6 +1429,18 @@ public class AdminController {
             deleteCompOrder();
         }
     }
+
+
+    private int validateIntegerColumn(String value, int def) {
+        try {
+            return Integer.parseInt(value);
+        }
+        catch (NumberFormatException e) {
+            return def;
+        }
+    }
+
+
 
     //Returns the method from validation with varibles from texfield in compcontroller.
     public String validationSeat(Seat seat) {
