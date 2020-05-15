@@ -247,7 +247,7 @@ public class AdminController {
     }
 
 
-    public ObservableList<Engine> engineTable(){
+    private ObservableList<Engine> engineTable(){
         engines = FXCollections.observableArrayList();
         //Getting the component Engine
         carComponents = retrievedCompMap.get("Engine");
@@ -267,7 +267,7 @@ public class AdminController {
     }
 
 
-    public ObservableList<Seat> seatTable() {
+    private ObservableList<Seat> seatTable() {
         seats = FXCollections.observableArrayList();
         //Getting the component Seat
         carComponents = retrievedCompMap.get("Seat");
@@ -285,7 +285,7 @@ public class AdminController {
         return seats;
     }
 
-    public ObservableList<Spoiler> spoilerTable() {
+    private ObservableList<Spoiler> spoilerTable() {
         spoilers = FXCollections.observableArrayList();
         //Getting the component Spoiler
         carComponents = retrievedCompMap.get("Spoiler");
@@ -303,7 +303,7 @@ public class AdminController {
         return spoilers;
     }
 
-    public ObservableList<SteeringWheel> sWheelTable() {
+    private ObservableList<SteeringWheel> sWheelTable() {
         steeringWheels = FXCollections.observableArrayList();
         //Getting the component steeringwheel
         carComponents = retrievedCompMap.get("SteeringWheel");
@@ -322,7 +322,7 @@ public class AdminController {
         return steeringWheels;
     }
 
-    public ObservableList<WheelRim> wheelRTable() {
+    private ObservableList<WheelRim> wheelRTable() {
         wheelRims = FXCollections.observableArrayList();
         //Getting the component wheelrim
         carComponents = retrievedCompMap.get("WheelRim");
@@ -341,7 +341,7 @@ public class AdminController {
         return wheelRims;
     }
 
-    public ObservableList<CustomerOrder> OrderInfoCustomer(){
+    private ObservableList<CustomerOrder> OrderInfoCustomer(){
      //   if (customerOrderList.size() == 0) return null;
         customerOrders = FXCollections.observableArrayList();
         //Presenting the customer registrated info in a tablview with right values to the right tableclum
@@ -359,7 +359,7 @@ public class AdminController {
         return customerOrders;
     }
 
-    public  ObservableList<CompOrder> carComTable(){
+    private ObservableList<CompOrder> carComTable(){
 
         compOrders = FXCollections.observableArrayList();
 
@@ -395,8 +395,8 @@ public class AdminController {
     }
 
 
-    @FXML
-    public void deleteSelectedRow() {
+
+    private void deleteSelectedRow() {
 
         if (carComponentsTab != null && carComponentsTab.isSelected()) {
             System.out.println("PRODUCTS TAB");
@@ -519,7 +519,7 @@ public class AdminController {
     }
 
 
-    public void deleteCompOrder(){
+    private void deleteCompOrder(){
 
 
         int visibleIndex = carCompView.getSelectionModel().getSelectedIndex();
@@ -555,14 +555,12 @@ public class AdminController {
 
         //todo: Delete CustomerOrder if all CompOrders with same OrderNr is deleted
     }
-
+    @FXML
     public void searchCompOrders(){
 
         if (compOrders == null) compOrders = carComTable();
 
        // ObservableList<CompOrder> compOrdersList = compOrders;
-
-
         FilteredList<CompOrder> filteredList = new FilteredList(compOrders, b -> true);
         searchCompOrder.textProperty().addListener(((observable, oldValue, newValue) -> {
             filteredList.setPredicate( carcomp-> {
@@ -585,7 +583,7 @@ public class AdminController {
         carCompView.setItems(sortedCompOrderList);
 
     }
-
+    @FXML
     public void  searchComp() {
         //Engine
         if (engineTab.isSelected()) {
@@ -743,7 +741,7 @@ public class AdminController {
         }
     }
 
-    public void editEngine() {
+    private void editEngine() {
         engineView.setEditable(true);
 
         if (carComponents.size() == 0) return;
@@ -754,13 +752,11 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             String value = t.getNewValue().replaceAll("[-+.^:,]","");
-            System.out.println(value);
             carComponents = retrievedCompMap.get("Engine");
             engine = ((Engine) carComponents.get(row));
             engine.setCompType(value);
             retrievedCompMap.get("Engine").set(row, engine);
             jobjHandler.writeComponent(retrievedCompMap);
-            System.out.println(engine.getCompType());
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setCompType(t.getNewValue());
@@ -772,13 +768,11 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             String value = t.getNewValue().replaceAll("[-+.^:,]","");
-            System.out.println(value);
             carComponents = retrievedCompMap.get("Engine");
             engine = ((Engine) carComponents.get(row));
             engine.setCompName(value);
             retrievedCompMap.get("Engine").set(row, engine);
             jobjHandler.writeComponent(retrievedCompMap);
-            System.out.println(engine.getCompType());
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setCompName(t.getNewValue());
@@ -790,7 +784,6 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             Integer value = t.getNewValue();
-            System.out.println(value);
             carComponents = retrievedCompMap.get("Engine");
             engine = ((Engine) carComponents.get(row));
             engine.setEngineHorsePower(value);
@@ -807,7 +800,6 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             Double value = t.getNewValue();
-            System.out.println(value);
             carComponents = retrievedCompMap.get("Engine");
             engine = ((Engine) carComponents.get(row));
             engine.setCompPrice(value);
@@ -824,7 +816,6 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             Integer value = t.getNewValue();
-            System.out.println(value);
             carComponents = retrievedCompMap.get("Engine");
             engine = ((Engine) carComponents.get(row));
             engine.setCompQuantity(value);
@@ -840,7 +831,7 @@ public class AdminController {
        // jobjHandler.writeComponent(retrievedCompMap);
     }
 
-    public void editSeatTable() {
+    private void editSeatTable() {
         seatView.setEditable(true);
 
         if (carComponents.size() == 0) return;
@@ -852,7 +843,6 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             String value = t.getNewValue().replaceAll("[-+.^:,]","");
-            System.out.println(value);
             carComponents = retrievedCompMap.get("Seat");
             seat = ((Seat) carComponents.get(row));
             seat.setCompName(value);
@@ -869,13 +859,11 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             String value = t.getNewValue().replaceAll("[-+.^:,]","");
-            System.out.println(value);
             carComponents = retrievedCompMap.get("Seat");
             seat = ((Seat) carComponents.get(row));
             seat.setSeatMaterial(value);
             retrievedCompMap.get("Seat").set(row, seat);
             jobjHandler.writeComponent(retrievedCompMap);
-            System.out.println(seat.getSeatMaterial());
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setSeatMaterial(t.getNewValue()
@@ -887,7 +875,6 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             String value = t.getNewValue().replaceAll("[-+.^:,]","");
-            System.out.println(value);
             carComponents = retrievedCompMap.get("Seat");
             seat = ((Seat) carComponents.get(row));
             seat.setSeatColor(value);
@@ -912,7 +899,7 @@ public class AdminController {
             } catch (NumberFormatException e) {
                 value = Double.parseDouble("0");
             }
-            System.out.println(value);
+
             carComponents = retrievedCompMap.get("Seat");
             seat = ((Seat) carComponents.get(row));
             seat.setCompPrice(value);
@@ -930,7 +917,7 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             Integer value = t.getNewValue();
-            System.out.println(value);
+
             carComponents = retrievedCompMap.get("Seat");
             seat = ((Seat) carComponents.get(row));
             seat.setCompQuantity(value);
@@ -943,7 +930,7 @@ public class AdminController {
         });
     }
 
-    public void editSpoilerTable() {
+    private void editSpoilerTable() {
         spoilerView.setEditable(true);
         if (carComponents.size() == 0) return;
 
@@ -954,7 +941,7 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             String value = t.getNewValue().replaceAll("[-+.^:,]","");
-            System.out.println(value);
+
             carComponents = retrievedCompMap.get("Spoiler");
             spoiler = ((Spoiler) carComponents.get(row));
             spoiler.setCompName(value);
@@ -988,7 +975,7 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             String value = t.getNewValue().replaceAll("[-+.^:,]","");
-            System.out.println(value);
+
             carComponents = retrievedCompMap.get("Spoiler");
             spoiler = ((Spoiler) carComponents.get(row));
             spoiler.setSpoilerSide(value);
@@ -1005,7 +992,7 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             Double value = t.getNewValue();
-            System.out.println(value);
+
             carComponents = retrievedCompMap.get("Spoiler");
             spoiler = ((Spoiler) carComponents.get(row));
             spoiler.setCompPrice(value);
@@ -1022,7 +1009,7 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             Integer value = t.getNewValue();
-            System.out.println(value);
+
             carComponents = retrievedCompMap.get("Spoiler");
             spoiler = ((Spoiler) carComponents.get(row));
             spoiler.setCompQuantity(value);
@@ -1035,7 +1022,7 @@ public class AdminController {
         });
     }
 
-    public void editSwheelTable(){
+    private void editSwheelTable(){
         sWheelView.setEditable(true);
         if (carComponents.size() == 0) return;
 
@@ -1046,7 +1033,7 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             String value = t.getNewValue().replaceAll("[-+.^:,]","");
-            System.out.println(value);
+
             carComponents = retrievedCompMap.get("SteeringWheel");
             steeringWheel = ((SteeringWheel) carComponents.get(row));
             steeringWheel.setCompName(value);
@@ -1063,7 +1050,7 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             String value = t.getNewValue().replaceAll("[-+.^:,]","");
-            System.out.println(value);
+
             carComponents = retrievedCompMap.get("SteeringWheel");
             steeringWheel = ((SteeringWheel) carComponents.get(row));
             steeringWheel.setSteeringWheelMaterial(value);
@@ -1080,7 +1067,7 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             String value = t.getNewValue().replaceAll("[-+.^:,]","");
-            System.out.println(value);
+
             carComponents = retrievedCompMap.get("SteeringWheel");
             steeringWheel = ((SteeringWheel) carComponents.get(row));
             steeringWheel.setSteeringWheelColor(value);
@@ -1097,7 +1084,7 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             Double value = t.getNewValue();
-            System.out.println(value);
+
             carComponents = retrievedCompMap.get("SteeringWheel");
             steeringWheel = ((SteeringWheel) carComponents.get(row));
             steeringWheel.setCompPrice(value);
@@ -1114,7 +1101,7 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             Integer value = t.getNewValue();
-            System.out.println(value);
+
             carComponents = retrievedCompMap.get("SteeringWheel");
             steeringWheel = ((SteeringWheel) carComponents.get(row));
             steeringWheel.setCompQuantity(value);
@@ -1127,7 +1114,7 @@ public class AdminController {
         });
     }
 
-    public void editWheelRim(){
+    private void editWheelRim(){
         wheelRimView.setEditable(true);
         if (carComponents.size() == 0) return;
 
@@ -1138,7 +1125,7 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             String value = t.getNewValue().replaceAll("[-+.^:,]","");
-            System.out.println(value);
+
             carComponents = retrievedCompMap.get("WheelRim");
             wheelRim = ((WheelRim) carComponents.get(row));
             wheelRim.setCompName(value);
@@ -1155,7 +1142,7 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             String value = t.getNewValue().replaceAll("[-+.^:,]","");
-            System.out.println(value);
+
             carComponents = retrievedCompMap.get("WheelRim");
             wheelRim = ((WheelRim) carComponents.get(row));
             wheelRim.setWheelRimDimension(value);
@@ -1172,7 +1159,7 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             String value = t.getNewValue().replaceAll("[-+.^:,]","");
-            System.out.println(value);
+
             carComponents = retrievedCompMap.get("WheelRim");
             wheelRim = ((WheelRim) carComponents.get(row));
             wheelRim.setWheelRimColor(value);
@@ -1189,7 +1176,7 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             Double value = t.getNewValue();
-            System.out.println(value);
+
             carComponents = retrievedCompMap.get("WheelRim");
             wheelRim = ((WheelRim) carComponents.get(row));
             wheelRim.setCompPrice(value);
@@ -1205,7 +1192,7 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             Integer value = t.getNewValue();
-            System.out.println(value);
+
             carComponents = retrievedCompMap.get("WheelRim");
             wheelRim = ((WheelRim) carComponents.get(row));
             wheelRim.setCompQuantity(value);
@@ -1218,7 +1205,7 @@ public class AdminController {
         });
     }
 
-    public void editOrderCustomer(){
+    private void editOrderCustomer(){
 
         customerOrderInfoView.setEditable(true);
 
@@ -1227,7 +1214,7 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             String value = t.getNewValue();
-            System.out.println(value);
+
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setCustomerName(t.getNewValue()
@@ -1239,7 +1226,7 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             String value = t.getNewValue();
-            System.out.println(value);
+
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setCustomerMail(t.getNewValue()
@@ -1251,7 +1238,7 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             String value = t.getNewValue();
-            System.out.println(value);
+
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setCustomerNumber(t.getNewValue()
@@ -1263,7 +1250,7 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             String value = t.getNewValue();
-            System.out.println(value);
+
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setCustomerCity(t.getNewValue()
@@ -1275,7 +1262,7 @@ public class AdminController {
             t.getTableView().getItems();
             row = t.getTablePosition().getRow();
             String value = t.getNewValue();
-            System.out.println(value);
+
             (t.getTableView().getItems().get(
                     t.getTablePosition().getRow())
             ).setCustomerZipCode(t.getNewValue()
@@ -1374,7 +1361,7 @@ public class AdminController {
             System.out.println("SELECTED COMP ORDER ID: " + selectedOrderId);
         } else selectedOrderId = -1;
     }
-
+    @FXML
     public void backToAdmin() {
 
         try {
@@ -1389,7 +1376,7 @@ public class AdminController {
             e.printStackTrace();
         }
     }
-
+    @FXML
     public void deleteRowAdmin() {
 
         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -1421,7 +1408,7 @@ public class AdminController {
             deleteSelectedRow();
         }
     }
-
+    @FXML
     public void deleteRowOrders(){
 
         Alert alert = new Alert(Alert.AlertType.WARNING);
