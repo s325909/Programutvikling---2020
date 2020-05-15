@@ -162,11 +162,8 @@ public class AdminController {
 
     @FXML
     public void initialize() {
-        System.out.println("@INITIALIZE");
-
         jobjHandler = new ComponentOBJHandler();
 
-        //todo: fila kan være null eller tom
         retrievedCompMap = jobjHandler.readComponent(retrievedCompMap);
 
         System.out.println("INIT COMP MAP: " + retrievedCompMap );
@@ -590,10 +587,6 @@ public class AdminController {
 
     }
 
-
-
-
-
     public void  searchComp() {
         //Engine
         if (engineTab.isSelected()) {
@@ -748,10 +741,8 @@ public class AdminController {
             sortedCustomerOrderData = new SortedList<>(filteredList);
             sortedCustomerOrderData.comparatorProperty().bind(customerOrderInfoView.comparatorProperty());
             customerOrderInfoView.setItems(sortedCustomerOrderData);
-
         }
     }
-
 
     public void editEngine() {
         engineView.setEditable(true);
@@ -809,8 +800,6 @@ public class AdminController {
             );
         });
 
-
-
         priceEngineColum.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
         priceEngineColum.setOnEditCommit((TableColumn.CellEditEvent<Engine, Double> t) -> {
             t.getTableView().getItems();
@@ -842,6 +831,9 @@ public class AdminController {
             ).setCompQuantity(t.getNewValue()
             );
         });
+
+        //todo: validation before writing to file!!!
+        jobjHandler.writeComponent(retrievedCompMap);
     }
 
     public void editSeatTable() {
@@ -868,7 +860,6 @@ public class AdminController {
             );
         });
 
-
         nameSeatColum.setCellFactory(TextFieldTableCell.forTableColumn());
         nameSeatColum.setOnEditCommit((TableColumn.CellEditEvent<Seat, String> t) -> {
             t.getTableView().getItems();
@@ -885,7 +876,6 @@ public class AdminController {
             );
         });
 
-
         colorSeatColum.setCellFactory(TextFieldTableCell.forTableColumn());
         colorSeatColum.setOnEditCommit((TableColumn.CellEditEvent<Seat, String> t) -> {
             t.getTableView().getItems();
@@ -901,7 +891,6 @@ public class AdminController {
             ).setSeatColor(t.getNewValue()
             );
         });
-
 
         seatPriceColum.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
         seatPriceColum.setOnEditCommit((TableColumn.CellEditEvent<Seat, Double> t) -> {
@@ -920,7 +909,6 @@ public class AdminController {
 
         });
 
-
         quantitySeatColum.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         quantitySeatColum.setOnEditCommit((TableColumn.CellEditEvent<Seat, Integer> t) -> {
             t.getTableView().getItems();
@@ -937,13 +925,13 @@ public class AdminController {
             );
         });
 
+        jobjHandler.writeComponent(retrievedCompMap);
     }
 
 
     public void editSpoilerTable() {
         spoilerView.setEditable(true);
         if (carComponents.size() == 0) return;
-
 
         spoiler = (Spoiler) carComponents.get(row);
 
@@ -963,7 +951,6 @@ public class AdminController {
             );
         });
 
-
         colorSpoilerColum.setCellFactory(TextFieldTableCell.forTableColumn());
         colorSpoilerColum.setOnEditCommit((TableColumn.CellEditEvent<Spoiler, String> t) -> {
             t.getTableView().getItems();
@@ -980,7 +967,6 @@ public class AdminController {
             );
         });
 
-
         sideSpoilerColum.setCellFactory(TextFieldTableCell.forTableColumn());
         sideSpoilerColum.setOnEditCommit((TableColumn.CellEditEvent<Spoiler, String> t) -> {
             t.getTableView().getItems();
@@ -996,7 +982,6 @@ public class AdminController {
             ).setSpoilerSide(t.getNewValue()
             );
         });
-
 
         priceSpoilerColum.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
         priceSpoilerColum.setOnEditCommit((TableColumn.CellEditEvent<Spoiler, Double> t) -> {
@@ -1029,12 +1014,13 @@ public class AdminController {
             ).setCompQuantity(t.getNewValue()
             );
         });
+
+        jobjHandler.writeComponent(retrievedCompMap);
     }
 
     public void editSwheelTable(){
         sWheelView.setEditable(true);
         if (carComponents.size() == 0) return;
-
 
         steeringWheel = (SteeringWheel) carComponents.get(row);
 
@@ -1054,7 +1040,6 @@ public class AdminController {
             );
         });
 
-
         materiellSWeel.setCellFactory(TextFieldTableCell.forTableColumn());
         materiellSWeel.setOnEditCommit((TableColumn.CellEditEvent<SteeringWheel, String> t) -> {
             t.getTableView().getItems();
@@ -1070,7 +1055,6 @@ public class AdminController {
             ).setSteeringWheelMaterial(t.getNewValue()
             );
         });
-
 
         colorSWheelColum.setCellFactory(TextFieldTableCell.forTableColumn());
         colorSWheelColum.setOnEditCommit((TableColumn.CellEditEvent<SteeringWheel, String> t) -> {
@@ -1088,7 +1072,6 @@ public class AdminController {
             );
         });
 
-
         priceSWeelColum.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
         priceSWeelColum.setOnEditCommit((TableColumn.CellEditEvent<SteeringWheel, Double> t) -> {
             t.getTableView().getItems();
@@ -1104,7 +1087,6 @@ public class AdminController {
             ).setCompPrice(t.getNewValue()
             );
         });
-
         quantitySWeelColum.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         quantitySWeelColum.setOnEditCommit((TableColumn.CellEditEvent<SteeringWheel, Integer> t) -> {
             t.getTableView().getItems();
@@ -1120,12 +1102,13 @@ public class AdminController {
             ).setCompQuantity(t.getNewValue()
             );
         });
+
+        jobjHandler.writeComponent(retrievedCompMap);
     }
 
     public void editWheelRim(){
         wheelRimView.setEditable(true);
         if (carComponents.size() == 0) return;
-
 
         wheelRim = (WheelRim) carComponents.get(row);
 
@@ -1145,7 +1128,6 @@ public class AdminController {
             );
         });
 
-
         dimensionWheelRim.setCellFactory(TextFieldTableCell.forTableColumn());
         dimensionWheelRim.setOnEditCommit((TableColumn.CellEditEvent<WheelRim, String> t) -> {
             t.getTableView().getItems();
@@ -1161,7 +1143,6 @@ public class AdminController {
             ).setWheelRimDimension(t.getNewValue()
             );
         });
-
 
         colorWheelRim.setCellFactory(TextFieldTableCell.forTableColumn());
         colorWheelRim.setOnEditCommit((TableColumn.CellEditEvent<WheelRim, String> t) -> {
@@ -1210,6 +1191,8 @@ public class AdminController {
             ).setCompQuantity(t.getNewValue()
             );
         });
+
+        jobjHandler.writeComponent(retrievedCompMap);
     }
 
     public void editOrderCustomer(){
@@ -1228,8 +1211,6 @@ public class AdminController {
             );
         });
 
-
-
         customerInfoOrderEmail.setCellFactory(TextFieldTableCell.forTableColumn());
         customerInfoOrderEmail.setOnEditCommit((TableColumn.CellEditEvent<CustomerOrder, String> t) -> {
             t.getTableView().getItems();
@@ -1241,8 +1222,6 @@ public class AdminController {
             ).setCustomerMail(t.getNewValue()
             );
         });
-
-
 
         customerInfoOrderMobilNr.setCellFactory(TextFieldTableCell.forTableColumn());
         customerInfoOrderMobilNr.setOnEditCommit((TableColumn.CellEditEvent<CustomerOrder, String> t) -> {
@@ -1256,8 +1235,6 @@ public class AdminController {
             );
         });
 
-
-
         customerInfoOrderCity.setCellFactory(TextFieldTableCell.forTableColumn());
         customerInfoOrderCity.setOnEditCommit((TableColumn.CellEditEvent<CustomerOrder, String> t) -> {
             t.getTableView().getItems();
@@ -1270,7 +1247,6 @@ public class AdminController {
             );
         });
 
-
         customerInfoOrderZip.setCellFactory(TextFieldTableCell.forTableColumn());
         customerInfoOrderZip.setOnEditCommit((TableColumn.CellEditEvent<CustomerOrder, String> t) -> {
             t.getTableView().getItems();
@@ -1282,15 +1258,11 @@ public class AdminController {
             ).setCustomerZipCode(t.getNewValue()
             );
         });
+
+        //todo: Update CustomerOrder.csv file with changes
     }
 
-
-
-
-
-
-
-
+    
     /**
      * Method that opens main.fxml when the Back Button is clicked
      */
