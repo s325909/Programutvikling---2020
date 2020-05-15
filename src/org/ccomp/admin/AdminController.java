@@ -19,11 +19,14 @@ import org.ccomp.fileHandling.ComponentCSVHandler;
 import org.ccomp.fileHandling.ComponentOBJHandler;
 import org.ccomp.model.CompOrder;
 import org.ccomp.model.CustomerOrder;
+import org.ccomp.model.Validation;
 import org.ccomp.model.component.*;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+
+import static org.ccomp.admin.compGUI.CompController.alert;
 
 public class AdminController {
 
@@ -159,6 +162,8 @@ public class AdminController {
     private String orderId;
     private List<CompOrder> compOrderList;
     private static int selectedOrderId;
+
+    private boolean emptyFields;
 
     @FXML
     public void initialize() {
@@ -919,8 +924,18 @@ public class AdminController {
             );
         });
 
+        /*if (!validationSeat((Seat) retrievedCompMap.get("Seat").get(row)).isEmpty()) {
+            if (!nameSeatColum.getText().isEmpty() || !colorSeatColum.getText().isEmpty()
+                    || !materiellColum.getText().isEmpty() || !seatPriceColum.getText().isEmpty()
+                    || !quantitySeatColum.getText().isEmpty()) {
+                alert(validationSeat((Seat) retrievedCompMap.get("Seat").get(row)));
+                return;
+            }*/
+
         jobjHandler.writeComponent(retrievedCompMap);
+
     }
+
 
 
     public void editSpoilerTable() {
@@ -1411,7 +1426,66 @@ public class AdminController {
         }
     }
 
+    //Returns the method from validation with varibles from texfield in compcontroller.
+    public String validationSeat(Seat seat) {
+        return Validation.valAdminSeat(seat.getCompName(),
+                seat.getSeatMaterial(), seat.getSeatColor(), String.valueOf(seat.getCompPrice()), String.valueOf(seat.getCompQuantity()));
+    }
+    //Method for checking if texfield are empty, return an alert if fields are empty.
+    public void emptyFieldsSeat(Seat seat) {
+        if (seat.getCompName().isEmpty() && seat.getSeatColor().isEmpty() && seat.getSeatMaterial().isEmpty()
+                && String.valueOf(seat.getCompPrice()).isEmpty() && String.valueOf(seat.getCompQuantity()).isEmpty()) {
+            alert("Fyll inn alle felt!");
+            emptyFields = true;
+        }
+    }
+
+   /* public String validationSpoiler() {
+        return Validation.valAdminSpiler(spoilerName.getText(), spoilerColor.getText(),
+                spoilerSide.getText(), spoilerPrice.getText(), spoilerQuantity.getText());
+    }
+    public void emptyFieldsSpoiler() {
+        if (spoilerName.getText().isEmpty() && spoilerColor.getText().isEmpty() && spoilerSide.getText().isEmpty()
+                && spoilerPrice.getText().isEmpty() && spoilerQuantity.getText().isEmpty()) {
+            alert("Fyll inn alle felt!");
+            emptyFields = true;
+        }
+    }
+
+    public String validationSteering() {
+        return Validation.valAdminSteering(steeringWheelName.getText(), steeringWheelColor.getText(),
+                steeringWheelMaterial.getText(), steeringWheelPrice.getText(), steeringWheelQuantity.getText());
+    }
+    public void emptyFieldsSteering() {
+        if (steeringWheelName.getText().isEmpty() && steeringWheelColor.getText().isEmpty() && steeringWheelMaterial.getText().isEmpty()
+                && steeringWheelPrice.getText().isEmpty() && steeringWheelQuantity.getText().isEmpty()) {
+            alert("Fyll inn alle felt!");
+            emptyFields = true;
+        }
+    }
+
+    public String validationEngine() {
+        return Validation.valAdminEngine(engineName.getText(), enginePower.getText(), enginePrice.getText(), engineQuantity.getText());
+    }
+    public void emptyFieldsEngine() {
+        if (engineName.getText().isEmpty() && enginePower.getText().isEmpty() && enginePrice.getText().isEmpty()
+                && engineQuantity.getText().isEmpty()) {
+            alert("Fyll inn alle felt!");
+            emptyFields = true;
+        }
+    }
+
+    public String validationRim() {
+        return Validation.valAdminRim(wheelRimName.getText(), wheelRimColor.getText(), wheelRimDimension.getText(),  wheelRimPrice.getText(),
+                wheelRimQuantity.getText());
+    }
+    public void emptyFieldsRim() {
+        if (wheelRimName.getText().isEmpty() && wheelRimColor.getText().isEmpty() && wheelRimDimension.getText().isEmpty()
+                && wheelRimPrice.getText().isEmpty() && wheelRimQuantity.getText().isEmpty()) {
+            alert("Fyll inn alle felt!");
+            emptyFields = true;
+        }
+    }*/
+
 }
-
-
 
