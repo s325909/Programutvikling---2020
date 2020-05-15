@@ -45,7 +45,7 @@ public class Validation {
     public static String validateQuantity (String input) {
         String lable = "";
 
-        String regex = "[1-9][0-9]{1,10}";
+        String regex = "^[1-9][0-9]{1,10}";
 
         if (!input.matches(regex)) {
             lable = ("Feil format i antall komponenter!\n");
@@ -67,7 +67,8 @@ public class Validation {
     public static String validatePower (String input) {
         String lable = "";
 
-        String regex = "^[1-9][0-9]{3}";
+        //String regex = "[0-9]{3}";
+        String regex = "^[0-9]*${3}";
 
         if (!input.matches(regex)) {
             lable = ("Antall hestekrefter er skrevet inn i feil format!\n");
